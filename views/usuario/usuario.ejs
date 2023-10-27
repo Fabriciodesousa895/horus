@@ -1,0 +1,350 @@
+<%- include('../partials/head'); %>
+
+
+<%- include('../partials/header'); %>
+<!-- <button id="BTN_MODAL"  data-toggle="modal" style="display: none;" data-target=".bd-example-modal-xl"></button>
+
+<!--visualizar detalhes do usuario-->
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-sm"  style="padding: 50px;">
+  
+          <p><span class="mt-2">Código usuário</span></p>
+          <input type="text" id="COD_USU" class="form-control mt-2 insert"  disabled>
+
+          <p><span class="mt-2">Usuário</span></p>
+          <input type="text" id="USU_NOME_UP" class="form-control mt-2 insert" placeholder="Nome de usuario" required>
+           
+           <p><span class="mt-2">Parceiro</span></p>
+           <div style="display: flex; flex-direction: row;">
+            <input type="number" required id="ID_PARC_UP" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. parceiro">
+            <input type="text" readonly id="PARC_NOME_UP" class="form-control mt-2 insert" placeholder="Nome do parceiro" >
+           </div>
+  
+           <p><span class="mt-2">Vendedor</span></p>
+           <div style="display: flex; flex-direction: row;">
+            <input type="number" required id="ID_VENDEDOR_UP" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. vendedor">
+            <input type="text" readonly id="VND_NOME_UP" class="form-control mt-2 insert" placeholder="Nome do vendedor" >
+           </div>
+           <p><span class="mt-2">Grupo</span></p>
+           <div style="display: flex; flex-direction: row;">
+
+            <select id="ID_GRUPO_UP"  required  class="form-control mt-2 ">
+            <option value="">Selecione um grupo</option>
+            </select>
+           
+           </div>
+  
+  
+          <p><span class="mt-2">Senha</span></p>
+          <input type="password" id="USU_SENHA_UP" class="form-control mt-2 insert" placeholder="Senha" required>
+  
+        </div>
+        <div class="col-sm">
+  
+  
+  
+         <p style="margin-bottom: 50px;"></p>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="CFG_USU_ALT_PARC_UP">
+            <label class="custom-control-label" for="CFG_USU_ALT_PARC_UP"> Altera Cadastro Parceiro?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox"> 
+            <input type="checkbox" class="custom-control-input"  id="CFG_USU_CONF_CONFERE_CAIXA_UP" >
+            <label class="custom-control-label"  for="CFG_USU_CONF_CONFERE_CAIXA">Pode Conferir Caixa?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="CFG_USU_EXC_FIN_UP" >
+            <label class="custom-control-label"  for="CFG_USU_EXC_FIN">Permite excluir Mov. Financeiro?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="CFG_USU_FECHA_CAIXA_UP" >
+            <label class="custom-control-label"for="CFG_USU_FECHA_CAIXA">Pode Fechar Caixa?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input " id="CFG_USU_LIB_BLOQ_PARC_UP" >
+            <label class="custom-control-label"  for="CFG_USU_LIB_BLOQ_PARC">Libera bloqueio de parceiro?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox"  class="custom-control-input" id="USU_ADM_UP">
+            <label class="custom-control-label"   for="USU_ADM_UP">Administrador do sistema?</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox"  class="custom-control-input" id="STATUS">
+            <label class="custom-control-label"   for="STATUS">Ativo?</label>
+          </div>
+        </div>
+        <div class="col-sm-3" style="margin-right: 30px;width: 230px;">
+          <p style="margin-bottom: 50px;"></p>
+               <span>Usu. inclusão</span>
+               <input type="text" disabled id="USU_INC" class="form-control">
+               <span>Data hora inclusão</span>
+               <input type="text" id="ID_INC" disabled class="form-control">
+               <span>Usu. alteração</span>
+               <input type="text" disabled id="USU_ALT" class="form-control">
+               <span>Data hora alteração</span>
+               <input type="text" disabled id="ID_ALT" class="form-control">
+
+        </div>
+      </div>
+  
+      </div>
+      <% let D = P_USU.P_USU %>
+
+      <% if  (D[1] == 'S') {%>
+        <button class="btn btn-danger" style="position: absolute;bottom: 30px;right: 100px;"   data-toggle="modal" >Deletar</button>
+    <% } else { %>
+        <button class="btn  btn-danger" style="position: absolute;bottom: 30px;right: 100px;"   disabled>Deletar</button>s
+    <% } %>
+      <button id="btn" id="delet"  style="position: absolute;bottom: 30px;right: 30px;" class="btn btn-warning mt-3">Salvar</button>
+    </div>
+  
+  </form>
+</div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Modal extra grande -->
+
+
+<div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <form class="needs-validation" id="form" novalidate>
+        <div class="container">
+            <div class="row">
+              <div class="col-sm"  style="padding: 50px;">
+        
+                <p><span class="mt-2">Usuário</span></p>
+                <input type="text" id="USU_NOME" class="form-control mt-2 insert" placeholder="Nome de usuario" required>
+                 
+                 <p><span class="mt-2">Parceiro</span></p>
+                 <div style="display: flex; flex-direction: row;">
+                  <input type="number" required id="ID_PARC" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. parceiro">
+                  <input type="text" readonly id="PARC_NOME" class="form-control mt-2 insert" placeholder="Nome do parceiro" >
+                 </div>
+        
+                 <p><span class="mt-2">Vendedor</span></p>
+                 <div style="display: flex; flex-direction: row;">
+                  <input type="number" required id="ID_VENDEDOR" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. vendedor">
+                  <input type="text" readonly id="VND_NOME" class="form-control mt-2 insert" placeholder="Nome do vendedor" >
+                 </div>
+                 <p><span class="mt-2">Grupo</span></p>
+                 <div style="display: flex; flex-direction: row;">
+
+                  <select id="ID_GRUPO"  required  class="form-control mt-2 ">
+                  <option value="">Selecione um grupo</option>
+                  </select>
+                 
+                 </div>
+        
+        
+                <p><span class="mt-2">Senha</span></p>
+                <input type="password" id="USU_SENHA" class="form-control mt-2 insert" placeholder="Senha" required>
+        
+              </div>
+              <div class="col-sm">
+        
+        
+        
+               <p style="margin-bottom: 50px;"></p>
+        
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="CFG_USU_ALT_PARC">
+                  <label class="custom-control-label" for="CFG_USU_ALT_PARC"> Altera Cadastro Parceiro?</label>
+                </div>
+        
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input"  id="CFG_USU_CONF_CONFERE_CAIXA" >
+                  <label class="custom-control-label"  for="CFG_USU_CONF_CONFERE_CAIXA">Pode Conferir Caixa?</label>
+                </div>
+        
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="CFG_USU_EXC_FIN" >
+                  <label class="custom-control-label"  for="CFG_USU_EXC_FIN">Permite excluir Mov. Financeiro?</label>
+                </div>
+        
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="CFG_USU_FECHA_CAIXA" >
+                  <label class="custom-control-label"for="CFG_USU_FECHA_CAIXA">Pode Fechar Caixa?</label>
+                </div>
+        
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input " id="CFG_USU_LIB_BLOQ_PARC" >
+                  <label class="custom-control-label"  for="CFG_USU_LIB_BLOQ_PARC">Libera bloqueio de parceiro?</label>
+                </div>
+        
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox"  class="custom-control-input" id="USU_ADM">
+                  <label class="custom-control-label"   for="USU_ADM">Administrador do sistema?</label>
+                </div>
+              </div>
+              <div class="col-sm">
+         <!--                   -->
+              </div>
+        
+            </div>
+        
+            </div>
+            <button id="btn"  style="margin-left: 50px;" class="btn btn-warning mt-3">Salvar</button>
+          </div>
+        
+        </form>
+    </div>
+  </div>
+</div>
+
+<!--Filtro e tabela-->
+<div class="grad" style="display: flex; height: auto;padding: 30px;">
+<% let filtro = P_USU.T_FILTRO %>
+  <div style="width: 300px;height: 400px;">
+      <form  id="filtro" >
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <input type="text" placeholder="Nome" id="nome" value="<%=filtro[0][0]%>" class="form-control" id="inputEmail3" >
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <select id="ID_GRUPO_FILTRO"    class="form-control ">
+                <option value="">Selecione um grupo</option>
+              </select>
+            </div>
+          </div>
+
+          <fieldset class="form-group">
+            <div class="row">
+  
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <%if (filtro[0][1] == 'S'){%>
+                    <input class="form-check-input" checked type="checkbox"  id="adm" value="opcao1" >
+                 <% }else{%>
+                  <input class="form-check-input" type="checkbox"  id="adm" value="opcao1" >
+
+                 <%}%>
+
+                  <label class="form-check-label" for="adm"> Somente Adm? </label>
+                </div>
+
+                <div class="form-check">
+                  <%if (filtro[0][2] == 'A'){%>
+                  <input class="form-check-input" type="checkbox" checked id="ativo" value="opcao2">
+                 <% }else{%>
+                  <input class="form-check-input" type="checkbox"  id="ativo" value="opcao2">
+                 <%}%>
+
+                  <label class="form-check-label" for="ativo">Somente ativos? </label>
+                </div>
+
+                <div class="form-check ">
+                  <input class="form-check-input" type="checkbox"  id="gridRadios3" value="opcao3" disabled>
+                  <label class="form-check-label" for="gridRadios3"> Terceiro radio desativado   </label>
+                </div>
+
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button  class="btn btn-primary">Buscar</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Ações
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" data-toggle="modal" data-target="#modalExemplo"> Copiar conf. usuário</a>
+            <a class="dropdown-item" href="#">Outra ação</a>
+            <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+          </div>
+        </div>
+
+  </div>  <div style="width: 100%;" >
+    <table class="table" style="width: 70%;" >
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Status</th>
+          <th>Info</th>
+        </tr>
+      </thead>
+      <tbody id="tabelausuario"   >
+  
+ 
+
+      </tbody>
+    </table>
+    
+
+  </div>
+
+
+  
+</div>
+
+
+<!-- Botão para acionar modal de acao de copiar usuario -->
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+
+          <p><span class="mt-2">Usuário de origem</span></p>
+          <div style="display: flex; flex-direction: row;">
+           <input type="number" required id="ID_FORNECE" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
+           <input type="text" readonly id="NOME_USU_F" class="form-control mt-2 insert" placeholder="Nome do usuario" >
+          </div>
+
+          <p><span class="mt-2">Usuário que ira receber a copia</span></p>
+          <div style="display: flex; flex-direction: row;">
+           <input type="number" required id="ID_RECEBE" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
+           <input type="text" readonly id="NOME_USU_R" class="form-control mt-2 insert" placeholder="Nome do usuario" >
+          </div>
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" id="BTN_COPIA" class="btn btn-primary">Salvar mudanças</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="/js/usuario/usuario_http.js"></script>
+<script src="/js/usuario/visualiza_usuario.js"></script>
+<script src="/js/usuario/filtro_usuario.js"></script>
+<script src="/js/usuario/copia_usuario.js"></script>
+<script src="/js/usuario/input_copia.js"></script>
+<script src="/js/usuario/input_copia2.js"></script>
+<script src="/js/parceiro/consulta_parceiro.js"></script>
+<script src="/js/vendedor/consulta_vendedor.js"></script>
+<script src="/js/grupo/consulta_grupo.js"></script>
+
+
+<%- include('../partials/footer'); %>

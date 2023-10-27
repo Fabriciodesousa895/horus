@@ -1,0 +1,40 @@
+<%- include('../partials/head'); %>
+
+<%- include('../partials/header'); %>
+<div style="width: 100%;display: flex;justify-content: center;flex-direction: column;">
+  
+    <div style="width: 350px;">
+        <p><span class="mt-2">Usuário de origem</span></p>
+        <div style="display: flex; flex-direction: row;">
+         <input type="number" required id="ID_FORNECE" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
+         <input type="text" readonly id="NOME_USU_F" class="form-control mt-2 insert" placeholder="Nome do usuario" >
+         <button id="btn">Pesquisar</button>
+        </div>
+        
+    </div>
+
+    <div>
+        <table class="table " id="tabelaacesso">
+            <thead>
+            <tr>
+                <td>Nome</td>
+                <td>Altera?</td>
+                <td>Inclui?</td>
+                <td>Exclui?</td>
+                <td>Consulta?</td>
+            </tr>
+        </thead>
+        <tbody>
+            <!--colunas sendo inseridas dinamicamente pelo js-->
+        </tbody>
+        
+        </table>
+    </div>
+
+</div>
+
+
+<script src="/js/usuario/input_copia.js"></script>
+<script src="/js/acesso/acesso.js"></script>
+
+<%- include('../partials/footer'); %>

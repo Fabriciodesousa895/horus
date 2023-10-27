@@ -1,0 +1,123 @@
+<%- include('../partials/head'); %>
+
+<%- include('../partials/header'); %>
+
+
+<button id="BTN_MODAL"  data-toggle="modal" style="display: none;" data-target=".bd-example-modal-xl"></button>
+<% result.forEach(U=>{ %>
+
+<!--visualizar detalhes do usuario-->
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-sm"  style="padding: 50px;">
+  
+          <p><span class="mt-2">Código usuário</span></p>
+          <input type="text" id="ID_USU" value="<%=U.ID_USU%>"  style="width: 100px;" class="form-control mt-2 insert"  disabled>
+          <p><span class="mt-2">Usuário</span></p>
+          <input type="text" id="USU_NOME" value="<%=U.USU_NOME%>"  class="form-control mt-2 insert" placeholder="Nome de usuario" required>
+           
+           <p><span class="mt-2">Parceiro</span></p>
+           <div style="display: flex; flex-direction: row;">
+            <input type="text" required id="ID_PARC" value="<%=U.ID_PARC%>" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. parceiro">
+            <input type="text" readonly id="PARC_NOME" value="<%=U.PARC_NOME%>" class="form-control mt-2 insert" placeholder="Nome do parceiro" >
+           </div>
+  
+           <p><span class="mt-2">Vendedor</span></p>
+           <div style="display: flex; flex-direction: row;">
+            <input type="text" required id="ID_VENDEDOR" value="<%=U.ID_VEND%>" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. vendedor">
+            <input type="text" readonly id="VND_NOME"  value="<%=U.VND_NOME%>" class="form-control mt-2 insert" placeholder="Nome do vendedor" >
+           </div>
+           <p><span class="mt-2">Grupo</span></p>
+           <div style="display: flex; flex-direction: row;">
+
+            <select id="ID_GRUPO"  required  class="form-control mt-2 ">
+            <option value="<%=U.ID_GRUPO%>"><%=U.NOME_GRUPO%></option>
+            </select>
+           
+           </div>
+  
+  
+          <p><span class="mt-2">Senha</span></p>
+          <input type="text" id="USU_SENHA" class="form-control mt-2 insert" placeholder="Senha" required>
+  
+        </div>
+        <div class="col-sm">
+  
+  
+  
+         <p style="margin-bottom: 50px;"></p>
+  
+         <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="CFG_USU_ALT_PARC" <% if (U.ALT_PARC === 'S') { %> checked <% } %>>
+            <label class="custom-control-label" for="CFG_USU_ALT_PARC">Altera Cadastro Parceiro?</label>
+        </div>
+        
+  
+          <div class="custom-control custom-checkbox"> 
+            <input type="checkbox" class="custom-control-input"  id="CFG_USU_CONF_CONFERE_CAIXA"  <% if (U.CF_CAIXA === 'S') { %> checked <% } %>>
+            <label class="custom-control-label"  for="CFG_USU_CONF_CONFERE_CAIXA">Pode Conferir Caixa?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="CFG_USU_EXC_FIN"  <% if (U.EX_FIN == 'S') { %> checked <% } %> >
+            <label class="custom-control-label"  for="CFG_USU_EXC_FIN">Permite excluir Mov. Financeiro?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="CFG_USU_FECHA_CAIXA" <% if (U.F_CAIXA == 'S') { %> checked <% } %> >
+            <label class="custom-control-label"for="CFG_USU_FECHA_CAIXA" >Pode Fechar Caixa?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input " id="CFG_USU_LIB_BLOQ_PARC"  <% if (U.U_L_PARC === 'S') { %> checked <% } %>>
+            <label class="custom-control-label"  for="CFG_USU_LIB_BLOQ_PARC">Libera bloqueio de parceiro?</label>
+          </div>
+  
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox"  class="custom-control-input" id="USU_ADM"  <% if (U.ADM == 'S') { %> checked <% } %>> 
+            <label class="custom-control-label"   for="USU_ADM">Administrador do sistema?</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox"  class="custom-control-input" id="STATUS"  <% if (U.USU_STATUS == 'S') { %> checked <% } %>>
+            <label class="custom-control-label"   for="STATUS" >Ativo?</label>
+          </div>
+        </div>
+        <div class="col-sm-3" style="margin-right: 30px;width: 230px;">
+          <p style="margin-bottom: 50px;"></p>
+               <span>Usu. inclusão</span>
+               <input type="text" disabled id="USU_INC"  value="<%=U.NOME_IN%>"  class="form-control">
+               <span>Data hora inclusão</span>
+               <input type="text" id="ID_INC"  value="<%=U.DATA_IN%>"  disabled class="form-control">
+               <span>Usu. alteração</span>
+               <input type="text" disabled id="USU_ALT"   value="<%=U.NOME_ALT%>" class="form-control">
+               <span>Data hora alteração</span>
+               <input type="text" disabled id="ID_ALT"  value="<%=U.DATA_ALT%>"  class="form-control">
+
+        </div>
+      </div>
+  
+      </div>
+
+    </div>
+  
+  </form>
+</div>
+    </div>
+  </div>
+        <% let D = P_USU.P_USU %>
+
+        <button class="btn btn-danger" type="button" id="delet"   data-toggle="modal" <% if (D[1] == 'N') { %> disabled <% } %> >Deletar</button>
+
+      <button id="btn"   style="position: absolute;bottom: 30px;right: 30px;" class="btn btn-warning mt-3">Salvar</button>
+
+<%})%>
+<input type="hidden" id="ID_GRUPO_FILTRO">
+<script src="/js/parceiro/consulta_parceiro.js"></script>
+<script src="/js/vendedor/consulta_vendedor.js"></script>
+<script src="/js/grupo/consulta_grupo.js"></script>
+<script src="/js/usuario/delete.js"></script>
+<script src="/js/usuario/update_usuario.js"></script>
+
+
+<%- include('../partials/footer'); %>

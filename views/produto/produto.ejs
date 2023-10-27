@@ -1,0 +1,56 @@
+<%- include('../partials/head'); %>
+
+
+<%- include('../partials/header'); %>
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+        Produto
+
+        <p><span class="mt-2">Nome</span></p>
+        <input type="text" name="PRDT_NOME" class="form-control mt-2" placeholder="Nome do produto">
+
+        <span>Descrição</span>
+        <input type="text" name="PRDT_DESCRICAO" class="form-control mt-2 " placeholder="Descrição do produto">
+
+        <span>Categoria</span>
+        <select name="PRDT_ID_CTG" class="form-control mt-2"  id="PRDT_ID_CTG">
+            <option value="">Selecione uma categoria</option>
+        </select>
+
+        <span>NCM</span>
+        <select name="PRDT_NCM" class="form-control mt-2"  id="PRDT_NCM">
+            <option value="">Selecione um grupo de NCM</option>
+            <%ncm.forEach(ncm=>{%>
+              <option value="<%=ncm.COD_NCM%>"><%=ncm.NCM_DESC%></option>
+
+            <%})%>
+        </select>
+      </div>
+
+      <div class="col-sm-3">
+        Medidas
+
+        <p><span>Peso bruto</span></p>
+        <input type="number" class="form-control mt-2" name="PRDT_PESO" placeholder="Peso bruto do produto em gramas">
+
+        <span>Altura</span>
+        <input type="number" class="form-control mt-2" name="PRDT_ALTURA" placeholder="Altura do produto" >
+
+        <span>Largura</span>
+        <input type="text" class="form-control mt-2" name="PRDT_LARGURA">
+
+      </div>
+      <div class="col-sm">
+ 
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+<%- include('../partials/footer'); %>

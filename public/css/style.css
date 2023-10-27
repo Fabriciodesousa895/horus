@@ -1,0 +1,22 @@
+main {
+    border: 0.4px solid rgb(0, 0, 0);
+    box-shadow: 8px 8px 8px black;
+    min-height: 40vw !important;
+    padding: 30px;
+    margin-bottom: 5vw !important;
+    background-color: rgb(255, 255, 255);
+}
+
+.logo{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+.sps {
+    display: flex;
+    justify-content: space-between;
+}
+.link{
+    text-decoration: none;
+    color: black;
+}

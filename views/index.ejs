@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<form method="post" id="form">
+    NOME DA TABELA: <input type="text" name="table_name" id="nomedatabela" placeholder="nome da tabela"><br>
+    <div id="AD">
+        <button id="adicionarCampo">Adicionar Campo</button>
+    </div>
+    <br>
+    <button id="btn">Salvar</button>
+</form>
+</body>
+<script>
+    const form = document.getElementById('form');
+    //array para armazenar o objeto
+    const campos = []; 
+   //evitar o envio do formulario
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+    });
+
+    //--------------------------------------------------------------------------------------------//
+    const adicionarCampoButton = document.getElementById('adicionarCampo');
+    let campoCount = 0; // Contador de campos
+
+    adicionarCampoButton.addEventListener('click', () => {
+        campoCount++;
+        //adiciona o input para o nome do campo
+        const nomeCampoInput = document.createElement('input');
+        nomeCampoInput.type = 'text';
+        nomeCampoInput.name = `campo${campoCount}`;
+        nomeCampoInput.placeholder = 'Nome do Campo';
+        //adiciona o select para o tipo de dado
+        const tipoDadoSelect = document.createElement('select');
+        tipoDadoSelect.name = `tipoDado${campoCount}`;
+
+        const tiposDeDado = ['varchar2', 'number', 'INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY', 'boolean'];
+
+        tiposDeDado.forEach((tipo) => {
+            const option = document.createElement('option');
+            option.value = tipo.toLowerCase().replace(' ', '_'); // Valor em minúsculas e com sublinhado
+            option.text = tipo;
+            tipoDadoSelect.appendChild(option);
+        });
+
+        document.querySelector('form').appendChild(nomeCampoInput);
+        document.querySelector('form').appendChild(tipoDadoSelect);
+    });
+
+    //-----------------------------------------------------------------------------------------------------//
+
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', () => {
+        campos.length = 0; // Limpa o array de campos
+
+        for (let i = 1; i <= campoCount; i++) {
+            const campoInput = document.querySelector(`input[name="campo${i}"]`);
+            const tipoDadoSelect = document.querySelector(`select[name="tipoDado${i}"]`);
+            const campo = campoInput.value;
+            const tipo = tipoDadoSelect.value;
+            const objeto = { campo, tipo };
+            campos.push(objeto);
+        }
+        //array de objeto para eniar para o servidor
+       const nomedatabela = document.getElementById('nomedatabela').value; 
+        //FAZENDO REQUISIÇÃO HTTP 
+        const url = '/criandotabela';
+
+        fetch(url,{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ campos, nomedatabela })
+
+        }).then(response =>{
+            if(response.status === 200){
+                alert('REQUISIÇÃO FEITA COM SUCESSO');
+            }else{
+                throw new Error('Houve um erro')
+            }
+        }).then(data =>{
+            console.log(data);
+        }).catch(error =>{
+            console.log(error);
+        })
+
+
+    });
+</script>
+</html>

@@ -1,0 +1,99 @@
+<meta charset="UTF-8">
+<title>EJS Is Fun</title>
+
+<!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body { padding-top:50px; }
+    nav{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav>
+        <% let P = P_USU.P_USU %>
+
+      <!--VALIDANDO SE O USUÁRIO PODE INCLUIR-->
+      <% if (P[2] == 'S') { %>
+        <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" data-target=".PRINCIPAL">+</button>
+    <% } else { %>
+        <button class="btn btn-primary" style="margin-right: 15px;" disabled>+</button>
+    <% } %>
+  <!--VALIDANDO SE O USUÁRIO PODE EXCLUIR-->
+    <% if (P[1] == 'S') { %>
+        <button class="btn "  style="margin-right: 15px;" data-toggle="modal" ><img src="/img/bin.png" alt="-"></button>
+    <% } else { %>
+        <button class="btn " style="margin-right: 15px;" disabled><img src="/img/bin.png" alt="-"></button>
+    <% } %>
+  <!--VALIDANDO SE O USUÁRIO PODE ALTERAR-->
+    <% if (P[0] == 'S') { %>
+        <button class="btn btn-primary" data-toggle="modal" >A</button>
+    <% } else { %>
+        <button class="btn btn-primary" disabled>A</button>
+    <% } %>
+</nav>
+
+ <!---->
+ <nav>
+    <% let T_USU = P_USU.T_NOME %>
+    <div ><%=T_USU%></div> 
+
+ </nav>
+ <!---->
+ <nav>
+
+ <div class="input-group mb-3" style="width: 300px;">
+    <div class="input-group-prepend">
+      <label class="input-group-text" id="irParaLink" for="irParaLink">Pesquisar</label>
+    </div>
+    <select style="width: 200px;" class="custom-select" id="meuSelect">
+        <option value="" >consulte suas telas</option>
+        <% let usu = P_USU.T_USU %>
+        <% usu.forEach(a => { %>
+            <option value="<%= a[1] %>"><%= a[0] %></option>
+        <% }) %>
+    </select>
+      </div>
+    </div>
+        
+ </nav>
+  </nav>
+
+
+
+
+
+
+    
+
+
+
+
+
+<script>
+        const selectElement = document.getElementById('meuSelect');
+        const buttonElement = document.getElementById('irParaLink');
+
+        buttonElement.addEventListener('click', function() {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            if (selectedOption.value) {
+                window.location.href = selectedOption.value;
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+</script>
+
+

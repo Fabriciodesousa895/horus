@@ -5,6 +5,7 @@
         // Seleciona todos os inputs da página
         var inputs = document.querySelectorAll("input[type='text']");
         var checkbox = document.querySelectorAll("input[type='checkbox']");
+        var Select = document.getElementsByTagName("select");
     
         // Inicializa um objeto vazio
         var objeto = {};
@@ -21,7 +22,12 @@
             var valor = (checkbox[i].checked ? 'S' : 'N');//Valida se a flag está marcada ou não
             objeto[id] = valor;
         }
-    
+        // Percorre todos os selects e adiciona suas IDs e valores ao objeto
+        for(var i = 0; i  < Select.length; i++){
+               var id = Select[i].id;
+               var valor = Select[i].value;
+               objeto[id] = valor;
+        }
 
     let data = JSON.stringify(objeto)
     //fazendo requisição ajax

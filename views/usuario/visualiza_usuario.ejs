@@ -30,9 +30,10 @@
            </div>
            <p><span class="mt-2">Grupo</span></p>
            <div style="display: flex; flex-direction: row;">
-
+  <input type="hidden" value="<%=U.ID_GRUPO%>">
+  <input type="hidden" id="gruponome" value="<%=U.NOME_GRUPO%>">
             <select id="ID_GRUPO"  required  class="form-control mt-2 ">
-            <option value="<%=U.ID_GRUPO%>"><%=U.NOME_GRUPO%></option>
+            <option value="">Selecione um grupo</option>
             </select>
            
            </div>

@@ -345,7 +345,7 @@ WHERE U.ID_USU = :ID_USU`;
   };
   try{
     let Acesso = await valida_acesso(1, token);
-    let P_USU = await permi_usu(81, token);
+    let P_USU = await permi_usu(1, token);
     let result = await conectarbd(sql,binds,options_objeto);
 
     if (Acesso === 'N') return res.send('Usuário não tem permissão');
@@ -453,7 +453,7 @@ ID_USU:   objeto.ID_USU,
 USU_NOME: objeto.USU_NOME,
 ID_PARC:  objeto.ID_PARC,
 ID_VENDEDOR: objeto.ID_VENDEDOR,
-ID_GRUPO: 1,
+ID_GRUPO: objeto.ID_GRUPO,
 USU_SENHA: objeto.USU_SENHA ? bycrypt.hashSync(objeto.USU_SENHA, saltRounds) : '',
 STATUS:      objeto.STATUS,
 USU_ADM: objeto.USU_ADM,

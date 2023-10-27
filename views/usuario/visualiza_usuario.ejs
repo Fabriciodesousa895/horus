@@ -12,16 +12,10 @@
       <div class="row">
         <div class="col-sm"  style="padding: 50px;">
   
-          <p><span class="mt-2">Código usuário</span></p>
-          <input type="text" id="ID_USU" value="<%=U.ID_USU%>"  style="width: 100px;" class="form-control mt-2 insert"  disabled>
-          <p><span class="mt-2">Usuário</span></p>
-          <input type="text" id="USU_NOME" value="<%=U.USU_NOME%>"  class="form-control mt-2 insert" placeholder="Nome de usuario" required>
-           
-           <p><span class="mt-2">Parceiro</span></p>
-           <div style="display: flex; flex-direction: row;">
-            <input type="text" required id="ID_PARC" value="<%=U.ID_PARC%>" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. parceiro">
-            <input type="text" readonly id="PARC_NOME" value="<%=U.PARC_NOME%>" class="form-control mt-2 insert" placeholder="Nome do parceiro" >
-           </div>
+             <%- include('../components/usuario'); %>
+             <%- include('../components/parceiro'); %>
+            
+     
   
            <p><span class="mt-2">Vendedor</span></p>
            <div style="display: flex; flex-direction: row;">

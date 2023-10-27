@@ -1,7 +1,6 @@
 (function readyJS(win, doc) {
   'use strict';
 
-  let form = document.getElementById('form');
   let USU_NOME = document.getElementById('USU_NOME');
   let ID_GRUPO = document.getElementById('ID_GRUPO');
   let USU_SENHA = document.getElementById('USU_SENHA');
@@ -74,6 +73,6 @@
     }
   }
 
-  form.addEventListener('submit', sendForm, false);
+  document.getElementById('SALVA').addEventListener('click', sendForm, false);
 
 })(window, document);

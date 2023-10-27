@@ -360,14 +360,12 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
   }               
   try{
     let result  = await conectar(sql,binds);
-    console.log(result)
     
   //enviando para o usuario a rsposta da requisição
   res.send(result.outBinds.P_RESULTADO);
-  }catch(error){
-  res.redirect(`/erroservidor/${error}`);
-  console.log(error)
-
+  
+  }catch(err){
+  res.status(500).send('Ocorreu um erro!' + err );
     
   }
     }
@@ -572,7 +570,7 @@ app.post('/copia_usuario',async(req,res)=>{
 app.post('/consulta_acessos',async(req,res)=>{
   let ID_USU = req.body.ID_USU;
 
-  let sql = `SELECT T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA
+  let sql = `SELECT T.ID_TELA,T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA
   FROM
   CONFIG_USU_TELA U
   INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
@@ -582,6 +580,7 @@ app.post('/consulta_acessos',async(req,res)=>{
   }
    try{
     let result = await conectarbd(sql,binds, options)
+    console.log(result)
     result.length === 0 ? res.status(505).send('Usuário não encontrado!') :   res.send(result)
    }catch (error){
     res.send('Erro no lado do servidor ' + error)

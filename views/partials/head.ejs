@@ -18,25 +18,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <nav>
         <% let P = P_USU.P_USU %>
+     <!--VALIDANDO SE O USUÁRIO PODE INCLUIR-->
+        <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal"   <% if (P.INCLUI === 'S') { %> data-target=".PRINCIPAL"  <% } %>>+</button>
 
-      <!--VALIDANDO SE O USUÁRIO PODE INCLUIR-->
-      <% if (P[2] == 'S') { %>
-        <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" data-target=".PRINCIPAL">+</button>
-    <% } else { %>
-        <button class="btn btn-primary" style="margin-right: 15px;" disabled>+</button>
-    <% } %>
-  <!--VALIDANDO SE O USUÁRIO PODE EXCLUIR-->
-    <% if (P[1] == 'S') { %>
-        <button class="btn "  style="margin-right: 15px;" data-toggle="modal" ><img src="/img/bin.png" alt="-"></button>
-    <% } else { %>
-        <button class="btn " style="margin-right: 15px;" disabled><img src="/img/bin.png" alt="-"></button>
-    <% } %>
-  <!--VALIDANDO SE O USUÁRIO PODE ALTERAR-->
-    <% if (P[0] == 'S') { %>
-        <button class="btn btn-primary" data-toggle="modal" >A</button>
-    <% } else { %>
-        <button class="btn btn-primary" disabled>A</button>
-    <% } %>
+     <!--VALIDANDO SE O USUÁRIO PODE EXCLUIR-->
+        <button class="btn "  style="margin-right: 15px;" data-toggle="modal" <% if (P.DELETA === 'N') { %> disabled <% } %> ><img src="/img/bin.png" alt="-"></button>
+
+     <!--VALIDANDO SE O USUÁRIO PODE ALTERAR-->
+        <button class="btn btn-primary" data-toggle="modal"  <% if (P.ALTERA === 'N') { %> disabled <% } %>>A</button>
+
 </nav>
 
  <!---->
@@ -47,7 +37,6 @@
  </nav>
  <!---->
  
-
  <nav>
 
  <div class="input-group mb-3" style="width: 300px;">

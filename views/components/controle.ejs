@@ -1,0 +1,12 @@
+<% result.forEach(U=>{ %>
+
+<span>Usu. inclusão</span>
+<input type="text" disabled id="USU_INC"  value="<%=U.NOME_IN%>"  class="form-control">
+<span>Data hora inclusão</span>
+<input type="text" id="ID_INC"  value="<%=U.DATA_IN%>"  disabled class="form-control">
+<span>Usu. alteração</span>
+<input type="text" disabled id="USU_ALT"   value="<%=U.NOME_ALT%>" class="form-control">
+<span>Data hora alteração</span>
+<input type="text" disabled id="ID_ALT"  value="<%=U.DATA_ALT%>"  class="form-control">
+
+<%})%>

@@ -159,7 +159,62 @@ function permi_usu (ID_TELA,token){
       jwt.verify(token,secret,async(err,data)=>{
         if(err){ reject('token inválido')}
         else{
-          let sql = `SELECT PERMIT_USU (:P_ID_USU,:P_ID_TELA) FROM DUAL`;
+          //tr´s as permissões do usuario na teala especificada
+          let sql = `SELECT
+          CASE 
+          WHEN ALU.CFU_ALTERA = 'S' OR ALG.GRUP_ALTERA = 'S' OR U.USU_ADM = 'S' THEN 'S' 
+          ELSE 'N' 
+          END AS ALTERA,
+          CASE 
+          WHEN DLU.CFU_DELETA = 'S' OR DLG.GRUP_DELETA = 'S' OR U.USU_ADM = 'S' THEN 'S'
+          ELSE 'N'
+          END AS DELETA,
+          CASE 
+          WHEN UIN.CFU_INCLUI = 'S' OR GIN.GRUP_INCLUI = 'S' OR U.USU_ADM = 'S' THEN 'S'
+          ELSE 'N'
+          END AS INCLUI,
+          U.USU_ADM
+      FROM (
+          SELECT CFU_ALTERA
+          FROM CONFIG_USU_TELA
+          WHERE ID_USU = :P_ID_USU
+          AND ID_TELA = :P_ID_TELA
+      ) ALU,
+      (
+          SELECT T.GRUP_ALTERA 
+          FROM CONFIG_GRUPO_TELA T
+          INNER JOIN USU_USUARIO U ON U.ID_GRUPO = T.ID_GRUPO
+          WHERE ID_USU = :P_ID_USU
+          AND ID_TELA = :P_ID_TELA
+      ) ALG,
+      (
+          SELECT CFU_DELETA 
+          FROM CONFIG_USU_TELA
+          WHERE ID_USU  = :P_ID_USU
+          AND ID_TELA = :P_ID_TELA
+      ) DLU,
+      (
+          SELECT T.GRUP_DELETA 
+          FROM CONFIG_GRUPO_TELA T 
+          INNER JOIN USU_USUARIO U ON U.ID_GRUPO = T.ID_GRUPO
+          WHERE ID_USU  = :P_ID_USU
+          AND ID_TELA = :P_ID_TELA
+      ) DLG,
+      (
+          SELECT CFU_INCLUI 
+          FROM CONFIG_USU_TELA
+          WHERE ID_USU  = :P_ID_USU
+          AND ID_TELA = :P_ID_TELA
+      ) UIN,
+      (
+          SELECT T.GRUP_INCLUI 
+          FROM CONFIG_GRUPO_TELA T 
+          INNER JOIN USU_USUARIO U ON U.ID_GRUPO = T.ID_GRUPO
+          WHERE ID_USU  = :P_ID_USU
+          AND ID_TELA = :P_ID_TELA
+      ) GIN,
+      USU_USUARIO U
+      WHERE U.ID_USU = :P_ID_USU`;
           let binds = {P_ID_USU: data.ID_USUARIO,P_ID_TELA:ID_TELA};
 
 
@@ -185,7 +240,7 @@ function permi_usu (ID_TELA,token){
             let binds3 = {
               ID_TELA: ID_TELA
              }
-
+               //faz o log de acesso  da tela
              let sql4 = `BEGIN P_HIST_TELA(:ID_TELA,:ID_USU,:TOKEN); END;`;
              let binds4 = {
               ID_TELA: ID_TELA,
@@ -209,14 +264,15 @@ function permi_usu (ID_TELA,token){
              }
 
         try {
-          let result  = await conectar(sql, binds,options);
+          let result  = await conectarbd(sql, binds,options_objeto);
           let result2 = await conectar(sql2,binds2,options);
           let result3 = await conectar(sql3,binds3,options);
           let result4 = await conectar(sql4,binds4,options);
           let result5 = await conectar(sql5,binds5,options);
+          console.log(result);
           result4.rowsAffected
           let Objeto = {
-            P_USU :  result.rows[0][0][0],
+            P_USU :  result,
             T_USU: result2.rows,
             T_NOME: result3.rows[0][0],
             T_FILTRO: result5.rows
@@ -231,16 +287,22 @@ function permi_usu (ID_TELA,token){
 
 }
 
+//Redirecionado a rota caso haja um erro no lado do servidor
+app.get('/erroservidor/:error',(req,res)=>{
+  res.send('Ocorreu um erro ! '+ '<br>' + req.params.error)
+})
+
+
 app.get('/usuario', auth, async (req, res) => {
   let token = req.cookies.jwt;
   try {
-      let Acesso = await valida_acesso(1, token);
+      let Acesso = await valida_acesso(1,token);
       let P_USU = await permi_usu(1, token);
-      if (Acesso === 'N') return res.send('Usuário não tem permissão');
-      else { res.render('./usuario/usuario', { P_USU }); }
+
+      Acesso === 'N' ? res.send('Usuário não tem permissão') :  res.render('./usuario/usuario', { P_USU })
+
   } catch (error) {
-      res.send(error);
-      console.log(error);
+      res.redirect(`/erroservidor/${error}`)
   }
 });
 
@@ -302,15 +364,15 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
   //enviando para o usuario a rsposta da requisição
   res.send(result.outBinds.P_RESULTADO);
   
-  }catch(err){
-  res.status(500).send('Ocorreu um erro no lado do servidor! ' + err );
+  }catch(error){
+  res.redirect(`/erroservidor/${error}`);
     
   }
     }
   })
 });
 
-app.get('/visualiza_usuario/:ID_USU',async(req,res)=>{
+app.get('/visualiza_usuario/:ID_USU',auth,async(req,res)=>{
   let ID_USU = req.params.ID_USU
   let token = req.cookies.jwt;
 
@@ -348,24 +410,12 @@ WHERE U.ID_USU = :ID_USU`;
     let P_USU = await permi_usu(1, token);
     let result = await conectarbd(sql,binds,options_objeto);
 
-    if (Acesso === 'N') return res.send('Usuário não tem permissão');
-    else { res.render('./usuario/visualiza_usuario', { P_USU,result }); }
-    console.log(result);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/visualiza_usuario', { P_USU,result })
 
   }catch (error){
-    res.send( error);
-    console.log(error);
+    res.redirect(`/erroservidor/${error}`);
   }
-
 })
-
-
-app.post('/delete_usu',(req,res)=>{
-  console.log('servidor')
-  res.send('teste');
-})
-
-
 
 app.post('/filtro_usuario',async(req,res)=>{
   let token = req.cookies.jwt;
@@ -394,10 +444,15 @@ app.post('/filtro_usuario',async(req,res)=>{
         P_GRUPO:  grupo,
         P_ID_USU: data.ID_USUARIO
       }
-    
-      let result = await conectarbd(sql,binds,options);
-      let result2 = await conectarbd(sql2,binds2,options);
-      res.send(result[0][0])
+
+      try{
+        let result = await conectarbd(sql,binds,options);
+        let result2 = await conectarbd(sql2,binds2,options);
+        res.send(result[0][0])
+      }catch (error){
+           res.redirect(`/erroservidor/${error}`);
+      }
+
     }
   })
 
@@ -408,20 +463,14 @@ app.post('/input_usu',async(req,res)=>{
   let ID_USU = req.body.ID_USU;
 
   let sql = `SELECT USU_NOME FROM USU_USUARIO WHERE ID_USU = :ID_USU `;
-  let binds = {
-    ID_USU: ID_USU
-  }
+  let binds = {ID_USU: ID_USU}
 
-  let result = await conectarbd(sql,binds, options)
-  if(result.length === 0){
-  res.status(505).send('Usuário não encontrado!');
-  return 
-   
-  }else{
-    res.send(result[0][0])
-    return
+  try{
+    let result = await conectarbd(sql,binds, options)
+    result.length === 0 ? res.status(505).send('Usuário não encontrado!') :   res.send(result[0][0])
+  }catch(error){    res.redirect(`/erroservidor/${error}`); }
 
-  }
+
 })
 //rota para alterar o cadastro de usuario
 app.post('/update_usuario', async(req,res)=>{
@@ -507,8 +556,15 @@ app.post('/copia_usuario',async(req,res)=>{
      ID_R:ID_R,
      P_RESULTADO:{ dir: oracledb.BIND_OUT, type: oracledb.STRING }
   };
-  let result = await conectar(sql,binds)
-  res.status(200).send(result.outBinds.P_RESULTADO)
+
+  try{
+    let result = await conectar(sql,binds)
+    res.status(200).send(result.outBinds.P_RESULTADO)
+  }catch (error){
+    res.send('Erro no lado do servidor ' + error)
+  }
+
+
 })
 //CONSULTA PERMISSOES DE TODAS AS TELAS
 app.post('/consulta_acessos',async(req,res)=>{
@@ -522,21 +578,18 @@ app.post('/consulta_acessos',async(req,res)=>{
   let binds = {
     ID_USU: ID_USU
   }
+   try{
+    let result = await conectarbd(sql,binds, options)
+    result.length === 0 ? res.status(505).send('Usuário não encontrado!') :   res.send(result)
+   }catch (error){
+    res.send('Erro no lado do servidor ' + error)
+   }
 
-  let result = await conectarbd(sql,binds, options)
-  if(result.length === 0){
-  res.status(505).send('Usuário não encontrado!');
-  return 
-   
-  }else{
-    res.send(result)
-    return
-
-  }
+    
 })
 
 
-
+//consulta parceiro
 app.post('/consulta_parceiro', urlencodedParser, async (req, res) => {
   let ID_PARC = req.body.ID_PARC;
   let binds = {
@@ -544,13 +597,13 @@ app.post('/consulta_parceiro', urlencodedParser, async (req, res) => {
   }
   let sql = `SELECT PARC_NOME FROM PRC_PARCEIRO WHERE ID_PARC = :ID_PARC `; 
   
-     let result = await conectarbd(sql,binds, options); 
-     if(result.length === 0){
-     return res.status(505).send('Parceiro não existe!')
-     }else{
-      res.status(200).send( result[0][0] );
-      console.log(result[0][0] )
-     }
+    try{
+      let result = await conectarbd(sql,binds, options); 
+      result.length === 0 ?  res.status(505).send('Parceiro não existe!') :  res.status(200).send( result[0][0] );
+    }catch (error){
+      res.send('Erro no lado do servidor ' + error)
+    }
+
 
 });
 
@@ -558,20 +611,16 @@ app.post('/consulta_parceiro', urlencodedParser, async (req, res) => {
 app.post('/consulta_vendedor',urlencodedParser,async(req,res)=>{
   let ID_VENDEDOR = req.body.ID_VENDEDOR;
 
-  let binds = {
-    ID_VENDEDOR:ID_VENDEDOR
-  };
+  let binds = { ID_VENDEDOR:ID_VENDEDOR};
 
-  let sql = `SELECT VND_NOME FROM VND_VENDEDOR WHERE ID_VENDEDOR = :ID_VENDEDOR `; 
-  let result = await conectarbd(sql,binds,options);
+  let sql = `SELECT VND_NOME FROM VND_VENDEDOR WHERE ID_VENDEDOR = :ID_VENDEDOR `;
 
-    if(result.length === 0){
-      return res.status(400).send('Vendedor não existe!')
-    }else{
-      res.status(200).send(result[0][0]);
-      console.log(result[0][0]);
-    }
-
+  try{
+    let result = await conectarbd(sql,binds,options);
+    result.length === 0 ?  res.status(505).send('Vendedor não existe!') :   res.status(200).send(result[0][0])
+  }catch (error){
+    res.send('Erro no lado do servidor ' + error)
+  }
 })
 
 //consulta grupo

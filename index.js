@@ -360,12 +360,14 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
   }               
   try{
     let result  = await conectar(sql,binds);
+    console.log(result)
     
   //enviando para o usuario a rsposta da requisição
   res.send(result.outBinds.P_RESULTADO);
-  
   }catch(error){
   res.redirect(`/erroservidor/${error}`);
+  console.log(error)
+
     
   }
     }

@@ -53,7 +53,7 @@
   }
 
    //Quando o botão de salvar é chamado a funcao sendForm para fazer a requisição ajax;
-  document.getElementById('btn').addEventListener('click',sendForm,false);
+  document.getElementById('SALVA').addEventListener('click',sendForm,false);
 
      
 })(window.document)

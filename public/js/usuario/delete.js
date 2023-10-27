@@ -1,6 +1,6 @@
 (function readJS(win,doc){
   'use strict';
-  let delet = document.getElementById('delet');
+  let delet = document.getElementById('DELETA');
 
   function sendForm(){
   let ajax = new XMLHttpRequest();

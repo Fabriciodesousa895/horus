@@ -19,7 +19,7 @@
     <nav>
         <% let P = P_USU.P_USU %>
      <!--VALIDANDO SE O USUÁRIO PODE INCLUIR-->
-        <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal"   <% if (P.INCLUI === 'S') { %> data-target=".PRINCIPAL"  <% } %>>+</button>
+        <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" data-target=".PRINCIPAL"  <% if (P.INCLUI === 'S') { %>   <% } %>>+</button>
 
      <!--VALIDANDO SE O USUÁRIO PODE EXCLUIR-->
         <button class="btn "  style="margin-right: 15px;" data-toggle="modal" <% if (P.DELETA === 'N') { %> disabled <% } %> ><img src="/img/bin.png" alt="-"></button>

@@ -15,12 +15,7 @@
              <%- include('../components/usuario_v'); %>
              <%- include('../components/parceiro_v'); %>
              <%- include('../components/vendedor_v'); %>
-            
-           <p><span class="mt-2">Grupo</span></p>
-           <div style="display: flex; flex-direction: row;">
-            <select id="ID_GRUPO"  required  class="form-control mt-2 ">
-            <option value="">Selecione um grupo</option>
-            </select>
+             <%- include('../components/grupo_v'); %>
            
            </div>
   
@@ -69,7 +64,6 @@
           </div>
         </div>
         <div class="col-sm-3" style="margin-right: 30px;width: 230px;">
-          <p style="margin-bottom: 50px;"></p>
   
           <%- include('../components/controle'); %>
 
@@ -85,11 +79,9 @@
 </div>
     </div>
   </div>
-        <% let D = P_USU.P_USU %>
 
-        <button class="btn btn-danger" type="button" id="delet"   data-toggle="modal" <% if (D[1] == 'N') { %> disabled <% } %> >Deletar</button>
-
-      <button id="btn"   style="position: absolute;bottom: 30px;right: 30px;" class="btn btn-warning mt-3">Salvar</button>
+  <%- include('../components/salvadeleta_V'); %>
+ 
 
 <%})%>
 <input type="hidden" id="ID_GRUPO_FILTRO">

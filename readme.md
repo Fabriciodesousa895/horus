@@ -1,3 +1,9 @@
+
+
+
+
+
+
 <%- include('../partials/head'); %>
 
 <%- include('../partials/header'); %>

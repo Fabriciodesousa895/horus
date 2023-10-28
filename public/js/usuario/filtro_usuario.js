@@ -44,12 +44,8 @@
                          cell.innerText = '';
                          row.appendChild(cell);
 
-                         const deleteIcon = document.createElement("img");
-                         deleteIcon.src = '/img/bin.png';
-                         deleteIcon.alt = 'Excluir'; 
-                     
-                         // Adicionar o ícone de exclusão à célula "info"
-                         cell.appendChild(deleteIcon);
+
+
 
                      tbody.appendChild(row)
                   ;})

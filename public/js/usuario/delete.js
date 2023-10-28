@@ -1,24 +1,33 @@
 (function readJS(win,doc){
   'use strict';
-  let delet = document.getElementById('DELETA');
+  let DELETA = document.getElementById('DELETA');
+  let ID_USU = document.getElementById('ID_USU');
 
   function sendForm(){
   let ajax = new XMLHttpRequest();
-
+  let data = {
+    ID_USU: ID_USU.value
+  }
+  let jsondata = JSON.stringify(data)
     ajax.open('POST','/delete_usu');
     ajax.setRequestHeader('Content-type','application/json');
     ajax.onreadystatechange = function (){
-      alert('tef')
       if(ajax.status == 200){
-  alert('teste')
-
+        swal({
+          title: ajax.response,
+          icon: 'warning'
+         })
       }else{
-        alert('teste errado')
+     swal({
+      title: ajax.response,
+      icon: 'error'
+     })
 
       }
     }
+    ajax.send(jsondata)
 
   };
   
-  delet.addEventListener('dblclick',sendForm,false)
+  DELETA.addEventListener('click',sendForm,false)
 })(window,document)

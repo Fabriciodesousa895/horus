@@ -1,7 +1,7 @@
 (function readyJS(win,doc){
     'use strict';
-    let ID_USU = document.getElementById('ID_USU');
-    let USU_NOME = document.getElementById('USU_NOME');
+    let ID_USU = document.getElementById('ID_FORNECE');
+    let USU_NOME = document.getElementById('NOME_USU_F');
 
     function sendForm(){
         let ajax = new XMLHttpRequest();

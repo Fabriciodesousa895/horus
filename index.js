@@ -269,8 +269,6 @@ function permi_usu (ID_TELA,token){
           let result3 = await conectar(sql3,binds3,options);
           let result4 = await conectar(sql4,binds4,options);
           let result5 = await conectar(sql5,binds5,options);
-          console.log(result);
-          result4.rowsAffected
           let Objeto = {
             P_USU :  result,
             T_USU: result2.rows,
@@ -300,9 +298,9 @@ app.get('/usuario', auth, async (req, res) => {
       let P_USU = await permi_usu(1, token);
 
       Acesso === 'N' ? res.send('Usuário não tem permissão') :  res.render('./usuario/usuario', { P_USU })
-
   } catch (error) {
-      res.redirect(`/erroservidor/${error}`)
+      res.send(error);
+      console.log(error)
   }
 });
 
@@ -409,7 +407,6 @@ WHERE U.ID_USU = :ID_USU`;
     let Acesso = await valida_acesso(1, token);
     let P_USU = await permi_usu(1, token);
     let result = await conectarbd(sql,binds,options_objeto);
-
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/visualiza_usuario', { P_USU,result })
 
   }catch (error){
@@ -531,6 +528,14 @@ res.send('Erro no lado do servidor ' + error)
 
 
 })
+app.post('/delete_usu',urlencodedParser,async(req,res)=>{
+  let ID_USU = req.body.ID_USU;
+  console.log(ID_USU)
+  let  sql = `BEGIN DELETA_USUARIO(:ID_USU,:P_MENSAGEM); END;`;
+  let binds = {ID_USU:ID_USU,P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }}
+  let result = await conectar(sql,binds)
+  res.send(result.outBinds.P_MENSAGEM)
+})
 // --------------------------------------------------------------------------------------------------------------- //
 
 
@@ -630,6 +635,19 @@ app.post('/consulta_grupo',urlencodedParser,auth,async(req,res)=>{
   let sql = `SELECT ID_GRUPO,GRP_NOME FROM GRP_GRUPO`;
   let result = await conectarbd(sql,[],options)
     res.status(200).send(result);
+})
+
+app.post('/grupo',urlencodedParser,auth,async(req,res)=>{
+  let ID_GRUPO_ = req.body.ID_GRUPO
+  let sql = `SELECT ID_GRUPO,GRP_NOME FROM GRP_GRUPO WHERE ID_GRUPO = :ID_GRUPO`;
+  let binds = {ID_GRUPO:ID_GRUPO_}
+  try{
+    let result = await conectarbd(sql,binds,options);
+    result.length == 0 ? res.status(400).send('Grupo não existe!') :   res.status(200).send(result[0][1])  
+  }catch (error){
+    res.send('Erro no lado do servidor ' + error)
+  }
+
 })
 
 

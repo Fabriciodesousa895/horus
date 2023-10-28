@@ -16,9 +16,7 @@
              <%- include('../components/parceiro_v'); %>
              <%- include('../components/vendedor_v'); %>
              <%- include('../components/grupo_v'); %>
-           
-           </div>
-  
+            
   
           <p><span class="mt-2">Senha</span></p>
           <input type="text" id="USU_SENHA" class="form-control mt-2 insert" placeholder="Senha" required>
@@ -79,17 +77,19 @@
 </div>
     </div>
   </div>
-
+  
   <%- include('../components/salvadeleta_V'); %>
  
 
 <%})%>
 <input type="hidden" id="ID_GRUPO_FILTRO">
+
+<script src="/js/usuario/delete.js"></script>
 <script src="/js/parceiro/consulta_parceiro.js"></script>
 <script src="/js/vendedor/consulta_vendedor.js"></script>
 <script src="/js/grupo/consulta_grupo.js"></script>
-<script src="/js/usuario/delete.js"></script>
 <script src="/js/usuario/update_usuario.js"></script>
+<script src="/js/grupo/grupo.js"></script>
 
 
 <%- include('../partials/footer'); %>

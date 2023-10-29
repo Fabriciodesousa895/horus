@@ -538,17 +538,31 @@ app.post('/delete_usu', urlencodedParser, async (req, res) => {
 app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
   let objeto = req.body
   let token = req.cookies.jwt;
+  console.log(objeto)
 
   jwt.verify(token, secret, async (err, data) => {
     if (err) { res.send('Token invãlido') } else {
-      let sql = `BEGIN
-      UPDATE CONFIG_USU_TELA SET ${objeto.POSICAO} = :VALOR WHERE ID_TELA = :ID_TELA AND ID_USU = :ID_USU;
-      COMMIT;
-      END;`;
+      let sql;
+      //verifica se o usuario está alterando um usuario
+      if (objeto.TABELA == 'USU_USUARIO') {
+        sql = `BEGIN
+         UPDATE CONFIG_USU_TELA SET ${objeto.POSICAO} = :VALOR WHERE ID_TELA = :ID_TELA AND ID_USU = :ID;
+         COMMIT;
+         END;`
+      }
+      //verifica se o usuario está alterando um grupo
+      if (objeto.TABELA == 'GRP_GRUPO') {
+        sql = `BEGIN
+        UPDATE CONFIG_GRUPO_TELA SET ${objeto.POSICAO} = :VALOR WHERE ID_TELA = :ID_TELA AND ID_GRUPO = :ID;
+        COMMIT;
+        END;`
+      }
+
+
       let binds = {
         VALOR: objeto.VALOR,
         ID_TELA: objeto.ID_TELA,
-        ID_USU:objeto.ID_USU
+        ID: objeto.ID
       }
       let result = await conectar(sql, binds)
       res.send(result);
@@ -562,7 +576,31 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
 })
 // --------------------------------------------------------------------------------------------------------------- //
 
+//na tela de acesso faz uma consulta pelo grupo ou usuario
+app.post('/grupousuario', urlencodedParser, async (req, res) => {
+  let objeto = req.body;
+  let sql;
+  console.log(objeto);
 
+
+  if (objeto.TABELA == 'USU_USUARIO') {
+    sql = `SELECT USU_NOME FROM USU_USUARIO WHERE ID_USU = :ID`
+  }
+  if (objeto.TABELA == 'GRP_GRUPO') {
+    sql = `SELECT GRP_NOME FROM GRP_GRUPO WHERE ID_GRUPO = :ID`
+  }
+  let binds = {
+    ID: objeto.ID
+  }
+  if (objeto.TABELA == '') {
+    res.status(500).send('Especifique o filtro,selecione por usuário ou grupo');
+    return
+  } else {
+    let result = await conectar(sql, binds, options)
+    console.log(result.rows + 'gdfgfdgfgdf')
+    result.rows == '' ? res.status(505).send('Usuário ou grupo não encontrado!') : res.send(result.rows[0][0])
+  }
+})
 
 //acessos
 app.get('/acessos', urlencodedParser, auth, async (req, res) => {
@@ -598,23 +636,41 @@ app.post('/copia_usuario', async (req, res) => {
 })
 //CONSULTA PERMISSOES DE TODAS AS TELAS
 app.post('/consulta_acessos', async (req, res) => {
-  let ID_USU = req.body.ID_USU;
+  let ID = req.body.ID;
+  let TABELA = req.body.TABELA
+  //valida se o usuario selecionou o select
+  if (TABELA == '') {
+    res.status(500).send('Especifique o filtro,selecione por usuário ou grupo!')
+  } else {
+    let sql;
+    if (TABELA == 'USU_USUARIO') {
+      sql = `SELECT T.ID_TELA,T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA
+   FROM
+   CONFIG_USU_TELA U
+   INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
+    WHERE ID_USU = :ID`
+    }
+    if (TABELA == 'GRP_GRUPO') {
+      sql = `SELECT T.ID_TELA,T.T_NOME,GRUP_ALTERA,GRUP_INCLUI,GRUP_DELETA,GRUP_CONSULTA
+   FROM
+   CONFIG_GRUPO_TELA U
+   INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
+   INNER JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
+    WHERE U.ID_GRUPO = :ID`
+    }
 
-  let sql = `SELECT T.ID_TELA,T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA
-  FROM
-  CONFIG_USU_TELA U
-  INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
-   WHERE ID_USU = :ID_USU`;
-  let binds = {
-    ID_USU: ID_USU
+    let binds = {
+      ID: ID
+    }
+    try {
+      let result = await conectarbd(sql, binds, options)
+      result.length === 0 ? res.status(505).send('Usuário ou grupo não encontrado!') : res.send(result)
+
+    } catch (error) {
+      res.send('Erro no lado do servidor ' + error)
+    }
   }
-  try {
-    let result = await conectarbd(sql, binds, options)
-    console.log(result)
-    result.length === 0 ? res.status(505).send('Usuário não encontrado!') : res.send(result)
-  } catch (error) {
-    res.send('Erro no lado do servidor ' + error)
-  }
+
 
 
 })

@@ -3,12 +3,18 @@
 <%- include('../partials/header'); %>
 <div style="width: 100%;display: flex;justify-content: center;flex-direction: column;">
   
-    <div style="width: 350px;">
+    <div style="width: 650px;">
+
         <p><span class="mt-2">Usuário de origem</span></p>
         <div style="display: flex; flex-direction: row;">
-         <input type="number" required id="ID_USU" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
-         <input type="text" readonly id="USU_NOME" class="form-control mt-2 insert" placeholder="Nome do usuario" >
-         <button id="btn" > Pesquisar</button>
+            <select  id="TABELA" class="form-control mt-2" style="margin-right: 15px;">
+                <option value="">Selecione</option>
+                <option value="USU_USUARIO">Usuário</option>
+                <option value="GRP_GRUPO">Grupo</option>
+            </select>
+         <input type="number" required id="ID_USU" style="width: 120px;margin-right: 15px;" class="form-control mt-2 insert" placeholder="Código">
+         <input type="text" readonly id="USU_NOME" class="form-control mt-2 insert" placeholder="Nome do usuario/grupo" style="margin-right: 15px;" >
+         <button id="btn" class="btn btn-warning" > Pesquisar</button>
 
           
         </div>
@@ -16,7 +22,7 @@
     </div>
 
     <div>
-        <table class="table " >
+        <table class="table mt-3 " >
             <thead>
             <tr> 
                 <td>ID</td>
@@ -42,8 +48,9 @@
 
 </script>
 
-<script src="/js/usuario/input_copia.js"></script>
+<!-- <script src="/js/usuario/input_copia.js"></script> -->
 <script src="/js/acesso/acesso.js"></script>
 <script src="/js/acesso/usuario.js"></script>
+<script src="/js/acesso/inputs.js"></script>
 
 <%- include('../partials/footer'); %>

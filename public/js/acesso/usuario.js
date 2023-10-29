@@ -1,7 +1,9 @@
 (function readJS(win,doc){
 let tbody = document.getElementById('tabelaacesso');
-let ID_USU = document.getElementById('ID_USU');
+let ID = document.getElementById('ID_USU');
 let PROGRESSO = document.getElementById('PROGRESSO');
+let TABELA = document.getElementById('TABELA');
+
 
 tbody.addEventListener('change', (e) => {
     let checkbox = e.target;
@@ -24,29 +26,54 @@ tbody.addEventListener('change', (e) => {
         let isChecked = (checkbox.checked ? 'S' : 'N');
         let POSICAO;
 
-        switch (cellIndex) {
-                    case 2:
-                        POSICAO = 'CFU_ALTERA'
-                        break;
-                    case 3:
-                        POSICAO = 'CFU_INCLUI'
-                        break;
-                    case 4:
-                        POSICAO = 'CFU_DELETA'
-                        break;
-                    case 5:
-                        POSICAO = 'CFU_CONSULTA'
-                        break;
-                    
-                    default:
-                        break;
-                 }
+  let TABELA = document.getElementById('TABELA');
+        if(TABELA.value == 'USU_USUARIO'){
+            switch (cellIndex) {
+                case 2:
+                    POSICAO = 'CFU_ALTERA'
+                    break;
+                case 3:
+                    POSICAO = 'CFU_INCLUI'
+                    break;
+                case 4:
+                    POSICAO = 'CFU_DELETA'
+                    break;
+                case 5:
+                    POSICAO = 'CFU_CONSULTA'
+                    break;
+                
+                default:
+                    break;
+             }
+        }
+        if(TABELA.value == 'GRP_GRUPO'){
+            switch (cellIndex) {
+                case 2:
+                    POSICAO = 'GRUP_ALTERA'
+                    break;
+                case 3:
+                    POSICAO = 'GRUP_INCLUI'
+                    break;
+                case 4:
+                    POSICAO = 'GRUP_DELETA'
+                    break;
+                case 5:
+                    POSICAO = 'GRUP_CONSULTA'
+                    break;
+                
+                default:
+                    break;
+             }
+        }
+
+
 
         let objeto = {
             ID_TELA: ID_TELA,
             VALOR: isChecked,
             POSICAO: POSICAO,
-            ID_USU:ID_USU.value
+            ID:ID.value,
+            TABELA: TABELA.value
         };
         console.log(objeto);
         let ajax = new XMLHttpRequest();

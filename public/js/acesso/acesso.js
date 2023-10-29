@@ -4,8 +4,9 @@
   let btn = document.getElementById('btn');
   let PROGRESSO = document.getElementById('PROGRESSO');
   let TABELA = document.getElementById('TABELA');
-  
-
+  let PERMI = document.getElementById('PERMI');
+  let  P;
+   
   function sendForm() {
 
     let ajax = new XMLHttpRequest();
@@ -37,10 +38,12 @@
               const checkbox = document.createElement('input');
               checkbox.type = 'checkbox';
               checkbox.checked = true;
+              checkbox.disabled = ( PERMI.value == 'N' ? true : false )
               cell.appendChild(checkbox);
             } else if (cellData === 'N') {
               const checkbox = document.createElement('input');
               checkbox.type = 'checkbox';
+              checkbox.disabled = ( PERMI.value == 'N' ? true : false )
               cell.appendChild(checkbox);
             } else {
               cell.innerHTML = cellData;
@@ -62,5 +65,6 @@
     }
     ajax.send(jsonData);
   }
+  ID_USU.addEventListener('change', sendForm, false)
   btn.addEventListener('click', sendForm, false)
 })(window, document);

@@ -21,7 +21,7 @@
             ajax.open('POST', '/copia_usuario');
             ajax.setRequestHeader('Content-type', 'application/json');
             //mostra ao usuário a barra de progresso
-            PROGRESSO.style.opacity = '1'
+            // PROGRESSO.style.opacity = '1'
             ajax.onreadystatechange = function () {
                 if (ajax.status == 200) {
                     swal({

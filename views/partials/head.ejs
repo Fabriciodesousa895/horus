@@ -16,6 +16,9 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- valida o acessos -->
+    <% let T_USU = P_USU.T_NOME %>
+
     <nav>
         <% let P = P_USU.P_USU %>
         <% let D = P[0] %>
@@ -35,17 +38,19 @@
 
      <!--VALIDANDO SE O USUÁRIO PODE ALTERAR-->
      <% if (D.ALTERA == 'N') { %> 
-        <button class="btn btn-primary" data-toggle="modal" disabled  >A</button>
+        <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" disabled  >A</button>
     <% }else{ %>
-        <button class="btn btn-primary" data-toggle="modal"  >A</button>
-    <%}%>
+        <button class="btn btn-primary "  style="margin-right: 15px;" data-toggle="modal"  >A</button>
+    <%}%> 
+    <button type="button"  class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<%=T_USU[1]%>">
+        ?
+      </button>
 
 </nav>
 
  <!---->
  <nav>
-    <% let T_USU = P_USU.T_NOME %>
-    <div ><%=T_USU%></div> 
+    <div ><%=T_USU[0]%></div> 
 
  </nav>
  <!---->

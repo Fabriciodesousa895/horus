@@ -236,7 +236,7 @@ function permi_usu(ID_TELA, token) {
           ID_USU: data.ID_USUARIO
         }
 
-        let sql3 = `SELECT T_NOME FROM T_TELA WHERE ID_TELA = :ID_TELA`;
+        let sql3 = `SELECT T_NOME,T_DESCRICAO FROM T_TELA WHERE ID_TELA = :ID_TELA`;
         let binds3 = {
           ID_TELA: ID_TELA
         }
@@ -269,10 +269,11 @@ function permi_usu(ID_TELA, token) {
           let result3 = await conectar(sql3, binds3, options);
           let result4 = await conectar(sql4, binds4, options);
           let result5 = await conectar(sql5, binds5, options);
+          console.log(result3)
           let Objeto = {
             P_USU: result,
             T_USU: result2.rows,
-            T_NOME: result3.rows[0][0],
+            T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
           resolve(Objeto);
@@ -467,6 +468,30 @@ app.post('/input_usu', async (req, res) => {
 
 
 })
+
+//rota usuario campo para adicionar uma tela
+app.post('/novatela',urlencodedParser, async (req, res) => {
+  let objeto = req.body;
+  let sql = `BEGIN
+             INSERT INTO T_TELA (ROTA,T_NOME,T_DESCRICAO,TIPO) VALUES(:T_ROTA,:T_NOME,:T_DESCRICAO,:TIPO);
+             COMMIT;
+             END;`
+             let binds = {
+              T_ROTA: objeto.ROTA,
+              T_NOME: objeto.T_NOME,
+              T_DESCRICAO: objeto.T_DESCRICAO,
+              TIPO:objeto.TIPO
+             }
+             try {
+              let result = await conectar(sql, binds);
+              res.status(200).send('Operação realizada com sucesso!');
+            } catch (error) {
+              console.error('Erro ao executar a operação: ', error);
+              res.status(500).send('Erro ao processar a solicitação: ' + error.message);
+            }
+            
+})
+
 //rota para alterar o cadastro de usuario
 app.post('/update_usuario', async (req, res) => {
   let token = req.cookies.jwt;

@@ -13,6 +13,9 @@
         <div class="container">
             <div class="row">
               <div class="col-sm"  style="padding: 50px;">
+                <div class="progress" id="PROGRESS" style="opacity: 0;">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated"  role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                </div>
         
                 <%- include('../components/usuario') %>
                 <%- include('../components/parceiro') %>
@@ -67,9 +70,18 @@
                   <input type="checkbox"  class="custom-control-input" id="USU_ADM">
                   <label class="custom-control-label"   for="USU_ADM">Administrador do sistema?</label>
                 </div>
+                
               </div>
-              <div class="col-sm">
-         <!--                   -->
+
+              <div class="col-sm-3">
+                                <!--input para selecionar a imagem  -->
+                <div class="custom-file" style="margin-top: 50px;width: 200px;">
+                  <input type="file"  class="custom-file-input" id="img" >
+                  <label class="custom-file-label" for="img">Foto</label>
+                </div>
+                <!-- img que recebe a imagem selecionada -->
+                <img src="/img/upload.png" width="220px" class="mt-2 " height="280px" id="inputimg" alt="">
+
               </div>
         
             </div>
@@ -164,17 +176,10 @@
         </tr>
       </thead>
       <tbody id="tabelausuario"   >
-  
- 
-
+             <!-- inserido pela requição ajax apos usar o filtro -->
       </tbody>
     </table>
-    
-
   </div>
-
-
-  
 </div>
 
 
@@ -190,6 +195,9 @@
       </div>
       <div class="modal-body">
         <div class="form-group row">
+          <div class="progress" id="PROGRE" style="opacity: 0;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated"  role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+          </div>
 
           <p><span class="mt-2">Usuário de origem</span></p>
           <div style="display: flex; flex-direction: row;">
@@ -213,10 +221,32 @@
     </div>
   </div>
 </div>
+<input type="hidden" id="BLOB">
 
+<script>
+  // inserindo a imagem selecionada pelo usuário
+  let input = document.getElementById('img')
 
+  input.addEventListener('change', (e) => {
+    const img = e.target || window.event.srcElement;
+    const files = img.files;
+
+    if (files.length > 0) {
+      const fr = new FileReader();
+      fr.onload = () => {
+        document.getElementById('inputimg').src = fr.result;
+        const binaryData = fr.result.split(',')[1]; 
+        console.log(binaryData);
+        document.getElementById('BLOB').value = binaryData;
+      };
+      fr.readAsDataURL(files[0]);
+      
+    }
+  });
+</script>
 
 <script src="/js/usuario/usuario_http.js"></script>
+<script src="/js/usuario/upload.js"></script>
 <script src="/js/usuario/visualiza_usuario.js"></script>
 <script src="/js/usuario/filtro_usuario.js"></script>
 <script src="/js/usuario/copia_usuario.js"></script>

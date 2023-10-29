@@ -8,13 +8,15 @@
         <div style="display: flex; flex-direction: row;">
          <input type="number" required id="ID_USU" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
          <input type="text" readonly id="USU_NOME" class="form-control mt-2 insert" placeholder="Nome do usuario" >
-         <button id="btn">Pesquisar</button>
+         <button id="btn" > Pesquisar</button>
+
+          
         </div>
-        
+
     </div>
 
     <div>
-        <table class="table " id="tabelaacesso">
+        <table class="table " >
             <thead>
             <tr> 
                 <td>ID</td>
@@ -25,7 +27,7 @@
                 <td>Consulta?</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tabelaacesso">
             <!--colunas sendo inseridas dinamicamente pelo js-->
         </tbody>
         
@@ -33,9 +35,15 @@
     </div>
 
 </div>
+<script>
 
+
+
+
+</script>
 
 <script src="/js/usuario/input_copia.js"></script>
 <script src="/js/acesso/acesso.js"></script>
+<script src="/js/acesso/usuario.js"></script>
 
 <%- include('../partials/footer'); %>

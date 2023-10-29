@@ -8,8 +8,8 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 //body-parser
 const bodyparser = require("body-parser");
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json({ limit: '100mb' }));
 //sessao de cookies
 const cookieparser = require('cookie-parser');
 app.use(cookieparser());
@@ -20,21 +20,21 @@ const secret = 'M987ggjjj@583';
 const jwt = require('jsonwebtoken');
 //configurando cors
 const cors = require('cors');
-let urlencodedParser = bodyparser.urlencoded({extended:false});
+let urlencodedParser = bodyparser.urlencoded({ extended: false });
 app.use(cors());
 //middleware
-app.use((req,res,next)=>{
-   console.log('Entre cliente e servidor!')
-   next();
+app.use((req, res, next) => {
+  console.log('Entre cliente e servidor!')
+  next();
 })
 //middleware de autenticação;
-function auth (req,res,next){
+function auth(req, res, next) {
   const token = req.cookies.jwt;
 
-  if(!token){
+  if (!token) {
     res.status(500).send('Token inválido,faça login novamente!');
-  }else{
-    const decoded = jwt.verify(token,secret);
+  } else {
+    const decoded = jwt.verify(token, secret);
     req.ID_USUARIO = decoded;
     next();
   }
@@ -42,19 +42,19 @@ function auth (req,res,next){
 //fazendo a chamaa do banco
 const oracledb = require('oracledb');
 const dbconfig = {
-  user:'SYSTEM',
-  password:'host2023',
-  connectString:'localhost:1521'
+  user: 'SYSTEM',
+  password: 'host2023',
+  connectString: 'localhost:1521'
 }
 
-async function conectarbd(sql,binds,options){
+async function conectarbd(sql, binds, options) {
   let connection = await oracledb.getConnection(dbconfig);
-  let result = await connection.execute(`${sql}`,binds,options);
+  let result = await connection.execute(`${sql}`, binds, options);
   return result.rows;
 }
-async function conectar(sql,binds){
+async function conectar(sql, binds) {
   let connection = await oracledb.getConnection(dbconfig);
-  let result = await connection.execute(`${sql}`,binds);
+  let result = await connection.execute(`${sql}`, binds);
   return result;
 }
 //resultado vem em array de array
@@ -69,7 +69,7 @@ const options_objeto = {
 }
 
 //login
-app.get('/login',(req,res)=>{
+app.get('/login', (req, res) => {
   res.render('./usuario/login')
 })
 app.post('/login', async (req, res) => {
@@ -105,9 +105,9 @@ app.post('/login', async (req, res) => {
               return;
             } else {
               res.status(200)
-              .cookie("jwt", token, { httpOnly: true, maxAge: 8000000 })
-              .send('Operação realizada com sucesso');
-                
+                .cookie("jwt", token, { httpOnly: true, maxAge: 8000000 })
+                .send('Operação realizada com sucesso');
+
             }
           }
         )
@@ -153,14 +153,14 @@ function valida_acesso(ID_TELA, token) {
   });
 }
 //valia aspermições na tela em que o usuário está
-function permi_usu (ID_TELA,token){
+function permi_usu(ID_TELA, token) {
 
-  return new Promise((resolve,reject)=>{
-      jwt.verify(token,secret,async(err,data)=>{
-        if(err){ reject('token inválido')}
-        else{
-          //tr´s as permissões do usuario na teala especificada
-          let sql = `SELECT
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, async (err, data) => {
+      if (err) { reject('token inválido') }
+      else {
+        //tr´s as permissões do usuario na teala especificada
+        let sql = `SELECT
           CASE 
           WHEN ALU.CFU_ALTERA = 'S' OR ALG.GRUP_ALTERA = 'S' OR U.USU_ADM = 'S' THEN 'S' 
           ELSE 'N' 
@@ -215,10 +215,10 @@ function permi_usu (ID_TELA,token){
       ) GIN,
       USU_USUARIO U
       WHERE U.ID_USU = :P_ID_USU`;
-          let binds = {P_ID_USU: data.ID_USUARIO,P_ID_TELA:ID_TELA};
+        let binds = { P_ID_USU: data.ID_USUARIO, P_ID_TELA: ID_TELA };
 
 
-          let sql2 = ` SELECT  TL.T_NOME,TL.ROTA
+        let sql2 = ` SELECT  TL.T_NOME,TL.ROTA
           FROM USU_USUARIO U
           LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
           LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
@@ -232,22 +232,22 @@ function permi_usu (ID_TELA,token){
             AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
             AND TL.TIPO <> 'V'
              ORDER BY TT.ID_TELA`
-            let binds2 = {
-             ID_USU: data.ID_USUARIO
-            }
+        let binds2 = {
+          ID_USU: data.ID_USUARIO
+        }
 
-            let sql3 = `SELECT T_NOME FROM T_TELA WHERE ID_TELA = :ID_TELA`;
-            let binds3 = {
-              ID_TELA: ID_TELA
-             }
-               //faz o log de acesso  da tela
-             let sql4 = `BEGIN P_HIST_TELA(:ID_TELA,:ID_USU,:TOKEN); END;`;
-             let binds4 = {
-              ID_TELA: ID_TELA,
-              ID_USU: data.ID_USUARIO,
-              TOKEN: token
-             }
-             let sql5 = `SELECT 
+        let sql3 = `SELECT T_NOME FROM T_TELA WHERE ID_TELA = :ID_TELA`;
+        let binds3 = {
+          ID_TELA: ID_TELA
+        }
+        //faz o log de acesso  da tela
+        let sql4 = `BEGIN P_HIST_TELA(:ID_TELA,:ID_USU,:TOKEN); END;`;
+        let binds4 = {
+          ID_TELA: ID_TELA,
+          ID_USU: data.ID_USUARIO,
+          TOKEN: token
+        }
+        let sql5 = `SELECT 
              CAMP_1,
              CAMP_2,
              CAMP_3,
@@ -258,19 +258,19 @@ function permi_usu (ID_TELA,token){
              CAMP_8,
              CAMP_9,
              CAMP_10 FROM FILTRO_HISTORICO WHERE ID_TELA = :ID_TELA AND ID_USU = :ID_USU`;
-             let binds5 = {
-              ID_TELA: ID_TELA,
-              ID_USU: data.ID_USUARIO
-             }
+        let binds5 = {
+          ID_TELA: ID_TELA,
+          ID_USU: data.ID_USUARIO
+        }
 
         try {
-          let result  = await conectarbd(sql, binds,options_objeto);
-          let result2 = await conectar(sql2,binds2,options);
-          let result3 = await conectar(sql3,binds3,options);
-          let result4 = await conectar(sql4,binds4,options);
-          let result5 = await conectar(sql5,binds5,options);
+          let result = await conectarbd(sql, binds, options_objeto);
+          let result2 = await conectar(sql2, binds2, options);
+          let result3 = await conectar(sql3, binds3, options);
+          let result4 = await conectar(sql4, binds4, options);
+          let result5 = await conectar(sql5, binds5, options);
           let Objeto = {
-            P_USU :  result,
+            P_USU: result,
             T_USU: result2.rows,
             T_NOME: result3.rows[0][0],
             T_FILTRO: result5.rows
@@ -278,29 +278,29 @@ function permi_usu (ID_TELA,token){
           resolve(Objeto);
         } catch (error) {
           reject(error);
-         }
         }
-      })
+      }
+    })
   })
 
 }
 
 //Redirecionado a rota caso haja um erro no lado do servidor
-app.get('/erroservidor/:error',(req,res)=>{
-  res.send('Ocorreu um erro ! '+ '<br>' + req.params.error)
+app.get('/erroservidor/:error', (req, res) => {
+  res.send('Ocorreu um erro ! ' + '<br>' + req.params.error)
 })
 
 
 app.get('/usuario', auth, async (req, res) => {
   let token = req.cookies.jwt;
   try {
-      let Acesso = await valida_acesso(1,token);
-      let P_USU = await permi_usu(1, token);
+    let Acesso = await valida_acesso(1, token);
+    let P_USU = await permi_usu(1, token);
 
-      Acesso === 'N' ? res.send('Usuário não tem permissão') :  res.render('./usuario/usuario', { P_USU })
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/usuario', { P_USU })
   } catch (error) {
-      res.send(error);
-      console.log(error)
+    res.send(error);
+    console.log(error)
   }
 });
 
@@ -311,27 +311,26 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
 
   const token = req.cookies.jwt;
 
-  jwt.verify(token,secret,async(err,data)=>{
-    if(err){
+  jwt.verify(token, secret, async (err, data) => {
+    if (err) {
       return res.status(500).send('Token inválido!' + 'Não foi possivel realizar esta operação.')
-     
-    }else{
-      let  USU_NOME = req.body.USU_NOME;
-      let  USU_SENHA = req.body.USU_SENHA;
-      let  ID_VENDEDOR = req.body.ID_VENDEDOR;
-      let  ID_PARC = req.body.ID_PARC
-      let  CFG_USU_ALT_PARC = req.body.CFG_USU_ALT_PARC;
-      let  CFG_USU_CONF_CONFERE_CAIXA = req.body.CFG_USU_CONF_CONFERE_CAIXA;
-      let  CFG_USU_LIB_BLOQ_PARC = req.body.CFG_USU_LIB_BLOQ_PARC;
-      let  CFG_USU_EXC_FIN = req.body.CFG_USU_EXC_FIN;
-      let  CFG_USU_FECHA_CAIXA = req.body.CFG_USU_FECHA_CAIXA;
-      let  USU_ADM = req.body.USU_ADM;
-      let  ID_GRUPO  = req.body.ID_GRUPO
-      let  USU_LOGADO = data.ID_USUARIO;
-    
-        // Gerando o hash da senha usando bcrypt 
-  const hash = await bycrypt.hash(USU_SENHA,saltRounds);
-  let sql =   `BEGIN
+
+    } else {
+      let USU_NOME = req.body.USU_NOME;
+      let USU_SENHA = req.body.USU_SENHA;
+      let ID_VENDEDOR = req.body.ID_VENDEDOR;
+      let ID_PARC = req.body.ID_PARC
+      let CFG_USU_ALT_PARC = req.body.CFG_USU_ALT_PARC;
+      let CFG_USU_CONF_CONFERE_CAIXA = req.body.CFG_USU_CONF_CONFERE_CAIXA;
+      let CFG_USU_LIB_BLOQ_PARC = req.body.CFG_USU_LIB_BLOQ_PARC;
+      let CFG_USU_EXC_FIN = req.body.CFG_USU_EXC_FIN;
+      let CFG_USU_FECHA_CAIXA = req.body.CFG_USU_FECHA_CAIXA;
+      let USU_ADM = req.body.USU_ADM;
+      let ID_GRUPO = req.body.ID_GRUPO
+      let USU_LOGADO = data.ID_USUARIO;
+      // Gerando o hash da senha usando bcrypt 
+      const hash = await bycrypt.hash(USU_SENHA, saltRounds);
+      let sql = `BEGIN
    INSERI_USUARIO(:USU_NOME, :USU_SENHA,
                   :ID_VENDEDOR,
                   :ID_PARC,:USU_ADM,:USU_LOGADO, 
@@ -340,37 +339,36 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
                   :CFG_USU_EXC_FIN, :CFG_USU_FECHA_CAIXA,:P_RESULTADO);
   END;
   `
-  let binds = {
-    USU_NOME:      USU_NOME,
-    USU_SENHA:     hash,
-    ID_VENDEDOR:   ID_VENDEDOR,
-    ID_PARC:       ID_PARC,
-    USU_ADM:       USU_ADM,
-    USU_LOGADO:    USU_LOGADO,
-    ID_GRUPO :     ID_GRUPO,
-    CFG_USU_ALT_PARC:              CFG_USU_ALT_PARC,
-    CFG_USU_CONF_CONFERE_CAIXA:   CFG_USU_CONF_CONFERE_CAIXA,
-    CFG_USU_LIB_BLOQ_PARC:        CFG_USU_LIB_BLOQ_PARC,
-    CFG_USU_EXC_FIN:              CFG_USU_EXC_FIN,
-    CFG_USU_FECHA_CAIXA:          CFG_USU_FECHA_CAIXA,
-    P_RESULTADO:{ dir: oracledb.BIND_OUT, type: oracledb.STRING }
-  
-  }               
-  try{
-    let result  = await conectar(sql,binds);
-    
-  //enviando para o usuario a rsposta da requisição
-  res.send(result.outBinds.P_RESULTADO);
-  
-  }catch(err){
-  res.status(500).send('Ocorreu um erro!' + err );
-    
-  }
+      let binds = {
+        USU_NOME: USU_NOME,
+        USU_SENHA: hash,
+        ID_VENDEDOR: ID_VENDEDOR,
+        ID_PARC: ID_PARC,
+        USU_ADM: USU_ADM,
+        USU_LOGADO: USU_LOGADO,
+        ID_GRUPO: ID_GRUPO,
+        CFG_USU_ALT_PARC: CFG_USU_ALT_PARC,
+        CFG_USU_CONF_CONFERE_CAIXA: CFG_USU_CONF_CONFERE_CAIXA,
+        CFG_USU_LIB_BLOQ_PARC: CFG_USU_LIB_BLOQ_PARC,
+        CFG_USU_EXC_FIN: CFG_USU_EXC_FIN,
+        CFG_USU_FECHA_CAIXA: CFG_USU_FECHA_CAIXA,
+        P_RESULTADO: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
+      }
+      try {
+        let result = await conectar(sql, binds);
+
+        //enviando para o usuario a rsposta da requisição
+        res.send(result.outBinds.P_RESULTADO);
+
+      } catch (err) {
+        res.status(500).send('Ocorreu um erro!' + err);
+
+      }
     }
   })
 });
 
-app.get('/visualiza_usuario/:ID_USU',auth,async(req,res)=>{
+app.get('/visualiza_usuario/:ID_USU', auth, async (req, res) => {
   let ID_USU = req.params.ID_USU
   let token = req.cookies.jwt;
 
@@ -401,26 +399,26 @@ INNER JOIN PRC_PARCEIRO P ON P.ID_PARC = U.ID_PARC
 INNER JOIN VND_VENDEDOR V ON V.ID_VENDEDOR = U.USU_ID_VEND 
 WHERE U.ID_USU = :ID_USU AND ROWNUM = 1`;
   let binds = {
-    ID_USU : ID_USU
+    ID_USU: ID_USU
   };
-  try{
+  try {
     let Acesso = await valida_acesso(1, token);
     let P_USU = await permi_usu(1, token);
-    let result = await conectarbd(sql,binds,options_objeto);
-    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/visualiza_usuario', { P_USU,result })
+    let result = await conectarbd(sql, binds, options_objeto);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/visualiza_usuario', { P_USU, result })
 
-  }catch (error){
+  } catch (error) {
     res.redirect(`/erroservidor/${error}`);
   }
 })
 
-app.post('/filtro_usuario',async(req,res)=>{
+app.post('/filtro_usuario', async (req, res) => {
   let token = req.cookies.jwt;
 
-  jwt.verify(token,secret,async(err,data)=>{
-    if(err){
-     return res.send('Token inválido, faça login novamente!')
-    }else{
+  jwt.verify(token, secret, async (err, data) => {
+    if (err) {
+      return res.send('Token inválido, faça login novamente!')
+    } else {
       let nome = req.body.P_NOME;
       let adm = req.body.P_ADM;
       let status = req.body.P_STATUS;
@@ -428,26 +426,26 @@ app.post('/filtro_usuario',async(req,res)=>{
       let sql = `SELECT FILTRO_USU (:P_NOME,:P_ADM,:P_STATUS,:P_GRUPO) FROM DUAL`
       let sql2 = `BEGIN INSERI_HIST_USU(:P_NOME,:P_ADM,:P_STATUS,:P_GRUPO,:P_ID_USU); END;`
       let binds = {
-        P_NOME:   nome,
-        P_ADM:    adm,
+        P_NOME: nome,
+        P_ADM: adm,
         P_STATUS: status,
-        P_GRUPO:  grupo
-    
+        P_GRUPO: grupo
+
       }
       let binds2 = {
-        P_NOME:   nome,
-        P_ADM:    adm,
+        P_NOME: nome,
+        P_ADM: adm,
         P_STATUS: status,
-        P_GRUPO:  grupo,
+        P_GRUPO: grupo,
         P_ID_USU: data.ID_USUARIO
       }
 
-      try{
-        let result = await conectarbd(sql,binds,options);
-        let result2 = await conectarbd(sql2,binds2,options);
+      try {
+        let result = await conectarbd(sql, binds, options);
+        let result2 = await conectarbd(sql2, binds2, options);
         res.send(result[0][0])
-      }catch (error){
-           res.redirect(`/erroservidor/${error}`);
+      } catch (error) {
+        res.redirect(`/erroservidor/${error}`);
       }
 
     }
@@ -456,28 +454,28 @@ app.post('/filtro_usuario',async(req,res)=>{
 })
 
 //copia usuario campo para colocar usuario
-app.post('/input_usu',async(req,res)=>{
+app.post('/input_usu', async (req, res) => {
   let ID_USU = req.body.ID_USU;
 
   let sql = `SELECT USU_NOME FROM USU_USUARIO WHERE ID_USU = :ID_USU `;
-  let binds = {ID_USU: ID_USU}
+  let binds = { ID_USU: ID_USU }
 
-  try{
-    let result = await conectarbd(sql,binds, options)
-    result.length === 0 ? res.status(505).send('Usuário não encontrado!') :   res.send(result[0][0])
-  }catch(error){    res.redirect(`/erroservidor/${error}`); }
+  try {
+    let result = await conectarbd(sql, binds, options)
+    result.length === 0 ? res.status(505).send('Usuário não encontrado!') : res.send(result[0][0])
+  } catch (error) { res.redirect(`/erroservidor/${error}`); }
 
 
 })
 //rota para alterar o cadastro de usuario
-app.post('/update_usuario', async(req,res)=>{
+app.post('/update_usuario', async (req, res) => {
   let token = req.cookies.jwt;
   let saltRounds = 10
   let objeto = req.body; //pegando os dados da requisição ajax
-  jwt.verify(token,secret,async(err,data)=>{
-     if(err)return res.send('Token inválido,faça login e tente novamente!');
+  jwt.verify(token, secret, async (err, data) => {
+    if (err) return res.send('Token inválido,faça login e tente novamente!');
 
-     let sql = `BEGIN ALTERA_USUARIO ( :ID_USU,
+    let sql = `BEGIN ALTERA_USUARIO ( :ID_USU,
       :USU_NOME,
       :ID_PARC,
       :ID_VENDEDOR,
@@ -494,85 +492,112 @@ app.post('/update_usuario', async(req,res)=>{
      :P_MENSAGEM);
       END;`;
 
-let binds = {
-ID_USU:   objeto.ID_USU,
-USU_NOME: objeto.USU_NOME,
-ID_PARC:  objeto.ID_PARC,
-ID_VENDEDOR: objeto.ID_VENDEDOR,
-ID_GRUPO: objeto.ID_GRUPO,
-USU_SENHA: objeto.USU_SENHA ? bycrypt.hashSync(objeto.USU_SENHA, saltRounds) : '',
-STATUS:      objeto.STATUS,
-USU_ADM: objeto.USU_ADM,
-CFG_USU_LIB_BLOQ_PARC: objeto.CFG_USU_LIB_BLOQ_PARC,
-CFG_USU_FECHA_CAIXA: objeto.CFG_USU_FECHA_CAIXA,
-CFG_USU_EXC_FIN:   objeto.CFG_USU_EXC_FIN,
-CFG_USU_CONF_CONFERE_CAIXA:objeto.CFG_USU_CONF_CONFERE_CAIXA,
-CFG_USU_ALT_PARC: objeto.CFG_USU_ALT_PARC,
-USU_LOGADO: data.ID_USUARIO,
-P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
+    let binds = {
+      ID_USU: objeto.ID_USU,
+      USU_NOME: objeto.USU_NOME,
+      ID_PARC: objeto.ID_PARC,
+      ID_VENDEDOR: objeto.ID_VENDEDOR,
+      ID_GRUPO: objeto.ID_GRUPO,
+      USU_SENHA: objeto.USU_SENHA ? bycrypt.hashSync(objeto.USU_SENHA, saltRounds) : '',
+      STATUS: objeto.STATUS,
+      USU_ADM: objeto.USU_ADM,
+      CFG_USU_LIB_BLOQ_PARC: objeto.CFG_USU_LIB_BLOQ_PARC,
+      CFG_USU_FECHA_CAIXA: objeto.CFG_USU_FECHA_CAIXA,
+      CFG_USU_EXC_FIN: objeto.CFG_USU_EXC_FIN,
+      CFG_USU_CONF_CONFERE_CAIXA: objeto.CFG_USU_CONF_CONFERE_CAIXA,
+      CFG_USU_ALT_PARC: objeto.CFG_USU_ALT_PARC,
+      USU_LOGADO: data.ID_USUARIO,
+      P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
 
-}
+    }
 
-// const hash = await 
+    // const hash = await 
 
-try{
-let  result = await conectar(sql,binds);
-console.log(objeto)
-res.send(result.outBinds.P_MENSAGEM)
-}catch (error){
-res.send('Erro no lado do servidor ' + error)
-}
+    try {
+      let result = await conectar(sql, binds);
+      console.log(objeto)
+      res.send(result.outBinds.P_MENSAGEM)
+    } catch (error) {
+      res.send('Erro no lado do servidor ' + error)
+    }
 
   })
 
 
 
 })
-app.post('/delete_usu',urlencodedParser,async(req,res)=>{
+app.post('/delete_usu', urlencodedParser, async (req, res) => {
   let ID_USU = req.body.ID_USU;
   console.log(ID_USU)
-  let  sql = `BEGIN DELETA_USUARIO(:ID_USU,:P_MENSAGEM); END;`;
-  let binds = {ID_USU:ID_USU,P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }}
-  let result = await conectar(sql,binds)
+  let sql = `BEGIN DELETA_USUARIO(:ID_USU,:P_MENSAGEM); END;`;
+  let binds = { ID_USU: ID_USU, P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING } }
+  let result = await conectar(sql, binds)
   res.send(result.outBinds.P_MENSAGEM)
+})
+//faz update nas configuraçõesde tela dos usuarios
+app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
+  let objeto = req.body
+  let token = req.cookies.jwt;
+
+  jwt.verify(token, secret, async (err, data) => {
+    if (err) { res.send('Token invãlido') } else {
+      let sql = `BEGIN
+      UPDATE CONFIG_USU_TELA SET ${objeto.POSICAO} = :VALOR WHERE ID_TELA = :ID_TELA AND ID_USU = :ID_USU;
+      COMMIT;
+      END;`;
+      let binds = {
+        VALOR: objeto.VALOR,
+        ID_TELA: objeto.ID_TELA,
+        ID_USU:objeto.ID_USU
+      }
+      let result = await conectar(sql, binds)
+      res.send(result);
+
+
+    }
+
+  })
+
+
 })
 // --------------------------------------------------------------------------------------------------------------- //
 
 
+
 //acessos
-app.get('/acessos',urlencodedParser,auth,async(req,res)=>{
+app.get('/acessos', urlencodedParser, auth, async (req, res) => {
   let token = req.cookies.jwt;
-  let Acesso = valida_acesso(2,token)
+  let Acesso = valida_acesso(2, token)
   let P_USU = await permi_usu(2, token);
-  if(Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
-  res.render('./acesso/acesso',{P_USU});
+  if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
+  res.render('./acesso/acesso', { P_USU });
 
 })
 
 
 
 //Copia permissões
-app.post('/copia_usuario',async(req,res)=>{
+app.post('/copia_usuario', async (req, res) => {
   let ID_F = req.body.ID_FORNECE;
   let ID_R = req.body.ID_RECEBE;
   let sql = `BEGIN COPIA_CONFIG_USU(:ID_R,:ID_F,:P_RESULTADO); END; `;
   let binds = {
-     ID_F:ID_F,
-     ID_R:ID_R,
-     P_RESULTADO:{ dir: oracledb.BIND_OUT, type: oracledb.STRING }
+    ID_F: ID_F,
+    ID_R: ID_R,
+    P_RESULTADO: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
   };
 
-  try{
-    let result = await conectar(sql,binds)
+  try {
+    let result = await conectar(sql, binds)
     res.status(200).send(result.outBinds.P_RESULTADO)
-  }catch (error){
+  } catch (error) {
     res.send('Erro no lado do servidor ' + error)
   }
 
 
 })
 //CONSULTA PERMISSOES DE TODAS AS TELAS
-app.post('/consulta_acessos',async(req,res)=>{
+app.post('/consulta_acessos', async (req, res) => {
   let ID_USU = req.body.ID_USU;
 
   let sql = `SELECT T.ID_TELA,T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA
@@ -583,15 +608,15 @@ app.post('/consulta_acessos',async(req,res)=>{
   let binds = {
     ID_USU: ID_USU
   }
-   try{
-    let result = await conectarbd(sql,binds, options)
+  try {
+    let result = await conectarbd(sql, binds, options)
     console.log(result)
-    result.length === 0 ? res.status(505).send('Usuário não encontrado!') :   res.send(result)
-   }catch (error){
+    result.length === 0 ? res.status(505).send('Usuário não encontrado!') : res.send(result)
+  } catch (error) {
     res.send('Erro no lado do servidor ' + error)
-   }
+  }
 
-    
+
 })
 
 
@@ -601,50 +626,50 @@ app.post('/consulta_parceiro', urlencodedParser, async (req, res) => {
   let binds = {
     ID_PARC: ID_PARC
   }
-  let sql = `SELECT PARC_NOME FROM PRC_PARCEIRO WHERE ID_PARC = :ID_PARC `; 
-  
-    try{
-      let result = await conectarbd(sql,binds, options); 
-      result.length === 0 ?  res.status(505).send('Parceiro não existe!') :  res.status(200).send( result[0][0] );
-    }catch (error){
-      res.send('Erro no lado do servidor ' + error)
-    }
+  let sql = `SELECT PARC_NOME FROM PRC_PARCEIRO WHERE ID_PARC = :ID_PARC `;
+
+  try {
+    let result = await conectarbd(sql, binds, options);
+    result.length === 0 ? res.status(505).send('Parceiro não existe!') : res.status(200).send(result[0][0]);
+  } catch (error) {
+    res.send('Erro no lado do servidor ' + error)
+  }
 
 
 });
 
 //consulta vendedor
-app.post('/consulta_vendedor',urlencodedParser,async(req,res)=>{
+app.post('/consulta_vendedor', urlencodedParser, async (req, res) => {
   let ID_VENDEDOR = req.body.ID_VENDEDOR;
 
-  let binds = { ID_VENDEDOR:ID_VENDEDOR};
+  let binds = { ID_VENDEDOR: ID_VENDEDOR };
 
   let sql = `SELECT VND_NOME FROM VND_VENDEDOR WHERE ID_VENDEDOR = :ID_VENDEDOR `;
 
-  try{
-    let result = await conectarbd(sql,binds,options);
-    result.length === 0 ?  res.status(505).send('Vendedor não existe!') :   res.status(200).send(result[0][0])
-  }catch (error){
+  try {
+    let result = await conectarbd(sql, binds, options);
+    result.length === 0 ? res.status(505).send('Vendedor não existe!') : res.status(200).send(result[0][0])
+  } catch (error) {
     res.send('Erro no lado do servidor ' + error)
   }
 })
 
 //consulta grupo
-app.post('/consulta_grupo',urlencodedParser,auth,async(req,res)=>{
+app.post('/consulta_grupo', urlencodedParser, auth, async (req, res) => {
   // let binds = {ID_GRUPO: ID_GRUPO};
   let sql = `SELECT ID_GRUPO,GRP_NOME FROM GRP_GRUPO`;
-  let result = await conectarbd(sql,[],options)
-    res.status(200).send(result);
+  let result = await conectarbd(sql, [], options)
+  res.status(200).send(result);
 })
 
-app.post('/grupo',urlencodedParser,auth,async(req,res)=>{
+app.post('/grupo', urlencodedParser, auth, async (req, res) => {
   let ID_GRUPO_ = req.body.ID_GRUPO
   let sql = `SELECT ID_GRUPO,GRP_NOME FROM GRP_GRUPO WHERE ID_GRUPO = :ID_GRUPO`;
-  let binds = {ID_GRUPO:ID_GRUPO_}
-  try{
-    let result = await conectarbd(sql,binds,options);
-    result.length == 0 ? res.status(400).send('Grupo não existe!') :   res.status(200).send(result[0][1])  
-  }catch (error){
+  let binds = { ID_GRUPO: ID_GRUPO_ }
+  try {
+    let result = await conectarbd(sql, binds, options);
+    result.length == 0 ? res.status(400).send('Grupo não existe!') : res.status(200).send(result[0][1])
+  } catch (error) {
     res.send('Erro no lado do servidor ' + error)
   }
 

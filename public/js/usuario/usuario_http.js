@@ -1,3 +1,4 @@
+
 (function readyJS(win, doc) {
   'use strict';
 
@@ -12,11 +13,16 @@
   let CFG_USU_FECHA_CAIXA = document.getElementById('CFG_USU_FECHA_CAIXA');
   let CFG_USU_LIB_BLOQ_PARC = document.getElementById('CFG_USU_LIB_BLOQ_PARC');
   let USU_ADM = document.getElementById('USU_ADM')
+  let BLOB = document.getElementById('BLOB')
+  let PROGRESSO = document.getElementById('PROGRESS');
+
+
+
 
   // Envia o formulário para o servidor em formato JSON
   function sendForm(evento) {
     evento.preventDefault();
-
+   
     // Verificando se os campos obrigatórios estão preenchidos
     if (USU_NOME.checkValidity() && USU_SENHA.checkValidity() && ID_PARC.checkValidity() && ID_VENDEDOR.checkValidity ) {
       let ajax = new XMLHttpRequest();
@@ -31,8 +37,8 @@
         CFG_USU_LIB_BLOQ_PARC : CFG_USU_LIB_BLOQ_PARC.checked ? 'S' : 'N',
         CFG_USU_FECHA_CAIXA : CFG_USU_FECHA_CAIXA.checked ? 'S' : 'N',
         CFG_USU_EXC_FIN : CFG_USU_EXC_FIN.checked ? 'S' : 'N',
-        USU_ADM: USU_ADM.checked ? 'S' : 'N'
-
+        USU_ADM: USU_ADM.checked ? 'S' : 'N',
+        IMG: BLOB
 
       };
 
@@ -41,6 +47,8 @@
 
       ajax.open('POST', '/usuario');
       ajax.setRequestHeader('Content-type', 'application/json');
+      //mostra ao usuário a barra de progresso
+      PROGRESSO.style.opacity = '1'
       ajax.onreadystatechange = function () {
         if (ajax.status === 200 && ajax.readyState === 4) {
                   swal({
@@ -54,7 +62,8 @@
                   inputs.forEach((e) => {
                     e.value = '' // Isso adicionará uma borda verde aos elementos
                   });
-                  
+        //omite do usuário a barra de progresso
+        PROGRESSO.style.opacity = '0';
              
         }else{
           swal({

@@ -173,7 +173,11 @@ function permi_usu(ID_TELA, token) {
           WHEN UIN.CFU_INCLUI = 'S' OR GIN.GRUP_INCLUI = 'S' OR U.USU_ADM = 'S' THEN 'S'
           ELSE 'N'
           END AS INCLUI,
-          U.USU_ADM
+          U.USU_ADM,
+          CASE
+          WHEN  AN.CFU_ANEXA = 'S' OR AG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S' THEN 'S'
+          ELSE 'N'
+          END AS ANEXA
       FROM (
           SELECT CFU_ALTERA
           FROM CONFIG_USU_TELA
@@ -213,6 +217,19 @@ function permi_usu(ID_TELA, token) {
           WHERE ID_USU  = :P_ID_USU
           AND ID_TELA = :P_ID_TELA
       ) GIN,
+      (
+      SELECT CFU_ANEXA
+      FROM CONFIG_USU_TELA
+      WHERE ID_USU = :P_ID_USU
+      AND ID_TELA = :P_ID_TELA
+  ) AN,     
+   (
+    SELECT T.GRP_ANEXA 
+    FROM CONFIG_GRUPO_TELA T 
+    INNER JOIN USU_USUARIO U ON U.ID_GRUPO = T.ID_GRUPO
+    WHERE ID_USU  = :P_ID_USU
+    AND ID_TELA = :P_ID_TELA
+) AG,
       USU_USUARIO U
       WHERE U.ID_USU = :P_ID_USU`;
         let binds = { P_ID_USU: data.ID_USUARIO, P_ID_TELA: ID_TELA };
@@ -269,13 +286,13 @@ function permi_usu(ID_TELA, token) {
           let result3 = await conectar(sql3, binds3, options);
           let result4 = await conectar(sql4, binds4, options);
           let result5 = await conectar(sql5, binds5, options);
-          console.log(result3)
           let Objeto = {
             P_USU: result,
             T_USU: result2.rows,
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
+
           resolve(Objeto);
         } catch (error) {
           reject(error);
@@ -286,9 +303,35 @@ function permi_usu(ID_TELA, token) {
 
 }
 
+
 //Redirecionado a rota caso haja um erro no lado do servidor
 app.get('/erroservidor/:error', (req, res) => {
   res.send('Ocorreu um erro ! ' + '<br>' + req.params.error)
+})
+app.get('/teste', async (req, res) => {
+  try {
+    // Recupere o BLOB do banco de dados
+    const sql = `SELECT COLUS FROM ANEXO`;
+    const result = await conectar(sql, [], options_objeto);
+
+    if (result.rows.length > 0) {
+      const blobData = result.rows[0][0]; // Assumindo que o BLOB está na primeira linha do resultado
+      const base64Data = Buffer.from(blobData).toString('base64'); // Converte o BLOB em base64
+
+      // Envie a base64 para o frontend
+      console.log(result.rows[0][0])
+      res.send(base64Data);
+    } else {
+      res.status(404).send('BLOB não encontrado');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao processar a solicitação');
+  }
+});
+
+app.get('/imagem',(req,res)=>{
+  res.render('teste')
 })
 
 
@@ -392,10 +435,10 @@ app.get('/visualiza_usuario/:ID_USU', auth, async (req, res) => {
   V.VND_NOME 
 FROM
 USU_USUARIO U
-INNER JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
-INNER JOIN USU_USUARIO US ON US.ID_USU = U.ID_USU_INCLUSAO
-INNER JOIN USU_USUARIO USU ON USU.ID_USU = U.COD_USU_ALTER
-INNER JOIN CONFIG_USU CG ON CG.COD_USU = U.ID_USU
+LEFT JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
+LEFT JOIN USU_USUARIO US ON US.ID_USU = U.ID_USU_INCLUSAO
+LEFT JOIN USU_USUARIO USU ON USU.ID_USU = U.COD_USU_ALTER
+LEFT JOIN CONFIG_USU CG ON CG.COD_USU = U.ID_USU
 INNER JOIN PRC_PARCEIRO P ON P.ID_PARC = U.ID_PARC
 INNER JOIN VND_VENDEDOR V ON V.ID_VENDEDOR = U.USU_ID_VEND 
 WHERE U.ID_USU = :ID_USU AND ROWNUM = 1`;
@@ -470,26 +513,26 @@ app.post('/input_usu', async (req, res) => {
 })
 
 //rota usuario campo para adicionar uma tela
-app.post('/novatela',urlencodedParser, async (req, res) => {
+app.post('/novatela', urlencodedParser, async (req, res) => {
   let objeto = req.body;
   let sql = `BEGIN
              INSERT INTO T_TELA (ROTA,T_NOME,T_DESCRICAO,TIPO) VALUES(:T_ROTA,:T_NOME,:T_DESCRICAO,:TIPO);
              COMMIT;
              END;`
-             let binds = {
-              T_ROTA: objeto.ROTA,
-              T_NOME: objeto.T_NOME,
-              T_DESCRICAO: objeto.T_DESCRICAO,
-              TIPO:objeto.TIPO
-             }
-             try {
-              let result = await conectar(sql, binds);
-              res.status(200).send('Operação realizada com sucesso!');
-            } catch (error) {
-              console.error('Erro ao executar a operação: ', error);
-              res.status(500).send('Erro ao processar a solicitação: ' + error.message);
-            }
-            
+  let binds = {
+    T_ROTA: objeto.ROTA,
+    T_NOME: objeto.T_NOME,
+    T_DESCRICAO: objeto.T_DESCRICAO,
+    TIPO: objeto.TIPO
+  }
+  try {
+    let result = await conectar(sql, binds);
+    res.status(200).send('Operação realizada com sucesso!');
+  } catch (error) {
+    console.error('Erro ao executar a operação: ', error);
+    res.status(500).send('Erro ao processar a solicitação: ' + error.message);
+  }
+
 })
 
 //rota para alterar o cadastro de usuario
@@ -540,7 +583,6 @@ app.post('/update_usuario', async (req, res) => {
 
     try {
       let result = await conectar(sql, binds);
-      console.log(objeto)
       res.send(result.outBinds.P_MENSAGEM)
     } catch (error) {
       res.send('Erro no lado do servidor ' + error)
@@ -600,6 +642,81 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
 
 })
 // --------------------------------------------------------------------------------------------------------------- //
+
+//Rota pára gráfico de usuario
+
+app.get('/dash_usuario',urlencodedParser,async(req,res)=>{
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(121, token);
+    let P_USU = await permi_usu(121, token);
+
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/dash_usuario', { P_USU })
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
+
+app.post('/dash_usuario',urlencodedParser,async(req,res)=>{
+  let ID_TELA = req.body.ID_TELA
+  let sql = `SELECT * FROM (SELECT  TL.T_NOME,COUNT(*) AS CONSULTA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
+    AND TL.TIPO <> 'V'
+    AND TL.ID_TELA = :ID_TELA
+GROUP BY  TL.T_NOME) CONSULTA,   
+(SELECT COUNT(*) AS ALTERA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_ALTERA = 'S' OR CG.GRUP_ALTERA = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA) ALTERA,   
+(SELECT  COUNT(*) AS DELETA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_DELETA = 'S' OR CG.GRUP_DELETA = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA
+GROUP BY  TL.T_NOME) DELETA,
+    (SELECT COUNT(*) AS INCLUI
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_INCLUI = 'S' OR CG.GRUP_INCLUI = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA ) INCLUI,
+(   SELECT  COUNT(*) AS ANEXA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_ANEXA = 'S' OR CG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA
+GROUP BY  TL.T_NOME) ANEXA `;
+  let binds = {ID_TELA:ID_TELA}
+  try {
+
+    let result = await conectar(sql,binds)
+ 
+    console.log(result.rows[0])
+
+     res.send(result.rows[0]); 
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
 
 //na tela de acesso faz uma consulta pelo grupo ou usuario
 app.post('/grupousuario', urlencodedParser, async (req, res) => {
@@ -669,14 +786,14 @@ app.post('/consulta_acessos', async (req, res) => {
   } else {
     let sql;
     if (TABELA == 'USU_USUARIO') {
-      sql = `SELECT T.ID_TELA,T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA
+      sql = `SELECT T.ID_TELA,T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA,CFU_ANEXA
    FROM
    CONFIG_USU_TELA U
    INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
     WHERE ID_USU = :ID`
     }
     if (TABELA == 'GRP_GRUPO') {
-      sql = `SELECT T.ID_TELA,T.T_NOME,GRUP_ALTERA,GRUP_INCLUI,GRUP_DELETA,GRUP_CONSULTA
+      sql = `SELECT T.ID_TELA,T.T_NOME,GRUP_ALTERA,GRUP_INCLUI,GRUP_DELETA,GRUP_CONSULTA,GRP_ANEXA
    FROM
    CONFIG_GRUPO_TELA U
    INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA

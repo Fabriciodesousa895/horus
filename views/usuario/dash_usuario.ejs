@@ -1,0 +1,13 @@
+<%- include('../partials/head'); %>
+
+    <%- include('../partials/header'); %>
+    <div style="display: flex; flex-direction: row;width: 400px;">
+     <input type="number" required id="ID_TELA" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. tela">
+     <input type="text" readonly id="T_NOME" class="form-control mt-2 insert" placeholder="Nome da tela" >
+    </div>
+        <canvas id="dash" style="width: 500px;height: 200px;"></canvas>
+
+
+        <script src="/js/dash/dash_usuario.js"></script>
+
+        <%- include('../partials/footer'); %>

@@ -41,6 +41,9 @@ tbody.addEventListener('change', (e) => {
                 case 5:
                     POSICAO = 'CFU_CONSULTA'
                     break;
+                case 6:
+                    POSICAO = 'CFU_ANEXA'
+                    break;
                 
                 default:
                     break;
@@ -59,6 +62,9 @@ tbody.addEventListener('change', (e) => {
                     break;
                 case 5:
                     POSICAO = 'GRUP_CONSULTA'
+                    break;
+                case 6:
+                    POSICAO = 'GRP_ANEXA'
                     break;
                 
                 default:

@@ -14,7 +14,6 @@
   let CFG_USU_LIB_BLOQ_PARC = document.getElementById('CFG_USU_LIB_BLOQ_PARC');
   let USU_ADM = document.getElementById('USU_ADM')
   let BLOB = document.getElementById('BLOB')
-  let PROGRESSO = document.getElementById('PROGRESS');
 
 
 
@@ -47,8 +46,7 @@
 
       ajax.open('POST', '/usuario');
       ajax.setRequestHeader('Content-type', 'application/json');
-      //mostra ao usuário a barra de progresso
-      PROGRESSO.style.opacity = '1'
+ 
       ajax.onreadystatechange = function () {
         if (ajax.status === 200 && ajax.readyState === 4) {
                   swal({
@@ -62,8 +60,7 @@
                   inputs.forEach((e) => {
                     e.value = '' // Isso adicionará uma borda verde aos elementos
                   });
-        //omite do usuário a barra de progresso
-        PROGRESSO.style.opacity = '0';
+ 
              
         }else{
           swal({

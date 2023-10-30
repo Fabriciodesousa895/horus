@@ -710,8 +710,8 @@ GROUP BY  TL.T_NOME) ANEXA `;
     let result = await conectar(sql,binds)
  
     console.log(result.rows[0])
-
-     res.send(result.rows[0]); 
+    result.rows[0] == undefined ? res.status(500).send('Registro não encontrado!') : res.send(result.rows[0]);
+     
   } catch (error) {
     res.send(error);
     console.log(error)

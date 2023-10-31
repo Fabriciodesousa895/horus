@@ -330,7 +330,7 @@ app.get('/teste', async (req, res) => {
   }
 });
 
-app.get('/imagem',(req,res)=>{
+app.get('/imagem', (req, res) => {
   res.render('teste')
 })
 
@@ -439,8 +439,8 @@ LEFT JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
 LEFT JOIN USU_USUARIO US ON US.ID_USU = U.ID_USU_INCLUSAO
 LEFT JOIN USU_USUARIO USU ON USU.ID_USU = U.COD_USU_ALTER
 LEFT JOIN CONFIG_USU CG ON CG.COD_USU = U.ID_USU
-INNER JOIN PRC_PARCEIRO P ON P.ID_PARC = U.ID_PARC
-INNER JOIN VND_VENDEDOR V ON V.ID_VENDEDOR = U.USU_ID_VEND 
+LEFT JOIN PRC_PARCEIRO P ON P.ID_PARC = U.ID_PARC
+LEFT JOIN VND_VENDEDOR V ON V.ID_VENDEDOR = U.USU_ID_VEND 
 WHERE U.ID_USU = :ID_USU AND ROWNUM = 1`;
   let binds = {
     ID_USU: ID_USU
@@ -488,6 +488,7 @@ app.post('/filtro_usuario', async (req, res) => {
         let result = await conectarbd(sql, binds, options);
         let result2 = await conectarbd(sql2, binds2, options);
         res.send(result[0][0])
+        console.log(result[0][0])
       } catch (error) {
         res.redirect(`/erroservidor/${error}`);
       }
@@ -645,7 +646,7 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
 
 //Rota pára gráfico de usuario
 
-app.get('/dash_usuario',urlencodedParser,async(req,res)=>{
+app.get('/dash_usuario', urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
   try {
     let Acesso = await valida_acesso(121, token);
@@ -658,7 +659,7 @@ app.get('/dash_usuario',urlencodedParser,async(req,res)=>{
   }
 })
 
-app.post('/dash_usuario',urlencodedParser,async(req,res)=>{
+app.post('/dash_usuario', urlencodedParser, async (req, res) => {
   let ID_TELA = req.body.ID_TELA
   let sql = `SELECT * FROM (SELECT  TL.T_NOME,COUNT(*) AS CONSULTA
   FROM USU_USUARIO U
@@ -675,9 +676,12 @@ GROUP BY  TL.T_NOME) CONSULTA,
   LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
   LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
   LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  AND TL.TIPO <> 'V'
   WHERE CG.ID_TELA = TL.ID_TELA
     AND (CU.CFU_ALTERA = 'S' OR CG.GRUP_ALTERA = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA) ALTERA,   
+    AND TL.ID_TELA = :ID_TELA
+  AND TL.TIPO <> 'V'
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S'  OR U.USU_ADM = 'S')) ALTERA,   
 (SELECT  COUNT(*) AS DELETA
   FROM USU_USUARIO U
   LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
@@ -686,7 +690,8 @@ GROUP BY  TL.T_NOME) CONSULTA,
   WHERE CG.ID_TELA = TL.ID_TELA
     AND (CU.CFU_DELETA = 'S' OR CG.GRUP_DELETA = 'S' OR U.USU_ADM = 'S')
     AND TL.ID_TELA = :ID_TELA
-GROUP BY  TL.T_NOME) DELETA,
+  AND TL.TIPO <> 'V'
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')) DELETA,
     (SELECT COUNT(*) AS INCLUI
   FROM USU_USUARIO U
   LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
@@ -694,7 +699,9 @@ GROUP BY  TL.T_NOME) DELETA,
   LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
   WHERE CG.ID_TELA = TL.ID_TELA
     AND (CU.CFU_INCLUI = 'S' OR CG.GRUP_INCLUI = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA ) INCLUI,
+    AND TL.ID_TELA = :ID_TELA 
+  AND TL.TIPO <> 'V'
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) INCLUI,
 (   SELECT  COUNT(*) AS ANEXA
   FROM USU_USUARIO U
   LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
@@ -703,15 +710,16 @@ GROUP BY  TL.T_NOME) DELETA,
   WHERE CG.ID_TELA = TL.ID_TELA
     AND (CU.CFU_ANEXA = 'S' OR CG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S')
     AND TL.ID_TELA = :ID_TELA
-GROUP BY  TL.T_NOME) ANEXA `;
-  let binds = {ID_TELA:ID_TELA}
+  AND TL.TIPO <> 'V'
+AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) ANEXA `;
+  let binds = { ID_TELA: ID_TELA }
   try {
 
-    let result = await conectar(sql,binds)
- 
+    let result = await conectar(sql, binds)
+
     console.log(result.rows[0])
     result.rows[0] == undefined ? res.status(500).send('Registro não encontrado!') : res.send(result.rows[0]);
-     
+
   } catch (error) {
     res.send(error);
     console.log(error)
@@ -773,9 +781,33 @@ app.post('/copia_usuario', async (req, res) => {
   } catch (error) {
     res.send('Erro no lado do servidor ' + error)
   }
-
-
 })
+app.post('/dashusuariovisu', async (req, res) => {
+  let objeto = req.body;
+  let sql = `  SELECT   U.ID_USU, U.USU_NOME
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.${objeto.campo} = 'S' OR CG.${objeto.campo1} = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA
+  AND TL.TIPO <> 'V'
+AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )
+ GROUP BY  U.USU_NOME,U.ID_USU`;
+  let binds = {
+    ID_TELA: objeto.ID_TELA
+  };
+
+  try {
+    let result = await conectar(sql, binds, options)
+    console.log(result.rows)
+    res.status(200).send(result.rows)
+  } catch (error) {
+    res.send('Erro no lado do servidor ' + error)
+  }
+})
+
 //CONSULTA PERMISSOES DE TODAS AS TELAS
 app.post('/consulta_acessos', async (req, res) => {
   let ID = req.body.ID;
@@ -807,6 +839,7 @@ app.post('/consulta_acessos', async (req, res) => {
     try {
       let result = await conectarbd(sql, binds, options)
       result.length === 0 ? res.status(505).send('Usuário ou grupo não encontrado!') : res.send(result)
+      console.log(result);
 
     } catch (error) {
       res.send('Erro no lado do servidor ' + error)

@@ -1,0 +1,56 @@
+<%- include('../partials/head'); %>
+
+    <%- include('../partials/header'); %>
+
+
+
+
+            <div class="grad" style="display: flex; height: auto;">
+                    <div style="width: 300px;height: auto;">
+                        <select style="width: 300px;" id="select" class="form-control">
+                            <option value="">Selecione as expressões</option>
+                            <option value=" > ">( > ) maior que</option>
+                            <option value=" < ">( < ) menor que</option>
+                            <option value=" = ">( = ) igual</option>
+                            <option value=" <> ">( <> ) diferente dê</option>
+                            <option value=" LIKE ">( LIKE ) contém</option>
+                            <option value=" BETWEEN ">( BETWEEN ) entre</option>
+                            <option value=" INNER JOIN ">INNER JOIN</option>
+                            <option value=" LEFT JOIN ">LEFT JOIN</option>
+                        </select>
+                        <input type="text" id="NOME_TABELA" class="form-control mt-3" placeholder="Nome da tabela">
+                        <table class="table mt-3 table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Nome</td>
+                                    <td>Dado</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                <!--registros sendo preenchidas dinamicamento pelo js-->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="width: 100%;padding-left: 20px;">
+                        <textarea style="flex: 20px;height: 300px; margin-left: 10px; " class="form-control" id="sql"></textarea>
+                       <button id="btn" class="btn btn-warning mt-3">Consultar</button>
+                       <button id="Salvar" class="btn btn-success mt-3">Salvar</button>
+                       <table class="table mt-3 table-striped table-bordered table-hover">
+                        <thead id="cabecalho">
+                            <!--colunas sendo preenchidas dinamicamento pelo js-->
+                        </thead>
+                        <tbody id="dados">
+                            <!--registros sendo preenchidas dinamicamento pelo js-->
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+
+
+
+        <script src="/js/sql/DBE_explorer.js"></script>
+        <script src="/js/sql/manipulaelementos.js"></script>
+        <script src="/js/sql/buscatabela.js"></script>
+        <%- include('../partials/footer'); %>
+

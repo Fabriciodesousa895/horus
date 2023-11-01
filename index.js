@@ -46,6 +46,11 @@ const dbconfig = {
   password: 'host2023',
   connectString: 'localhost:1521'
 }
+const dbconfig_consulta = {
+  user: 'DIP',
+  password: 'HTML@583',
+  connectString: 'localhost:1521'
+}
 
 async function conectarbd(sql, binds, options) {
   let connection = await oracledb.getConnection(dbconfig);
@@ -54,6 +59,11 @@ async function conectarbd(sql, binds, options) {
 }
 async function conectar(sql, binds) {
   let connection = await oracledb.getConnection(dbconfig);
+  let result = await connection.execute(`${sql}`, binds);
+  return result;
+}
+async function consultaOracle(sql, binds) {
+  let connection = await oracledb.getConnection(dbconfig_consulta);
   let result = await connection.execute(`${sql}`, binds);
   return result;
 }
@@ -646,7 +656,7 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
 
 //Rota pára gráfico de usuario
 
-app.get('/dash_usuario', urlencodedParser, async (req, res) => {
+app.get('/dash_usuario', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
   try {
     let Acesso = await valida_acesso(121, token);
@@ -658,6 +668,97 @@ app.get('/dash_usuario', urlencodedParser, async (req, res) => {
     console.log(error)
   }
 })
+//rota para a consultad e dados no lado do usuário
+app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
+  let token = req.cookies.jwt;
+
+  try {
+    jwt.verify(token,secret,async(error,data)=>{
+      if(error){
+       res.status(500).send('Token inválido,faça login e tente novamente!')
+      }else{
+        let Acesso = await valida_acesso(141, token);
+        let P_USU = await permi_usu(141, token);
+         let ID_USU = data.ID_USUARIO;
+         let sql = `SELECT * FROM SQL_USU WHERE ID_USU = :ID_USU`;
+         let binds = {ID_USU:ID_USU}
+         let result = await conectar(sql,binds,options_objeto)
+          console.log(result.rows)
+        Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU,result:result.rows })
+
+      }})
+
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
+//faz a conSulta sql que o usuario digitou 
+app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
+  
+  try {
+    let result = await conectar(req.body.sql,[],options_objeto);
+    let arrayobjetos = result.metaData
+    let array_colunas = [];
+    let array_registros = []
+    array_registros = result.rows;
+    arrayobjetos.forEach((e)=>{array_colunas.push(e.name)});
+    let objeto = {
+      array_colunas:array_colunas,
+      array_registros:array_registros
+    }
+    res.send(objeto)
+  } catch (error) {
+    res.status(500).send('Erro ao execultar sql! ' + error.message);
+    console.log('Erro ao execultar sql! '+error)
+
+  }
+})
+//Salva a query do usuario
+app.post('/sql/salvasql',auth,urlencodedParser,async(req,res)=>{
+  let token = req.cookies.jwt;
+  let sql = req.body.sql;
+  let NOME_SQL = req.body.NOME_SQL;
+ jwt.verify(token,secret,async(error,data)=>{
+     if(error){
+      res.status(500).send('Token inválido,faça login e tente novamente!')
+     }else{
+      let ID_USU = data.ID_USUARIO;
+        let query = `BEGIN 
+                    INSERT INTO SQL_USU (SQL_NOME,ID_USU,SQL,DT_INCLUI,DT_ALTER	) VALUES (:NOME_SQL,:ID_USU,:SQL,SYSDATE,SYSDATE);
+                    COMMIT;
+                    END;`;
+        let binds = {
+          NOME_SQL:NOME_SQL,
+          ID_USU:ID_USU,
+          SQL:sql
+        }    
+        try{
+            let result = await conectar(query,binds);
+            res.send('Query salva com sucesso! '+result.message)
+        } catch(error){
+          res.status(500).send(error.message)
+        }       
+     }
+ })
+})
+
+app.post('/sql/buscatabela', auth, urlencodedParser, async (req, res) => {
+  let NOME_TABELA = req.body.NOME_TABELA
+  try {
+   
+    let binds = {NOME_TABELA:NOME_TABELA}
+    let sql = `SELECT COLUMN_NAME, DATA_TYPE FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = :NOME_TABELA`
+    let result = await conectar(sql,binds,options_objeto);
+    console.log(result.rows)
+    res.send(result.rows)
+  } catch (error) {
+    res.status(500).send('Erro ao execultar sql! ' + error.message);
+    console.log('Erro ao execultar sql! '+error)
+
+  }
+})
+
 
 app.post('/dash_usuario', urlencodedParser, async (req, res) => {
   let ID_TELA = req.body.ID_TELA

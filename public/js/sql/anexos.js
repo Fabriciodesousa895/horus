@@ -22,8 +22,16 @@
                     const cell = document.createElement('td');
                     cell.innerText = cellData;
                     row.appendChild(cell)
+
                     })
-                    tbody.appendChild(row)
+
+                    const editarCell = document.createElement('td'); // Crie uma célula separada para o botão "Editar"
+                    const editarButton = document.createElement('button');
+                    editarButton.innerHTML = 'Editar';
+                    editarCell.appendChild(editarButton);
+                  
+                    row.appendChild(editarCell);
+                     tbody.appendChild(row)
                  })
                 //pecorre os registros inseridos anteriomente e limita a 40 caracteres
                  let coluna = tbody.querySelectorAll('td');

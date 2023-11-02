@@ -255,15 +255,10 @@ function permi_usu(ID_TELA, token) {
           LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
           LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
           LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-             LEFT JOIN (SELECT ID_TELA,COUNT(ID_TELA) AS TOTAL
-                   FROM  HIST_TELA WHERE ID_USU = :ID_USU
-                  GROUP BY ID_TELA
-                  ORDER BY TOTAL DESC ) TT ON TT.ID_TELA = TL.ID_TELA
           WHERE U.ID_USU = :ID_USU
             AND CG.ID_TELA = TL.ID_TELA
             AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
-            AND TL.TIPO <> 'V'
-             ORDER BY TT.ID_TELA`
+            AND TL.TIPO <> 'V'`
         let binds2 = {
           ID_USU: data.ID_USUARIO
         }
@@ -299,7 +294,7 @@ function permi_usu(ID_TELA, token) {
           let result = await conectarbd(sql, binds, options_objeto);
           let result2 = await conectar(sql2, binds2, options);
           let result3 = await conectar(sql3, binds3, options);
-          let result4 = await conectar(sql4, binds4, options);
+          // let result4 = await conectar(sql4, binds4, options);
           let result5 = await conectar(sql5, binds5, options);
           let Objeto = {
             P_USU: result,
@@ -503,7 +498,6 @@ app.post('/filtro_usuario', async (req, res) => {
         let result = await conectarbd(sql, binds, options);
         let result2 = await conectarbd(sql2, binds2, options);
         res.send(result[0][0])
-        console.log(result[0][0])
       } catch (error) {
         res.redirect(`/erroservidor/${error}`);
       }
@@ -611,7 +605,6 @@ app.post('/update_usuario', async (req, res) => {
 })
 app.post('/delete_usu', urlencodedParser, async (req, res) => {
   let ID_USU = req.body.ID_USU;
-  console.log(ID_USU)
   let sql = `BEGIN DELETA_USUARIO(:ID_USU,:P_MENSAGEM); END;`;
   let binds = { ID_USU: ID_USU, P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING } }
   let result = await conectar(sql, binds)
@@ -720,7 +713,6 @@ app.post('/aql/anexos', auth, urlencodedParser, async (req, res) => {
          let binds = {ID_USU:ID_USU}
          //passa para a tela as query que o usuário tem salvo
          let result = await conectar(sql,binds,options_objeto)
-          console.log(result.rows)
         res.send(result.rows)
 
       }})
@@ -767,7 +759,6 @@ app.post('/sql/buscatabela', auth, urlencodedParser, async (req, res) => {
     let binds = {NOME_TABELA:NOME_TABELA}
     let sql = `SELECT COLUMN_NAME, DATA_TYPE FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = :NOME_TABELA`
     let result = await conectar(sql,binds,options_objeto);
-    console.log(result.rows)
     res.send(result.rows)
   } catch (error) {
     res.status(500).send('Erro ao execultar sql! ' + error.message);
@@ -835,7 +826,6 @@ AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) ANEXA
 
     let result = await conectar(sql, binds)
 
-    console.log(result.rows[0])
     result.rows[0] == undefined ? res.status(500).send('Registro não encontrado!') : res.send(result.rows[0]);
 
   } catch (error) {
@@ -848,7 +838,6 @@ AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) ANEXA
 app.post('/grupousuario', urlencodedParser, async (req, res) => {
   let objeto = req.body;
   let sql;
-  console.log(objeto);
 
 
   if (objeto.TABELA == 'USU_USUARIO') {
@@ -865,7 +854,6 @@ app.post('/grupousuario', urlencodedParser, async (req, res) => {
     return
   } else {
     let result = await conectar(sql, binds, options)
-    console.log(result.rows + 'gdfgfdgfgdf')
     result.rows == '' ? res.status(505).send('Usuário ou grupo não encontrado!') : res.send(result.rows[0][0])
   }
 })
@@ -917,7 +905,6 @@ AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )
 
   try {
     let result = await conectar(sql, binds, options)
-    console.log(result.rows)
     res.status(200).send(result.rows)
   } catch (error) {
     res.send('Erro no lado do servidor ' + error)
@@ -955,7 +942,6 @@ app.post('/consulta_acessos', async (req, res) => {
     try {
       let result = await conectarbd(sql, binds, options)
       result.length === 0 ? res.status(505).send('Usuário ou grupo não encontrado!') : res.send(result)
-      console.log(result);
 
     } catch (error) {
       res.send('Erro no lado do servidor ' + error)

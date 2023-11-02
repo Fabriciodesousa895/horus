@@ -14,6 +14,7 @@
 
                  let tbody = document.getElementById('query');
                  let array_registros = JSON.parse(ajax.responseText)
+                 tbody.innerText = '';
                 //inseri os registros na tabela
                  array_registros.forEach(RowData =>{
                     const  row = document.createElement('tr');
@@ -25,7 +26,7 @@
                     tbody.appendChild(row)
                  })
                 //pecorre os registros inseridos anteriomente e limita a 40 caracteres
-                 let coluna = table.querySelectorAll('td');
+                 let coluna = tbody.querySelectorAll('td');
                  var limit = 40;
                  for(  var i = 0;i < coluna.length;i++){
                      var textoCompleto = coluna[i].textContent;
@@ -38,10 +39,6 @@
                  }
                 //omite do usuário a barra de progresso
                 PROGRESSO.style.opacity = '0';
-                swal({
-                    text:'ok',
-                    icon: 'success'
-                 })
             } else {
                 swal({
                     text:'ok',

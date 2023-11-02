@@ -6,11 +6,4 @@ select.addEventListener('change', () => {
 });
 
 
-let table = document.getElementById('query');
-
-
-    if(table){
-
-    
-    }
 

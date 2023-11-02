@@ -47,10 +47,31 @@
                     </div>
             </div>
 
+  <!--modal para visualizar as query salva do usuario-->
+  
 
+  <div class="modal fade ANEXO" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content" style="padding: 30px;">
+        <table class="table table-striped table-bordered table-hover" id="query">
+            <thead >
+                <td>NOME</td>
+                <td>SQL</td>
+                <td>DT_INCLUSÃO</td>
+                <td>DT_ALTERAÇÃO</td>
+
+            </thead>
+            <tbody>
+               <!--Dados sendo inseridos dinamicamente pelo js-->
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
         <script src="/js/sql/DBE_explorer.js"></script>
         <script src="/js/sql/manipulaelementos.js"></script>
         <script src="/js/sql/buscatabela.js"></script>
+        <script src="/js/sql/anexos.js"></script>
         <%- include('../partials/footer'); %>
 

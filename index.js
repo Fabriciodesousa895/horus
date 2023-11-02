@@ -83,6 +83,7 @@ app.get('/login', (req, res) => {
   res.render('./usuario/login')
 })
 app.post('/login', async (req, res) => {
+  console.log('-----------')
   let USU_SENHA = req.body.USU_SENHA;
   let USU_NOME = req.body.USU_NOME;
   let sql = `SELECT USU_SENHA, ID_USU FROM USU_USUARIO WHERE USU_NOME = :USU_NOME`;
@@ -98,7 +99,7 @@ app.post('/login', async (req, res) => {
   } else {
     let senha_salva = result[0][0];
     let ID_USU = result[0][1];
-
+    try{
     // Valida a senha
     bycrypt.compare(USU_SENHA, senha_salva, (err, resultt) => {
       if (resultt) {
@@ -126,6 +127,10 @@ app.post('/login', async (req, res) => {
         return res.status(505).send('Senha inválida');
       }
     })
+    }catch(error){
+     res.send(error)
+    }
+
 
   }
 })
@@ -668,31 +673,19 @@ app.get('/dash_usuario', auth, urlencodedParser, async (req, res) => {
     console.log(error)
   }
 })
-//rota para a consultad e dados no lado do usuário
+//rota para a consulta e dados no lado do usuário DBE_explorer
 app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
-
   try {
-    jwt.verify(token,secret,async(error,data)=>{
-      if(error){
-       res.status(500).send('Token inválido,faça login e tente novamente!')
-      }else{
         let Acesso = await valida_acesso(141, token);
         let P_USU = await permi_usu(141, token);
-         let ID_USU = data.ID_USUARIO;
-         let sql = `SELECT * FROM SQL_USU WHERE ID_USU = :ID_USU`;
-         let binds = {ID_USU:ID_USU}
-         let result = await conectar(sql,binds,options_objeto)
-          console.log(result.rows)
-        Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU,result:result.rows })
-
-      }})
-
+        Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU})
   } catch (error) {
     res.send(error);
     console.log(error)
   }
 })
+
 //faz a conSulta sql que o usuario digitou 
 app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
   
@@ -714,6 +707,30 @@ app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
 
   }
 })
+//consulta as querys que usuario tem salvo na base de dados
+app.post('/aql/anexos', auth, urlencodedParser, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    jwt.verify(token,secret,async(error,data)=>{
+      if(error){
+       res.status(500).send('Token inválido,faça login e tente novamente!')
+      }else{
+         let ID_USU = data.ID_USUARIO;
+         let sql = `SELECT ID_QUERY,SQL_NOME,SQL,TO_CHAR(DT_INCLUI,'DD/MM/YY HH24:MI'),TO_CHAR(DT_ALTER,'DD/MM/YY HH24:MI') FROM QUERY_USU WHERE ID_USU = :ID_USU`;
+         let binds = {ID_USU:ID_USU}
+         //passa para a tela as query que o usuário tem salvo
+         let result = await conectar(sql,binds,options_objeto)
+          console.log(result.rows)
+        res.send(result.rows)
+
+      }})
+
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
+
 //Salva a query do usuario
 app.post('/sql/salvasql',auth,urlencodedParser,async(req,res)=>{
   let token = req.cookies.jwt;
@@ -725,7 +742,7 @@ app.post('/sql/salvasql',auth,urlencodedParser,async(req,res)=>{
      }else{
       let ID_USU = data.ID_USUARIO;
         let query = `BEGIN 
-                    INSERT INTO SQL_USU (SQL_NOME,ID_USU,SQL,DT_INCLUI,DT_ALTER	) VALUES (:NOME_SQL,:ID_USU,:SQL,SYSDATE,SYSDATE);
+                    INSERT INTO QUERY_USU (SQL_NOME,ID_USU,SQL,DT_INCLUI,DT_ALTER	) VALUES (:NOME_SQL,:ID_USU,:SQL,SYSDATE,SYSDATE);
                     COMMIT;
                     END;`;
         let binds = {
@@ -862,8 +879,6 @@ app.get('/acessos', urlencodedParser, auth, async (req, res) => {
   res.render('./acesso/acesso', { P_USU });
 
 })
-
-
 
 //Copia permissões
 app.post('/copia_usuario', async (req, res) => {
@@ -1006,13 +1021,6 @@ app.post('/grupo', urlencodedParser, auth, async (req, res) => {
   }
 
 })
-
-
-
-
-
-
-
 
 app.listen(8020, (err) => {
   if (err) {

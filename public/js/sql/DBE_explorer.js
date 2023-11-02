@@ -1,8 +1,12 @@
 (function readJS(win, doc) {
   'use sctrict';
   let sql = document.getElementById('sql')
+  let PROGRESSO = document.getElementById('PROGRESSO')
+
 
   function sendForm() {
+    //mostra ao usuário a barra de progresso
+    PROGRESSO.style.opacity = '1';
     let ajax = new XMLHttpRequest();
     ajax.open('POST', '/sql/DBE_explorer')
     ajax.setRequestHeader('Content-type', 'application/json');
@@ -16,19 +20,19 @@
         // let tr = document.getElementById('colunas');
         let tbody = document.getElementById('dados');
         let thead = document.getElementById('cabecalho');
+        //retira a tabela existente
         tbody.innerText = '';
         thead.innerText = '';
-
-
+        //faz um laço e inserio cabeçalho
         let tr = document.createElement('tr')
         for (var i = 0; i < array_colunas.length; i++) {
           var th = document.createElement('td');
           th.textContent = array_colunas[i];
           tr.appendChild(th);
         }
-
+       //adiciona a linha no cabeçalho;
         thead.appendChild(tr)
-
+      //percorre o array de array e inseri os dados da query
         array_registros.forEach(rowData => {
           const row = document.createElement('tr');
           rowData.forEach(cellData => {
@@ -38,13 +42,16 @@
           });
           tbody.appendChild(row);
         });
-
+        //omite do usuário a barra de progresso
+        PROGRESSO.style.opacity = '0';
 
       } else {
         swal({
           text: ajax.responseText,
           icon: 'warning'
         })
+        //omite do usuário a barra de progresso
+        PROGRESSO.style.opacity = '0';
       }
     }
     ajax.send(data)
@@ -69,7 +76,7 @@
         let ajax = new XMLHttpRequest();
         ajax.open('POST', '/sql/salvasql')
         ajax.setRequestHeader('Content-type', 'application/json');
-        let objeto = { sql: sql.value,NOME_SQL:name }
+        let objeto = { sql: sql.value, NOME_SQL: name }
         let data = JSON.stringify(objeto)
         ajax.onreadystatechange = () => {
           if (ajax.status === 200) {

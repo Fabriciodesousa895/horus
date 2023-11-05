@@ -18,10 +18,15 @@ let DEFAULT = document.getElementById('DEFAULT');
     let elementopai = elementclicado.parentNode;
     let conteudocelula = elementopai.cells[0]
     let ID = conteudocelula.textContent
-    let data = { ID: ID }
+    let data = {
+      sql:`SELECT SQL FROM QUERY_USU WHERE ID_QUERY = :ID_QUERY `,
+      binds:{ID_QUERY : ID},
+      mensage_error: 'Ocorreu um erro ao procurar este registro!',
+      rows: true
+    };
     let JsonData = JSON.stringify(data)
     let ajax = new XMLHttpRequest();
-    ajax.open('POST', '/sql/sql_id');
+    ajax.open('POST', '/select/universal');
     ajax.setRequestHeader('Content-Type', 'application/json');
     ajax.onreadystatechange = () => {
       if (ajax.status === 200) {
@@ -122,9 +127,20 @@ let DEFAULT = document.getElementById('DEFAULT');
         // Aqui estamos acessando o valor do input
         if (name != null) {
           let ajax = new XMLHttpRequest();
-          ajax.open('POST', '/sql/salvasql')
+          ajax.open('POST', '/rota/universal')
           ajax.setRequestHeader('Content-type', 'application/json');
-          let objeto = { sql: sql.value, NOME_SQL: name }
+          let objeto = { 
+            sql:  `BEGIN 
+            INSERT INTO QUERY_USU (SQL_NOME,ID_USU,SQL,DT_INCLUI,DT_ALTER	) VALUES (:NOME_SQL,:USU_LOGADO,:SQL,SYSDATE,SYSDATE);
+            COMMIT;
+            END;`,
+            binds: {SQL:sql.value,NOME_SQL: name
+            } ,
+            mensagem_sucess:'Query salva com sucesso',
+            mensagem_error: 'Erro ao salvar Query!',
+            USU_LOGADO: true  
+
+          }
           let data = JSON.stringify(objeto)
           ajax.onreadystatechange = () => {
             if (ajax.status === 200) {
@@ -157,11 +173,20 @@ let DEFAULT = document.getElementById('DEFAULT');
   //Quando o usuário  cilcar em Salvar query
   function salvaEdicao (){
    let ID = document.getElementById('ID_SQL');
-   let data = {ID:ID.value,QUERY:sql.value}
+   let data = {
+    sql: `BEGIN 
+    UPDATE QUERY_USU SET SQL = :QUERY,DT_ALTER = SYSDATE WHERE ID_QUERY = :ID_QUERY;
+    COMMIT;
+    END;`,
+    binds:{ID_QUERY:ID.value,QUERY:sql.value},
+    mensagem_sucess:'Query salva com sucesso',
+    mensagem_error: 'Erro ao Editar Query!',
+    USU_LOGADO:   false
+   }
    let JsonData = JSON.stringify(data)
 
     let ajax = new  XMLHttpRequest();
-    ajax.open('POST','/sql/salvaedicao');
+    ajax.open('POST','/rota/universal');
     ajax.setRequestHeader('Content-type','application/json');
     ajax.onreadystatechange = ()=>{
       if (ajax.status === 200) {
@@ -189,11 +214,20 @@ let DEFAULT = document.getElementById('DEFAULT');
   //Deletar registro
   function Deletar (){
    let ID = document.getElementById('ID_SQL');
-   let data = {ID:ID.value}
+   let data = {
+    sql : `BEGIN 
+    DELETE FROM QUERY_USU WHERE ID_QUERY = :ID_QUERY;
+    COMMIT;
+    END;`,
+    binds: {ID_QUERY:ID.value},
+    mensagem_sucess: 'Registro deletado com sucesso!',
+    mensagem_error:'Erro ao ideletar registro!',
+    USU_LOGADO: false
+   };
    let JsonData = JSON.stringify(data)
 
     let ajax = new  XMLHttpRequest();
-    ajax.open('POST','/sql/deleta');
+    ajax.open('POST','/rota/universal');
     ajax.setRequestHeader('Content-type','application/json');
     ajax.onreadystatechange = ()=>{
       if (ajax.status === 200) {

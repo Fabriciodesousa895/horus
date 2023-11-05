@@ -99,36 +99,36 @@ app.post('/login', async (req, res) => {
   } else {
     let senha_salva = result[0][0];
     let ID_USU = result[0][1];
-    try{
-    // Valida a senha
-    bycrypt.compare(USU_SENHA, senha_salva, (err, resultt) => {
-      if (resultt) {
-        // Gera o token da sessão
-        jwt.sign(
-          {
-            ID_USUARIO: ID_USU
-          },
-          secret,
-          { expiresIn: '10h' },
-          (err, token) => {
-            if (err) {
-              res.send('Ocorreu um erro ao gerar o token da sessão!');
-              return;
-            } else {
-              res.status(200)
-                .cookie("jwt", token, { httpOnly: true, maxAge: 8000000 })
-                .send('Operação realizada com sucesso');
+    try {
+      // Valida a senha
+      bycrypt.compare(USU_SENHA, senha_salva, (err, resultt) => {
+        if (resultt) {
+          // Gera o token da sessão
+          jwt.sign(
+            {
+              ID_USUARIO: ID_USU
+            },
+            secret,
+            { expiresIn: '10h' },
+            (err, token) => {
+              if (err) {
+                res.send('Ocorreu um erro ao gerar o token da sessão!');
+                return;
+              } else {
+                res.status(200)
+                  .cookie("jwt", token, { httpOnly: true, maxAge: 8000000 })
+                  .send('Operação realizada com sucesso');
 
+              }
             }
-          }
-        )
+          )
 
-      } else {
-        return res.status(505).send('Senha inválida');
-      }
-    })
-    }catch(error){
-     res.send(error)
+        } else {
+          return res.status(505).send('Senha inválida');
+        }
+      })
+    } catch (error) {
+      res.send(error)
     }
 
 
@@ -318,32 +318,6 @@ function permi_usu(ID_TELA, token) {
 app.get('/erroservidor/:error', (req, res) => {
   res.send('Ocorreu um erro ! ' + '<br>' + req.params.error)
 })
-app.get('/teste', async (req, res) => {
-  try {
-    // Recupere o BLOB do banco de dados
-    const sql = `SELECT COLUS FROM ANEXO`;
-    const result = await conectar(sql, [], options_objeto);
-
-    if (result.rows.length > 0) {
-      const blobData = result.rows[0][0]; // Assumindo que o BLOB está na primeira linha do resultado
-      const base64Data = Buffer.from(blobData).toString('base64'); // Converte o BLOB em base64
-
-      // Envie a base64 para o frontend
-      console.log(result.rows[0][0])
-      res.send(base64Data);
-    } else {
-      res.status(404).send('BLOB não encontrado');
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erro ao processar a solicitação');
-  }
-});
-
-app.get('/imagem', (req, res) => {
-  res.render('teste')
-})
-
 
 app.get('/usuario', auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -504,9 +478,7 @@ app.post('/filtro_usuario', async (req, res) => {
 
     }
   })
-
 })
-
 //copia usuario campo para colocar usuario
 app.post('/input_usu', async (req, res) => {
   let ID_USU = req.body.ID_USU;
@@ -521,30 +493,6 @@ app.post('/input_usu', async (req, res) => {
 
 
 })
-
-//rota usuario campo para adicionar uma tela
-app.post('/novatela', urlencodedParser, async (req, res) => {
-  let objeto = req.body;
-  let sql = `BEGIN
-             INSERT INTO T_TELA (ROTA,T_NOME,T_DESCRICAO,TIPO) VALUES(:T_ROTA,:T_NOME,:T_DESCRICAO,:TIPO);
-             COMMIT;
-             END;`
-  let binds = {
-    T_ROTA: objeto.ROTA,
-    T_NOME: objeto.T_NOME,
-    T_DESCRICAO: objeto.T_DESCRICAO,
-    TIPO: objeto.TIPO
-  }
-  try {
-    let result = await conectar(sql, binds);
-    res.status(200).send('Operação realizada com sucesso!');
-  } catch (error) {
-    console.error('Erro ao executar a operação: ', error);
-    res.status(500).send('Erro ao processar a solicitação: ' + error.message);
-  }
-
-})
-
 //rota para alterar o cadastro de usuario
 app.post('/update_usuario', async (req, res) => {
   let token = req.cookies.jwt;
@@ -670,9 +618,9 @@ app.get('/dash_usuario', auth, urlencodedParser, async (req, res) => {
 app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
   try {
-        let Acesso = await valida_acesso(141, token);
-        let P_USU = await permi_usu(141, token);
-        Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU})
+    let Acesso = await valida_acesso(141, token);
+    let P_USU = await permi_usu(141, token);
+    Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU })
   } catch (error) {
     res.send(error);
     console.log(error)
@@ -681,22 +629,23 @@ app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
 
 //faz a conSulta sql que o usuario digitou 
 app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
-  
+
   try {
-    let result = await conectar(req.body.sql,[],options_objeto);
+    let result = await conectar(req.body.sql, [], options_objeto);
     let arrayobjetos = result.metaData
     let array_colunas = [];
     let array_registros = []
     array_registros = result.rows;
-    arrayobjetos.forEach((e)=>{array_colunas.push(e.name)});
+    arrayobjetos.forEach((e) => { array_colunas.push(e.name) });
+    console.log(array_colunas)
     let objeto = {
-      array_colunas:array_colunas,
-      array_registros:array_registros
+      array_colunas: array_colunas,
+      array_registros: array_registros
     }
     res.send(objeto)
   } catch (error) {
     res.status(500).send('Erro ao execultar sql! ' + error.message);
-    console.log('Erro ao execultar sql! '+error)
+    console.log('Erro ao execultar sql! ' + error)
 
   }
 })
@@ -704,18 +653,19 @@ app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
 app.post('/aql/anexos', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
   try {
-    jwt.verify(token,secret,async(error,data)=>{
-      if(error){
-       res.status(500).send('Token inválido,faça login e tente novamente!')
-      }else{
-         let ID_USU = data.ID_USUARIO;
-         let sql = `SELECT ID_QUERY,SQL_NOME,SQL,TO_CHAR(DT_INCLUI,'DD/MM/YY HH24:MI'),TO_CHAR(DT_ALTER,'DD/MM/YY HH24:MI') FROM QUERY_USU WHERE ID_USU = :ID_USU`;
-         let binds = {ID_USU:ID_USU}
-         //passa para a tela as query que o usuário tem salvo
-         let result = await conectar(sql,binds,options_objeto)
+    jwt.verify(token, secret, async (error, data) => {
+      if (error) {
+        res.status(500).send('Token inválido,faça login e tente novamente!')
+      } else {
+        let ID_USU = data.ID_USUARIO;
+        let sql = `SELECT ID_QUERY,SQL_NOME,SQL,TO_CHAR(DT_INCLUI,'DD/MM/YY HH24:MI'),TO_CHAR(DT_ALTER,'DD/MM/YY HH24:MI') FROM QUERY_USU WHERE ID_USU = :ID_USU`;
+        let binds = { ID_USU: ID_USU }
+        //passa para a tela as query que o usuário tem salvo
+        let result = await conectar(sql, binds, options_objeto)
         res.send(result.rows)
 
-      }})
+      }
+    })
 
   } catch (error) {
     res.send(error);
@@ -723,109 +673,21 @@ app.post('/aql/anexos', auth, urlencodedParser, async (req, res) => {
   }
 })
 
-//Salva a query do usuario
-app.post('/sql/salvasql',auth,urlencodedParser,async(req,res)=>{
-  let token = req.cookies.jwt;
-  let sql = req.body.sql;
-  let NOME_SQL = req.body.NOME_SQL;
- jwt.verify(token,secret,async(error,data)=>{
-     if(error){
-      res.status(500).send('Token inválido,faça login e tente novamente!')
-     }else{
-      let ID_USU = data.ID_USUARIO;
-        let query = `BEGIN 
-                    INSERT INTO QUERY_USU (SQL_NOME,ID_USU,SQL,DT_INCLUI,DT_ALTER	) VALUES (:NOME_SQL,:ID_USU,:SQL,SYSDATE,SYSDATE);
-                    COMMIT;
-                    END;`;
-        let binds = {
-          NOME_SQL:NOME_SQL,
-          ID_USU:ID_USU,
-          SQL:sql
-        }    
-        try{
-            let result = await conectar(query,binds);
-            res.send('Query salva com sucesso! ')
-        } catch(error){
-          res.status(500).send(error.message)
-        }       
-     }
- })
-})
-
-app.post('/sql/sql_id', auth, urlencodedParser, async (req, res) => {
-  let ID_QUERY = req.body.ID;
-  let query = `SELECT SQL FROM QUERY_USU WHERE ID_QUERY = :ID_QUERY`;
-  let binds = { ID_QUERY: ID_QUERY }
-  try {
-    let result = await conectar(query, binds);
-    console.log(result)
-    console.log(ID_QUERY)
-    res.send(result.rows);
-
-  } catch (error) {
-    res.status(500).send(error.message)
-  }
-})
-//edita a query que o usuario editou
-app.post('/sql/salvaedicao', auth, urlencodedParser, async (req, res) => {
-  let body = req.body;
-  let query = `BEGIN 
-              UPDATE QUERY_USU SET SQL = :QUERY,DT_ALTER = SYSDATE WHERE ID_QUERY = :ID_QUERY;
-              COMMIT;
-              END;`;
-  let binds = { ID_QUERY: body.ID,QUERY: body.QUERY }
-  try {
-    let result = await conectar(query, binds);
-    res.send('Registro editado com sucesso!');
-  } catch (error) {
-    res.status(500).send(error.message)
-  }
-})
-app.post('/sql/deleta', auth, urlencodedParser, async (req, res) => {
-  let body = req.body;
-  let query = `BEGIN 
-              DELETE FROM QUERY_USU WHERE ID_QUERY = :ID_QUERY;
-              COMMIT;
-              END;`;
-  let binds = { ID_QUERY: body.ID }
-  try {
-    let result = await conectar(query, binds);
-    res.send('Registro deletado com sucesso!');
-  } catch (error) {
-    res.status(500).send(error.message)
-  }
-})
-
-app.post('/sql/buscatabela', auth, urlencodedParser, async (req, res) => {
-  let NOME_TABELA = req.body.NOME_TABELA
-  try {
-   
-    let binds = {NOME_TABELA:NOME_TABELA}
-    let sql = `SELECT COLUMN_NAME, DATA_TYPE FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = :NOME_TABELA`
-    let result = await conectar(sql,binds,options_objeto);
-    res.send(result.rows)
-  } catch (error) {
-    res.status(500).send('Erro ao execultar sql! ' + error.message);
-    console.log('Erro ao execultar sql! '+error)
-
-  }
-})
 //Inserindo uma nova tabela na base de dados
 app.post('/sql/novatabela', auth, urlencodedParser, async (req, res) => {
   let QUERY = req.body.QUERY
   try {
-   
-    let result = await conectar(QUERY,[]);
+
+    let result = await conectar(QUERY, []);
     res.send(result)
   } catch (error) {
     res.status(500).send('Erro ao execultar sql! ' + error.message);
-    console.log('Erro ao execultar sql! '+error)
+    console.log('Erro ao execultar sql! ' + error)
     console.log(QUERY);
 
 
   }
 })
-
 
 app.post('/dash_usuario', urlencodedParser, async (req, res) => {
   let ID_TELA = req.body.ID_TELA
@@ -945,30 +807,7 @@ app.post('/copia_usuario', async (req, res) => {
     res.send('Erro no lado do servidor ' + error)
   }
 })
-app.post('/dashusuariovisu', async (req, res) => {
-  let objeto = req.body;
-  let sql = `  SELECT   U.ID_USU, U.USU_NOME
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.${objeto.campo} = 'S' OR CG.${objeto.campo1} = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA
-  AND TL.TIPO <> 'V'
-AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )
- GROUP BY  U.USU_NOME,U.ID_USU`;
-  let binds = {
-    ID_TELA: objeto.ID_TELA
-  };
 
-  try {
-    let result = await conectar(sql, binds, options)
-    res.status(200).send(result.rows)
-  } catch (error) {
-    res.send('Erro no lado do servidor ' + error)
-  }
-})
 
 //CONSULTA PERMISSOES DE TODAS AS TELAS
 app.post('/consulta_acessos', async (req, res) => {
@@ -1006,44 +845,6 @@ app.post('/consulta_acessos', async (req, res) => {
       res.send('Erro no lado do servidor ' + error)
     }
   }
-
-
-
-})
-
-
-//consulta parceiro
-app.post('/consulta_parceiro', urlencodedParser, async (req, res) => {
-  let ID_PARC = req.body.ID_PARC;
-  let binds = {
-    ID_PARC: ID_PARC
-  }
-  let sql = `SELECT PARC_NOME FROM PRC_PARCEIRO WHERE ID_PARC = :ID_PARC `;
-
-  try {
-    let result = await conectarbd(sql, binds, options);
-    result.length === 0 ? res.status(505).send('Parceiro não existe!') : res.status(200).send(result[0][0]);
-  } catch (error) {
-    res.send('Erro no lado do servidor ' + error)
-  }
-
-
-});
-
-//consulta vendedor
-app.post('/consulta_vendedor', urlencodedParser, async (req, res) => {
-  let ID_VENDEDOR = req.body.ID_VENDEDOR;
-
-  let binds = { ID_VENDEDOR: ID_VENDEDOR };
-
-  let sql = `SELECT VND_NOME FROM VND_VENDEDOR WHERE ID_VENDEDOR = :ID_VENDEDOR `;
-
-  try {
-    let result = await conectarbd(sql, binds, options);
-    result.length === 0 ? res.status(505).send('Vendedor não existe!') : res.status(200).send(result[0][0])
-  } catch (error) {
-    res.send('Erro no lado do servidor ' + error)
-  }
 })
 
 //consulta grupo
@@ -1065,6 +866,49 @@ app.post('/grupo', urlencodedParser, auth, async (req, res) => {
     res.send('Erro no lado do servidor ' + error)
   }
 
+})
+//Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
+app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
+  let Objeto = req.body;
+  let token = req.cookies.jwt;
+  let novobinds;
+  jwt.verify(token, secret, async (error, data) => {
+    if (error) { return res.status(500).send('Token inválido!') }
+    if (Objeto.USU_LOGADO) {
+      let USU_LOGADO = data.ID_USUARIO;
+      novobinds = { ...Objeto.binds, USU_LOGADO }
+      try {
+        let result = await conectar(Objeto.sql, novobinds);
+        res.status(200).send(Objeto.mensagem_sucess);
+      } catch (error) {
+        res.status(500).send(Objeto.mensagem_error + error)
+      }
+    } else {
+      try {
+        let result = await conectar(Objeto.sql, Objeto.binds);
+        res.status(200).send(Objeto.mensagem_sucess);
+      } catch (error) {
+        res.status(500).send(Objeto.mensagem_error + error)
+      }
+    }
+
+  })
+
+})
+//Rota universal para consultas de campos que retornal apenas um valor
+app.post('/select/universal', urlencodedParser, async (req, res) => {
+  let Objeto = req.body;
+  try {
+    let result = await conectarbd(Objeto.sql, Objeto.binds, options);
+    if(Objeto.rows ){
+    let result = await conectar(Objeto.sql, Objeto.binds);
+    result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
+    }else{
+      result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
+    }
+  } catch (error) {
+    res.send('Ocorreu um erro no lado do servidor! ' + error)
+  }
 })
 
 app.listen(8020, (err) => {

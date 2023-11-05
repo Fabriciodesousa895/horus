@@ -77,12 +77,23 @@
 
       let ajax = new XMLHttpRequest()
 
-      ajax.open('POST', '/dashusuariovisu');
+      ajax.open('POST', '/rota/universal');
       ajax.setRequestHeader('Content-type', 'application/json');
       let data = {
-        ID_TELA: ID_TELA.value,
-        campo: campo,
-        campo1: campo1
+        sql: `  SELECT   U.ID_USU, U.USU_NOME
+        FROM USU_USUARIO U
+        LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+        LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+        LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+        WHERE CG.ID_TELA = TL.ID_TELA
+          AND (CU.${campo} = 'S' OR CG.${campo1} = 'S' OR U.USU_ADM = 'S')
+          AND TL.ID_TELA = :ID_TELA
+        AND TL.TIPO <> 'V'
+      AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )
+       GROUP BY  U.USU_NOME,U.ID_USU`,
+        binds: { ID_TELA: ID_TELA.value },
+        mensage_error: 'Houve um erro ao conultar o registro!',
+        rows: true
       };
       let jsonData = JSON.stringify(data);
       //mostra ao usuário a barra de progresso
@@ -113,6 +124,8 @@
             text: ajax.responseText,
             icon: 'warning'
           })
+          //omite do usuário a barra de progresso
+          PROGRESSO.style.opacity = '0'
         }
       }
       ajax.send(jsonData);
@@ -152,6 +165,8 @@
           text: ajax.responseText,
           icon: 'warning'
         })
+        //omite do usuário a barra de progresso
+        PROGRESSO.style.opacity = '0'
       }
     }
     ajax.send(jsonData);

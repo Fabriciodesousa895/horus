@@ -7,11 +7,16 @@
         //mostra ao usuário a barra de progresso
         PROGRESSO.style.opacity = '1';
         let ajax = new XMLHttpRequest();
-        ajax.open('POST', '/sql/buscatabela')
+        ajax.open('POST', '/select/universal')
         ajax.setRequestHeader('Content-type', 'application/json');
-        let objeto = { NOME_TABELA: NOME_TABELA.value }
-        let data = JSON.stringify(objeto)
+        let objeto = {
+        sql : `SELECT COLUMN_NAME, DATA_TYPE FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = :NOME_TABELA`,
+        binds: { NOME_TABELA: NOME_TABELA.value },
+        mensage_error:'Ocorrei um erro ao consultar o registro!',
+        rows:true
+    }
 
+        let data = JSON.stringify(objeto)
         ajax.onreadystatechange = () => {
             if (ajax.status === 200) {
                 let tbody = document.getElementById('tbody');

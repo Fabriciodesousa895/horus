@@ -10,12 +10,15 @@ function sendForm(evento){
       //passando os valores para objeto data
       let ajax = new XMLHttpRequest();
       let data = {
-        ID_PARC : ID_PARC.value
+        sql:`SELECT PARC_NOME FROM PRC_PARCEIRO WHERE ID_PARC = :ID_PARC`,
+        binds:{ID_PARC : ID_PARC.value},
+        mensage_error: 'Parceiro não existe ou não está ativo!',
+        rows: false
       };
         //transformando data em JSON
        let jsonData = JSON.stringify(data);
 
-       ajax.open('POST','/consulta_parceiro');
+       ajax.open('POST','/select/universal');
        ajax.setRequestHeader('Content-type', 'application/json');
        ajax.onreadystatechange = function(){
         if(ajax.status === 200 ){

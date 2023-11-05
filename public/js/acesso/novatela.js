@@ -17,14 +17,23 @@
             PROGRESSO.style.opacity = '1'
 
             let ajax = new XMLHttpRequest();
-            ajax.open('POST', '/novatela');
+            ajax.open('POST', '/rota/universal');
             ajax.setRequestHeader('Content-type', 'application/json');
             //pega os dados dos inputs e adiciona num objeto
             let data = {
-                ROTA: ROTA.value,
-                T_NOME: T_NOME.value,
-                T_DESCRICAO: T_DESCRICAO.value,
-                TIPO: TIPO.value
+                sql: `BEGIN
+                INSERT INTO T_TELA (ROTA,T_NOME,T_DESCRICAO,TIPO) VALUES(:T_ROTA,:T_NOME,:T_DESCRICAO,:TIPO);
+                COMMIT;
+                END;`,
+                binds:{
+                    T_ROTA: ROTA.value,
+                    T_NOME: T_NOME.value,
+                    T_DESCRICAO:  T_DESCRICAO.value,
+                    TIPO: TIPO.value
+                  },
+                  mensagem_sucess:'Registro inserido com sucesso!',
+                  mensagem_error:'Erro ao inserir registro!',
+                  USU_LOGADO: false
             }
             //transforma objeto em json
             let jsonData = JSON.stringify(data)

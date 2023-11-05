@@ -9,12 +9,15 @@
      let ajax = new XMLHttpRequest();
      //passando os valores para objeto data;
      let data = {
-        ID_VENDEDOR:ID_VENDEDOR.value
-     };
+        sql:`SELECT VND_NOME FROM VND_VENDEDOR WHERE ID_VENDEDOR = :ID_VENDEDOR `,
+        binds:{ID_VENDEDOR : ID_VENDEDOR.value},
+        mensage_error: 'Vendedor não existe oou não está ativo!',
+        rows: false
+      };
     //transformando data em JSON;
     let jsonData = JSON.stringify(data);
 
-    ajax.open('POST','/consulta_vendedor');
+    ajax.open('POST','/select/universal');
     ajax.setRequestHeader('Content-type','application/json');
     ajax.onreadystatechange = function(){
         if(ajax.status === 200 ){

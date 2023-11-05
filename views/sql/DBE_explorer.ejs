@@ -97,22 +97,25 @@
 
                                     <form class="needs-validation" novalidate id="FORM">
                                         <div class="row">
+                                            <span>  Nome da tabela</span>
+                                            <div class="col"><input type="text" class="form-control" id="NOME_TABLE" required></div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col">
                                                 <span> Nome do campo</span>
-                                                <input type="text" id="NOME" class="form-control"
+                                                <input type="text"  id="NOME" class="form-control"
                                                     placeholder="Nome do campo" required>
                                             </div>
                                             <div class="col">
                                                 <span>Tipo de dado</span>
                                                 <select id="TIPO" class="form-control" required>
                                                     <option value=""></option>
-                                                    <option value=" Varchar2">Varchar2 (200)</option>
-                                                    <option value=" Varchar2 (100)">Varchar2 (100)</option>
-                                                    <option value=" Int">Int</option>
-                                                    <option value=" Number (10,2)">Number (10,2)</option>
-                                                    <option value=" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY">Número
-                                                        único</option>
-                                                    <option value="BLOB">Blob</option>
+                                                    <option value=" VARCHAR2(200)">Varchar2(200)</option>
+                                                    <option value=" VARCHAR2(100)">Varchar2 (100)</option>
+                                                    <option value=" INT">Int</option>
+                                                    <option value=" NUMBER(10,2)">Number(10,2)</option>
+                                                    <option value=" TIMESTAMP(6)">TIMESTAMP(6)</option>
+                                                    <option value=" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY">Número único</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -124,7 +127,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" id="OMITE">
 
                                             <div class="col">
                                                 <span>Valor default</span>
@@ -145,19 +148,18 @@
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <button type="submit" id="ADICIONA"
-                                                    class="btn btn-warning mt-3">Adionar</button>
+                                                <button type="submit" id="ADICIONA" class="btn btn-warning mt-3">Adionar</button>
+                                                <button type="submit" id="GERA_SQL" class="btn btn-warning mt-3">Gerar DDL</button>
+                                                <button type="submit" style="display: none;" id="EXECUTAR" class="btn btn-danger mt-3">Executar</button>
+                                                <button  id="LIMPAR" class="btn btn-danger mt-3">Limpar</button>
                                             </div>
                                         </div>
                                     </form>
 
                                 </div>
 
-                                <div style="width: 50%;padding-left: 20px;">
-                                    <textarea style="flex: 20px;height: 300px; margin-left: 10px; " disabled
-                                        id="SQL_TABLE" class="form-control" >
-
-                           </textarea>
+                                <div style="width: 50%;">
+                                    <textarea style="flex: 20px;height: 300px; margin-left: 10px; " disabled    id="SQL_TABLE" class="form-control" >            </textarea>
 
                                 </div>
 

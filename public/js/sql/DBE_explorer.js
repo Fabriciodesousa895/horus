@@ -3,6 +3,12 @@
   let sql = document.getElementById('sql')
   let PROGRESSO = document.getElementById('PROGRESSO')
   let query = document.getElementById('query');
+  let SQL_TABLE = document.getElementById('SQL_TABLE');
+ let table_table = document.getElementById('table_table');
+ let NOME_TABLE = document.getElementById('NOME_TABLE');
+let DEFAULT = document.getElementById('DEFAULT');
+
+
 
   //quando o usuário estiver na modal de anexos,e dar um duplo clique
   query.addEventListener('dblclick', (e) => {
@@ -212,6 +218,38 @@
     ajax.send(JsonData)
 
   }
+  function Novatabela (){
+
+   let data = {QUERY:SQL_TABLE.value}
+   let JsonData = JSON.stringify(data)
+
+    let ajax = new  XMLHttpRequest();
+    ajax.open('POST','/sql/novatabela');
+    ajax.setRequestHeader('Content-type','application/json');
+    ajax.onreadystatechange = ()=>{
+      if (ajax.status === 200) {
+        swal({
+          text: ajax.responseText,
+          icon: 'success'
+        })
+        table_table.innerText = '';
+        NOME_TABLE.value = '';
+        SQL_TABLE.value = '';
+        DEFAULT.value = '';
+        document.getElementById('EXECUTAR').style.display = 'none'
+
+
+      } else {
+        swal({
+          text: ajax.responseText,
+          icon: 'error'
+        })
+      }
+    }
+
+    ajax.send(JsonData)
+
+  }
   //Quando o usuário clicar em Salvar
 
   document.getElementById('Salvar').addEventListener('click', sendsalvasql, false)
@@ -221,4 +259,6 @@
   document.getElementById('SalvarEdicao').addEventListener('click', salvaEdicao, false)
   //Deletar o registro
   document.getElementById('DeletarSQL').addEventListener('click', Deletar, false)
+  //Inclui r uma tabela na base de dados
+  document.getElementById('EXECUTAR').addEventListener('click', Novatabela, false)
 })(window, document)

@@ -7,23 +7,41 @@ let NULO = document.getElementById('NULO');
 let DESCRICAO = document.getElementById('DESCRICAO');
 let DEFAULT = document.getElementById('DEFAULT');
 let table_table = document.getElementById('table_table');
-
+let NOME_TABLE = document.getElementById('NOME_TABLE');
+let SQL = ''
+let count = 0
+//Quando o usuário selecionar Numero unico no select
 select.addEventListener('change', () => {
     textarea.value += select.value;
 });
+//Quando o usuário selecionar o tipo de dado do campo
+TIPO.addEventListener('change', () => {
+    if (TIPO.value == ' INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY') {
+        document.getElementById('OMITE').style.display = 'none';
+    } else {
+        document.getElementById('OMITE').style.display = '';
 
+    }
+});
 
+//Quando o usuário inseri um novo campo
 document.getElementById('FORM').addEventListener('submit', (e) => {
     e.preventDefault();
-    let nulo = NULO.checked ? ' NULL' : ' NOT NULL'
-    if (TIPO.value != '' && NOME.value != '' && DESCRICAO.value != '') {
-    SQL_TABLE.value += NOME.value + TIPO.value + nulo + ' DEFAULT ' + `${DEFAULT.value},`  
+    let tipo = TIPO.value;
 
-        let array = []
-        let tipo = TIPO.value
-        //adiciona os valores dos campos num array,para depois inserir na tabela
-        tipo == ' INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY' ? tipo = 'Numero unico ' : tipo
-        array.push(NOME.value, tipo, DESCRICAO.value, DEFAULT.value, nulo)
+    let nulo = NULO.checked ? ' NULL' : ' NOT NULL'
+    if (TIPO.value != '' && NOME.value != '' && DESCRICAO.value != '' && NOME_TABLE.value != '') {
+        if (tipo == ' INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY') {
+            SQL += `${NOME.value} ${TIPO.value}  ${nulo},\n `;
+        } else {
+            SQL += `${NOME.value} ${TIPO.value} DEFAULT '${DEFAULT.value}' ${nulo},\n `;
+
+        }
+        let array = [];
+        tipo == ' INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY' ? tipo = 'Número único' : tipo;
+
+        array.push(NOME.value, tipo, DESCRICAO.value, DEFAULT.value, nulo);
+
         const tr = document.createElement('tr');
 
         for (var i = 0; i < array.length; i++) {
@@ -31,11 +49,39 @@ document.getElementById('FORM').addEventListener('submit', (e) => {
             td.innerText = array[i]
             tr.append(td)
         }
-        table_table.appendChild(tr)
-        TIPO.value = ''
-        NOME.value = ''
-        NULO.checked = false
-        DESCRICAO.value = ''
-        DEFAULT.value = ''
+        table_table.appendChild(tr);
+        TIPO.value = '';
+        NOME.value = '';
+        NULO.checked = false;
+        DESCRICAO.value = '';
+        DEFAULT.value = '';
     }
+
+}
+
+)
+//Quando o usuário clicar em Gerar DDL 
+document.getElementById('GERA_SQL').addEventListener('click', () => {
+    if (table_table.rows.length != 0) {
+        let ultimaVirgulaIndex = SQL.lastIndexOf(',');
+        document.getElementById('EXECUTAR').style.display = ''
+        if (ultimaVirgulaIndex !== -1) {
+            // Remove a última vírgula
+            let textoSemUltimaVirgula = SQL.slice(0, ultimaVirgulaIndex) + SQL.slice(ultimaVirgulaIndex + 1);
+            SQL_TABLE.value = `CREATE TABLE ${NOME_TABLE.value}( ${textoSemUltimaVirgula} )`
+            NOME_TABLE.value = '';
+            DEFAULT.value = '';
+        }
+    }
+
+})
+document.getElementById('LIMPAR').addEventListener('click', () => {
+    table_table.innerText = '';
+    SQL = '';
+    NOME_TABLE.value = '';
+    DEFAULT.value = '';
+    DESCRICAO.value = '';
+    TIPO.value = '';
+    NOME.value = '';
+    SQL_TABLE.value = '';
 })

@@ -810,6 +810,21 @@ app.post('/sql/buscatabela', auth, urlencodedParser, async (req, res) => {
 
   }
 })
+//Inserindo uma nova tabela na base de dados
+app.post('/sql/novatabela', auth, urlencodedParser, async (req, res) => {
+  let QUERY = req.body.QUERY
+  try {
+   
+    let result = await conectar(QUERY,[]);
+    res.send(result)
+  } catch (error) {
+    res.status(500).send('Erro ao execultar sql! ' + error.message);
+    console.log('Erro ao execultar sql! '+error)
+    console.log(QUERY);
+
+
+  }
+})
 
 
 app.post('/dash_usuario', urlencodedParser, async (req, res) => {

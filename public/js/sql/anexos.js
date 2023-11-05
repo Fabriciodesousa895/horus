@@ -25,12 +25,7 @@
 
                     })
 
-                    const editarCell = document.createElement('td'); // Crie uma célula separada para o botão "Editar"
-                    const editarButton = document.createElement('button');
-                    editarButton.innerHTML = 'Editar';
-                    editarCell.appendChild(editarButton);
-                  
-                    row.appendChild(editarCell);
+                
                      tbody.appendChild(row)
                  })
                 //pecorre os registros inseridos anteriomente e limita a 40 caracteres
@@ -58,7 +53,7 @@
         }
         ajax.send()
     }
-    //quando o usuario clicar em anexos,chama a função e é feita a consulta das querys que o usuario salvoy na base de dados
+    //quando o usuario clicar em anexos,chama a função e é feita a consulta das querys que o usuario salvou na base de dados
     document.getElementById('ANEXO').addEventListener('click', sendForm, false);
 
 })(window, document)

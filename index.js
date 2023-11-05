@@ -744,12 +744,56 @@ app.post('/sql/salvasql',auth,urlencodedParser,async(req,res)=>{
         }    
         try{
             let result = await conectar(query,binds);
-            res.send('Query salva com sucesso! '+result.message)
+            res.send('Query salva com sucesso! ')
         } catch(error){
           res.status(500).send(error.message)
         }       
      }
  })
+})
+
+app.post('/sql/sql_id', auth, urlencodedParser, async (req, res) => {
+  let ID_QUERY = req.body.ID;
+  let query = `SELECT SQL FROM QUERY_USU WHERE ID_QUERY = :ID_QUERY`;
+  let binds = { ID_QUERY: ID_QUERY }
+  try {
+    let result = await conectar(query, binds);
+    console.log(result)
+    console.log(ID_QUERY)
+    res.send(result.rows);
+
+  } catch (error) {
+    res.status(500).send(error.message)
+  }
+})
+//edita a query que o usuario editou
+app.post('/sql/salvaedicao', auth, urlencodedParser, async (req, res) => {
+  let body = req.body;
+  let query = `BEGIN 
+              UPDATE QUERY_USU SET SQL = :QUERY,DT_ALTER = SYSDATE WHERE ID_QUERY = :ID_QUERY;
+              COMMIT;
+              END;`;
+  let binds = { ID_QUERY: body.ID,QUERY: body.QUERY }
+  try {
+    let result = await conectar(query, binds);
+    res.send('Registro editado com sucesso!');
+  } catch (error) {
+    res.status(500).send(error.message)
+  }
+})
+app.post('/sql/deleta', auth, urlencodedParser, async (req, res) => {
+  let body = req.body;
+  let query = `BEGIN 
+              DELETE FROM QUERY_USU WHERE ID_QUERY = :ID_QUERY;
+              COMMIT;
+              END;`;
+  let binds = { ID_QUERY: body.ID }
+  try {
+    let result = await conectar(query, binds);
+    res.send('Registro deletado com sucesso!');
+  } catch (error) {
+    res.status(500).send(error.message)
+  }
 })
 
 app.post('/sql/buscatabela', auth, urlencodedParser, async (req, res) => {

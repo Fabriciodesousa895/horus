@@ -3,8 +3,6 @@ let select = document.getElementById('select');
 let SQL_TABLE = document.getElementById('SQL_TABLE');
 let NOME = document.getElementById('NOME');
 let TIPO = document.getElementById('TIPO');
-let tipo = TIPO.options[TIPO.selectedIndex].innerText
-
 let NULO = document.getElementById('NULO');
 let DESCRICAO = document.getElementById('DESCRICAO');
 let DEFAULT = document.getElementById('DEFAULT');
@@ -17,23 +15,27 @@ select.addEventListener('change', () => {
 
 document.getElementById('FORM').addEventListener('submit', (e) => {
     e.preventDefault();
-    let nulo = NULO.checked ? 'NULL' : 'NOT NULL'
-    let array = []
-    //adiciona os valores dos campos num array,para depois inserir na tabela
-    array.push(NOME.value, tipo, DESCRICAO.value, DEFAULT.value, nulo)
-    const tr = document.createElement('tr');
+    let nulo = NULO.checked ? ' NULL' : ' NOT NULL'
+    if (TIPO.value != '' && NOME.value != '' && DESCRICAO.value != '') {
+    SQL_TABLE.value += NOME.value + TIPO.value + nulo + ' DEFAULT ' + `${DEFAULT.value},`  
 
-    for (var i = 0; i < array.length; i++) {
-        const td = document.createElement('td')
-        td.innerText = array[i]
-        tr.append(td)
+        let array = []
+        let tipo = TIPO.value
+        //adiciona os valores dos campos num array,para depois inserir na tabela
+        tipo == ' INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY' ? tipo = 'Numero unico ' : tipo
+        array.push(NOME.value, tipo, DESCRICAO.value, DEFAULT.value, nulo)
+        const tr = document.createElement('tr');
+
+        for (var i = 0; i < array.length; i++) {
+            const td = document.createElement('td')
+            td.innerText = array[i]
+            tr.append(td)
+        }
+        table_table.appendChild(tr)
+        TIPO.value = ''
+        NOME.value = ''
+        NULO.checked = false
+        DESCRICAO.value = ''
+        DEFAULT.value = ''
     }
-    table_table.appendChild(tr)
-    console.log(array)
-
-    TIPO.value = ''
-    NOME.value = ''
-    NULO.checked = false
-    DESCRICAO.value = ''
-    DEFAULT.value = ''
 })

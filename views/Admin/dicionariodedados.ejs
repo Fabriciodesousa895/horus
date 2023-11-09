@@ -46,6 +46,16 @@
       </div>
       
     </div>
+    <script>
+           const table = document.querySelector('tbody');
+     table.addEventListener('click',(e)=>{
+              let elementoclicado = e.target;
+              let elementoPai = elementoclicado.parentNode
+              let ID_valor = elementoPai.cells[0].innerText
+              window.location.href = `/visualiza/dicionario/dados/` +ID_valor
+
+     });
+    </script>
 <script src="/js/Admin/dicionariodedados.js"></script>
 
 <%- include('../partials/footer'); %>

@@ -94,11 +94,19 @@
                         <div class="modal-content" style="padding: 30px;">
                             <div class="grad" style="display: flex; height: auto;">
                                 <div style="width: 500px;height: auto;">
-
+<input type="hidden" id="INSERTTABLE;">
                                     <form class="needs-validation" novalidate id="FORM">
                                         <div class="row">
                                             <span>  Nome da tabela</span>
                                             <div class="col"><input type="text" class="form-control" id="NOME_TABLE" required></div>
+                                        </div>
+                                        <div class="row">
+                                            <span>Descrição da tabela</span>
+                                            <div class="col">
+                                                <input type="text" id="DESCRICAO" class="form-control"
+                                                    placeholder="Descrição" required>
+
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col">
@@ -119,14 +127,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <span>Descrição do campo</span>
-                                            <div class="col">
-                                                <input type="text" id="DESCRICAO" class="form-control"
-                                                    placeholder="Descrição" required>
 
-                                            </div>
-                                        </div>
                                         <div class="row" id="OMITE">
 
                                             <div class="col">

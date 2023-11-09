@@ -39,7 +39,12 @@ function auth(req, res, next) {
     next();
   }
 }
-//fazendo a chamaa do banco
+//sockte.io
+// const server = require('socket.io');
+// const http = require('http')
+// const serverHttp = http.createServer(app);
+// const io = new server(serverHttp);
+//fazendo a chama do banco
 const oracledb = require('oracledb');
 const dbconfig = {
   user: 'SYSTEM',
@@ -318,6 +323,14 @@ function permi_usu(ID_TELA, token) {
 app.get('/erroservidor/:error', (req, res) => {
   res.send('Ocorreu um erro ! ' + '<br>' + req.params.error)
 })
+//tela de inicio
+app.get('/',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+
+  let P_USU = await permi_usu(1, token);
+
+   res.render('index',{P_USU})
+})
 
 app.get('/usuario', auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -326,6 +339,18 @@ app.get('/usuario', auth, async (req, res) => {
     let P_USU = await permi_usu(1, token);
 
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/usuario', { P_USU })
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+});
+app.get('/dicionario/de/dados', auth, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(118, token);
+    let P_USU = await permi_usu(118, token);
+
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/dicionariodedados', { P_USU })
   } catch (error) {
     res.send(error);
     console.log(error)
@@ -677,13 +702,15 @@ app.post('/aql/anexos', auth, urlencodedParser, async (req, res) => {
 app.post('/sql/novatabela', auth, urlencodedParser, async (req, res) => {
   let QUERY = req.body.QUERY
   try {
-
+console.log(QUERY)
     let result = await conectar(QUERY, []);
+    let sql = ` BEGIN INSERT INTO TABELA_BANCO (TAB_NOME) VALUES(:TAB_NOME);COMMIT; END;`
+    let binds = {TAB_NOME:req.body.TAB_NOME}
+    let result1 = await conectar(sql, binds);
     res.send(result)
   } catch (error) {
     res.status(500).send('Erro ao execultar sql! ' + error.message);
     console.log('Erro ao execultar sql! ' + error)
-    console.log(QUERY);
 
 
   }

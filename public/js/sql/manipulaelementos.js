@@ -4,10 +4,10 @@ let SQL_TABLE = document.getElementById('SQL_TABLE');
 let NOME = document.getElementById('NOME');
 let TIPO = document.getElementById('TIPO');
 let NULO = document.getElementById('NULO');
-let DESCRICAO = document.getElementById('DESCRICAO');
 let DEFAULT = document.getElementById('DEFAULT');
 let table_table = document.getElementById('table_table');
 let NOME_TABLE = document.getElementById('NOME_TABLE');
+let DESCRICAO = document.getElementById('DESCRICAO');
 let SQL = ''
 let count = 0
 //Quando o usuário selecionar Numero unico no select
@@ -53,7 +53,6 @@ document.getElementById('FORM').addEventListener('submit', (e) => {
         TIPO.value = '';
         NOME.value = '';
         NULO.checked = false;
-        DESCRICAO.value = '';
         DEFAULT.value = '';
     }
 
@@ -68,8 +67,8 @@ document.getElementById('GERA_SQL').addEventListener('click', () => {
         if (ultimaVirgulaIndex !== -1) {
             // Remove a última vírgula
             let textoSemUltimaVirgula = SQL.slice(0, ultimaVirgulaIndex) + SQL.slice(ultimaVirgulaIndex + 1);
-            SQL_TABLE.value = `CREATE TABLE ${NOME_TABLE.value}( ${textoSemUltimaVirgula} )`
-            NOME_TABLE.value = '';
+            SQL_TABLE.value = ` CREATE TABLE ${NOME_TABLE.value}( ${textoSemUltimaVirgula} )`
+            document.getElementById('INSERTTABLE').value = `INSERT INTO TABELA_BANCO (TAB_NOME,TAB_DESCRICAO) VALUES('${NOME_TABLE.value}','${DESCRICAO.value}')`
             DEFAULT.value = '';
         }
     }

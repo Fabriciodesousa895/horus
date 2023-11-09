@@ -254,7 +254,7 @@ let DEFAULT = document.getElementById('DEFAULT');
   }
   function Novatabela (){
 
-   let data = {QUERY:SQL_TABLE.value}
+   let data = {QUERY:SQL_TABLE.value,TAB_NOME:NOME_TABLE.value}
    let JsonData = JSON.stringify(data)
 
     let ajax = new  XMLHttpRequest();
@@ -282,6 +282,7 @@ let DEFAULT = document.getElementById('DEFAULT');
     }
 
     ajax.send(JsonData)
+    
 
   }
   //Quando o usuário clicar em Salvar

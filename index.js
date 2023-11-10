@@ -324,12 +324,12 @@ app.get('/erroservidor/:error', (req, res) => {
   res.send('Ocorreu um erro ! ' + '<br>' + req.params.error)
 })
 //tela de inicio
-app.get('/',auth,async(req,res)=>{
+app.get('/', auth, async (req, res) => {
   let token = req.cookies.jwt;
 
   let P_USU = await permi_usu(1, token);
 
-   res.render('index',{P_USU})
+  res.render('index', { P_USU })
 })
 
 app.get('/usuario', auth, async (req, res) => {
@@ -623,9 +623,45 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
 
 
 })
+//rota para visualizar dados especificos do dicionario de dados
+
 // --------------------------------------------------------------------------------------------------------------- //
 
 //Rota pára gráfico de usuario
+app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(118, token);
+    let P_USU = await permi_usu(118, token);
+    let sql = `SELECT COLUMN_NAME, CONSTRAINT_NAME,POSITION,TABLE_NAME
+    FROM ALL_CONS_COLUMNS TT,TABELA_BANCO TB
+    WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
+    AND TT.TABLE_NAME = TB.TAB_NOME
+    `
+    let sql2 = `SELECT TT.COLUMN_NAME, 
+    TT.DATA_TYPE,
+    TT.NULLABLE,
+    TT.DATA_LENGTH,
+    TT.DATA_DEFAULT,
+    CM.COMMENTS
+FROM TABELA_BANCO TB
+INNER JOIN ALL_COL_COMMENTS CM ON CM.TABLE_NAME = TB.TAB_NOME
+INNER JOIN ALL_TAB_COLUMNS TT ON TT.TABLE_NAME = TB.TAB_NOME
+WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
+AND TT.COLUMN_NAME = CM.COLUMN_NAME  `
+    let Objeto = {}
+    const result = await conectar(sql, []);
+    const result2 = await conectar(sql2, []);
+    let CAMPOS = result2.rows
+    let CONSTRAINT = result.rows
+    Objeto = { CAMPOS, CONSTRAINT }
+    console.log(Objeto)
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
 
 app.get('/dash_usuario', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
@@ -702,10 +738,10 @@ app.post('/aql/anexos', auth, urlencodedParser, async (req, res) => {
 app.post('/sql/novatabela', auth, urlencodedParser, async (req, res) => {
   let QUERY = req.body.QUERY
   try {
-console.log(QUERY)
+    console.log(QUERY)
     let result = await conectar(QUERY, []);
     let sql = ` BEGIN INSERT INTO TABELA_BANCO (TAB_NOME) VALUES(:TAB_NOME);COMMIT; END;`
-    let binds = {TAB_NOME:req.body.TAB_NOME}
+    let binds = { TAB_NOME: req.body.TAB_NOME }
     let result1 = await conectar(sql, binds);
     res.send(result)
   } catch (error) {
@@ -927,10 +963,10 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
   let Objeto = req.body;
   try {
     let result = await conectarbd(Objeto.sql, Objeto.binds, options);
-    if(Objeto.rows ){
-    let result = await conectar(Objeto.sql, Objeto.binds);
-    result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
-    }else{
+    if (Objeto.rows) {
+      let result = await conectar(Objeto.sql, Objeto.binds);
+      result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
+    } else {
       result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
     }
   } catch (error) {

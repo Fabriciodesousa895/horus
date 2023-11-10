@@ -644,17 +644,25 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
     TT.DATA_LENGTH,
     TT.DATA_DEFAULT,
     CM.COMMENTS
-FROM TABELA_BANCO TB
-INNER JOIN ALL_COL_COMMENTS CM ON CM.TABLE_NAME = TB.TAB_NOME
-INNER JOIN ALL_TAB_COLUMNS TT ON TT.TABLE_NAME = TB.TAB_NOME
-WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
-AND TT.COLUMN_NAME = CM.COLUMN_NAME  `
+    FROM TABELA_BANCO TB
+    INNER JOIN ALL_COL_COMMENTS CM ON CM.TABLE_NAME = TB.TAB_NOME
+    INNER JOIN ALL_TAB_COLUMNS TT ON TT.TABLE_NAME = TB.TAB_NOME
+    WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
+    AND TT.COLUMN_NAME = CM.COLUMN_NAME  `;
+
+    let sql3 = `SELECT INDEX_NAME,INDEX_TYPE	,CONSTRAINT_INDEX,NUM_ROWS
+    FROM DBA_INDEXES WHERE TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`;
+    let sql4 = `SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID}`
     let Objeto = {}
     const result = await conectar(sql, []);
     const result2 = await conectar(sql2, []);
-    let CAMPOS = result2.rows
+    const result3 = await conectar(sql3, []);
+    const result4 = await conectar(sql4, []);
     let CONSTRAINT = result.rows
-    Objeto = { CAMPOS, CONSTRAINT }
+    let CAMPOS = result2.rows
+    let INDEXES = result3.rows
+    let TABELA_NOME = result4.rows
+    Objeto = { CAMPOS, CONSTRAINT,INDEXES,TABELA_NOME }
     console.log(Objeto)
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
   } catch (error) {

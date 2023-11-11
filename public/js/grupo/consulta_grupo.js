@@ -8,7 +8,9 @@
        function sendForm(evento){
         evento.preventDefault();
         let  ajax = new XMLHttpRequest();
-        ajax.open('POST','/consulta_grupo');
+        ajax.open('POST','/select/universal');
+        let data = {sql : `SELECT ID_GRUPO,GRP_NOME FROM GRP_GRUPO`,binds:{},rows:true,USU_LOGAD0: false}
+        let JsonData = JSON.stringify(data)
         ajax.setRequestHeader('Content-type' ,'application/json');
         ajax.onreadystatechange = function(){
             if(ajax.status === 200){
@@ -47,7 +49,7 @@
                   }) 
             }
         }
-        ajax.send();
+        ajax.send(JsonData);
        }
        window.addEventListener('load',sendForm,false)
        

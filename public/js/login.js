@@ -16,7 +16,7 @@ function sendForm(evento){
        ajax.open('POST', '/login');       
        ajax.setRequestHeader('Content-type', 'application/json');
        ajax.onreadystatechange = function (){
-        if (ajax.status === 200 ) {
+        if (ajax.status == 200 ) {
             swal({
               title: ajax.response,
               icon:'warning'
@@ -30,9 +30,7 @@ function sendForm(evento){
       title: ajax.response,
       icon:'error'
     }) 
-    setInterval(() => {
-      location.href = '/usuario'
-  }, 3000);
+
   }
        }    
        

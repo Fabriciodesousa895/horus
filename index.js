@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const axios = require('axios');
 'use strict';
 //view engine
 app.set("view engine", "ejs");
@@ -91,16 +91,13 @@ app.post('/login', async (req, res) => {
   console.log('-----------')
   let USU_SENHA = req.body.USU_SENHA;
   let USU_NOME = req.body.USU_NOME;
-  let sql = `SELECT USU_SENHA, ID_USU FROM USU_USUARIO WHERE USU_NOME = :USU_NOME`;
-  let binds = {
-    USU_NOME: USU_NOME
-  }
+  let sql = `SELECT USU_SENHA, ID_USU FROM USU_USUARIO WHERE USU_NOME = :USU_NOME AND USU_STATUS = 'S'`;
+  let binds = {USU_NOME: USU_NOME}
   let result = await conectarbd(sql, binds, options);
 
   // Verifica se o resultado está vazio (nenhum usuário encontrado)
   if (result.length === 0) {
     res.send('Usuário não encontrado ou está inativo');
-    return;
   } else {
     let senha_salva = result[0][0];
     let ID_USU = result[0][1];
@@ -129,9 +126,10 @@ app.post('/login', async (req, res) => {
           )
 
         } else {
-          return res.status(505).send('Senha inválida');
+          return res.status(505).send('Senha inválida,verifique sua senha e tente novamente!');
         }
       })
+
     } catch (error) {
       res.send(error)
     }
@@ -325,8 +323,16 @@ app.get('/erroservidor/:error', (req, res) => {
 })
 //tela de inicio
 app.get('/', auth, async (req, res) => {
+  try {
+    const response = await axios.get('https://receitaws.com.br/v1/cnpj/20758851000105');
+    const data = response.data;
+    res.json(data);
+    console.log(data)
+  } catch (error) {
+    console.error('Erro:', error);
+    res.status(500).send('Erro ao obter os dados');
+  }
   let token = req.cookies.jwt;
-
   let P_USU = await permi_usu(1, token);
 
   res.render('index', { P_USU })
@@ -356,6 +362,164 @@ app.get('/dicionario/de/dados', auth, async (req, res) => {
     console.log(error)
   }
 });
+//Rota pára gráfico de usuario
+app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(118, token);
+    let P_USU = await permi_usu(118, token);
+    let sql = `SELECT COLUMN_NAME, CONSTRAINT_NAME,POSITION,TABLE_NAME
+    FROM ALL_CONS_COLUMNS TT,TABELA_BANCO TB
+    WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
+    AND TT.TABLE_NAME = TB.TAB_NOME
+    `
+    let sql2 = `SELECT TT.COLUMN_NAME, 
+    TT.DATA_TYPE,
+    TT.NULLABLE,
+    TT.DATA_LENGTH,
+    TT.DATA_DEFAULT,
+    CM.COMMENTS
+    FROM TABELA_BANCO TB
+    INNER JOIN ALL_COL_COMMENTS CM ON CM.TABLE_NAME = TB.TAB_NOME
+    INNER JOIN ALL_TAB_COLUMNS TT ON TT.TABLE_NAME = TB.TAB_NOME
+    WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
+    AND TT.COLUMN_NAME = CM.COLUMN_NAME  `;
+
+    let sql3 = `SELECT INDEX_NAME,INDEX_TYPE	,CONSTRAINT_INDEX,NUM_ROWS
+    FROM DBA_INDEXES WHERE TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`;
+    let sql4 = `SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID}`
+    let Objeto = {}
+    const result = await conectar(sql, []);
+    const result2 = await conectar(sql2, []);
+    const result3 = await conectar(sql3, []);
+    const result4 = await conectar(sql4, []);
+    let CONSTRAINT = result.rows
+    let CAMPOS = result2.rows
+    let INDEXES = result3.rows
+    let TABELA_NOME = result4.rows
+    Objeto = { CAMPOS, CONSTRAINT,INDEXES,TABELA_NOME }
+    console.log(Objeto)
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
+
+app.get('/dash_usuario', auth, urlencodedParser, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(121, token);
+    let P_USU = await permi_usu(121, token);
+
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/dash_usuario', { P_USU })
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
+//rota para a consulta e dados no lado do usuário DBE_explorer
+app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(141, token);
+    let P_USU = await permi_usu(141, token);
+    Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU })
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
+//para baixo somente rotas posts
+// --------------------------------------------------------------------------------------------------------------- //
+
+//faz a conSulta sql que o usuario digitou 
+app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
+
+  try {
+    let result = await conectar(req.body.sql, [], options_objeto);
+    let arrayobjetos = result.metaData
+    let array_colunas = [];
+    let array_registros = []
+    array_registros = result.rows;
+    arrayobjetos.forEach((e) => { array_colunas.push(e.name) });
+    console.log(array_colunas)
+    let objeto = {
+      array_colunas: array_colunas,
+      array_registros: array_registros
+    };
+    res.send(objeto)
+  } catch (error) {
+    res.status(500).send('Erro ao execultar sql! ' + error.message);
+    console.log('Erro ao execultar sql! ' + error)
+
+  }
+})
+app.post('/dash_usuario', urlencodedParser, async (req, res) => {
+  let ID_TELA = req.body.ID_TELA
+  let sql = `SELECT * FROM (SELECT  TL.T_NOME,COUNT(*) AS CONSULTA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
+    AND TL.TIPO <> 'V'
+    AND TL.ID_TELA = :ID_TELA
+GROUP BY  TL.T_NOME) CONSULTA,   
+(SELECT COUNT(*) AS ALTERA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  AND TL.TIPO <> 'V'
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_ALTERA = 'S' OR CG.GRUP_ALTERA = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA
+  AND TL.TIPO <> 'V'
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S'  OR U.USU_ADM = 'S')) ALTERA,   
+(SELECT  COUNT(*) AS DELETA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_DELETA = 'S' OR CG.GRUP_DELETA = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA
+  AND TL.TIPO <> 'V'
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')) DELETA,
+    (SELECT COUNT(*) AS INCLUI
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_INCLUI = 'S' OR CG.GRUP_INCLUI = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA 
+  AND TL.TIPO <> 'V'
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) INCLUI,
+(   SELECT  COUNT(*) AS ANEXA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_ANEXA = 'S' OR CG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S')
+    AND TL.ID_TELA = :ID_TELA
+  AND TL.TIPO <> 'V'
+AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) ANEXA `;
+  let binds = { ID_TELA: ID_TELA }
+  try {
+
+    let result = await conectar(sql, binds)
+
+    result.rows[0] == undefined ? res.status(500).send('Registro não encontrado!') : res.send(result.rows[0]);
+
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
 
 //Salvando novo usuário
 app.post('/usuario', urlencodedParser, async (req, res) => {
@@ -561,20 +725,14 @@ app.post('/update_usuario', async (req, res) => {
       P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
 
     }
-
     // const hash = await 
-
     try {
       let result = await conectar(sql, binds);
       res.send(result.outBinds.P_MENSAGEM)
     } catch (error) {
       res.send('Erro no lado do servidor ' + error)
     }
-
   })
-
-
-
 })
 app.post('/delete_usu', urlencodedParser, async (req, res) => {
   let ID_USU = req.body.ID_USU;
@@ -623,215 +781,10 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
 
 
 })
-//rota para visualizar dados especificos do dicionario de dados
-
-// --------------------------------------------------------------------------------------------------------------- //
-
-//Rota pára gráfico de usuario
-app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, res) => {
-  let token = req.cookies.jwt;
-  try {
-    let Acesso = await valida_acesso(118, token);
-    let P_USU = await permi_usu(118, token);
-    let sql = `SELECT COLUMN_NAME, CONSTRAINT_NAME,POSITION,TABLE_NAME
-    FROM ALL_CONS_COLUMNS TT,TABELA_BANCO TB
-    WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
-    AND TT.TABLE_NAME = TB.TAB_NOME
-    `
-    let sql2 = `SELECT TT.COLUMN_NAME, 
-    TT.DATA_TYPE,
-    TT.NULLABLE,
-    TT.DATA_LENGTH,
-    TT.DATA_DEFAULT,
-    CM.COMMENTS
-    FROM TABELA_BANCO TB
-    INNER JOIN ALL_COL_COMMENTS CM ON CM.TABLE_NAME = TB.TAB_NOME
-    INNER JOIN ALL_TAB_COLUMNS TT ON TT.TABLE_NAME = TB.TAB_NOME
-    WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
-    AND TT.COLUMN_NAME = CM.COLUMN_NAME  `;
-
-    let sql3 = `SELECT INDEX_NAME,INDEX_TYPE	,CONSTRAINT_INDEX,NUM_ROWS
-    FROM DBA_INDEXES WHERE TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`;
-    let sql4 = `SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID}`
-    let Objeto = {}
-    const result = await conectar(sql, []);
-    const result2 = await conectar(sql2, []);
-    const result3 = await conectar(sql3, []);
-    const result4 = await conectar(sql4, []);
-    let CONSTRAINT = result.rows
-    let CAMPOS = result2.rows
-    let INDEXES = result3.rows
-    let TABELA_NOME = result4.rows
-    Objeto = { CAMPOS, CONSTRAINT,INDEXES,TABELA_NOME }
-    console.log(Objeto)
-    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
-  } catch (error) {
-    res.send(error);
-    console.log(error)
-  }
-})
-
-app.get('/dash_usuario', auth, urlencodedParser, async (req, res) => {
-  let token = req.cookies.jwt;
-  try {
-    let Acesso = await valida_acesso(121, token);
-    let P_USU = await permi_usu(121, token);
-
-    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/dash_usuario', { P_USU })
-  } catch (error) {
-    res.send(error);
-    console.log(error)
-  }
-})
-//rota para a consulta e dados no lado do usuário DBE_explorer
-app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
-  let token = req.cookies.jwt;
-  try {
-    let Acesso = await valida_acesso(141, token);
-    let P_USU = await permi_usu(141, token);
-    Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU })
-  } catch (error) {
-    res.send(error);
-    console.log(error)
-  }
-})
-
-//faz a conSulta sql que o usuario digitou 
-app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
-
-  try {
-    let result = await conectar(req.body.sql, [], options_objeto);
-    let arrayobjetos = result.metaData
-    let array_colunas = [];
-    let array_registros = []
-    array_registros = result.rows;
-    arrayobjetos.forEach((e) => { array_colunas.push(e.name) });
-    console.log(array_colunas)
-    let objeto = {
-      array_colunas: array_colunas,
-      array_registros: array_registros
-    }
-    res.send(objeto)
-  } catch (error) {
-    res.status(500).send('Erro ao execultar sql! ' + error.message);
-    console.log('Erro ao execultar sql! ' + error)
-
-  }
-})
-//consulta as querys que usuario tem salvo na base de dados
-app.post('/aql/anexos', auth, urlencodedParser, async (req, res) => {
-  let token = req.cookies.jwt;
-  try {
-    jwt.verify(token, secret, async (error, data) => {
-      if (error) {
-        res.status(500).send('Token inválido,faça login e tente novamente!')
-      } else {
-        let ID_USU = data.ID_USUARIO;
-        let sql = `SELECT ID_QUERY,SQL_NOME,SQL,TO_CHAR(DT_INCLUI,'DD/MM/YY HH24:MI'),TO_CHAR(DT_ALTER,'DD/MM/YY HH24:MI') FROM QUERY_USU WHERE ID_USU = :ID_USU`;
-        let binds = { ID_USU: ID_USU }
-        //passa para a tela as query que o usuário tem salvo
-        let result = await conectar(sql, binds, options_objeto)
-        res.send(result.rows)
-
-      }
-    })
-
-  } catch (error) {
-    res.send(error);
-    console.log(error)
-  }
-})
-
-//Inserindo uma nova tabela na base de dados
-app.post('/sql/novatabela', auth, urlencodedParser, async (req, res) => {
-  let QUERY = req.body.QUERY
-  try {
-    console.log(QUERY)
-    let result = await conectar(QUERY, []);
-    let sql = ` BEGIN INSERT INTO TABELA_BANCO (TAB_NOME) VALUES(:TAB_NOME);COMMIT; END;`
-    let binds = { TAB_NOME: req.body.TAB_NOME }
-    let result1 = await conectar(sql, binds);
-    res.send(result)
-  } catch (error) {
-    res.status(500).send('Erro ao execultar sql! ' + error.message);
-    console.log('Erro ao execultar sql! ' + error)
-
-
-  }
-})
-
-app.post('/dash_usuario', urlencodedParser, async (req, res) => {
-  let ID_TELA = req.body.ID_TELA
-  let sql = `SELECT * FROM (SELECT  TL.T_NOME,COUNT(*) AS CONSULTA
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
-    AND TL.TIPO <> 'V'
-    AND TL.ID_TELA = :ID_TELA
-GROUP BY  TL.T_NOME) CONSULTA,   
-(SELECT COUNT(*) AS ALTERA
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  AND TL.TIPO <> 'V'
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_ALTERA = 'S' OR CG.GRUP_ALTERA = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA
-  AND TL.TIPO <> 'V'
-    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S'  OR U.USU_ADM = 'S')) ALTERA,   
-(SELECT  COUNT(*) AS DELETA
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_DELETA = 'S' OR CG.GRUP_DELETA = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA
-  AND TL.TIPO <> 'V'
-    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')) DELETA,
-    (SELECT COUNT(*) AS INCLUI
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_INCLUI = 'S' OR CG.GRUP_INCLUI = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA 
-  AND TL.TIPO <> 'V'
-    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) INCLUI,
-(   SELECT  COUNT(*) AS ANEXA
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_ANEXA = 'S' OR CG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA
-  AND TL.TIPO <> 'V'
-AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) ANEXA `;
-  let binds = { ID_TELA: ID_TELA }
-  try {
-
-    let result = await conectar(sql, binds)
-
-    result.rows[0] == undefined ? res.status(500).send('Registro não encontrado!') : res.send(result.rows[0]);
-
-  } catch (error) {
-    res.send(error);
-    console.log(error)
-  }
-})
-
 //na tela de acesso faz uma consulta pelo grupo ou usuario
 app.post('/grupousuario', urlencodedParser, async (req, res) => {
   let objeto = req.body;
   let sql;
-
-
   if (objeto.TABELA == 'USU_USUARIO') {
     sql = `SELECT USU_NOME FROM USU_USUARIO WHERE ID_USU = :ID`
   }
@@ -918,26 +871,6 @@ app.post('/consulta_acessos', async (req, res) => {
   }
 })
 
-//consulta grupo
-app.post('/consulta_grupo', urlencodedParser, auth, async (req, res) => {
-  // let binds = {ID_GRUPO: ID_GRUPO};
-  let sql = `SELECT ID_GRUPO,GRP_NOME FROM GRP_GRUPO`;
-  let result = await conectarbd(sql, [], options)
-  res.status(200).send(result);
-})
-
-app.post('/grupo', urlencodedParser, auth, async (req, res) => {
-  let ID_GRUPO_ = req.body.ID_GRUPO
-  let sql = `SELECT ID_GRUPO,GRP_NOME FROM GRP_GRUPO WHERE ID_GRUPO = :ID_GRUPO`;
-  let binds = { ID_GRUPO: ID_GRUPO_ }
-  try {
-    let result = await conectarbd(sql, binds, options);
-    result.length == 0 ? res.status(400).send('Grupo não existe!') : res.status(200).send(result[0][1])
-  } catch (error) {
-    res.send('Erro no lado do servidor ' + error)
-  }
-
-})
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
 app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
   let Objeto = req.body;
@@ -966,20 +899,54 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
   })
 
 })
-//Rota universal para consultas de campos que retornal apenas um valor
+//Rota universal para consultas de campos que retornal apenas um valor ou array de array
 app.post('/select/universal', urlencodedParser, async (req, res) => {
   let Objeto = req.body;
-  try {
-    let result = await conectarbd(Objeto.sql, Objeto.binds, options);
-    if (Objeto.rows) {
-      let result = await conectar(Objeto.sql, Objeto.binds);
-      result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
-    } else {
-      result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
-    }
-  } catch (error) {
-    res.send('Ocorreu um erro no lado do servidor! ' + error)
-  }
+  let novobinds;
+  let token = req.cookies.jwt;
+    jwt.verify(token, secret, async (error, data) => { 
+      if (error) {
+        res.status(500).send('Token inválido,faça login e tente novamente!')
+      } else {
+        let USU_LOGADO = data.ID_USUARIO;
+
+        if(Objeto.USU_LOGADO){
+          //CASO USU_LOGADO SEJA true,fazendo o sql com base no usuário logado
+        novobinds = { ...Objeto.binds, USU_LOGADO }
+        try {
+          let result = await conectarbd(Objeto.sql, novobinds, options);
+          //validando se o resultado é pra retornar em array de array
+          if (Objeto.rows) {
+            let result = await conectar(Objeto.sql, novobinds);
+            result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
+          } else {
+            result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
+
+          }
+        } catch (error) {
+          res.send('Ocorreu um erro no lado do servidor! ' + error);
+          console.log(error);
+        }
+        }else
+
+        try {
+          let result = await conectarbd(Objeto.sql, Objeto.binds, options);
+          if (Objeto.rows) {
+            let result = await conectar(Objeto.sql, Objeto.binds);
+            result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
+          } else {
+            result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
+          }
+        } catch (error) {
+          res.send('Ocorreu um erro no lado do servidor! ' + error);
+          console.log(error);
+        }
+
+
+      }
+    })
+
+
 })
 
 app.listen(8020, (err) => {

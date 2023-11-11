@@ -5,8 +5,15 @@
     function sendForm() {
         //mostra ao usuário a barra de progresso
         PROGRESSO.style.opacity = '1'
+        let data = {
+            sql :`SELECT ID_QUERY,SQL_NOME,SQL,TO_CHAR(DT_INCLUI,'DD/MM/YY HH24:MI'),TO_CHAR(DT_ALTER,'DD/MM/YY HH24:MI') FROM QUERY_USU WHERE ID_USU = :USU_LOGADO`,
+            binds:{},
+            mensage_error:'Erro ao consultar registro!',
+            USU_LOGADO: true,
+            rows: true   }
+           let JsonData = JSON.stringify(data)
         let ajax = new XMLHttpRequest();
-        ajax.open('POST', '/aql/anexos');
+        ajax.open('POST', '/select/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
 
         ajax.onreadystatechange = () => {
@@ -44,14 +51,14 @@
                 PROGRESSO.style.opacity = '0';
             } else {
                 swal({
-                    text:'ok',
+                    text:'error ' + ajax.responseText,
                     icon: 'warning'
                  })
                 //omite do usuário a barra de progresso
                 PROGRESSO.style.opacity = '0';
             }
         }
-        ajax.send()
+        ajax.send(JsonData)
     }
     //quando o usuario clicar em anexos,chama a função e é feita a consulta das querys que o usuario salvou na base de dados
     document.getElementById('ANEXO').addEventListener('click', sendForm, false);

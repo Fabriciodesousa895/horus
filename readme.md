@@ -50,6 +50,7 @@ Um objeto com os seguintes parametros
         binds: { ID_TELA: ID_TELA.value },
         mensage_error: 'Houve um erro ao conultar o registro!',
         rows: true
+        USU_LOGADO,true
       };
 <%- include('../partials/head'); %>
 
@@ -58,3 +59,18 @@ Um objeto com os seguintes parametros
 <%- include('../partials/footer'); %>
 
 
+//Inserindo uma nova tabela na base de dados
+app.post('/sql/novatabela', auth, urlencodedParser, async (req, res) => {
+  let QUERY = req.body.QUERY
+  try {
+    console.log(QUERY)
+    let result = await conectar(QUERY, []);
+    let sql = ``
+    res.send(result)
+  } catch (error) {
+    res.status(500).send('Erro ao execultar sql! ' + error.message);
+    console.log('Erro ao execultar sql! ' + error)
+
+
+  }
+})

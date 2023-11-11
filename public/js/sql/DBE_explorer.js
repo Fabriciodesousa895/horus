@@ -254,11 +254,16 @@ let DEFAULT = document.getElementById('DEFAULT');
   }
   function Novatabela (){
 
-   let data = {QUERY:SQL_TABLE.value,TAB_NOME:NOME_TABLE.value}
+   let data = {
+    sql: `${SQL_TABLE.value}`,
+    binds:{},
+    mensagem_sucess:'Registro inserido com sucesso!',
+    mensagem_error:'Erro ao inserir registro!'
+  }
    let JsonData = JSON.stringify(data)
 
     let ajax = new  XMLHttpRequest();
-    ajax.open('POST','/sql/novatabela');
+    ajax.open('POST','/rota/universal');
     ajax.setRequestHeader('Content-type','application/json');
     ajax.onreadystatechange = ()=>{
       if (ajax.status === 200) {

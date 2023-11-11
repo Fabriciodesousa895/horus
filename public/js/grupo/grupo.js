@@ -10,12 +10,17 @@ function sendForm(evento){
       //passando os valores para objeto data
       let ajax = new XMLHttpRequest();
       let data = {
-        ID_GRUPO : ID_GRUPO.value
+        sql: `SELECT GRP_NOME FROM GRP_GRUPO WHERE ID_GRUPO = :ID_GRUPO`,
+        binds:{ID_GRUPO : ID_GRUPO.value
+        },
+        mensage_error:'Grupo não existe!',
+        USU_LOGADO: false,
+        rows: false
       };
         //transformando data em JSON
        let jsonData = JSON.stringify(data);
 
-       ajax.open('POST','/grupo');
+       ajax.open('POST','/select/universal');
        ajax.setRequestHeader('Content-type', 'application/json');
        ajax.onreadystatechange = function(){
         if(ajax.status === 200 ){

@@ -58,19 +58,3 @@ Um objeto com os seguintes parametros
 
 <%- include('../partials/footer'); %>
 
-
-//Inserindo uma nova tabela na base de dados
-app.post('/sql/novatabela', auth, urlencodedParser, async (req, res) => {
-  let QUERY = req.body.QUERY
-  try {
-    console.log(QUERY)
-    let result = await conectar(QUERY, []);
-    let sql = ``
-    res.send(result)
-  } catch (error) {
-    res.status(500).send('Erro ao execultar sql! ' + error.message);
-    console.log('Erro ao execultar sql! ' + error)
-
-
-  }
-})

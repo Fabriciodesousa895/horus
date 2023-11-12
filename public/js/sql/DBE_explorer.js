@@ -93,7 +93,7 @@ let DEFAULT = document.getElementById('DEFAULT');
         });
         //omite do usuário a barra de progresso
         PROGRESSO.style.opacity = '0';
-
+        document.getElementById('TOTAL').innerText = array_registros.length
       } else {
         swal({
           text: ajax.responseText,

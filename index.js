@@ -337,6 +337,18 @@ app.get('/', auth, async (req, res) => {
 
   res.render('index', { P_USU })
 })
+app.get('/cadastro/cidades',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+
+  try{
+    let Acesso = await valida_acesso(181, token);
+    let P_USU = await permi_usu(181, token);
+
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./cadastro/cidades', { P_USU })
+  }catch (error){
+    res.send('Error:' + error)
+  }
+})
 
 app.get('/usuario', auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -868,6 +880,20 @@ app.post('/consulta_acessos', async (req, res) => {
     } catch (error) {
       res.send('Erro no lado do servidor ' + error)
     }
+  }
+})
+
+app.post('/importar/cod/municipio',async(req,res)=>{
+  try{
+    const response = await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/municipios?view=nivelado');
+    const data = response.data;
+    res.json(data);
+    console.log(req.body)
+    console.log(data)
+
+  }catch(error){
+    console.error('Erro:', error);
+    res.status(500).send('Erro ao obter os dados');
   }
 })
 

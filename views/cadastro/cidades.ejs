@@ -1,0 +1,64 @@
+<%- include('../partials/head'); %>
+
+<%- include('../partials/header'); %>
+<div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-xl" style="width: 500px;">
+      <div class="modal-content">
+        <form class="needs-validation" id="form" novalidate>
+          <div class="container" style="padding: 40px;" >
+              <div class="row">
+                <div class="col-sm"  >
+                    <label for="NOME">Nome da cidade</label>
+                   <input type="text" class="form-control"  id="NOME" required>
+                    <label for="COD_DOMICILIO_FISCAL">Código de domicilio fiscal</label>
+                   <input type="number" class="form-control"  id="COD_DOMICILIO_FISCAL" required>
+                </div>
+              </div>
+          
+              </div>
+              <button style="margin-left: 40px;" id="SALVA"  class="btn btn-warning ">Salvar</button>
+              <button  id="IMPORTAR"  class="btn btn-danger ">Importar dados</button>
+            </div>
+          
+          </form>
+      </div>
+    </div>
+  </div>
+<!--Filtro e tabela-->
+<div class="grad" style="display: flex; height: auto;padding: 30px;">
+    <% let filtro = P_USU.T_FILTRO %>
+      <div style="width: 300px;height: 400px;">
+          <form  id="filtro" >
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <input type="text" placeholder="Nome" id="FILTRO_NOME" value="<%=filtro[0][0]%>" class="form-control"  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <input type="text" placeholder="Cod. domicilio" id="FILTRO_COD" value="<%=filtro[0][1]%>" class="form-control"  >
+                </div>
+              </div>
+    <button id="Buscar" class="btn btn-warning">Buscar</button>
+    <button id="TOTAL" class="btn btn-success">00</button>
+
+      </div> 
+      
+      <div style="width: 100%;" >
+        <table class="table" style="width: 70%;" >
+          <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Cod. domicilio  fiscal</th>
+            </tr>
+          </thead>
+          <tbody id="tabela"   >
+                 <!-- inserido pela requição ajax apos usar o filtro -->
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+<script src="/js/cadastro/cidades.js"></script>
+<%- include('../partials/footer'); %>

@@ -37,6 +37,8 @@
                         <textarea style="flex: 20px;height: 300px; margin-left: 10px; " class="form-control"
                             id="sql"></textarea>
                         <button id="btn" class="btn btn-warning mt-3">Consultar</button>
+                        <button id="TOTAL" class="btn btn-success mt-3">00</button>
+
                         <% if (D.ALTERA=='S' ) { %>
                             <button id="SalvarEdicao" style="display: none;" class="btn btn-warning mt-3">Salvar
                                 query</button>
@@ -94,11 +96,12 @@
                         <div class="modal-content" style="padding: 30px;">
                             <div class="grad" style="display: flex; height: auto;">
                                 <div style="width: 500px;height: auto;">
-<input type="hidden" id="INSERTTABLE;">
+                                    <input type="hidden" id="INSERTTABLE;">
                                     <form class="needs-validation" novalidate id="FORM">
                                         <div class="row">
-                                            <span>  Nome da tabela</span>
-                                            <div class="col"><input type="text" class="form-control" id="NOME_TABLE" required></div>
+                                            <span> Nome da tabela</span>
+                                            <div class="col"><input type="text" class="form-control" id="NOME_TABLE"
+                                                    required></div>
                                         </div>
                                         <div class="row">
                                             <span>Descrição da tabela</span>
@@ -111,7 +114,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <span> Nome do campo</span>
-                                                <input type="text"  id="NOME" class="form-control"
+                                                <input type="text" id="NOME" class="form-control"
                                                     placeholder="Nome do campo" required>
                                             </div>
                                             <div class="col">
@@ -123,7 +126,8 @@
                                                     <option value=" INT">Int</option>
                                                     <option value=" NUMBER(10,2)">Number(10,2)</option>
                                                     <option value=" TIMESTAMP(6)">TIMESTAMP(6)</option>
-                                                    <option value=" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY">Número único</option>
+                                                    <option value=" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY">Número
+                                                        único</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -149,10 +153,13 @@
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <button type="submit" id="ADICIONA" class="btn btn-warning mt-3">Adionar</button>
-                                                <button type="submit" id="GERA_SQL" class="btn btn-warning mt-3">Gerar DDL</button>
-                                                <button type="submit" style="display: none;" id="EXECUTAR" class="btn btn-danger mt-3">Executar</button>
-                                                <button  id="LIMPAR" class="btn btn-danger mt-3">Limpar</button>
+                                                <button type="submit" id="ADICIONA"
+                                                    class="btn btn-warning mt-3">Adionar</button>
+                                                <button type="submit" id="GERA_SQL" class="btn btn-warning mt-3">Gerar
+                                                    DDL</button>
+                                                <button type="submit" style="display: none;" id="EXECUTAR"
+                                                    class="btn btn-danger mt-3">Executar</button>
+                                                <button id="LIMPAR" class="btn btn-danger mt-3">Limpar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -160,7 +167,8 @@
                                 </div>
 
                                 <div style="width: 60%;">
-                                    <textarea style="flex: 20px;height: 300px; margin-left: 10px; " disabled    id="SQL_TABLE" class="form-control" >            </textarea>
+                                    <textarea style="flex: 20px;height: 300px; margin-left: 10px; " disabled
+                                        id="SQL_TABLE" class="form-control">            </textarea>
 
                                 </div>
 

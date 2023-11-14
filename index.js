@@ -442,6 +442,17 @@ app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
     console.log(error)
   }
 })
+app.get('/cadastro/parceiro', auth, urlencodedParser, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(201, token);
+    let P_USU = await permi_usu(201, token);
+    Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./parceiro/cadastroparceiro', { P_USU })
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
 //para baixo somente rotas posts
 // --------------------------------------------------------------------------------------------------------------- //
 

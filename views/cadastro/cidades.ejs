@@ -1,6 +1,10 @@
 <%- include('../partials/head'); %>
 
 <%- include('../partials/header'); %>
+<!--Incluir registro-->
+<% let P = P_USU.P_USU %>
+<% let D = P[0] %>
+
 <div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-xl" style="width: 500px;">
       <div class="modal-content">
@@ -18,6 +22,34 @@
               </div>
               <button style="margin-left: 40px;" id="SALVA"  class="btn btn-warning ">Salvar</button>
               <button  id="IMPORTAR"  class="btn btn-danger ">Importar dados</button>
+            </div>
+          
+          </form>
+      </div>
+    </div>
+  </div>
+<!--editar registro-->
+<div class="modal fade EDITAR" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-xl" style="width: 500px;">
+      <div class="modal-content">
+        <form class="needs-validation"  novalidate>
+          <div class="container" style="padding: 40px;" >
+              <div class="row">
+                <div class="col-sm"  >
+                    <label for="NOME_UP">Nome da cidade</label>
+                   <input type="text" class="form-control"  id="NOME_UP" required>
+                    <label for="COD_UP">Código de domicilio fiscal</label>
+                    <input type="hidden" id="ID_SELECIONADO">
+                   <input type="number" class="form-control"  id="COD_UP" required>
+                </div>
+              </div>
+              </div>
+              <% if (D.ALTERA == 'N') { %> 
+                <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" disabled  >Salvar</button>
+            <% }else{ %>
+                <button style="margin-left: 40px;" id="SALVA_EDICAO"  class="btn btn-warning ">Salvar</button>
+
+            <%}%> 
             </div>
           
           </form>
@@ -51,6 +83,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Cod. domicilio  fiscal</th>
+                <th><input type="checkbox" id="DELETE_TOTAL"></th>
             </tr>
           </thead>
           <tbody id="tabela"   >

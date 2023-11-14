@@ -52,6 +52,7 @@ Um objeto com os seguintes parametros
         rows: true
         USU_LOGADO,true
       };
+      
 <%- include('../partials/head'); %>
 
 <%- include('../partials/header'); %>

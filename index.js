@@ -907,6 +907,19 @@ app.post('/importar/cod/municipio',async(req,res)=>{
     res.status(500).send('Erro ao obter os dados');
   }
 })
+app.post('/importar/dados',  async (req, res) => {
+  let CGC = req.body.CGC
+  try {
+    const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
+    const data = response.data;
+    res.json(data);
+    console.log(data)
+  } catch (error) {
+    console.error('Erro:', error);
+    res.status(500).send('Erro ao obter os dados');
+  }
+
+})
 
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
 app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
@@ -970,12 +983,13 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
           let result = await conectarbd(Objeto.sql, Objeto.binds, options);
           if (Objeto.rows) {
             let result = await conectar(Objeto.sql, Objeto.binds);
+            console.log(result.rows[0][0])
             result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
           } else {
             result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
           }
         } catch (error) {
-          res.send('Ocorreu um erro no lado do servidor! ' + error);
+          res.send('Ocorreu um erro no lado do servidor! --' + error);
           console.log(error);
         }
 

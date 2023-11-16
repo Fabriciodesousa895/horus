@@ -1,78 +1,215 @@
 <%- include('../partials/head'); %>
 
-<%- include('../partials/header'); %>
+    <%- include('../partials/header'); %>
+
+        <div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <form class="needs-validation" id="form" novalidate>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-3" style="padding: 50px;width: 356px;">
+
+                                    <p><span class="mt-2">Nome</span></p>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Nome do parceiro"    id="PARC_N_RAZAO_SOCIAL">
+                                    </div>
+
+                                    <label for="">Razão social</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Razão social"  id="PARC_NOME">
+                                    </div>
+                                    <label for="">CPF/CNPJ</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="CPF/CNPJ"
+                                            id="PARC_CGC">
+                                    </div>
+                                    <label for="">IE/RG</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="IE/RG"
+                                            id="PARC_NOME">
+                                    </div>
+                                    <label for="">Email</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="exemplo@gmail.com"   id="PARC_EMAIL">
+                                    </div>
+                                    <label for="">Nascimento/fundação</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="date" class="form-control" placeholder="exemplo@gmail.com"   id="PARC_NASC">
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-3" style="padding: 50px;width: 356px;">
+
+                                    <p><span class="mt-2">Telefone</span></p>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Telefone 1"    id="PARC_TEL">
+                                    </div>
+                                    <p><span class="mt-2">Telefone</span></p>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Telefone 2"    id="PARC_NOME">
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox mt-3">
+                                        <input type="checkbox" class="custom-control-input " id="CFG_USU_ALT_PARC">
+                                        <label class="custom-control-label" for="CFG_USU_ALT_PARC"> Fornecedor?</label>
+                                      </div>
+                              
+                                      <div class="custom-control custom-checkbox"> 
+                                        <input type="checkbox" class="custom-control-input"  id="CFG_USU_CONF_CONFERE_CAIXA" >
+                                        <label class="custom-control-label"  for="CFG_USU_CONF_CONFERE_CAIXA">Funcionário?</label>
+                                      </div>
+                              
+                                      <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="CFG_USU_EXC_FIN" >
+                                        <label class="custom-control-label"  for="CFG_USU_EXC_FIN">Permite excluir Mov. Financeiro?</label>
+                                      </div>
 
 
-<div style="display: flex;">
-    <div style="width: 300px;margin-right: 20px;">
- <label for="ID">ID</label>
- <input type="number" class="form-control" placeholder="ID do parceiro" id="ID">
- <label for="NOME_F">Nome</label>
- <input type="text" class="form-control" placeholder="Nome do parceiro" id="NOME_F">
- <label for="CGC">CPF / CNPJ</label>
- <input type="number" class="form-control" id="CGC" placeholder="CPF/CNPJ">
- <label for="IE_RG_F">IE / RG</label>
- <input type="number" class="form-control" id="IE_RG_F" placeholder="IE / RG">
- <label for="UF">Estado</label>
- <select id="UF" name="UF" class="form-control" >
-    <option value="">Selecione um estado</option>
-    <option value="AC">Acre</option>
-    <option value="AL">Alagoas</option>
-    <option value="AP">Amapá</option>
-    <option value="AM">Amazonas</option>
-    <option value="BA">Bahia</option>
-    <option value="CE">Ceará</option>
-    <option value="DF">Distrito Federal</option>
-    <option value="ES">Espirito Santo</option>
-    <option value="GO">Goiás</option>
-    <option value="MA">Maranhão</option>
-    <option value="MS">Mato Grosso do Sul</option>
-    <option value="MT">Mato Grosso</option>
-    <option value="MG">Minas Gerais</option>
-    <option value="PA">Pará</option>
-    <option value="PB">Paraíba</option>
-    <option value="PR">Paraná</option>
-    <option value="PE">Pernambuco</option>
-    <option value="PI">Piauí</option>
-    <option value="RJ">Rio de Janeiro</option>
-    <option value="RN">Rio Grande do Norte</option>
-    <option value="RS">Rio Grande do Sul</option>
-    <option value="RO">Rondônia</option>
-    <option value="RR">Roraima</option>
-    <option value="SC">Santa Catarina</option>
-    <option value="SP">São Paulo</option>
-    <option value="SE">Sergipe</option>
-    <option value="TO">Tocantins</option>
-</select>
-<label for="ATIVO">Somente ativos?</label>
-<input type="radio" id="ATIVO">
-<br>
-<label for="CPF">Somente CPF?</label>
-<input type="radio" id="CPF" name="cpf_cnpj">
-<br>
-<label for="CNPJ">Somente CNPJ?</label>
-<input type="radio" id="CNPJ" name="cpf_cnpj">
-<br>
-<label for="FORNECEDOR">Somente fornecedor?</label>
-<input type="radio" id="FORNECEDOR" >
-<br>
-<label for="BLOQUEADOS">Venda bloqueada?</label>
-<input type="radio" id="BLOQUEADOS" >
-<br>
-<button id="Buscar" class="btn btn-success">Buscar</button>
+                                </div>
 
-    </div>
-    <div style="width: 100%;">
-     <table class="table table-hover">
-        <thead>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>CPF/CNPJ</th>
-            <th>Telefone</th>
-            <th>Email</th>
-        </thead>
-     </table>
-    </div>
-</div>
+                                <div class="col-sm-3" style="padding: 50px;width: 356px;">
 
-<%- include('../partials/footer'); %>
+                                    <label for="">CEP</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Cep"  id="PARC_CEP">
+                                    </div>
+                                    <label for="UF">Estado</label>
+                                    <select id="UF" name="UF" class="form-control">
+                                        <option value="">Selecione um estado</option>
+                                        <option value="12">Acre</option>
+                                        <option value="27">Alagoas</option>
+                                        <option value="16">Amapá</option>
+                                        <option value="13">Amazonas</option>
+                                        <option value="29">Bahia</option>
+                                        <option value="23">Ceará</option>
+                                        <option value="53">Distrito Federal</option>
+                                        <option value="32">Espirito Santo</option>
+                                        <option value="52">Goiás</option>
+                                        <option value="21">Maranhão</option>
+                                        <option value="50">Mato Grosso do Sul</option>
+                                        <option value="51">Mato Grosso</option>
+                                        <option value="31">Minas Gerais</option>
+                                        <option value="15">Pará</option>
+                                        <option value="25">Paraíba</option>
+                                        <option value="41">Paraná</option>
+                                        <option value="26">Pernambuco</option>
+                                        <option value="22">Piauí</option>
+                                        <option value="33">Rio de Janeiro</option>
+                                        <option value="24">Rio Grande do Norte</option>
+                                        <option value="43">Rio Grande do Sul</option>
+                                        <option value="11">Rondônia</option>
+                                        <option value="14">Roraima</option>
+                                        <option value="42">Santa Catarina</option>
+                                        <option value="35">São Paulo</option>
+                                        <option value="28">Sergipe</option>
+                                        <option value="17">Tocantins</option>
+                                    </select>
+                                    <label for="">Bairro</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Bairro"    id="PARC_BAIRRO">
+                                    </div>
+                                    <label for="">Logradouro</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Logradouro"  id="PARC_LOGRA">
+                                    </div>
+                                    <label for="">Numero</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Numero"   id="PARC_NUM">
+                                    </div>
+                                    <label for="">CoMplemento</label>
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control" placeholder="Complemento"   id="PARC_COMP">
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                        <button id="SALVA" style="margin-left: 50px;" class="btn btn-success mt-3">Salvar</button>
+                        <button id="IMPORTAR"  class="btn btn-warning mt-3">Importar dados</button>
+                </div>
+
+                </form>
+            </div>
+        </div>
+        </div>
+
+        <!--FILTRO E TABELA-->
+        <div style="display: flex;">
+            <div style="width: 300px;margin-right: 20px;">
+                <label for="ID">ID</label>
+                <input type="number" class="form-control" placeholder="ID do parceiro" id="ID">
+                <label for="NOME_F">Nome</label>
+                <input type="text" class="form-control" placeholder="Nome do parceiro" id="NOME_F">
+                <label for="CGC">CPF / CNPJ</label>
+                <input type="number" class="form-control" id="CGC" placeholder="CPF/CNPJ">
+                <label for="IE_RG_F">IE / RG</label>
+                <input type="number" class="form-control" id="IE_RG_F" placeholder="IE / RG">
+                <label for="UF">Estado</label>
+                <select id="UF" name="UF" class="form-control">
+                    <option value="">Selecione um estado</option>
+                    <option value="12">Acre</option>
+                    <option value="27">Alagoas</option>
+                    <option value="16">Amapá</option>
+                    <option value="13">Amazonas</option>
+                    <option value="29">Bahia</option>
+                    <option value="23">Ceará</option>
+                    <option value="53">Distrito Federal</option>
+                    <option value="32">Espirito Santo</option>
+                    <option value="52">Goiás</option>
+                    <option value="21">Maranhão</option>
+                    <option value="50">Mato Grosso do Sul</option>
+                    <option value="51">Mato Grosso</option>
+                    <option value="31">Minas Gerais</option>
+                    <option value="15">Pará</option>
+                    <option value="25">Paraíba</option>
+                    <option value="41">Paraná</option>
+                    <option value="26">Pernambuco</option>
+                    <option value="22">Piauí</option>
+                    <option value="33">Rio de Janeiro</option>
+                    <option value="24">Rio Grande do Norte</option>
+                    <option value="43">Rio Grande do Sul</option>
+                    <option value="11">Rondônia</option>
+                    <option value="14">Roraima</option>
+                    <option value="42">Santa Catarina</option>
+                    <option value="35">São Paulo</option>
+                    <option value="28">Sergipe</option>
+                    <option value="17">Tocantins</option>
+                </select>
+                <label for="ATIVO">Somente ativos?</label>
+                <input type="checkbox" id="ATIVO">
+                <br>
+
+                <label for="FORNECEDOR">Somente fornecedor?</label>
+                <input type="checkbox" id="FORNECEDOR">
+                <br>
+                <label for="BLOQUEADOS">Venda bloqueada?</label>
+                <input type="checkbox" id="BLOQUEADOS">
+                <br>
+                <button id="Buscar" type="submit" class="btn btn-success">Buscar</button>
+                <button id="TOTAL" class="btn btn-success ">00</button>
+
+
+            </div>
+            <div style="width: 100%;">
+                <table class="table table-hover">
+                    <thead>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>CPF/CNPJ</th>
+                        <th>IE_RG</th>
+                        <th>Email</th>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="/js/parceiro/parceiro.js"></script>
+        <%- include('../partials/footer'); %>

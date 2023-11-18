@@ -46,6 +46,7 @@ function auth(req, res, next) {
 // const io = new server(serverHttp);
 //fazendo a chama do banco
 const oracledb = require('oracledb');
+const { status } = require("init");
 const dbconfig = {
   user: 'SYSTEM',
   password: 'host2023',
@@ -92,7 +93,7 @@ app.post('/login', async (req, res) => {
   let USU_SENHA = req.body.USU_SENHA;
   let USU_NOME = req.body.USU_NOME;
   let sql = `SELECT USU_SENHA, ID_USU FROM USU_USUARIO WHERE USU_NOME = :USU_NOME AND USU_STATUS = 'S'`;
-  let binds = {USU_NOME: USU_NOME}
+  let binds = { USU_NOME: USU_NOME }
   let result = await conectarbd(sql, binds, options);
 
   // Verifica se o resultado está vazio (nenhum usuário encontrado)
@@ -337,15 +338,15 @@ app.get('/', auth, async (req, res) => {
 
   res.render('index', { P_USU })
 })
-app.get('/cadastro/cidades',auth,async(req,res)=>{
+app.get('/cadastro/cidades', auth, async (req, res) => {
   let token = req.cookies.jwt;
 
-  try{
+  try {
     let Acesso = await valida_acesso(181, token);
     let P_USU = await permi_usu(181, token);
 
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./cadastro/cidades', { P_USU })
-  }catch (error){
+  } catch (error) {
     res.send('Error:' + error)
   }
 })
@@ -409,7 +410,7 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
     let CAMPOS = result2.rows
     let INDEXES = result3.rows
     let TABELA_NOME = result4.rows
-    Objeto = { CAMPOS, CONSTRAINT,INDEXES,TABELA_NOME }
+    Objeto = { CAMPOS, CONSTRAINT, INDEXES, TABELA_NOME }
     console.log(Objeto)
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
   } catch (error) {
@@ -894,29 +895,34 @@ app.post('/consulta_acessos', async (req, res) => {
   }
 })
 
-app.post('/importar/cod/municipio',async(req,res)=>{
-  try{
+app.post('/importar/cod/municipio', async (req, res) => {
+  try {
     const response = await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/municipios?view=nivelado');
     const data = response.data;
-    res.json(data);
-    console.log(req.body)
-    console.log(data)
+    const status = response.status;
+    console.log(status)
 
-  }catch(error){
+    if (status == 429) {
+      res.status(429).json('As importação possui um limite de 3 tentativas por CNPJ a cada 60 segundos!')
+    } else {
+      res.json(data);
+
+    }
+
+  } catch (error) {
     console.error('Erro:', error);
     res.status(500).send('Erro ao obter os dados');
   }
 })
-app.post('/importar/dados',  async (req, res) => {
+app.post('/importar/dados', async (req, res) => {
   let CGC = req.body.CGC
   try {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
-    res.json(data);
-    console.log(data)
+    res.status(200).json(data);
   } catch (error) {
-    console.error('Erro:', error);
-    res.status(500).send('Erro ao obter os dados');
+      console.error('Erro:', error);
+      res.status(500).send('Erro ao obter os dados');
   }
 
 })
@@ -954,14 +960,14 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
   let Objeto = req.body;
   let novobinds;
   let token = req.cookies.jwt;
-    jwt.verify(token, secret, async (error, data) => { 
-      if (error) {
-        res.status(500).send('Token inválido,faça login e tente novamente!')
-      } else {
-        let USU_LOGADO = data.ID_USUARIO;
+  jwt.verify(token, secret, async (error, data) => {
+    if (error) {
+      res.status(500).send('Token inválido,faça login e tente novamente!')
+    } else {
+      let USU_LOGADO = data.ID_USUARIO;
 
-        if(Objeto.USU_LOGADO){
-          //CASO USU_LOGADO SEJA true,fazendo o sql com base no usuário logado
+      if (Objeto.USU_LOGADO) {
+        //CASO USU_LOGADO SEJA true,fazendo o sql com base no usuário logado
         novobinds = { ...Objeto.binds, USU_LOGADO }
         try {
           let result = await conectarbd(Objeto.sql, novobinds, options);
@@ -977,7 +983,7 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
           res.send('Ocorreu um erro no lado do servidor! ' + error);
           console.log(error);
         }
-        }else
+      } else
 
         try {
           let result = await conectarbd(Objeto.sql, Objeto.binds, options);
@@ -994,8 +1000,8 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
         }
 
 
-      }
-    })
+    }
+  })
 
 
 })

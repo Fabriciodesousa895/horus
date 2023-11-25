@@ -16,11 +16,11 @@
             ajax.open('POST', '/rota/universal');
             ajax.setRequestHeader('Content-type', 'application/json');
             let data = {
-                sql: `BEGIN INSERT INTO CIDADE(NOME,COD_DOMICILIO_FISCAL) VALUES (:NOME,:COD_DOMICILIO_FISCAL); COMMIT; END;`,
+                sql: `BEGIN INSERT INTO CIDADE(NOME,COD_DOMICILIO_FISCAL,ID_USU_INCLU,ID_USU_ALTER,DT_INCLUSAO,DT_ALTERACAO) VALUES (:NOME,:COD_DOMICILIO_FISCAL,:USU_LOGADO,:USU_LOGADO,SYSDATE,SYSDATE); COMMIT; END;`,
                 binds: { NOME: NOME.value, COD_DOMICILIO_FISCAL: COD_DOMICILIO_FISCAL.value },
                 mensagem_sucess: 'Registro inserido com sucesso!',
                 mensagem_error: 'Houve um errro ao inserir o resgitro!',
-                USU_LOGADO: false
+                USU_LOGADO: true
             };
             let JsonData = JSON.stringify(data)
             ajax.onreadystatechange = () => {
@@ -56,7 +56,7 @@
         ajax.open('POST', '/select/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
         let data = {
-            sql: `SELECT * FROM CIDADE WHERE  COD_DOMICILIO_FISCAL LIKE  '%${FILTRO_COD.value}%' AND ( NOME LIKE '%${FILTRO_NOME.value}%' OR NOME  IS NULL)`,
+            sql: `SELECT ID,NOME,COD_DOMICILIO_FISCAL FROM CIDADE WHERE  COD_DOMICILIO_FISCAL LIKE  '%${FILTRO_COD.value}%' AND ( NOME LIKE '%${FILTRO_NOME.value}%' OR NOME  IS NULL)`,
             binds: {},
             mensage_error: 'Houve um errro ao consultar so resgitros!',
             USU_LOGADO: false,
@@ -143,11 +143,15 @@
             ajax.open('POST', '/rota/universal');
             ajax.setRequestHeader('Content-type', 'application/json');
             let data = {
-                sql: `BEGIN UPDATE CIDADE SET NOME = '${NOME_UP.value}', COD_DOMICILIO_FISCAL = '${COD_UP.value}' WHERE ID = ${ID_SELECIONADO.value};COMMIT; END; `,
+                sql: `BEGIN UPDATE CIDADE SET NOME = '${NOME_UP.value}',
+                                              COD_DOMICILIO_FISCAL = '${COD_UP.value}' ,
+                                              ID_USU_ALTER = :USU_LOGADO,
+                                              DT_ALTERACAO =  SYSDATE 
+                                              WHERE ID = ${ID_SELECIONADO.value};COMMIT; END; `,
                 binds: {},
                 mensagem_error: "Error ao editar registro",
                 mensagem_sucess: "Registro editado com sucesso!",
-                USU_LOGADO: false
+                USU_LOGADO: true
             };
             let JsonData = JSON.stringify(data)
             ajax.onreadystatechange = () => {

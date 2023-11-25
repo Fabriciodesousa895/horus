@@ -22,11 +22,11 @@
                                     </div>
                                     <label for="">CPF/CNPJ</label>
                                     <div style="display: flex; flex-direction: row;">
-                                        <input type="text" class="form-control" placeholder="CPF/CNPJ"   id="PARC_CGC" required>
+                                        <input type="number" class="form-control" placeholder="CPF/CNPJ"   id="PARC_CGC" required>
                                     </div>
                                     <label for="">IE/RG</label>
                                     <div style="display: flex; flex-direction: row;">
-                                        <input type="text" class="form-control" placeholder="IE/RG"     id="PARC_IR_RG" required>
+                                        <input type="number" class="form-control" placeholder="IE/RG"     id="PARC_IR_RG" required>
                                     </div>
                                     <label for="">Email</label>
                                     <div style="display: flex; flex-direction: row;">
@@ -64,7 +64,7 @@
                                     <label for="">Cidade</label>
                                     <div style="display: flex; flex-direction: row;">
                                         <input type="text" required  id="ID_CID_F" style="width: 80px;margin-right: 8px;" class="form-control mt-2 cidade">
-                                        <input type="text" readonly   id="IDCID_F" class="form-control mt-2 " placeholder="Cidade" >
+                                        <input type="text" required   id="NOME_CID_F" class="form-control mt-2 " placeholder="Cidade" >
                                        </div>
                                     <p><span class="mt-2">Logradouro do trabalho</span></p>
                                     <div style="display: flex; flex-direction: row;">
@@ -88,7 +88,7 @@
                                     </div>
                                     <p><span class="mt-2">Data admissão</span></p>
                                     <div style="display: flex; flex-direction: row;">
-                                        <input type="date" class="form-control"   id="PARC_SALARIO">
+                                        <input type="date" class="form-control"   id="PARC_ADMISSAO">
                                     </div>
 
                               
@@ -157,21 +157,18 @@
                                     </div>
 
                                     <div class="custom-control custom-checkbox"> 
-                                        <input type="checkbox" class="custom-control-input"  id="CFG_USU_CONF_CONFERE_CAIXA" >
-                                        <label class="custom-control-label"  for="CFG_USU_CONF_CONFERE_CAIXA">Funcionário?</label>
+                                        <input type="checkbox" class="custom-control-input"  id="PARC_FORNEC" >
+                                        <label class="custom-control-label"  for="PARC_FORNEC">Fornecedor?</label>
                                       </div>
                               
-                                      <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="CFG_USU_EXC_FIN" >
-                                        <label class="custom-control-label"  for="CFG_USU_EXC_FIN">Email automático?</label>
-                                      </div>
+ 
 
                                 </div>
 
                             </div>
 
                         </div>
-                        <button id="SALVA" style="margin-left: 50px;" class="btn btn-success mt-3">Salvar</button>
+                        <button id="SALVAR" style="margin-left: 50px;" class="btn btn-success mt-3">Salvar</button>
                         <button id="IMPORTAR"  class="btn btn-warning mt-3">Importar dados</button>
                 </div>
 

@@ -298,7 +298,7 @@ function permi_usu(ID_TELA, token) {
           let result = await conectarbd(sql, binds, options_objeto);
           let result2 = await conectar(sql2, binds2, options);
           let result3 = await conectar(sql3, binds3, options);
-          // let result4 = await conectar(sql4, binds4, options);
+          let result4 = await conectar(sql4, binds4, options);
           let result5 = await conectar(sql5, binds5, options);
           let Objeto = {
             P_USU: result,
@@ -919,6 +919,7 @@ app.post('/importar/dados', async (req, res) => {
   try {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
+      console.error(data);
     res.status(200).json(data);
   } catch (error) {
       console.error('Erro:', error);
@@ -937,6 +938,8 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
     if (Objeto.USU_LOGADO) {
       let USU_LOGADO = data.ID_USUARIO;
       novobinds = { ...Objeto.binds, USU_LOGADO }
+      console.log(novobinds)
+      console.log(Objeto.sql)
       try {
         let result = await conectar(Objeto.sql, novobinds);
         res.status(200).send(Objeto.mensagem_sucess);
@@ -975,6 +978,8 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
           if (Objeto.rows) {
             let result = await conectar(Objeto.sql, novobinds);
             result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
+          console.log(result.rows);
+
           } else {
             result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
 

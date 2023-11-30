@@ -36,15 +36,39 @@
             
      </nav>
       </nav>
-
+      <% result.forEach((result, index) => { %>
+        <% if (index % 3 === 0) { %>
+          <div class="row">
+        <% } %>
       
-
-
-      <input type="text" class="form-control" style="width: 300px;"> <button id="Enviar" class="btn btn-primary">Enviar</button>
-
+        <div class="col-md-4">
+            <div class="card mt-3" style="width: 600px;height: 450px;">
+              <div class="card-header" style="color: <%= result.COR %>;display: flex;justify-content: space-around;align-items: center; " >
+                <p><%= result.TITULO %></p> <p>Postagem <%= result.POSTAGEM %></p> 
+              </div>
+              <div class="card-body">
+                <p><%= result.MENSAGEM %></p>
+    
+              </div>
+              <div class="card-footer" style="display: flex;justify-content: space-around;align-items: center;">
+                <p>Data inicio: <%= result.INICIO %></p>
+                <p>Data fim: <%= result.FIM %></p>
+                
+              </div>
+    
+      
+          </div>
+        </div>
+      
+        <% if ((index + 1) % 3 === 0 || index === result.length - 1) { %>
+          </div>
+        <% } %>
+      <% }) %>
+      
+    
 
 <p class="text-center text-muted">© Copyright 2020 The Awesome People</p>
-<script>
+<!-- <script>
     const selectElement = document.getElementById('meuSelect');
     const buttonElement = document.getElementById('irParaLink');
 
@@ -63,7 +87,7 @@
     console.error('Erro:', error);
   });
 
-</script>
+</script> -->
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script

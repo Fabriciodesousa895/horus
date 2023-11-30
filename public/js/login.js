@@ -22,7 +22,7 @@ function sendForm(evento){
               icon:'warning'
             });
             setInterval(() => {
-                location.href = '/usuario'
+                location.href = '/'
             }, 3000);
            
   }else{

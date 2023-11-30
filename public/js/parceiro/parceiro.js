@@ -10,10 +10,16 @@
     let telefone = document.getElementById('PARC_TEL')
     let telefone2 = document.getElementById('PARC_TEL_2')
     let email = document.getElementById('PARC_EMAIL')
-    let abertura = document.getElementById('PARC_NASC')
+    let PARC_NASC = document.getElementById('PARC_NASC')
     let UF = document.getElementById('ESTADO')
+    let PROGRESSO = document.getElementById('PROGRESSO');
+    let NOME_CID = document.getElementById('NOME_CID');
+
+
     function Filtro(e) {
         e.preventDefault();
+        //mostra ao usuário a barra de progresso
+        PROGRESSO.style.opacity = '1'
 
         let inputs = document.querySelectorAll('input');
         let Select = document.getElementsByTagName("select");
@@ -74,11 +80,13 @@
                         const td = document.createElement('td');
                         td.innerText = Cell;
                         tr.appendChild(td)
+                        td.style.maxWidth = '300px'
                     })
                     tbody.appendChild(tr)
                 });
                 document.getElementById('TOTAL').innerText = dados.length
-
+          //omite do usuário a barra de progresso
+          PROGRESSO.style.opacity = '0'
             } else {
                 swal({
                     text: ajax.responseText,
@@ -110,9 +118,9 @@
                 fantasia.value = dados.fantasia;
                 email.value = dados.email;
                 var data = dados.abertura
-                // var dataform = data.split('/');
-                // var newdata = new Date(dataform[0],dataform[1]  ,dataform[2])
-                // abertura.value = dados.newdata;
+                var dataform = data.split('/');
+                var newdata = dataform[2] + '-' +  dataform[1] + '-'  + dataform[0]
+                PARC_NASC.value = newdata;
                 var tel = dados.telefone
                 var telNew = tel.split('/');
                 telefone.value = telNew[0];
@@ -121,7 +129,8 @@
                 }
                 var selectedIndex = dados.uf
                 UF.value = selectedIndex
-                // console.log(telNew)
+                NOME_CID.value = dados.bairro
+                filtracidade();
 
             }
 
@@ -226,12 +235,8 @@
                 value = inputs[i].value
             }
             Objeto[id] = value
-            // if (inputs[i].required && value.trim() === '') {
-            //     todosPreenchidos = false;
-            //     break;
-            // }
+    
         }
-        console.log(UF.value)
         let ajax = new XMLHttpRequest();
         ajax.open('POST', '/rota/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
@@ -314,6 +319,7 @@
                     text: ajax.responseText,
                     icon: 'success'
                 })
+                inputs.forEach((e)=>{e.value = ''});
             } else {
                 swal({
                     text: ajax.responseText,

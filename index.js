@@ -23,9 +23,11 @@ const cors = require('cors');
 let urlencodedParser = bodyparser.urlencoded({ extended: false });
 app.use(cors());
 //middleware
+//no middleware é preciso validar a licença da aplicação que está rodando,na raiz da aplicação existe um arquivo.json que informaos dados da licençat b bb
 app.use((req, res, next) => {
-  console.log('Entre cliente e servidor!')
-  next();
+  console.log('Entre cliente e servidor!');
+  res.status(403).send('Licença inválida!')
+  // next();
 })
 //middleware de autenticação;
 function auth(req, res, next) {
@@ -324,19 +326,33 @@ app.get('/erroservidor/:error', (req, res) => {
 })
 //tela de inicio
 app.get('/', auth, async (req, res) => {
+  let token = req.cookies.jwt;
   try {
-    const response = await axios.get('https://receitaws.com.br/v1/cnpj/20758851000105');
-    const data = response.data;
-    res.json(data);
-    console.log(data)
+    let sql = `SELECT 
+    TITULO,
+    MENSAGEM,
+    TO_CHAR(DTINICIO,'DD-MM-YYYY') AS INICIO,  
+    TO_CHAR(DTFIM,'DD-MM-YYYY') AS FIM,
+    TO_CHAR(DTCOMUNICADO,'DD-MM-YYYY') AS POSTAGEM,
+    CASE 
+        WHEN TIPO = 'A' THEN 'BLACK'
+        WHEN TIPO = 'B' THEN 'orange'
+        WHEN TIPO = 'C' THEN 'RED'
+        ELSE 'BLACK' 
+    END AS COR,
+USU.USU_NOME
+FROM C_COMUNICADO CC
+INNER JOIN USU_USUARIO USU ON USU.ID_USU = CC.ID_USU
+    WHERE SYSDATE  BETWEEN DTINICIO AND DTFIM + 1
+ORDER BY COR DESC`
+    let result = await conectarbd(sql,[],options_objeto)
+    let P_USU = await permi_usu(1, token);
+    res.render('index', { P_USU ,result})
   } catch (error) {
     console.error('Erro:', error);
     res.status(500).send('Erro ao obter os dados');
   }
-  let token = req.cookies.jwt;
-  let P_USU = await permi_usu(1, token);
 
-  res.render('index', { P_USU })
 })
 app.get('/cadastro/cidades', auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -437,6 +453,7 @@ app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
   try {
     let Acesso = await valida_acesso(141, token);
     let P_USU = await permi_usu(141, token);
+
     Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU })
   } catch (error) {
     res.send(error);
@@ -450,6 +467,18 @@ app.get('/cadastro/parceiro', auth, urlencodedParser, async (req, res) => {
     let P_USU = await permi_usu(201, token);
     Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./parceiro/cadastroparceiro', { P_USU })
   } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+})
+app.get('/comunicado/usuarios',auth,urlencodedParser,async(req,res)=>{
+  let token = req.cookies.jwt;
+  try{
+    let Acesso = await valida_acesso(224, token);
+    let P_USU = await permi_usu(224, token);
+  
+    Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./Admin/comunicado', { P_USU })
+  }catch(error){
     res.send(error);
     console.log(error)
   }
@@ -839,21 +868,32 @@ app.get('/acessos', urlencodedParser, auth, async (req, res) => {
 
 //Copia permissões
 app.post('/copia_usuario', async (req, res) => {
-  let ID_F = req.body.ID_FORNECE;
-  let ID_R = req.body.ID_RECEBE;
-  let sql = `BEGIN COPIA_CONFIG_USU(:ID_R,:ID_F,:P_RESULTADO); END; `;
-  let binds = {
-    ID_F: ID_F,
-    ID_R: ID_R,
-    P_RESULTADO: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
-  };
+let token = req.cookies.jwt;
+  jwt.verify(token, secret, async (error, data) => {
+    if (error) { return res.status(500).send('Token inválido!') }
+    else{
+      let ID_F = req.body.ID_FORNECE;
+      let ID_R = req.body.ID_RECEBE;
+      let sql = `BEGIN COPIA_CONFIG_USU(:ID_R,:ID_F,:P_USU_LOGADO,:P_RESULTADO); END; `;
+      let binds = {
+        ID_F: ID_F,
+        ID_R: ID_R,
+        P_USU_LOGADO: data.ID_USUARIO,
+        P_RESULTADO: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
+      };
+    
+      try {
+        let result = await conectar(sql, binds)
+        res.status(200).send(result.outBinds.P_RESULTADO)
+      } catch (error) {
+        res.send('Erro no lado do servidor ' + error)
+      }
+    }
 
-  try {
-    let result = await conectar(sql, binds)
-    res.status(200).send(result.outBinds.P_RESULTADO)
-  } catch (error) {
-    res.send('Erro no lado do servidor ' + error)
-  }
+  })
+
+
+
 })
 
 
@@ -919,11 +959,20 @@ app.post('/importar/dados', async (req, res) => {
   try {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
-      console.error(data);
+  console.log(data)
+
     res.status(200).json(data);
   } catch (error) {
-      console.error('Erro:', error);
-      res.status(500).send('Erro ao obter os dados');
+    let erro = error
+  let status = erro.response.status;
+  console.log(status)
+  if(status  == 429){
+    res.status(429).json('Erro ao obter os dados,so e permitido 3 solicitações por CNPJ a cada 60s');
+  }else{
+    res.status(500).json('Erro ao obter os dados,CNPJ deve ter 14 digitos');
+
+  }
+
   }
 
 })

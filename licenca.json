@@ -1,0 +1,5 @@
+[
+  {"razao_social" : "Razao social da empresa"},
+  {"cnpj" : "cnpj da empresa "},
+  {"token" : "token da licenca atual"}
+]

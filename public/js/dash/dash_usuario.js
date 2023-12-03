@@ -95,6 +95,8 @@
         mensage_error: 'Houve um erro ao conultar o registro!',
         rows: true
       };
+      console.log(data.sql)
+
       let jsonData = JSON.stringify(data);
       //mostra ao usuário a barra de progresso
       PROGRESSO.style.opacity = '1'
@@ -102,7 +104,8 @@
         if (ajax.status == 200) {
           //apos a requisição retornar um array de array é foito um forEach para inseririr os registros na tabela
           let dados = JSON.parse(ajax.responseText);//transformando para um objeto
-          const tbody = document.querySelector('tbody');
+          console.log(dados)
+          const tbody = document.getElementById('tbody');
           tbody.innerText = '';
           dados.forEach(rowData => {
             const row = document.createElement('tr');
@@ -114,6 +117,8 @@
             tbody.appendChild(row)
 
           })
+      console.log(tbody)
+
           //omite do usuário a barra de progresso
           PROGRESSO.style.opacity = '0'
         } else {

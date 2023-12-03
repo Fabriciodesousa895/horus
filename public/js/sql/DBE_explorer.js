@@ -253,7 +253,6 @@ let DEFAULT = document.getElementById('DEFAULT');
 
   }
   function Novatabela (){
-
    let data = {
     sql: `${SQL_TABLE.value}`,
     binds:{},
@@ -261,7 +260,6 @@ let DEFAULT = document.getElementById('DEFAULT');
     mensagem_error:'Erro ao inserir registro!'
   }
    let JsonData = JSON.stringify(data)
-
     let ajax = new  XMLHttpRequest();
     ajax.open('POST','/rota/universal');
     ajax.setRequestHeader('Content-type','application/json');
@@ -276,8 +274,6 @@ let DEFAULT = document.getElementById('DEFAULT');
         SQL_TABLE.value = '';
         DEFAULT.value = '';
         document.getElementById('EXECUTAR').style.display = 'none'
-
-
       } else {
         swal({
           text: ajax.responseText,
@@ -285,10 +281,33 @@ let DEFAULT = document.getElementById('DEFAULT');
         })
       }
     }
-
     ajax.send(JsonData)
-    
+  }
+  function NovaTabelaNome (){
+    let sql = document.getElementById('sql_sql')
+   let data = {
 
+    sql: `${sql.value}`,
+    binds:{},
+    mensagem_sucess:'Registro inserido com sucesso!',
+    mensagem_error:'Erro ao inserir registro!'
+  }
+   let JsonData = JSON.stringify(data)
+    let ajax = new  XMLHttpRequest();
+    ajax.open('POST','/rota/universal');
+    ajax.setRequestHeader('Content-type','application/json');
+    ajax.onreadystatechange = ()=>{
+      if (ajax.status === 200) {
+
+        document.getElementById('EXECUTAR').style.display = 'none'
+      } else {
+        swal({
+          text: ajax.responseText,
+          icon: 'error'
+        })
+      }
+    }
+    ajax.send(JsonData)
   }
   //Quando o usuário clicar em Salvar
 
@@ -301,4 +320,5 @@ let DEFAULT = document.getElementById('DEFAULT');
   document.getElementById('DeletarSQL').addEventListener('click', Deletar, false)
   //Inclui r uma tabela na base de dados
   document.getElementById('EXECUTAR').addEventListener('click', Novatabela, false)
+  document.getElementById('EXECUTAR').addEventListener('click', NovaTabelaNome, false)
 })(window, document)

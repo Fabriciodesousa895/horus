@@ -68,7 +68,7 @@ document.getElementById('GERA_SQL').addEventListener('click', () => {
             // Remove a última vírgula
             let textoSemUltimaVirgula = SQL.slice(0, ultimaVirgulaIndex) + SQL.slice(ultimaVirgulaIndex + 1);
             SQL_TABLE.value = ` CREATE TABLE ${NOME_TABLE.value}( ${textoSemUltimaVirgula} )`
-            document.getElementById('INSERTTABLE').value = `INSERT INTO TABELA_BANCO (TAB_NOME,TAB_DESCRICAO) VALUES('${NOME_TABLE.value}','${DESCRICAO.value}')`
+            document.getElementById('sql_sql').value = `INSERT INTO TABELA_BANCO (TAB_NOME,TAB_DESCRICAO) VALUES('${NOME_TABLE.value}','${DESCRICAO.value}')`
             DEFAULT.value = '';
         }
     }

@@ -22,13 +22,63 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 let urlencodedParser = bodyparser.urlencoded({ extended: false });
 app.use(cors());
-//middleware
-//no middleware é preciso validar a licença da aplicação que está rodando,na raiz da aplicação existe um arquivo.json que informaos dados da licençat b bb
-app.use((req, res, next) => {
+
+//a verificação da licença será feita a cada 60 minutos pelo servidor
+const fs = require('fs');
+let V_truefalse = false;
+function toggleValue() {
+  setInterval(() => {
+    V_truefalse = !V_truefalse;
+  }, 80000);
+}
+toggleValue();
+setInterval(() => { console.log(V_truefalse); }, 50000)
+//no middleware é preciso validar a licença da aplicação que está rodando,na raiz da aplicação existe um arquivo.json que informaos dados da licença
+app.use(async (req, res, next) => {
   console.log('Entre cliente e servidor!');
-  res.status(403).send('Licença inválida!')
-  // next();
+  let url = req.path;
+  if (V_truefalse) {
+    try {
+      fs.readFile('licenca.json', 'utf-8', async (err, data) => {
+        if (err) {
+          res.json('Houve um erro ao ler o certificado da aplicação, por favor contactar setor de TI');
+          console.log(err);
+          return;
+        } else {
+          // faz uma requisição get para o gerenciador de licença passando o json com os dados
+          const response = await axios.get(`http://localhost:8030/licenca/${data}`);
+          let response_data = response.data;
+          // validando o resultado da requisição
+          if (response_data[0].status === 200) {
+            // aplicação segue o curso,pois certificado está tubo certo
+            next();
+            return;
+          } else {
+            //quando o status for <> de 200,o usuário será redirecionado para uma rota get passando a url e a mensagem para a rota
+            // res.redirect(`/certificado/validacao/${url}/${response_data[1].menssage}`);
+            // res.redirect(`/certificado/validacao}`);
+            // console.log(url + '<br>' + response_data[1].menssage);
+            res.json(response_data[1].menssage)
+
+          }
+        }
+      });
+    } catch (error) {
+      console.log('Erro ao se comunicar com o gerenciador de licenças: ', error);
+      res.status(500).send('Internal Server Error');
+    }
+  } else {
+    next();
+  }
+});
+
+app.get('/certificado/validacao', (req, res) => {
+  let url = req.params.url;
+  let menssage = req.params.menssage;
+  res.render('certificado', { url, menssage });
+  console.log(url + '<br>' + menssage);
 })
+
 //middleware de autenticação;
 function auth(req, res, next) {
   const token = req.cookies.jwt;
@@ -49,6 +99,7 @@ function auth(req, res, next) {
 //fazendo a chama do banco
 const oracledb = require('oracledb');
 const { status } = require("init");
+const { error } = require("console");
 const dbconfig = {
   user: 'SYSTEM',
   password: 'host2023',
@@ -345,9 +396,9 @@ FROM C_COMUNICADO CC
 INNER JOIN USU_USUARIO USU ON USU.ID_USU = CC.ID_USU
     WHERE SYSDATE  BETWEEN DTINICIO AND DTFIM + 1
 ORDER BY COR DESC`
-    let result = await conectarbd(sql,[],options_objeto)
+    let result = await conectarbd(sql, [], options_objeto)
     let P_USU = await permi_usu(1, token);
-    res.render('index', { P_USU ,result})
+    res.render('index', { P_USU, result })
   } catch (error) {
     console.error('Erro:', error);
     res.status(500).send('Erro ao obter os dados');
@@ -417,16 +468,23 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
     let sql3 = `SELECT INDEX_NAME,INDEX_TYPE	,CONSTRAINT_INDEX,NUM_ROWS
     FROM DBA_INDEXES WHERE TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`;
     let sql4 = `SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID}`
+    let sql5 = `SELECT TRIGGER_NAME,
+                       TRIGGERING_EVENT,
+                       STATUS
+                FROM ALL_TRIGGERS 
+                WHERE TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`
     let Objeto = {}
     const result = await conectar(sql, []);
     const result2 = await conectar(sql2, []);
     const result3 = await conectar(sql3, []);
     const result4 = await conectar(sql4, []);
+    const result5 = await conectar(sql5, []);
     let CONSTRAINT = result.rows
     let CAMPOS = result2.rows
     let INDEXES = result3.rows
     let TABELA_NOME = result4.rows
-    Objeto = { CAMPOS, CONSTRAINT, INDEXES, TABELA_NOME }
+    let TRIGGRES = result5.rows
+    Objeto = { CAMPOS, CONSTRAINT, INDEXES, TABELA_NOME,TRIGGRES }
     console.log(Objeto)
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
   } catch (error) {
@@ -471,14 +529,14 @@ app.get('/cadastro/parceiro', auth, urlencodedParser, async (req, res) => {
     console.log(error)
   }
 })
-app.get('/comunicado/usuarios',auth,urlencodedParser,async(req,res)=>{
+app.get('/comunicado/usuarios', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
-  try{
+  try {
     let Acesso = await valida_acesso(224, token);
     let P_USU = await permi_usu(224, token);
-  
+
     Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./Admin/comunicado', { P_USU })
-  }catch(error){
+  } catch (error) {
     res.send(error);
     console.log(error)
   }
@@ -868,10 +926,10 @@ app.get('/acessos', urlencodedParser, auth, async (req, res) => {
 
 //Copia permissões
 app.post('/copia_usuario', async (req, res) => {
-let token = req.cookies.jwt;
+  let token = req.cookies.jwt;
   jwt.verify(token, secret, async (error, data) => {
     if (error) { return res.status(500).send('Token inválido!') }
-    else{
+    else {
       let ID_F = req.body.ID_FORNECE;
       let ID_R = req.body.ID_RECEBE;
       let sql = `BEGIN COPIA_CONFIG_USU(:ID_R,:ID_F,:P_USU_LOGADO,:P_RESULTADO); END; `;
@@ -881,7 +939,7 @@ let token = req.cookies.jwt;
         P_USU_LOGADO: data.ID_USUARIO,
         P_RESULTADO: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
       };
-    
+
       try {
         let result = await conectar(sql, binds)
         res.status(200).send(result.outBinds.P_RESULTADO)
@@ -959,19 +1017,19 @@ app.post('/importar/dados', async (req, res) => {
   try {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
-  console.log(data)
+    console.log(data)
 
     res.status(200).json(data);
   } catch (error) {
     let erro = error
-  let status = erro.response.status;
-  console.log(status)
-  if(status  == 429){
-    res.status(429).json('Erro ao obter os dados,so e permitido 3 solicitações por CNPJ a cada 60s');
-  }else{
-    res.status(500).json('Erro ao obter os dados,CNPJ deve ter 14 digitos');
+    let status = erro.response.status;
+    console.log(status)
+    if (status == 429) {
+      res.status(429).json('Erro ao obter os dados,so e permitido 3 solicitações por CNPJ a cada 60s');
+    } else {
+      res.status(500).json('Erro ao obter os dados,CNPJ deve ter 14 digitos');
 
-  }
+    }
 
   }
 
@@ -1027,7 +1085,7 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
           if (Objeto.rows) {
             let result = await conectar(Objeto.sql, novobinds);
             result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
-          console.log(result.rows);
+            console.log(result.rows);
 
           } else {
             result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])

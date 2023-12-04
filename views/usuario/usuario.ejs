@@ -164,7 +164,7 @@
   </div> 
   
   <div style="width: 100%;" >
-    <table class="table" style="width: 70%;" >
+    <table class="table" style="width: 70%;" id="tabeladados" >
       <thead>
         <tr>
           <th>Código</th>
@@ -180,6 +180,7 @@
   </div>
   
 </div>
+<%-include('../components/csv.ejs')%>
 
 
 
@@ -254,6 +255,7 @@
 <script src="/js/parceiro/consulta_parceiro.js"></script>
 <script src="/js/vendedor/consulta_vendedor.js"></script>
 <script src="/js/grupo/consulta_grupo.js"></script>
+<script src="/js/exportar/csv.js"></script>
 
 
 <%- include('../partials/footer'); %>

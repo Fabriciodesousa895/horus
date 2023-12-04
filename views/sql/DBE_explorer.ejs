@@ -1,4 +1,5 @@
 <%- include('../partials/head'); %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"></script>
 
     <%- include('../partials/header'); %>
 
@@ -39,22 +40,12 @@
                         <button id="btn" class="btn btn-warning mt-3">Consultar</button>
                         <button id="TOTAL" class="btn btn-success mt-3">00</button>
 
-                        <% if (D.ALTERA=='S' ) { %>
-                            <button id="SalvarEdicao" style="display: none;" class="btn btn-warning mt-3">Salvar
-                                query</button>
-                            <%}%>
-                                <% if (D.DELETA=='S' ) { %>
-
-                                    <button id="DeletarSQL" style="display: none;" class="btn btn-danger mt-3">Deletar
-                                        query</button>
-                                    <%}%>
-
-                                        <% if (D.INCLUI=='S' ) { %>
-                                            <button id="Salvar" class="btn btn-success mt-3">Salvar</button>
-                                            <%}%>
-
-
-                                                <table class="table mt-3 table-striped table-bordered table-hover">
+                        <% if (D.ALTERA=='S' ) { %> <button id="SalvarEdicao" style="display: none;" class="btn btn-warning mt-3">Salvar</button><%}%>
+                                <% if (D.DELETA=='S' ) { %> <button id="DeletarSQL" style="display: none;" class="btn btn-danger mt-3">Deletar</button><%}%>
+                                <% if (D.INCLUI=='S' ) { %>   <button id="Salvar" class="btn btn-success mt-3">Salvar</button><%}%>
+                                <%-include('../components/csv.ejs')%>
+                                <input type="button" id="gerapdf" class="btn btn-danger mt-3" value="Gerar pdf">
+                                                <table class="table mt-3 table-striped table-bordered table-hover"id="tabeladados">
                                                     <thead id="cabecalho">
                                                         <!--colunas sendo preenchidas dinamicamento pelo js-->
                                                     </thead>
@@ -160,6 +151,7 @@
                                                 <button type="submit" style="display: none;" id="EXECUTAR"
                                                     class="btn btn-danger mt-3">Executar</button>
                                                 <button id="LIMPAR" class="btn btn-danger mt-3">Limpar</button>
+
                                             </div>
                                         </div>
                                     </form>
@@ -186,12 +178,28 @@
                                 </tbody>
                             </table>
                         </div>
-<input type="text" id="sql_sql">
+                        <input type="hidden" id="sql_sql">
 
                     </div>
-
+                    <script>
+                        let gerapdf = document.getElementById('gerapdf');
+                        gerapdf.addEventListener('click', () => {
+                    
+                            let tabela = document.getElementById('tabeladados');
+                            const options = {
+                                margin: [10, 10, 10, 10],
+                                filename: 'arquivo.pdf',
+                                html2canvas: { scale: 2 },
+                                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                            }
+                    
+                            html2pdf().set(options).from(tabela).save();
+                        });
+                    </script>
+                    
                     <script src="/js/sql/DBE_explorer.js"></script>
                     <script src="/js/sql/manipulaelementos.js"></script>
                     <script src="/js/sql/buscatabela.js"></script>
                     <script src="/js/sql/anexos.js"></script>
+                    <script src="/js/exportar/csv.js"></script>
                     <%- include('../partials/footer'); %>

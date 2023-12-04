@@ -8,7 +8,6 @@
     let ativo = document.getElementById('ativo');
     let linha = document.getElementById('linha');
     let PROGRESSO = document.getElementById('PROGRESSO');
-
     function sendForm(evento) {
         evento.preventDefault();
         let selectedgrup = gruposelct.options[gruposelct.selectedIndex];
@@ -21,7 +20,6 @@
             P_STATUS: ativo.checked ? 'S' : '',
             P_GRUPO: grupo
         };
-
         let jsonData = JSON.stringify(data);
         ajax.open('POST', '/filtro_usuario');
         ajax.setRequestHeader('Content-type', 'application/json');
@@ -29,13 +27,9 @@
         PROGRESSO.style.opacity = '1'
         ajax.onreadystatechange = function () {
             if (ajax.status === 200) {
- 
-
                  let data = JSON.parse(ajax.responseText);
-
                  const tbody = document.querySelector("tbody");
                  tbody.innerText = ''
-
                  data.forEach(rowData => {
                      const row = document.createElement("tr");
                      rowData.forEach(cellData => {
@@ -50,9 +44,6 @@
         //omite do usuário a barra de progresso
         PROGRESSO.style.opacity = '0';
                   })
-                
-
-
             } else {
                 swal({
                     title: 'Error',

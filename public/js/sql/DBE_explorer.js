@@ -36,7 +36,7 @@ let DEFAULT = document.getElementById('DEFAULT');
 
         //omite do usuário a barra de progresso
         PROGRESSO.style.opacity = '0';
-        document.getElementById('Salvar').style.opacity = '0';
+        document.getElementById('Salvar').style.display = 'none';
         document.getElementById('SalvarEdicao').style.display = '';
         document.getElementById('DeletarSQL').style.display = '';
         document.getElementById('ID_SQL').value = ID
@@ -196,7 +196,7 @@ let DEFAULT = document.getElementById('DEFAULT');
         })
         document.getElementById('SalvarEdicao').style.display = 'none';
         document.getElementById('DeletarSQL').style.display = 'none';
-        document.getElementById('Salvar').style.opacity = '1';
+        document.getElementById('Salvar').style.display = '';
         document.getElementById('ID_SQL').value ='0'
         sql.value = ''
 
@@ -237,7 +237,7 @@ let DEFAULT = document.getElementById('DEFAULT');
         })
         document.getElementById('SalvarEdicao').style.display = 'none';
         document.getElementById('DeletarSQL').style.display = 'none';
-        document.getElementById('Salvar').style.opacity = '1';
+        document.getElementById('Salvar').style.display = '';
         document.getElementById('ID_SQL').value ='0'
         sql.value = ''
 

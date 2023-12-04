@@ -18,13 +18,12 @@
 
     function Filtro(e) {
         e.preventDefault();
+        salavfiltro()
         //mostra ao usuário a barra de progresso
         PROGRESSO.style.opacity = '1'
-
         let inputs = document.querySelectorAll('input');
         let Select = document.getElementsByTagName("select");
         let Objeto = {};
-
         for (let i = 0; i < inputs.length; i++) {
             let input = inputs[i];
             let id = input.id;
@@ -36,7 +35,6 @@
                 Objeto[id] = valor;
             }
         }
-
         // Percorre todos os selects e adiciona suas IDs e valores ao objeto
         for (let i = 0; i < Select.length; i++) {
             let id = Select[i].id;
@@ -47,7 +45,6 @@
         let ajax = new XMLHttpRequest();
         ajax.open('POST', '/select/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
-
         let data = {
             sql: `SELECT FILTRO_PARC(:ID,:NOME_F,:CGC,:UF,:IE_RG_F,:ATIVO,:FORNECEDOR,:BLOQUEADOS) FROM DUAL`,
             binds: {
@@ -64,9 +61,7 @@
             rows: true,
             USU_LOGADO: false
         };
-
         let JsonData = JSON.stringify(data);
-
         ajax.onreadystatechange = () => {
             if (ajax.status === 200) {
                 let tbody = document.getElementById('tbody')
@@ -95,6 +90,64 @@
             }
         };
         ajax.send(JsonData);
+    }
+
+    function salavfiltro(){
+        let ID = document.getElementById('ID')
+        let NOME_F = document.getElementById('NOME_F')
+        let CGC = document.getElementById('CGC')
+        let IE_RG_F = document.getElementById('IE_RG_F')
+        let UF = document.getElementById('UF')
+        let ATIVO = document.getElementById('ATIVO')
+        let FORNECEDOR = document.getElementById('FORNECEDOR')
+        let BLOQUEADOS = document.getElementById('BLOQUEADOS')
+    
+        let ajax = new XMLHttpRequest();
+        ajax.open('POST', '/rota/universal');
+        ajax.setRequestHeader('Content-type', 'application/json');
+        let data = {
+            sql: `BEGIN HIST_FILTROS(:P_ID_TELA,
+                                     :USU_LOGADO,
+                                     :P_CAMP_1,
+                                     :P_CAMP_2,
+                                     :P_CAMP_3,
+                                     :P_CAMP_4,
+                                     :P_CAMP_5,
+                                     :P_CAMP_6,
+                                     :P_CAMP_7,
+                                     :P_CAMP_8,
+                                     :P_CAMP_9,
+                                     :P_CAMP_10
+                                     ); END;`,
+            binds: {
+                P_ID_TELA: 201,
+                P_CAMP_1: ID.value,
+                P_CAMP_2: NOME_F.value,
+                P_CAMP_3: CGC.value,
+                P_CAMP_4: IE_RG_F.value,
+                P_CAMP_5: UF.value,
+                P_CAMP_6: ATIVO.checked ?  'S' : 'N',
+                P_CAMP_7: FORNECEDOR.checked ?  'S' : 'N',
+                P_CAMP_8: BLOQUEADOS.checked ?  'S' : 'N',
+                P_CAMP_9: '',
+                P_CAMP_10: ''
+            },
+            mensage_error: 'Houve um erro ao consultar registros',
+            USU_LOGADO: true
+        };
+        let JsonData = JSON.stringify(data);
+        ajax.onreadystatechange = () => {
+            if (ajax.status === 200) {
+     
+            } else {
+                swal({
+                    text: ajax.responseText,
+                    icon: 'error'
+                });
+            }
+        };
+        ajax.send(JsonData);
+        
     }
 
     function Importar(e) {

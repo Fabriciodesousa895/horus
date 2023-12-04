@@ -179,19 +179,19 @@
 
         <!--FILTRO E TABELA-->
         <div style="display: flex;padding: 50px;">
+            <% filtro = P_USU.T_FILTRO %>
             <div style="width: 300px;margin-right: 20px;">
                 <label for="ID">ID</label>
-                <input type="number" class="form-control" placeholder="ID do parceiro" id="ID">
+                <input type="number" class="form-control" placeholder="ID do parceiro" id="ID" value="<%=filtro[0][0]%>">
                 <label for="NOME_F">Nome</label>
-                <input type="text" class="form-control" placeholder="Nome do parceiro" id="NOME_F">
+                <input type="text" class="form-control" placeholder="Nome do parceiro" id="NOME_F" value="<%=filtro[0][1]%>">
                 <label for="CGC">CPF / CNPJ</label>
-                <input type="number" class="form-control" id="CGC" placeholder="CPF/CNPJ">
+                <input type="number" class="form-control" id="CGC" placeholder="CPF/CNPJ" value="<%=filtro[0][2]%>">
                 <label for="IE_RG_F">IE / RG</label>
-                <input type="number" class="form-control" id="IE_RG_F" placeholder="IE / RG">
+                <input type="number" class="form-control" id="IE_RG_F" placeholder="IE / RG" value="<%=filtro[0][3]%>">
                 <label for="UF">Estado</label>
-                <select id="UF"  class="form-control">
+                <select id="UF"  class="form-control" value="<%=filtro[0][4]%>">
                     <option value="">Selecione um estado</option>
-                    <option value="">Selecione</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
@@ -220,23 +220,40 @@
                     <option value="SE">Sergipe</option>
                     <option value="TO">Tocantins</option>
                 </select>
-                <label for="ATIVO">Somente ativos?</label>
-                <input type="checkbox" id="ATIVO">
+                
+                <label for="ATIVO" >Somente ativos?</label>
+               <% if(filtro[0][5] == 'S'){%>
+                    <input type="checkbox" id="ATIVO" checked >
+                <%}else{%>
+                    <input type="checkbox" id="ATIVO" >
+                <%}%>
                 <br>
 
                 <label for="FORNECEDOR">Somente fornecedor?</label>
+                <% if(filtro[0][6] == 'S'){%>
+                    <input type="checkbox" id="FORNECEDOR" checked>
+                    <%}else{%>
                 <input type="checkbox" id="FORNECEDOR">
+                    <%}%>
                 <br>
+
                 <label for="BLOQUEADOS">Venda bloqueada?</label>
-                <input type="checkbox" id="BLOQUEADOS">
+                <% if(filtro[0][7] == 'S'){%>
+                    <input type="checkbox" id="BLOQUEADOS" checked>
+                <%}else{%>
+                    <input type="checkbox" id="BLOQUEADOS">
+                <%}%>
                 <br>
+                
                 <button id="Buscar" type="submit" class="btn btn-success">Buscar</button>
                 <button id="TOTAL" class="btn btn-success ">00</button>
+<br>
+                <%-include('../components/csv.ejs')%>
 
 
             </div>
             <div style="width: 100%;">
-                <table class="table table-hover">
+                <table class="table table-hover"  id="tabeladados">
                     <thead>
                         <th>ID</th>
                         <th style="max-width:300px ;">Nome</th>
@@ -251,4 +268,5 @@
             </div>
         </div>
         <script src="/js/parceiro/parceiro.js"></script>
+        <script src="/js/exportar/csv.js"></script>
         <%- include('../partials/footer'); %>

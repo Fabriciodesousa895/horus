@@ -20,8 +20,11 @@
 
               <div class="form-group row">
                 <div class="col-sm-10">
-                  <button  class="btn btn-primary" id="Buscar">Buscar</button>
+                  <button  class="btn btn-primary mt-3" id="Buscar">Buscar</button>
+    <%-include('../components/csv.ejs')%>
+
                 </div>
+
               </div>
             </form>
     
@@ -30,7 +33,7 @@
       </div> 
       
       <div style="width: 100%;" >
-        <table class="table" style="width: 70%;" >
+        <table class="table" style="width: 70%;" id="tabeladados" >
           <thead>
             <tr>
               <th>ID</th>
@@ -46,9 +49,9 @@
       </div>
       
     </div>
+
     <script>
-           const table = document.querySelector('tbody');
-     table.addEventListener('dblclick',(e)=>{
+           document.getElementById('TABELA').addEventListener('dblclick',(e)=>{
               let elementoclicado = e.target;
               let elementoPai = elementoclicado.parentNode
               let ID_valor = elementoPai.cells[0].innerText
@@ -57,5 +60,7 @@
      });
     </script>
 <script src="/js/Admin/dicionariodedados.js"></script>
+<script src="/js/exportar/csv.js"></script>
+
 
 <%- include('../partials/footer'); %>

@@ -1,16 +1,14 @@
 Há uma grande demanda por requisições ajax,logo para cada requisição é feita uma rota POST,
 diante desta necessidade foi criado uma rota para requisições mais simples => '/rota/universal'
+que pode ser reutilizada.
 
-
-
-Durante a requisição ajax no lado do cliente deverá ser passado os seguintes parametros
-Um objeto com os seguintes parametros
+Durante a requisição ajax no lado do cliente deverá ser passado um objeto com os seguintes parametros
 -- sql => Sql a ser execultado
---binds => Valores a serem lidos
+--binds => Valores a serem lidos(parametros)
 --mensagem_sucess => mesngem de sucesso
 --mensagem_error  => mensagem de erro
---USU_LOGADO  => valor boolean,define se deve pegar o uisuario logado ou não
-
+--USU_LOGADO  => valor booleano,define se deve pegar o uisuario logado ou não
+exemplo:
             let data = {
                 sql: `BEGIN
                 INSERT INTO T_TELA (ROTA,T_NOME,T_DESCRICAO,TIPO) VALUES(:T_ROTA,:T_NOME,:T_DESCRICAO,:TIPO);
@@ -20,21 +18,20 @@ Um objeto com os seguintes parametros
                     T_ROTA: ROTA.value,
                     T_NOME: T_NOME.value,
                     T_DESCRICAO:  T_DESCRICAO.value,
-                    TIPO: TIPO.value
+                    TIPO: TIPO.value,
+                    USU_LOGADO: false
                   },
                   mensagem_sucess:'Registro inserido com sucesso!',
                   mensagem_error:'Erro ao inserir registro!'
             }
 
-    obs: caso o sql envolva informar o usuario logado para colocar
-    USU_LOGADO como parametro entre os values
 
----------------------------------------------------------------------------------------------------
-    Da mesma forma esxiste uma rota para select
-    -- sql => Sql a ser execultado
---binds => Valores a serem lidos
+----------------------------------------------------------------------------------------------------------------------------------------
+Da mesma forma esxiste uma rota para select dentro do banco
+-- sql => Sql a ser execultado
+--binds => Valores a serem lidos(parametros)
 --mensagem_error  => mensagem de erro 
---rows => valor boolean,define se o valor retornado é somente um array completo com varios registros
+--rows => valor booleano,define se o valor retornado é somente somente a primeira psoição do array ou um array completo
       let data = {
         sql: `  SELECT   U.ID_USU, U.USU_NOME
         FROM USU_USUARIO U
@@ -44,18 +41,59 @@ Um objeto com os seguintes parametros
         WHERE CG.ID_TELA = TL.ID_TELA
           AND (CU.${campo} = 'S' OR CG.${campo1} = 'S' OR U.USU_ADM = 'S')
           AND TL.ID_TELA = :ID_TELA
-        AND TL.TIPO <> 'V'
-      AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )
+          AND TL.TIPO <> 'V'
+          AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )
        GROUP BY  U.USU_NOME,U.ID_USU`,
         binds: { ID_TELA: ID_TELA.value },
         mensage_error: 'Houve um erro ao conultar o registro!',
         rows: true
         USU_LOGADO,true
       };
-      
+      OBS: rows =  true irá retornar um array com os registros;
+---------------------------------------------------------------------------------------------------------------------------------------------
+Toda pagina html dever ser informado os componentes abaixo,caso não informe deverá escrever o html próprio(cabeçalho,corpo e footer);
+
 <%- include('../partials/head'); %>
 
 <%- include('../partials/header'); %>
 
+html a ser exibido ao usuário
+
 <%- include('../partials/footer'); %>
 
+OBS: Na pasta views/components há arquivos quem são componentes que podem ser usados nas páginas html =>    <%-include('../components/csv.ejs')%>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Componente para exportar Tabelas para CSV
+
+-É preicso definir o ID da tabela como => id="tabeladados"
+-Referenciar o script que gera o CSV no no final da página html => <script src="/js/exportar/csv.js"></script>
+-Incluir componente  botão => <%-include('../components/csv.ejs')%>
+
+-Desta forma ao clicar no botão,será gerado um arquivo.csv com os dados da tabela referenciada.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Padronização de rotas get
+-Rotas assicronas.
+-Middlawre chamado auth.
+-Deverá ter uma variável chamada token no qual terá o token da sessão do usuário.
+-As açoes devem ser feitas dentro de um try{  } catch (error){res.send(error) } dentro deste try deve ter obrgatoriamente duas variaveis:
+
+ Acesso no qual chama a função valida_acesso que  precisa de dois parametros o primeiro sendo o ID da tela e o segundo o token.Valida se o usuário tem acesso.
+ P_USU  no qual chama a função permi_usu que precisa de dois parametros o primeiro sendo o ID da tela e o segundo o token.Manda para a tela as perissões do usuário e o historico de filtros da tela.
+
+-Logo mais abaixo deve ser feita validação de acesso.
+
+app.get('/usuario', auth, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(1, token);
+    let P_USU = await permi_usu(1, token);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/usuario', { P_USU })
+  } catch (error) {
+    res.send(error);
+    console.log(error)
+  }
+});
+
+-----------------------------------------------------------------------------------------------------------------------------

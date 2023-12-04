@@ -17,7 +17,6 @@ function sendForm(evento){
       };
         //transformando data em JSON
        let jsonData = JSON.stringify(data);
-
        ajax.open('POST','/select/universal');
        ajax.setRequestHeader('Content-type', 'application/json');
        ajax.onreadystatechange = function(){

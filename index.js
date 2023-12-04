@@ -224,7 +224,8 @@ function valida_acesso(ID_TELA, token) {
     });
   });
 }
-//valia aspermições na tela em que o usuário está
+
+//valia as permições na tela em que o usuário está
 function permi_usu(ID_TELA, token) {
 
   return new Promise((resolve, reject) => {
@@ -407,11 +408,9 @@ ORDER BY COR DESC`
 })
 app.get('/cadastro/cidades', auth, async (req, res) => {
   let token = req.cookies.jwt;
-
   try {
     let Acesso = await valida_acesso(181, token);
     let P_USU = await permi_usu(181, token);
-
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./cadastro/cidades', { P_USU })
   } catch (error) {
     res.send('Error:' + error)
@@ -845,6 +844,9 @@ app.post('/update_usuario', async (req, res) => {
     }
   })
 })
+
+
+
 app.post('/delete_usu', urlencodedParser, async (req, res) => {
   let ID_USU = req.body.ID_USU;
   let sql = `BEGIN DELETA_USUARIO(:ID_USU,:P_MENSAGEM); END;`;

@@ -73,11 +73,12 @@
               </div>
     <button id="Buscar" class="btn btn-warning">Buscar</button>
     <button id="TOTAL" class="btn btn-success">00</button>
-
+    <br>
+    <%-include('../components/csv.ejs')%>
       </div> 
       
       <div style="width: 100%;" >
-        <table class="table" style="width: 70%;" >
+        <table class="table" style="width: 70%;" id="tabeladados">
           <thead>
             <tr>
                 <th>ID</th>
@@ -94,4 +95,5 @@
       
     </div>
 <script src="/js/cadastro/cidades.js"></script>
+<script src="/js/exportar/csv.js"></script>
 <%- include('../partials/footer'); %>

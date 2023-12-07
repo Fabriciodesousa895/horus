@@ -1,10 +1,11 @@
 (function (win, doc) {
     'use strict';
-    let NOME_TABELA = document.getElementById('NOME_TABELA')
-    let DESCRICAO = document.getElementById('DESCRICAO')
+    // import {Filtro} from ('../Class/Filtro.js');
+
     function ConsultaTabela(e) {
         e.preventDefault();
-
+        let NOME_TABELA = document.getElementById('NOME_TABELA')
+        let DESCRICAO = document.getElementById('DESCRICAO')
         let ajax = new XMLHttpRequest();
         ajax.open('POST', '/select/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
@@ -37,57 +38,46 @@
             }
         };
         ajax.send(JsonData);
-        salvafiltro();
+        // new Filtro(118, NOME_TABELA.value, DESCRICAO.value).SalvaFiltro();
+    }
+    function FiltroTrigger(e){
+        e.preventDefault()
+        let NOME_TRIGGER = document.getElementById('NOME_TRIGGER')
+   let ajax = new XMLHttpRequest();
+   ajax.open('POST','/select/universal');
+   ajax.setRequestHeader('Content-type','application/json');
+   let data =  {
+    sql: `SELECT TRIGGER_NAME,TRIGGER_TYPE,TRIGGERING_EVENT,TABLE_NAME,STATUS FROM USER_TRIGGERS WHERE TRIGGER_NAME LIKE '%${NOME_TRIGGER.value}%'`,
+    binds: {},
+    mensage_error: 'Não foi encontrado registros!',
+    rows: true
+}
+   let JsonData = JSON.stringify(data);
+   ajax.onreadystatechange = ()=>{
+    if (ajax.status == 200) {
+        console.log(ajax.responseText)
+        let array_dados = JSON.parse(ajax.responseText);
+        let tbody = document.getElementById('tabelatrigger');
+        tbody.innerText = '';
+        array_dados.forEach(RowData => {
+            const row = document.createElement('tr');
+            RowData.forEach(cellData => {
+                let cell = document.createElement('td');
+                cell.innerText = cellData;
+                row.appendChild(cell);
+            })
+            tbody.appendChild(row);
+        });
+    } else {
+        swal({
+            text: ajax.responseText,
+            icon: 'error'
+        })
+    }
+   }
+   ajax.send(JsonData)
     }
 
-    function salvafiltro() {
-        let ajax = new XMLHttpRequest();
-        ajax.open('POST', '/rota/universal');
-        ajax.setRequestHeader('Content-type', 'application/json');
-        let data = {
-            sql: `BEGIN HIST_FILTROS(:P_ID_TELA,
-                :USU_LOGADO,
-                :P_CAMP_1,
-                :P_CAMP_2,
-                :P_CAMP_3,
-                :P_CAMP_4,
-                :P_CAMP_5,
-                :P_CAMP_6,
-                :P_CAMP_7,
-                :P_CAMP_8,
-                :P_CAMP_9,
-                :P_CAMP_10
-                ); END;`,
-            binds: {
-                P_ID_TELA: 118,
-                P_CAMP_1: NOME_TABELA.value,
-                P_CAMP_2: DESCRICAO.value,
-                P_CAMP_3: '',
-                P_CAMP_4: '',
-                P_CAMP_5: '',
-                P_CAMP_6: '',
-                P_CAMP_7: '',
-                P_CAMP_8: '',
-                P_CAMP_9: '',
-                P_CAMP_10: ''
-            },
-            mensagem_sucess: 'OK',
-            mensagem_error: 'Houve um erro ao salvar os regitros!',
-            USU_LOGADO: true
-        }
-        let JsonData = JSON.stringify(data)
-        ajax.onreadystatechange = () => {
-            if (ajax.status === 200) {
-     
-            } else {
-                swal({
-                    text: ajax.responseText,
-                    icon: 'error'
-                });
-            }
-        }
-        ajax.send(JsonData)
-    }
-
-    document.getElementById('Buscar').addEventListener('click', ConsultaTabela, false)
+    document.getElementById('BuscarFiltro').addEventListener('click', ConsultaTabela, false)
+    document.getElementById('BuscarTrigger').addEventListener('click', FiltroTrigger, false)
 })(window, document)

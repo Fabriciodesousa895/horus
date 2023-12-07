@@ -44,14 +44,15 @@
             ajax.send(JsonData)
         }
     }
+
+
     function SendFiltro(e) {
         e.preventDefault();
-        let FILTRO_COD = document.getElementById('FILTRO_COD')
         let PROGRESSO = document.getElementById('PROGRESSO');
         let FILTRO_NOME = document.getElementById('FILTRO_NOME');
+        let FILTRO_COD = document.getElementById('FILTRO_COD')
         //mostra ao usuário a barra de progresso
         PROGRESSO.style.opacity = '1'
-
         let ajax = new XMLHttpRequest();
         ajax.open('POST', '/select/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
@@ -62,19 +63,13 @@
             USU_LOGADO: false,
             rows: true
         };
-
         let JsonData = JSON.stringify(data)
-
         ajax.onreadystatechange = () => {
             if (ajax.status == 200) {
-
                 //omite do usuário a barra de progresso
                 PROGRESSO.style.opacity = '0';
                 tbody.innerText = '';
-
-
                 let array_registros = JSON.parse(ajax.responseText);
-
                 array_registros.forEach(rowData => {
                     const row = document.createElement("tr");
                     rowData.forEach(cellData => {
@@ -82,7 +77,6 @@
                         cell.innerText = cellData;
                         row.appendChild(cell);
                     });
-
                     const cell = document.createElement("td");
                     const check = document.createElement('input');
                     check.type = 'checkbox';
@@ -100,14 +94,67 @@
                 })
                 //omite do usuário a barra de progresso
                 PROGRESSO.style.opacity = '0';
-
-            }
-
         }
+   
+    }
+    ajax.send(JsonData);
+    SalvaFiltro();
+    }
+    function SalvaFiltro () {
+        let FILTRO_NOME = document.getElementById('FILTRO_NOME');
+        let FILTRO_COD = document.getElementById('FILTRO_COD')
+
+        let ajax = new XMLHttpRequest();
+        ajax.open('POST','/rota/universal');
+        ajax.setRequestHeader('Content-type','application/json');
+        let data = {
+            sql:`BEGIN HIST_FILTROS( :P_ID_TELA,
+                :USU_LOGADO,
+                :P_CAMP_1,
+                :P_CAMP_2,
+                :P_CAMP_3,
+                :P_CAMP_4,
+                :P_CAMP_5,
+                :P_CAMP_6,
+                :P_CAMP_7,
+                :P_CAMP_8,
+                :P_CAMP_9,
+                :P_CAMP_10
+                ); END;`,
+                binds: {
+                    P_ID_TELA: 181,
+                    P_CAMP_1: FILTRO_NOME.value,
+                    P_CAMP_2: FILTRO_COD.value,
+                    P_CAMP_3: '',
+                    P_CAMP_4: '',
+                    P_CAMP_5: '',
+                    P_CAMP_6: '',
+                    P_CAMP_7: '',
+                    P_CAMP_8: '',
+                    P_CAMP_9: '',
+                    P_CAMP_10: ''
+                },
+                mensage_error: 'Houve um erro ao salvar o filtro',
+                mensagem_sucess:'Registro salvo com sucesso!',
+                USU_LOGADO: true}
+        let JsonData = JSON.stringify(data)
+        ajax.onreadystatechange = () => {
+            if (ajax.status === 200) {
+                // swal({
+                //     text: ajax.responseText,
+                //     icon: 'warning'
+                // })
+            } else {
+                swal({
+                    text: ajax.responseText,
+                    icon: 'error'
+                });
+            }
+        };
         ajax.send(JsonData)
 
     }
-
+    
     function ImportarDados(e) {
         e.preventDefault();
         let NOME = document.getElementById('NOME');

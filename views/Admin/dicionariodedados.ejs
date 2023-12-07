@@ -1,38 +1,38 @@
 <%- include('../partials/head'); %>
 
 <%- include('../partials/header'); %>
+
+
+
+
+
+
 <div class="grad" style="display: flex; height: auto;padding: 30px;">
     <% let filtro = P_USU.T_FILTRO %>
-      <div style="width: 300px;height: 400px;">
+      <div style="width: 300px;height:auto;">
           <form  id="filtro" >
               <div class="form-group row">
                 <div class="col-sm-10">
 
-                  <input type="text" placeholder="Nome da tabela" id="NOME_TABELA"  class="form-control" value="<%=filtro[0][0]%>" id="inputEmail3" >
+                  <input type="text" placeholder="Nome da tabela" id="NOME_TABELA"  class="form-control" value="<%=filtro[0][0]%>"  >
                 </div>
               </div>
     
               <div class="form-group row">
                 <div class="col-sm-10">
-                    <input type="text" placeholder="Descrição da tabela" id="DESCRICAO"  class="form-control" value="<%=filtro[0][1]%>" id="inputEmail4" >
+                    <input type="text" placeholder="Descrição da tabela" id="DESCRICAO"  class="form-control" value="<%=filtro[0][1]%>"  >
                   </div>
               </div>
     
 
               <div class="form-group row">
                 <div class="col-sm-10">
-                  <button  class="btn btn-primary mt-3" id="Buscar">Buscar</button>
-    <%-include('../components/csv.ejs')%>
-
+                  <button type="button"  class="btn btn-primary mt-3" id="BuscarFiltro">Buscar</button>
+                         <%-include('../components/csv.ejs')%>
                 </div>
-
               </div>
             </form>
-    
-     
-    
       </div> 
-      
       <div style="width: 100%;" >
         <table class="table" style="width: 70%;" id="tabeladados" >
           <thead>
@@ -48,7 +48,83 @@
           </tbody>
         </table>
       </div>
-      
+    </div>
+
+    <!-- ----------------------------------------------------------------------------------------------- -->
+
+<div class="grad" style="display: flex; height: auto;padding: 30px;">
+      <div style="width: 300px;height: auto;">
+          <form  id="filtro" >
+              <div class="form-group row">
+                <div class="col-sm-10">
+                <label for="NOME_TRIGGER">Nome da trigger</label>
+                  <input type="text" placeholder="Nome da trigger" id="NOME_TRIGGER"  class="form-control" value="<%=filtro[0][2]%>" >
+                </div>
+              </div>
+    
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <button  class="btn btn-primary mt-3" id="BuscarTrigger">Buscar</button>
+
+                </div>
+
+              </div>
+            </form>
+      </div> 
+      <div style="width: 100%;" >
+        <table class="table" style="width: 70%;" id="tabeladados2" >
+          <thead>
+            <tr>
+              <th>TRIGGER_NAME</th>
+              <th>TRIGGER_TYPE</th>
+              <th>TRIGGERING_EVENT</th>
+              <th>TABLE_NAME</th>
+              <th>STATUS</th>
+                      </tr>
+          </thead>
+          <tbody id="tabelatrigger"   >
+                 <!-- inserido pela requição ajax apos usar o filtro -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<div class="grad" style="display: flex; height: auto;padding: 30px;">
+      <div style="width: 300px;height: auto;">
+          <form  id="filtro" >
+              <div class="form-group row">
+                <div class="col-sm-10">
+
+                  <input type="text" placeholder="Nome da procedure" id="NOME_T"  class="form-control" value="<%=filtro[0][3]%>">
+                </div>
+              </div>
+    
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <button  class="btn btn-primary mt-3" id="BusrJ">Buscar</button>
+
+                </div>
+
+              </div>
+            </form>
+      </div> 
+      <div style="width: 100%;" >
+        <table class="table" style="width: 70%;" id="tabeladados3" >
+          <thead>
+            <tr>
+              <th>PROCEDURE_NAME</th>
+              <th>TRIGGER_TYPE</th>
+              <th>TRIGGERING_EVENT</th>
+              <th>TABLE_NAME</th>
+              <th>STATUS</th>
+                      </tr>
+          </thead>
+          <tbody id="TABELA"   >
+                 <!-- inserido pela requição ajax apos usar o filtro -->
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <script>
@@ -57,9 +133,15 @@
               let elementoPai = elementoclicado.parentNode
               let ID_valor = elementoPai.cells[0].innerText
               window.location.href = `/visualiza/dicionario/dados/` +ID_valor
-
+     });
+           document.getElementById('tabelatrigger').addEventListener('dblclick',(e)=>{
+              let elementoclicado = e.target;
+              let elementoPai = elementoclicado.parentNode
+              let NOME_TRIGGER= elementoPai.cells[0].innerText
+              window.location.href = `/visualiza/dicionario/dados/trigger/` +NOME_TRIGGER
      });
     </script>
+<!-- <script type="module" src="/js/Class/Filtro.js"></script> -->
 <script src="/js/Admin/dicionariodedados.js"></script>
 <script src="/js/exportar/csv.js"></script>
 

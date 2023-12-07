@@ -163,7 +163,7 @@ O parametro binds deve ter obrigatóriamente a seguinte sintaxe,substituindo os 
             }
 O parametro  mensage_error de ter a seguinte mensagem.
  
-               mensage_error: 'Houve um erro ao consultar registros'
+               mensage_error: 'Houve um erro ao salvar o filtro registros'
 
 OBS: P_ID_TELA é o ID da tela que está sendo salvo o filtro
 

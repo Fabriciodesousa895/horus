@@ -540,8 +540,21 @@ app.get('/comunicado/usuarios', auth, urlencodedParser, async (req, res) => {
     console.log(error)
   }
 })
-//para baixo somente rotas posts
-// --------------------------------------------------------------------------------------------------------------- //
+//Rota para visuaçlizar trigger
+app.get('/visualiza/dicionario/dados/trigger/:trigger_name',urlencodedParser,auth,async(req,res)=>{
+let token = req.cookies.jwt;
+let trigger_name = req.params.trigger_name
+try {
+  let Acesso = await valida_acesso(118, token);
+  let P_USU = await permi_usu(118, token);
+  let sql = `SELECT DESCRIPTION,TRIGGER_BODY FROM USER_TRIGGERS WHERE TRIGGER_NAME = '${trigger_name}' `;
+  let result = await conectar(sql,[]);
+  console.log(result)
+  Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizatrigger', { P_USU,result:result.rows })
+} catch (error) {
+  res.send('Error:' + error)
+}
+})
 
 //faz a conSulta sql que o usuario digitou 
 app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {

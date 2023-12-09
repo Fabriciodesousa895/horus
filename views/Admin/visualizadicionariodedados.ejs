@@ -1,141 +1,192 @@
 <%- include('../partials/head'); %>
 
     <%- include('../partials/header'); %>
-                    <% let CAMPOS=Objeto.CAMPOS %>
-                    <% let CONSTRAINT=Objeto.CONSTRAINT %>
-                    <% let TABELA_NOME=Objeto.TABELA_NOME %>
+        <% let CAMPOS=Objeto.CAMPOS %>
+            <% let CONSTRAINT=Objeto.CONSTRAINT %>
+                <% let TABELA_NOME=Objeto.TABELA_NOME %>
                     <% let INDEXES=Objeto.INDEXES %>
-                    <% let TRIGGRES=Objeto.TRIGGRES %>
+                        <% let TRIGGRES=Objeto.TRIGGRES %>
 
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Campos</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Constraints</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Indices</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Triggres" role="tab" aria-controls="contact" aria-selected="false">Triggres</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link"><strong style="color: black;"><h5><%=TABELA_NOME[0]%></h5></strong> </a>
-                        </li>
-                      </ul>
-                      <div class="tab-content" id="myTabContent">
-                         <!-- Campos -->
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <%if(CAMPOS.length==0){%>
-                            <h5>Não há registros para visualizar.</h5>
-                            <%}else{%>
-                                <table class="table mt-3 table-hover" style="min-width: 800;width: 900px;">
-                                    <thead>
-                                        <tr>
-                                            <th>CAMPO</th>
-                                            <th>Tipo</th>
-                                            <th>NULL</th>
-                                            <th>Tamanho</th>
-                                            <th>Default</th>
-                                            <th>Descrição</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (var i=0; i < CAMPOS.length; i++) { %>
-                                            <tr>
-                                                <td> <%= CAMPOS[i][0] %></td>
-                                                <td> <%= CAMPOS[i][1] %></td>
-                                                <td> <%= CAMPOS[i][2] %></td>
-                                                <td> <%= CAMPOS[i][3] %></td>
-                                                <td> <%= CAMPOS[i][4] %></td>
-                                                <td> <%= CAMPOS[i][5] %></td>
-                                            </tr>
-                                            <% } %>
-
-                                    </tbody>
-                                </table>
-                        </div>
-                         <!--   Constraints  -->
-                        <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
-                                <%if(CONSTRAINT.length==0){%>
-                                    <h5>Não há Constraints para visualizar.</h5>
-                                    <%}else{%>
-                                        <table class="table mt-3 table-hover" style="min-width: 500;width: 600px;">
-                                            <thead>
-                                            <tr>
-                                                <th>CAMPO</th>
-                                                <th>NOME</th>
-                                                <th>POSICAO</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                                <% for (var i=0; i < CONSTRAINT.length; i++) { %>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                        aria-controls="home" aria-selected="true">Campos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab"
+                                        aria-controls="profile" aria-selected="false">Constraints</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab"
+                                        aria-controls="contact" aria-selected="false">Indices</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Triggres" role="tab"
+                                        aria-controls="contact" aria-selected="false">Triggres</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"><strong style="color: black;">
+                                            <h5>
+                                                <%=TABELA_NOME[0]%>
+                                            </h5>
+                                        </strong> </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <!-- Campos -->
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                    <%if(CAMPOS.length==0){%>
+                                        <h5>Não há registros para visualizar.</h5>
+                                        <%}else{%>
+                                            <table class="table mt-3 table-hover" style="min-width: 800;width: 900px;">
+                                                <thead>
                                                     <tr>
-                                                        <td> <%= CONSTRAINT[i][0] %></td>
-                                                        <td> <%= CONSTRAINT[i][1] %></td>
-                                                        <td> <%= CONSTRAINT[i][2] %></td>
+                                                        <th>CAMPO</th>
+                                                        <th>Tipo</th>
+                                                        <th>NULL</th>
+                                                        <th>Tamanho</th>
+                                                        <th>Default</th>
+                                                        <th>Descrição</th>
                                                     </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (var i=0; i < CAMPOS.length; i++) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= CAMPOS[i][0] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= CAMPOS[i][1] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= CAMPOS[i][2] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= CAMPOS[i][3] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= CAMPOS[i][4] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= CAMPOS[i][5] %>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
 
-                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                </div>
+                                <!--   Constraints  -->
+                                <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
+                                    <%if(CONSTRAINT.length==0){%>
+                                        <h5>Não há Constraints para visualizar.</h5>
+                                        <%}else{%>
+                                            <table class="table mt-3 table-hover" style="min-width: 500;width: 600px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>CAMPO</th>
+                                                        <th>NOME</th>
+                                                        <th>POSICAO</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (var i=0; i < CONSTRAINT.length; i++) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= CONSTRAINT[i][0] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= CONSTRAINT[i][1] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= CONSTRAINT[i][2] %>
+                                                            </td>
+                                                        </tr>
 
-                                            </tbody>
-                                        </table>
-                                        <%}%>
-                        </div>
-                        <!-- Indices -->
-                        <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
-                                                                    <%if(INDEXES.length==0){%>
-                                                                        <h5>Não há indices para visualizar.</h5>
-                                                                        <%}else{%>
-                                                                            <table class="table mt-3 table-hover"
-                                                                                style="min-width: 500;width: 600px;" >
-                                                                                <thead>
-                                                                                <tr>
-                                                                                    <th>INDEX_NAME</th>
-                                                                                    <th>INDEX_TYPE </th>
-                                                                                    <th>CONSTRAINT_INDEX</th>
-                                                                                    <th>NUM_ROWS</th>
-                                                                                </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <% for (var i=0; i < INDEXES.length; i++) { %>
-                                                                                        <tr>
-                                                                                            <td> <%= INDEXES[i][0] %></td>
-                                                                                            <td> <%= INDEXES[i][1] %></td>
-                                                                                            <td> <%= INDEXES[i][2] %></td>
-                                                                                            <td> <%= INDEXES[i][3] %></td>
-                                                                                        </tr>
-                                                                                    <% } %>
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <%}%>
-                        </div>
-                        <!-- Triggres -->
-                        <div class="tab-pane fade" id="Triggres" role="tabpanel" aria-labelledby="contact-tab">
-                                                    <%if(TRIGGRES.length==0){%>
-                                                        <h5>Não há Triggres para visualizar.</h5>
-                                                        <%}else{%>
-                                                            <table class="table mt-3 table-hover" style="min-width: 500;width: 600px;" >
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>TRIGGER_NAME</th>
-                                                                    <th>TRIGGERING_EVENT </th>
-                                                                    <th>STATUS</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <% for (var i=0; i < TRIGGRES.length; i++) { %>
-                                                                        <tr>
-                                                                            <td> <%= TRIGGRES[i][0] %> </td>
-                                                                            <td> <%= TRIGGRES[i][1] %> </td>
-                                                                            <td> <%= TRIGGRES[i][2] %> </td>
-                                                                        </tr>
-                                                                    <% } %>
-                                                                </tbody>
-                                                            </table>
-                                                            <%}%>
-                        </div>
-                      </div>
-                                                        <%}%>
-                                                            <%- include('../partials/footer'); %>
+                                                        <% } %>
+
+                                                </tbody>
+                                            </table>
+                                            <%}%>
+                                </div>
+                                <!-- Indices -->
+                                <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
+                                    <%if(INDEXES.length==0){%>
+                                        <h5>Não há indices para visualizar.</h5>
+                                        <%}else{%>
+                                            <table class="table mt-3 table-hover" style="min-width: 500;width: 600px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>INDEX_NAME</th>
+                                                        <th>INDEX_TYPE </th>
+                                                        <th>CONSTRAINT_INDEX</th>
+                                                        <th>NUM_ROWS</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (var i=0; i < INDEXES.length; i++) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= INDEXES[i][0] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= INDEXES[i][1] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= INDEXES[i][2] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= INDEXES[i][3] %>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                </tbody>
+                                            </table>
+                                            <%}%>
+                                </div>
+                                <!-- Triggres -->
+                                <div class="tab-pane fade" id="Triggres" role="tabpanel" aria-labelledby="contact-tab">
+                                    <%if(TRIGGRES.length==0){%>
+                                        <h5>Não há Triggres para visualizar.</h5>
+                                        <%}else{%>
+                                            <table class="table mt-3 table-hover" style="min-width: 500;width: 600px;" id="tabelatriggers">
+                                                <thead>
+                                                    <tr>
+                                                        <th>TRIGGER_NAME</th>
+                                                        <th>TRIGGERING_EVENT </th>
+                                                        <th>STATUS</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (var i=0; i < TRIGGRES.length; i++) { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= TRIGGRES[i][0] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= TRIGGRES[i][1] %>
+                                                            </td>
+                                                            <td>
+                                                                <%= TRIGGRES[i][2] %>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                </tbody>
+                                            </table>
+                                            <%}%>
+                                </div>
+                            </div>
+                            <%}%>
+                                <script>
+                                         let tabelatriggers = document.getElementById('tabelatriggers');
+                                         tabelatriggers.addEventListener('dblclick',(e)=>{
+                                         let elementoclicado = e.target;
+                                         let elementopai = elementoclicado.parentNode;
+                                         let nometrigger = elementopai.cells[0].innerText
+                                         window.location.href = `/visualiza/dicionario/dados/trigger/` + nometrigger
+
+                                         })
+
+                                </script>
+                                <%- include('../partials/footer'); %>

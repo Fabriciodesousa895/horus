@@ -208,3 +208,67 @@ Wed Dec 13 2023 08:16:18 GMT-0300 (Horário Padrão de Brasília) -- /beforeunlo
 ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
 ORA-06512: em line 1
 Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 13 2023 10:22:56 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Wed Dec 13 2023 10:23:03 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Wed Dec 13 2023 10:25:25 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Wed Dec 13 2023 10:26:59 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Wed Dec 13 2023 10:29:57 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 5, coluna 57:
+PL/SQL: ORA-00933: comando SQL não encerrado adequadamente
+ORA-06550: linha 5, coluna 1:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Wed Dec 13 2023 10:30:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Wed Dec 13 2023 10:34:48 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Wed Dec 13 2023 10:36:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 5, coluna 46:
+PLS-00302: o componente 'PARC_NOME' deve ser declarado
+ORA-06550: linha 5, coluna 44:
+PL/SQL: ORA-00904: "I"."PARC_NOME": identificador inválido
+ORA-06550: linha 5, coluna 1:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Wed Dec 13 2023 10:36:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+ORA-06512: em line 5
+ORA-06512: em line 5
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Wed Dec 13 2023 10:37:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Wed Dec 13 2023 10:39:23 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Wed Dec 13 2023 10:41:06 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 13 2023 11:41:02 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Wed Dec 13 2023 12:38:15 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 13 2023 13:06:06 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Wed Dec 13 2023 13:22:15 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 13 2023 13:22:56 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 13 2023 13:23:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/

@@ -35,6 +35,9 @@ toggleValue();
 setInterval(() => { console.log(V_truefalse); }, 50000)
 //no middleware é preciso validar a licença da aplicação que está rodando,na raiz da aplicação existe um arquivo.json que informaos dados da licença
 app.use(async (req, res, next) => {
+
+
+  // console.log(response.data)
   console.log('Entre cliente e servidor!');
   let url = req.path;
   if (V_truefalse) {
@@ -73,6 +76,8 @@ app.use(async (req, res, next) => {
     next();
   }
 });
+
+
 
 app.get('/certificado/validacao', (req, res) => {
   let url = req.params.url;
@@ -1109,25 +1114,31 @@ app.post('/consulta_acessos', async (req, res) => {
   }
 })
 
-app.post('/importar/cod/municipio', async (req, res) => {
-  try {
-    const response = await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/municipios?view=nivelado');
-    const data = response.data;
-    const status = response.status;
-    console.log(status)
+// app.post('/importar/cod/municipio', async (req, res) => {
+ 
+  // setInterval( function  importardados   (){
 
-    if (status == 429) {
-      res.status(429).json('As importação possui um limite de 3 tentativas por CNPJ a cada 60 segundos!')
-    } else {
-      res.json(data);
 
-    }
+  // },000)
+//   try {
 
-  } catch (error) {
-    console.error('Erro:', error);
-    res.status(500).send('Erro ao obter os dados');
-  }
-})
+
+//     const data = response.data;
+//     // const status = response.status;
+//     console.log(data)
+
+//     // if (status == 429) {
+//     //   res.status(429).json('As importação possui um limite de 3 tentativas por CNPJ a cada 60 segundos!')
+//     // } else {
+//     //   res.json(data);
+
+//     // }
+
+//   } catch (error) {
+//     console.error('Erro:', error);
+//     // res.status(500).send('Erro ao obter os dados');
+//   }
+// // })
 app.post('/importar/dados', async (req, res) => {
   let CGC = req.body.CGC
   try {
@@ -1150,7 +1161,24 @@ app.post('/importar/dados', async (req, res) => {
     }
 
   }
-
+  // IMPORTAMDO MUNICIPIOS DO IBGE
+  function importar(){
+    fs.readFile('municipios.json','utf-8',(err,data)=>{
+      let dados = JSON.parse(data)
+      dados.forEach(e=>{
+     
+      //  console.log( e.id , e.nome)
+      let sql = `BEGIN INSERT INTO CIDADE (NOME,COD_DOMICILIO_FISCAL,ID_USU_INCLU,ID_USU_ALTER,DT_INCLUSAO,DT_ALTERACAO) VALUES (:NOME,:ID,362,362,SYSDATE,SYSDATE); COMMIT; END;`
+      let binds = {NOME:e.nome,ID:e.id}
+        let result =  conectar(sql,binds)
+        console.log(result)
+       })
+     
+     })
+  
+  }
+  
+  importar();
 })
 
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
@@ -1239,6 +1267,7 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
 
 
 })
+
 
 app.listen(8020, (err) => {
   if (err) {

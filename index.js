@@ -64,6 +64,8 @@ app.use(async (req, res, next) => {
         }
       });
     } catch (error) {
+      let log = error;
+      criarlogtxt(log,req.url);
       console.log('Erro ao se comunicar com o gerenciador de licenças: ', error);
       res.status(500).send('Internal Server Error');
     }
@@ -78,6 +80,17 @@ app.get('/certificado/validacao', (req, res) => {
   res.render('certificado', { url, menssage });
   console.log(url + '<br>' + menssage);
 })
+ //gera log de erros do servidor no geral
+function criarlogtxt(log,url){
+  let data = new Date();
+  console.log(data);
+  try {
+    fs.appendFileSync('logdeerros.txt', `\n${data} -- ${url}  -- ${log}\n`, { encoding: 'utf8' });
+    console.log('Arquivo editado com sucesso.');
+  } catch (err) {
+    console.error('Erro ao escrever no arquivo: ', err);
+  }
+}
 
 //middleware de autenticação;
 function auth(req, res, next) {
@@ -99,7 +112,9 @@ function auth(req, res, next) {
 //fazendo a chama do banco
 const oracledb = require('oracledb');
 const { status } = require("init");
-const { error } = require("console");
+const { error, Console } = require("console");
+const bind = require("function-bind");
+const { date } = require("assert-plus");
 const dbconfig = {
   user: 'SYSTEM',
   password: 'host2023',
@@ -218,6 +233,8 @@ function valida_acesso(ID_TELA, token) {
           let result = await conectar(sql, binds);
           resolve(result.outBinds.P_RESULT);
         } catch (error) {
+          let log = error;
+          criarlogtxt(log,req.url);
           reject(error);
         }
       }
@@ -363,6 +380,8 @@ function permi_usu(ID_TELA, token) {
 
           resolve(Objeto);
         } catch (error) {
+          let log = error;
+          criarlogtxt(log,req.url);
           reject(error);
         }
       }
@@ -401,6 +420,8 @@ ORDER BY COR DESC`
     let P_USU = await permi_usu(1, token);
     res.render('index', { P_USU, result })
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     console.error('Erro:', error);
     res.status(500).send('Erro ao obter os dados');
   }
@@ -413,7 +434,9 @@ app.get('/cadastro/cidades', auth, async (req, res) => {
     let P_USU = await permi_usu(181, token);
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./cadastro/cidades', { P_USU })
   } catch (error) {
-    res.send('Error:' + error)
+    let log = error;
+    criarlogtxt(log,req.url);
+    res.send('Error:' + error);
   }
 })
 
@@ -425,6 +448,8 @@ app.get('/usuario', auth, async (req, res) => {
 
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/usuario', { P_USU })
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     res.send(error);
     console.log(error)
   }
@@ -437,8 +462,9 @@ app.get('/dicionario/de/dados', auth, async (req, res) => {
 
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/dicionariodedados', { P_USU })
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     res.send(error);
-    console.log(error)
   }
 });
 //Rota pára gráfico de usuario
@@ -487,8 +513,9 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
     console.log(Objeto)
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     res.send(error);
-    console.log(error)
   }
 })
 
@@ -500,8 +527,9 @@ app.get('/dash_usuario', auth, urlencodedParser, async (req, res) => {
 
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/dash_usuario', { P_USU })
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     res.send(error);
-    console.log(error)
   }
 })
 //rota para a consulta e dados no lado do usuário DBE_explorer
@@ -513,8 +541,9 @@ app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
 
     Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./sql/DBE_explorer', { P_USU })
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     res.send(error);
-    console.log(error)
   }
 })
 app.get('/cadastro/parceiro', auth, urlencodedParser, async (req, res) => {
@@ -524,8 +553,9 @@ app.get('/cadastro/parceiro', auth, urlencodedParser, async (req, res) => {
     let P_USU = await permi_usu(201, token);
     Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./parceiro/cadastroparceiro', { P_USU })
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     res.send(error);
-    console.log(error)
   }
 })
 app.get('/comunicado/usuarios', auth, urlencodedParser, async (req, res) => {
@@ -536,8 +566,9 @@ app.get('/comunicado/usuarios', auth, urlencodedParser, async (req, res) => {
 
     Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./Admin/comunicado', { P_USU })
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     res.send(error);
-    console.log(error)
   }
 })
 //Rota para visuaçlizar trigger
@@ -552,8 +583,25 @@ try {
   console.log(result)
   Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizatrigger', { P_USU,result:result.rows })
 } catch (error) {
+  let log = error;
+  criarlogtxt(log,req.url);
   res.send('Error:' + error)
 }
+})
+//Tela de log de acesso
+app.get('/log/acesso',urlencodedParser,auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(222, token);
+    let P_USU = await permi_usu(222, token);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') :  res.render('./Admin/logacesso',{P_USU})
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
+    res.send('Error:' + error)
+  }
+
+
 })
 
 //faz a conSulta sql que o usuario digitou 
@@ -573,11 +621,40 @@ app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
     };
     res.send(objeto)
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     res.status(500).send('Erro ao execultar sql! ' + error.message);
-    console.log('Erro ao execultar sql! ' + error)
-
   }
 })
+
+
+//grava log de saida das telas
+app.post('/beforeunload',urlencodedParser,async(req,res)=>{
+  let url_atual = req.body.url_atual
+  let token = req.cookies.jwt;
+  jwt.verify(token,secret,async(err,data)=>{
+     if(err){
+      console.log('Token inválido');
+      return;
+     }else{
+      let USU_LOGADO = data.ID_USUARIO;
+      try{
+        let sql4 = `BEGIN HIST_TELA_SAIDA(:P_TOKEN,:P_URL,:P_USU_LOGADO); END;`;
+        let binds4 = {
+          P_TOKEN: token,
+          P_URL: url_atual,
+          P_USU_LOGADO: USU_LOGADO}
+        await conectar(sql4,binds4,options)
+        return
+      }catch(error){
+        let log = error
+        criarlogtxt(log,req.url);
+       console.log('Erro ao salvar log de saida: ',error)
+      }
+     }
+  })
+})
+
 app.post('/dash_usuario', urlencodedParser, async (req, res) => {
   let ID_TELA = req.body.ID_TELA
   let sql = `SELECT * FROM (SELECT  TL.T_NOME,COUNT(*) AS CONSULTA
@@ -640,7 +717,16 @@ AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) ANEXA
 
   } catch (error) {
     res.send(error);
-    console.log(error)
+    let log = error
+    try {
+      fs.appendFile('logdeerros.txt', `${log}`, { encoding: 'utf8' });
+      console.log('Arquivo editado com sucesso.');
+    } catch (err) {       
+      let log = error;
+      criarlogtxt(log,req.url);
+      console.error('Erro ao escrever no arquivo:', err);
+    }
+    console.log(error);
   }
 })
 
@@ -701,6 +787,8 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
         res.send(result.outBinds.P_RESULTADO);
 
       } catch (err) {
+        let log = error;
+        criarlogtxt(log,req.url);
         res.status(500).send('Ocorreu um erro!' + err);
 
       }
@@ -785,6 +873,8 @@ app.post('/filtro_usuario', async (req, res) => {
         let result2 = await conectarbd(sql2, binds2, options);
         res.send(result[0][0])
       } catch (error) {
+        let log = error;
+        criarlogtxt(log,req.url);
         res.redirect(`/erroservidor/${error}`);
       }
 
@@ -801,7 +891,12 @@ app.post('/input_usu', async (req, res) => {
   try {
     let result = await conectarbd(sql, binds, options)
     result.length === 0 ? res.status(505).send('Usuário não encontrado!') : res.send(result[0][0])
-  } catch (error) { res.redirect(`/erroservidor/${error}`); }
+  } catch (error) { 
+    let log = error;
+    criarlogtxt(log,req.url);
+    res.redirect(`/erroservidor/${error}`);
+
+   }
 
 
 })
@@ -853,7 +948,9 @@ app.post('/update_usuario', async (req, res) => {
       let result = await conectar(sql, binds);
       res.send(result.outBinds.P_MENSAGEM)
     } catch (error) {
-      res.send('Erro no lado do servidor ' + error)
+      let log = error;
+      criarlogtxt(log,req.url);
+      res.send('Erro no lado do servidor ' + error);
     }
   })
 })
@@ -959,6 +1056,8 @@ app.post('/copia_usuario', async (req, res) => {
         let result = await conectar(sql, binds)
         res.status(200).send(result.outBinds.P_RESULTADO)
       } catch (error) {
+        let log = error;
+        criarlogtxt(log,req.url);
         res.send('Erro no lado do servidor ' + error)
       }
     }
@@ -1003,7 +1102,9 @@ app.post('/consulta_acessos', async (req, res) => {
       result.length === 0 ? res.status(505).send('Usuário ou grupo não encontrado!') : res.send(result)
 
     } catch (error) {
-      res.send('Erro no lado do servidor ' + error)
+      let log = error;
+      criarlogtxt(log,req.url);
+      res.send('Erro no lado do servidor ' + error);
     }
   }
 })
@@ -1036,6 +1137,8 @@ app.post('/importar/dados', async (req, res) => {
 
     res.status(200).json(data);
   } catch (error) {
+    let log = error;
+    criarlogtxt(log,req.url);
     let erro = error
     let status = erro.response.status;
     console.log(status)
@@ -1073,7 +1176,9 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
         let result = await conectar(Objeto.sql, Objeto.binds);
         res.status(200).send(Objeto.mensagem_sucess);
       } catch (error) {
-        res.status(500).send(Objeto.mensagem_error + error)
+        let log = error;
+        criarlogtxt(log,req.url);
+        res.status(500).send(Objeto.mensagem_error + error);
       }
     }
 
@@ -1122,6 +1227,8 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
             result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
           }
         } catch (error) {
+          let log = error;
+          criarlogtxt(log,req.url);
           res.send('Ocorreu um erro no lado do servidor! --' + error);
           console.log(error);
         }

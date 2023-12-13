@@ -1,0 +1,67 @@
+<%- include('../partials/head'); %>
+
+<%- include('../partials/header'); %>
+
+<!--Filtro e tabela-->
+<div class="grad" style="display: flex; height: auto;padding: 30px;">
+    <% let filtro = P_USU.T_FILTRO %>
+      <div style="width: 400px;height: 400px;">
+          <form  id="filtro" >
+              <div class="form-group row">
+                <div class="col-sm-10">
+                    <label for="ID_TELA">ID da tela</label>
+                  <input type="text" placeholder="ID_TELA" id="ID_TELA" value="<%=filtro[0][0]%>" class="form-control"  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10">
+                    <label for="NOME_USU">Nome de usuário</label>
+                  <input type="text" placeholder="NOME_USU" id="NOME_USU" value="<%=filtro[0][1]%>" class="form-control"  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10" style="display: flex;justify-content: space-between;">
+                    <label for="P_INICIO">Inicio</label>
+                    <label for="P_FIM">Fim</label>
+                </div>
+                <div class="col-sm-10" style="display: flex;">
+                   <input type="date" class="form-control"  id="P_INICIO">
+                   <input type="date" min="" class="form-control"  id="P_FIM">
+                </div>
+              </div>
+
+    <button id="Buscar" class="btn btn-warning">Buscar</button>
+    <br>
+    <%-include('../components/csv.ejs')%>
+      </div> 
+      
+      <div style="width: 100%;" >
+        <table class="table" style="width: 70%;" id="tabeladados">
+          <thead>
+            <tr>
+                <th>ID_USU</th>
+                <th>NOME_USU</th>
+                <th>TOKEN </th>
+            </tr>
+          </thead>
+          <tbody id="tabela"   >
+                 <!-- inserido pela requição ajax apos usar o filtro -->
+          </tbody>
+        </table>
+        <table class="table" style="width: 70%;" id="tabeladados">
+          <thead>
+            <tr>
+                <th>ID_TELA</th>
+                <th>TELA_NOME</th>
+                <th>DT_ENTRADA </th>
+                <th>DT_SAIDA </th>
+            </tr>
+          </thead>
+          <tbody id="tabela"   >
+                 <!-- inserido pela requição ajax apos usar o filtro -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+<%- include('../partials/footer'); %>

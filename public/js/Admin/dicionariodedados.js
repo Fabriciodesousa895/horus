@@ -1,9 +1,12 @@
+'use strict';
+// import { SalvaFiltro } from "../Class/Filtro.js";
+
 (function (win, doc) {
-    'use strict';
-    // import {Filtro} from ('../Class/Filtro.js');
+
 
     function ConsultaTabela(e) {
         e.preventDefault();
+        // console.log(salvafiltro)
         let NOME_TABELA = document.getElementById('NOME_TABELA')
         let DESCRICAO = document.getElementById('DESCRICAO')
         let ajax = new XMLHttpRequest();
@@ -38,7 +41,7 @@
             }
         };
         ajax.send(JsonData);
-        // new Filtro(118, NOME_TABELA.value, DESCRICAO.value).SalvaFiltro();
+        // SalvaFiltro(118, NOME_TABELA.value, DESCRICAO.value);
     }
     function FiltroTrigger(e){
         e.preventDefault()

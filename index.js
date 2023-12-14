@@ -205,6 +205,8 @@ app.post('/login', async (req, res) => {
       })
 
     } catch (error) {
+      let log = error;
+      criarlogtxt(log,req.url);
       res.send(error)
     }
 
@@ -400,6 +402,11 @@ function permi_usu(ID_TELA, token) {
 app.get('/erroservidor/:error', (req, res) => {
   res.send('Ocorreu um erro ! ' + '<br>' + req.params.error)
 })
+app.get('/logout', (req, res) => {
+  res.clearCookie('jwt')
+  res.redirect('/login')
+})
+
 //tela de inicio
 app.get('/', auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -1114,31 +1121,8 @@ app.post('/consulta_acessos', async (req, res) => {
   }
 })
 
-// app.post('/importar/cod/municipio', async (req, res) => {
- 
-  // setInterval( function  importardados   (){
 
 
-  // },000)
-//   try {
-
-
-//     const data = response.data;
-//     // const status = response.status;
-//     console.log(data)
-
-//     // if (status == 429) {
-//     //   res.status(429).json('As importação possui um limite de 3 tentativas por CNPJ a cada 60 segundos!')
-//     // } else {
-//     //   res.json(data);
-
-//     // }
-
-//   } catch (error) {
-//     console.error('Erro:', error);
-//     // res.status(500).send('Erro ao obter os dados');
-//   }
-// // })
 app.post('/importar/dados', async (req, res) => {
   let CGC = req.body.CGC
   try {
@@ -1162,21 +1146,21 @@ app.post('/importar/dados', async (req, res) => {
 
   }
   // IMPORTAMDO MUNICIPIOS DO IBGE
-  function importar(){
-    fs.readFile('municipios.json','utf-8',(err,data)=>{
-      let dados = JSON.parse(data)
-      dados.forEach(e=>{
+  // function importar(){
+  //   fs.readFile('municipios.json','utf-8',(err,data)=>{
+  //     let dados = JSON.parse(data)
+  //     dados.forEach(e=>{
      
-      //  console.log( e.id , e.nome)
-      let sql = `BEGIN INSERT INTO CIDADE (NOME,COD_DOMICILIO_FISCAL,ID_USU_INCLU,ID_USU_ALTER,DT_INCLUSAO,DT_ALTERACAO) VALUES (:NOME,:ID,362,362,SYSDATE,SYSDATE); COMMIT; END;`
-      let binds = {NOME:e.nome,ID:e.id}
-        let result =  conectar(sql,binds)
-        console.log(result)
-       })
+  //     //  console.log( e.id , e.nome)
+  //     let sql = `BEGIN INSERT INTO CIDADE (NOME,COD_DOMICILIO_FISCAL,ID_USU_INCLU,ID_USU_ALTER,DT_INCLUSAO,DT_ALTERACAO) VALUES (:NOME,:ID,362,362,SYSDATE,SYSDATE); COMMIT; END;`
+  //     let binds = {NOME:e.nome,ID:e.id}
+  //       let result =  conectar(sql,binds)
+  //       console.log(result)
+  //      })
      
-     })
+  //    })
   
-  }
+  // }
   
   importar();
 })

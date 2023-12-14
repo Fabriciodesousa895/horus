@@ -126,65 +126,32 @@ mensage => mesagem sobre a situação da licença
 
                                           => Historico de filtros <=
 
-Para poder salvar o historico de filtros de uma tela, é preciso criar uma function SalvaFiltro() e chama-la após a busca do filtro.
+Para poder salvar o historico de filtros de uma tela, é preciso criar importar um módulo SalvaFiltro.
 
-Tal função deve fazer uma requisição  ajax com o método POST,usando a rota '/rota/universal' passando os devidos parametros conforme mencionado no inicio desta  documentação
+'use strict';
+import { SalvaFiltro } from "../Class/Filtro.js";
 
-o parametro sql deve ter obrigatoriamente o seguinte sql:
+Para evitar a repeticão de chamadas da função SalvaFiltro é orientado a criar uma função chamada Salva.
 
-                `BEGIN HIST_FILTROS( :P_ID_TELA,
-                                     :USU_LOGADO,
-                                     :P_CAMP_1,
-                                     :P_CAMP_2,
-                                     :P_CAMP_3,
-                                     :P_CAMP_4,
-                                     :P_CAMP_5,
-                                     :P_CAMP_6,
-                                     :P_CAMP_7,
-                                     :P_CAMP_8,
-                                     :P_CAMP_9,
-                                     :P_CAMP_10
-                                     ); END;`
+    function Salva (){
+        SalvaFiltro(181, FILTRO_NOME.value, FILTRO_COD.value,'','','','','','','','');
+    }
+OBS:O primeiro parametro é o ID da tela e os demias são os valores a serem salvos
 
-O parametro USU_LOGADO deve ser true,desta forma irá referenciar o usuário logado.
-O parametro binds deve ter obrigatóriamente a seguinte sintaxe,substituindo os values de acordo com o input referenciado
-            binds: {
-                P_ID_TELA: 201,
-                P_CAMP_1: ID.value,
-                P_CAMP_2: NOME_F.value,
-                P_CAMP_3: CGC.value,
-                P_CAMP_4: IE_RG_F.value,
-                P_CAMP_5: UF.value,
-                P_CAMP_6: ATIVO.checked ?  'S' : 'N',
-                P_CAMP_7: FORNECEDOR.checked ?  'S' : 'N',
-                P_CAMP_8: BLOQUEADOS.checked ?  'S' : 'N',
-                P_CAMP_9: '',
-                P_CAMP_10: ''
-            }
-O parametro  mensage_error de ter a seguinte mensagem.
- 
-               mensage_error: 'Houve um erro ao salvar o filtro registros'
-
-OBS: P_ID_TELA é o ID da tela que está sendo salvo o filtro
-
-
-No bloco js no qual recebe a resposta da requisição deve ter obrigatoriamente a seguinte sintaxe:
-
-        ajax.onreadystatechange = () => {
-            if (ajax.status === 200) {
-     
-            } else {
-                swal({
-                    text: ajax.responseText,
-                    icon: 'error'
-                });
-            }
-        };
-  
 ----------------------------------------------------------------------------------------------------------------------------------
-                                             =>  <=     
+                                             => Trabalhas com tabelas <=  
+
+Foi desenvolvida uma class para tarabalhar com tabelas.Basta importar e chamar os metodos.
+Requer dois parametros,o primeiro é o id da tboby e o segundoo array de registros.
+
+'use strict';
+import { SalvaFiltro } from "../Class/Tabela.js";
+
+ new   Tabela('tabelausuario',array_de_dados).InseriRegistros()
 
 
+
+----------------------------------------------------------------------------------------------------------------------------------
 
 
 

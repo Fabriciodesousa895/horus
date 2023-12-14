@@ -71,7 +71,7 @@
                   <input type="text" placeholder="Cod. domicilio" id="FILTRO_COD" value="<%=filtro[0][1]%>" class="form-control"  >
                 </div>
               </div>
-    <button id="Buscar" class="btn btn-warning">Buscar</button>
+    <button id="Buscar" type="button" class="btn btn-warning">Buscar</button>
     <button id="TOTAL" class="btn btn-success">00</button>
     <br>
     <%-include('../components/csv.ejs')%>
@@ -94,6 +94,6 @@
       </div>
       
     </div>
-<script src="/js/cadastro/cidades.js"></script>
+<script type="module" src="/js/cadastro/cidades.js"></script>
 <script src="/js/exportar/csv.js"></script>
 <%- include('../partials/footer'); %>

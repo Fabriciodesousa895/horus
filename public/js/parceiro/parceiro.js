@@ -1,5 +1,7 @@
+'use strict';
+import { Tabela } from "../Class/Tabela.js";
+import { SalvaFiltro } from "../Class/Filtro.js";
 (function (win, doc) {
-    'use strict'
     let bairro = document.getElementById('PARC_BAIRRO')
     let logradouro = document.getElementById('PARC_LOGRA')
     let numero = document.getElementById('PARC_NUM')
@@ -15,10 +17,21 @@
     let PROGRESSO = document.getElementById('PROGRESSO');
     let NOME_CID = document.getElementById('NOME_CID');
 
+        let ID = document.getElementById('ID')
+        let NOME_F = document.getElementById('NOME_F')
+        let CGC = document.getElementById('CGC')
+        let IE_RG_F = document.getElementById('IE_RG_F')
+        let UF_ = document.getElementById('UF')
+        let ATIVO = document.getElementById('ATIVO')
+        let FORNECEDOR = document.getElementById('FORNECEDOR')
+        let BLOQUEADOS = document.getElementById('BLOQUEADOS')
+
+        function Salva (){
+            SalvaFiltro(201, ID.value, NOME_F.value,CGC.value,IE_RG_F.value,UF_.value,ATIVO.checked ?  'S' : 'N',FORNECEDOR.checked ?  'S' : 'N',BLOQUEADOS.checked ?  'S' : 'N','','');
+        }
 
     function Filtro(e) {
         e.preventDefault();
-        salavfiltro()
         //mostra ao usuário a barra de progresso
         PROGRESSO.style.opacity = '1'
         let inputs = document.querySelectorAll('input');
@@ -64,21 +77,10 @@
         let JsonData = JSON.stringify(data);
         ajax.onreadystatechange = () => {
             if (ajax.status === 200) {
-                let tbody = document.getElementById('tbody')
-                tbody.innerText = ''
-                let arraydedados = JSON.parse(ajax.responseText);
-                let dados = arraydedados[0][0];
+                let array_dados = JSON.parse(ajax.responseText);
+                let dados = array_dados[0][0];
+                new   Tabela('tabelaparceiro').InseriRegistros(dados)
 
-                dados.forEach(Row => {
-                    const tr = document.createElement('tr');
-                    Row.forEach(Cell => {
-                        const td = document.createElement('td');
-                        td.innerText = Cell;
-                        tr.appendChild(td)
-                        td.style.maxWidth = '300px'
-                    })
-                    tbody.appendChild(tr)
-                });
                 document.getElementById('TOTAL').innerText = dados.length
           //omite do usuário a barra de progresso
           PROGRESSO.style.opacity = '0'
@@ -90,65 +92,10 @@
             }
         };
         ajax.send(JsonData);
+        Salva();
     }
 
-    function salavfiltro(){
-        let ID = document.getElementById('ID')
-        let NOME_F = document.getElementById('NOME_F')
-        let CGC = document.getElementById('CGC')
-        let IE_RG_F = document.getElementById('IE_RG_F')
-        let UF = document.getElementById('UF')
-        let ATIVO = document.getElementById('ATIVO')
-        let FORNECEDOR = document.getElementById('FORNECEDOR')
-        let BLOQUEADOS = document.getElementById('BLOQUEADOS')
-    
-        let ajax = new XMLHttpRequest();
-        ajax.open('POST', '/rota/universal');
-        ajax.setRequestHeader('Content-type', 'application/json');
-        let data = {
-            sql: `BEGIN HIST_FILTROS(:P_ID_TELA,
-                                     :USU_LOGADO,
-                                     :P_CAMP_1,
-                                     :P_CAMP_2,
-                                     :P_CAMP_3,
-                                     :P_CAMP_4,
-                                     :P_CAMP_5,
-                                     :P_CAMP_6,
-                                     :P_CAMP_7,
-                                     :P_CAMP_8,
-                                     :P_CAMP_9,
-                                     :P_CAMP_10
-                                     ); END;`,
-            binds: {
-                P_ID_TELA: 201,
-                P_CAMP_1: ID.value,
-                P_CAMP_2: NOME_F.value,
-                P_CAMP_3: CGC.value,
-                P_CAMP_4: IE_RG_F.value,
-                P_CAMP_5: UF.value,
-                P_CAMP_6: ATIVO.checked ?  'S' : 'N',
-                P_CAMP_7: FORNECEDOR.checked ?  'S' : 'N',
-                P_CAMP_8: BLOQUEADOS.checked ?  'S' : 'N',
-                P_CAMP_9: '',
-                P_CAMP_10: ''
-            },
-            mensage_error: 'Houve um erro ao consultar registros',
-            USU_LOGADO: true
-        };
-        let JsonData = JSON.stringify(data);
-        ajax.onreadystatechange = () => {
-            if (ajax.status === 200) {
-     
-            } else {
-                swal({
-                    text: ajax.responseText,
-                    icon: 'error'
-                });
-            }
-        };
-        ajax.send(JsonData);
-        
-    }
+  
 
     function Importar(e) {
         e.preventDefault()

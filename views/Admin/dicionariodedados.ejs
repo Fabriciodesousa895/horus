@@ -107,20 +107,21 @@
         <form  id="filtro" >
             <div class="form-group row">
               <div class="col-sm-10">
-              <label for="NOME_TRIGGER">Nome da trigger</label>
-                <input type="text" placeholder="Nome da trigger" id="NOME_TRIGGER"  class="form-control" value="<%=filtro[0][2]%>" >
+              <label for="NOME_PROCEDURE">Nome da procedure</label>
+                <input type="text" placeholder="Nome da procedure" id="NOME_PROCEDURE"  class="form-control" value="<%=filtro[0][2]%>" >
               </div>
             </div>
   
             <div class="form-group row">
               <div class="col-sm-10">
-                <button  class="btn btn-primary mt-3" id="BuscarTrigger">Buscar</button>
+                <button  class="btn btn-primary mt-3" id="Buscarprocedure">Buscar</button>
 
               </div>
 
             </div>
           </form>
     </div> 
+    <!-- Procedures -->
     <div style="width: 100%;" >
       <table class="table" style="width: 70%;" id="tabeladados2" >
         <thead>
@@ -132,24 +133,18 @@
             <th>STATUS</th>
                     </tr>
         </thead>
-        <tbody id="tabelatrigger"   >
+        <tbody id="tabelaprocedure"   >
                <!-- inserido pela requição ajax apos usar o filtro -->
         </tbody>
       </table>
     </div>
   </div>
   </div>
-  <!-- <script  src="/js/Class/teste.js" type="module"></script> -->
 
 
 </div>
     <script>
-           document.getElementById('TABELA').addEventListener('dblclick',(e)=>{
-              let elementoclicado = e.target;
-              let elementoPai = elementoclicado.parentNode
-              let ID_valor = elementoPai.cells[0].innerText
-              window.location.href = `/visualiza/dicionario/dados/` +ID_valor
-     });
+ 
            document.getElementById('tabelatrigger').addEventListener('dblclick',(e)=>{
               let elementoclicado = e.target;
               let elementoPai = elementoclicado.parentNode
@@ -158,7 +153,8 @@
      });
 
     </script>
-<script type="module" src="/js/Admin/dicionariodedados.js"></script>
+<script  type="module"   src="/js/Admin/dicionariodedados.js"></script>
+<!-- <scriptsrc="/js/Class/Filtro.js"></script> -->
 <script src="/js/exportar/csv.js"></script>
 
 

@@ -272,3 +272,186 @@ Help: https://docs.oracle.com/error-help/db/ora-01403/
 
 Wed Dec 13 2023 13:23:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
 Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Wed Dec 13 2023 19:49:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Wed Dec 13 2023 19:49:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
+Help: https://docs.oracle.com/error-help/db/ora-00923/
+
+Wed Dec 13 2023 19:51:11 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Wed Dec 13 2023 19:54:21 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Wed Dec 13 2023 19:54:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Wed Dec 13 2023 19:56:35 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "TYPE_OBJECT": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Wed Dec 13 2023 19:56:47 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "US"."TYPE_OBJECT": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Wed Dec 13 2023 19:56:53 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Wed Dec 13 2023 19:58:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "US"."OWNER": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Wed Dec 13 2023 19:58:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "US"."OWNER": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Wed Dec 13 2023 19:59:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
+Help: https://docs.oracle.com/error-help/db/ora-00936/
+
+Wed Dec 13 2023 20:05:40 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-00918: coluna definida de maneira ambígua
+Help: https://docs.oracle.com/error-help/db/ora-00918/
+
+Wed Dec 13 2023 20:10:23 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Wed Dec 13 2023 20:10:30 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
+
+Wed Dec 13 2023 20:25:28 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Thu Dec 14 2023 09:42:55 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 09:42:58 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 09:43:14 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 09:43:45 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 09:52:42 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 09:59:06 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-00918: coluna definida de maneira ambígua
+Help: https://docs.oracle.com/error-help/db/ora-00918/
+
+Thu Dec 14 2023 10:00:03 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 10:24:27 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 11:20:42 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 11:22:19 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-00918: coluna definida de maneira ambígua
+Help: https://docs.oracle.com/error-help/db/ora-00918/
+
+Thu Dec 14 2023 11:22:21 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-00918: coluna definida de maneira ambígua
+Help: https://docs.oracle.com/error-help/db/ora-00918/
+
+Thu Dec 14 2023 11:32:36 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-00918: coluna definida de maneira ambígua
+Help: https://docs.oracle.com/error-help/db/ora-00918/
+
+Thu Dec 14 2023 11:32:36 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-00918: coluna definida de maneira ambígua
+Help: https://docs.oracle.com/error-help/db/ora-00918/
+
+Thu Dec 14 2023 11:36:57 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 11:37:04 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- TypeError: Cannot read properties of undefined (reading '0')
+
+Thu Dec 14 2023 12:49:15 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 12:52:39 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 12:52:46 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 12:55:37 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 12:55:52 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 12:56:34 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 12:57:47 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:04:44 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:05:55 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:09:28 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:09:28 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:10:21 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:11:03 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:12:01 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:12:25 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:12:30 GMT-0300 (Horário Padrão de Brasília) -- /visualiza/dicionario/dados/%20f461  -- Error: ORA-00904: "F461": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Thu Dec 14 2023 13:13:23 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:14:37 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:15:50 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:16:45 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Thu Dec 14 2023 13:18:17 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/

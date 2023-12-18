@@ -1,7 +1,11 @@
 'use strict';
 import { Tabela } from "../Class/Tabela.js";
 import { SalvaFiltro } from "../Class/Filtro.js";
-(function (win, doc) {
+import { Ajax } from "../Class/Ajax.js";
+import { filtra_campo } from "../Class/Filtra_campo.js";
+new filtra_campo('ID_CID','NOME_CID','CIDADE').Filtra()
+new filtra_campo('ID_CID_F','NOME_CID_F','CIDADE').Filtra()
+
     let bairro = document.getElementById('PARC_BAIRRO')
     let logradouro = document.getElementById('PARC_LOGRA')
     let numero = document.getElementById('PARC_NUM')
@@ -14,7 +18,6 @@ import { SalvaFiltro } from "../Class/Filtro.js";
     let email = document.getElementById('PARC_EMAIL')
     let PARC_NASC = document.getElementById('PARC_NASC')
     let UF = document.getElementById('ESTADO')
-    let PROGRESSO = document.getElementById('PROGRESSO');
     let NOME_CID = document.getElementById('NOME_CID');
 
         let ID = document.getElementById('ID')
@@ -29,11 +32,9 @@ import { SalvaFiltro } from "../Class/Filtro.js";
         function Salva (){
             SalvaFiltro(201, ID.value, NOME_F.value,CGC.value,IE_RG_F.value,UF_.value,ATIVO.checked ?  'S' : 'N',FORNECEDOR.checked ?  'S' : 'N',BLOQUEADOS.checked ?  'S' : 'N','','');
         }
+        function Filtro(){
 
-    function Filtro(e) {
-        e.preventDefault();
-        //mostra ao usuário a barra de progresso
-        PROGRESSO.style.opacity = '1'
+
         let inputs = document.querySelectorAll('input');
         let Select = document.getElementsByTagName("select");
         let Objeto = {};
@@ -55,9 +56,7 @@ import { SalvaFiltro } from "../Class/Filtro.js";
             Objeto[id] = valor;
         }
 
-        let ajax = new XMLHttpRequest();
-        ajax.open('POST', '/select/universal');
-        ajax.setRequestHeader('Content-type', 'application/json');
+
         let data = {
             sql: `SELECT FILTRO_PARC(:ID,:NOME_F,:CGC,:UF,:IE_RG_F,:ATIVO,:FORNECEDOR,:BLOQUEADOS) FROM DUAL`,
             binds: {
@@ -74,29 +73,17 @@ import { SalvaFiltro } from "../Class/Filtro.js";
             rows: true,
             USU_LOGADO: false
         };
-        let JsonData = JSON.stringify(data);
-        ajax.onreadystatechange = () => {
-            if (ajax.status === 200) {
-                let array_dados = JSON.parse(ajax.responseText);
-                let dados = array_dados[0][0];
-                new   Tabela('tabelaparceiro').InseriRegistros(dados)
 
-                document.getElementById('TOTAL').innerText = dados.length
-          //omite do usuário a barra de progresso
-          PROGRESSO.style.opacity = '0'
-            } else {
-                swal({
-                    text: ajax.responseText,
-                    icon: 'error'
-                });
-            }
-        };
-        ajax.send(JsonData);
+       let Ajax_res =  new Ajax('/select/universal',data).RequisicaoAjax(false)
+       Ajax_res.then((array_de_dados)=>{
+        let dados = array_de_dados[0][0];
+        new   Tabela('tabeladados').InseriRegistros(dados);
         Salva();
+
+       })
+
     }
-
   
-
     function Importar(e) {
         e.preventDefault()
         let CGC = document.getElementById('PARC_CGC')
@@ -143,89 +130,11 @@ import { SalvaFiltro } from "../Class/Filtro.js";
         };
         ajax.send(JsonData);
     }
-
-    function filtracidade() {
-        let ID_CID = document.getElementById('ID_CID');
-        let NOME_CID = document.getElementById('NOME_CID');
-        let ajax = new XMLHttpRequest();
-        ajax.open('POST', '/select/universal');
-        ajax.setRequestHeader('Content-type', 'application/json');
-        let data = {
-            sql: `SELECT FILTRA_CIDADE(:NOME, :ID) FROM DUAL`,
-            binds: {
-                ID: ID_CID.value,
-                NOME: NOME_CID.value,
-            },
-            mensage_error: 'Houve um erro ao consultar registros',
-            rows: true,
-            USU_LOGADO: false
-        };
-        let JsonData = JSON.stringify(data);
-        ajax.onload = function () {
-            if (ajax.status == 200) {
-                let arraydedados = JSON.parse(ajax.responseText);
-                let dados = arraydedados[0][0][0];
-                if (dados) {
-                    ID_CID.value = dados[0];
-                    NOME_CID.value = dados[1];
-                } else {
-                    ID_CID.value = '';
-                    NOME_CID.value = '';
-                }
-            } else {
-                swal({
-                    text: ajax.responseText,
-                    icon: 'error'
-                });
-            }
-        };
-        ajax.send(JsonData);
-    }
-    function filtracidade2() {
-        let ID_CID_F = document.getElementById('ID_CID_F');
-        let NOME_CID_F = document.getElementById('NOME_CID_F');
-        let ajax = new XMLHttpRequest();
-        ajax.open('POST', '/select/universal');
-        ajax.setRequestHeader('Content-type', 'application/json');
-        let data = {
-            sql: `SELECT FILTRA_CIDADE(:NOME, :ID) FROM DUAL`,
-            binds: {
-                ID: ID_CID_F.value,
-                NOME: NOME_CID_F.value,
-            },
-            mensage_error: 'Houve um erro ao consultar registros',
-            rows: true,
-            USU_LOGADO: false
-        };
-        let JsonData = JSON.stringify(data);
-        ajax.onload = function () {
-            if (ajax.status == 200) {
-                let arraydedados = JSON.parse(ajax.responseText);
-                let dados = arraydedados[0][0][0];
-                if (dados) {
-                    ID_CID_F.value = dados[0];
-                    NOME_CID_F.value = dados[1];
-                } else {
-                    ID_CID_F.value = '';
-                    NOME_CID_F.value = '';
-                }
-            } else {
-                swal({
-                    text: ajax.responseText,
-                    icon: 'error'
-                });
-            }
-        };
-        ajax.send(JsonData);
-    }
-
     function salvardados(e) {
         e.preventDefault();
         let form = document.getElementById('form');
         let inputs = form.querySelectorAll('input');
         let Objeto = {}
-        let todosPreenchidos
-
         for (let i = 0; i < inputs.length; i++) {
             let id = inputs[i].id
             let value
@@ -235,49 +144,27 @@ import { SalvaFiltro } from "../Class/Filtro.js";
                 value = inputs[i].value
             }
             Objeto[id] = value
-    
         }
-        let ajax = new XMLHttpRequest();
-        ajax.open('POST', '/rota/universal');
-        ajax.setRequestHeader('Content-type', 'application/json');
         let data = {
             sql: `BEGIN
-            INSERT INTO PRC_PARCEIRO(PARC_NOME,
-                                     PARC_N_RAZAO_SOCIAL,
-                                     PARC_CGC,
-                                     IE_RG,
-                                     PARC_EMAIL,
-                                     PARC_NASC,
-                                     PARC_TEL,
-                                     PARC_TEL_2,
-                                     PARC_TRABALHO_N,
-                                     PARC_CEP_T,
-                                     PARC_BAIRRO_T,
-                                     PARC_CID_F,
-                                     PARC_LOGRA_T,
-                                     PARC_NUM_T,
-                                     PARC_COMP_T,
-                                     PARC_TEL_T,
-                                     PARC_SALARIO,
-                                     PARC_ADMISSAO,
-                                     PARC_CEP,
-                                     UF,
-                                     ID_CIDADE,
-                                     PARC_BAIRRO,
-                                     PARC_LOGRA,
-                                     PARC_NUM,
-                                     PARC_COMP,
-                                     PARC_FORNEC,
-                                     USU_INCLUSAO,
-                                     USU_ALTER,
-                                     DT_INCLU,
-                                     DT_ALTER)
-            VALUES                   ('${Objeto.PARC_NOME}',
-                                      '${Objeto.PARC_N_RAZAO_SOCIAL}',
-                                      '${Objeto.PARC_CGC}',
-                                      ${Objeto.PARC_IR_RG},
-                                      '${Objeto.PARC_EMAIL}',
-                                      TO_DATE('${Objeto.PARC_NASC}','YYYY-MM-DD'),
+            INSERT INTO PRC_PARCEIRO(PARC_NOME,PARC_N_RAZAO_SOCIAL,
+                                     PARC_CGC,IE_RG,
+                                     PARC_EMAIL,PARC_NASC,
+                                     PARC_TEL,PARC_TEL_2,
+                                     PARC_TRABALHO_N,PARC_CEP_T,
+                                     PARC_BAIRRO_T,PARC_CID_F,
+                                     PARC_LOGRA_T,PARC_NUM_T,
+                                     PARC_COMP_T,PARC_TEL_T,
+                                     PARC_SALARIO,PARC_ADMISSAO,
+                                     PARC_CEP,UF,
+                                     ID_CIDADE,PARC_BAIRRO,
+                                     PARC_LOGRA,PARC_NUM,
+                                     PARC_COMP,PARC_FORNEC,
+                                     USU_INCLUSAO,USU_ALTER,
+                                     DT_INCLU,DT_ALTER)
+            VALUES                   ('${Objeto.PARC_NOME}','${Objeto.PARC_N_RAZAO_SOCIAL}',
+                                      '${Objeto.PARC_CGC}',${Objeto.PARC_IR_RG},
+                                      '${Objeto.PARC_EMAIL}',TO_DATE('${Objeto.PARC_NASC}','YYYY-MM-DD'),
                                       '${Objeto.PARC_TEL}',
                                       '${Objeto.PARC_TEL_2}',
                                       '${Objeto.PARC_TRABALHO_N}',
@@ -312,42 +199,12 @@ import { SalvaFiltro } from "../Class/Filtro.js";
             mensagem_error: 'Error ao inserir registro!',
             mensagem_sucess: 'Registro inserido com sucesso!'
         };
-        let JsonData = JSON.stringify(data)
-        ajax.onreadystatechange = () => {
-            if (ajax.status === 200) {
-                swal({
-                    text: ajax.responseText,
-                    icon: 'success'
-                })
-                inputs.forEach((e)=>{e.value = ''});
-            } else {
-                swal({
-                    text: ajax.responseText,
-                    icon: 'info'
-                })
-            }
-        }
-        ajax.send(JsonData)
-
-        // if (todosPreenchidos) {
-        //     console.log(Objeto)
-        // } else {
-        //     console.log('CAMPOS VAZIOS')
-        // }
-
+        new Ajax('/rota/universal',data).RequisicaoAjax(false)
     }
-
-
     // Usando o filtro
     document.getElementById('Buscar').addEventListener('click', Filtro, false);
     //importando os dados
     document.getElementById('IMPORTAR').addEventListener('click', Importar, false);
-    //filtrando a cidade
-    document.getElementById('ID_CID').addEventListener('change', filtracidade, false);
-    document.getElementById('NOME_CID').addEventListener('change', filtracidade, false);
-    document.getElementById('ID_CID_F').addEventListener('change', filtracidade2, false);
-    document.getElementById('NOME_CID_F').addEventListener('change', filtracidade2, false);
     document.getElementById('SALVAR').addEventListener('click', salvardados, false);
 
-})(window, document)
 

@@ -1,5 +1,5 @@
+'use strict';
 (function readJS(win, doc) {
-  'use strict';
 
   function sendForm() {
     // Seleciona todos os inputs da página

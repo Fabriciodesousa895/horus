@@ -1,5 +1,5 @@
 let table = document.getElementById('tabeladados');
-let exportbtn = document.querySelector('[data-js="export-table-btn"]');
+let exportbtn = document.getElementById('exporta');
 exportbtn.addEventListener('click', (() => {
     console.log(table.rows.length)
     if (table.rows.length != 0) {

@@ -38,7 +38,7 @@
               <div class="form-group row">
                 <div class="col-sm-10">
                   <button type="button"  class="btn btn-primary mt-3" id="BuscarFiltro">Buscar</button>
-                         <%-include('../components/csv.ejs')%>
+                  <a data-js="export-table" role="button" id="exportatabelas" class="btn btn-info mt-3" >Exportar CSV</a>
                 </div>
               </div>
             </form>
@@ -53,7 +53,7 @@
               <th>Tipo</th>
             </tr>
           </thead>
-          <tbody id="TABELA"   >
+          <tbody >
                  <!-- inserido pela requição ajax apos usar o filtro -->
           </tbody>
         </table>
@@ -76,6 +76,7 @@
             <div class="form-group row">
               <div class="col-sm-10">
                 <button  class="btn btn-primary mt-3" id="BuscarTrigger">Buscar</button>
+                <a data-js="export-table" role="button" id="exportatriggers" class="btn btn-info mt-3" >Exportar CSV</a>
 
               </div>
 
@@ -83,7 +84,7 @@
           </form>
     </div> 
     <div style="width: 100%;" >
-      <table class="table" style="width: 70%;" id="tabeladados2" >
+      <table class="table" style="width: 70%;" id="tabelatriggerdados" >
         <thead>
           <tr>
             <th>TRIGGER_NAME</th>
@@ -108,14 +109,16 @@
             <div class="form-group row">
               <div class="col-sm-10">
               <label for="NOME_PROCEDURE">Nome da procedure</label>
-                <input type="text" placeholder="Nome da procedure" id="NOME_PROCEDURE"  class="form-control" value="<%=filtro[0][2]%>" >
+                <input type="text" placeholder="Nome da procedure" id="NOME_PROCEDURE"  class="form-control" value="<%=filtro[0][3]%>" >
               </div>
             </div>
   
             <div class="form-group row">
               <div class="col-sm-10">
-                <button  class="btn btn-primary mt-3" id="Buscarprocedure">Buscar</button>
+                <button  class="btn btn-primary mt-3" type="button" id="Buscarprocedure">Buscar</button>
+                <a data-js="export-table" role="button" id="exportarprocedures" class="btn btn-info mt-3" >Exportar CSV</a>
 
+                
               </div>
 
             </div>
@@ -123,14 +126,13 @@
     </div> 
     <!-- Procedures -->
     <div style="width: 100%;" >
-      <table class="table" style="width: 70%;" id="tabeladados2" >
+      <table class="table" style="width: 70%;" id="proceduredados" >
         <thead>
           <tr>
+            <th>ID_PROCEDURE</th>
             <th>PROCEDURE_NAME</th>
-            <th>PROCEDURE_TYPE</th>
-            <th>PROCEDURE_EVENT</th>
-            <th>TABLE_NAME</th>
-            <th>STATUS</th>
+
+            <!-- <th>STATUS</th> -->
                     </tr>
         </thead>
         <tbody id="tabelaprocedure"   >
@@ -143,19 +145,5 @@
 
 
 </div>
-    <script>
- 
-           document.getElementById('tabelatrigger').addEventListener('dblclick',(e)=>{
-              let elementoclicado = e.target;
-              let elementoPai = elementoclicado.parentNode
-              let NOME_TRIGGER= elementoPai.cells[0].innerText
-              window.location.href = `/visualiza/dicionario/dados/trigger/` + NOME_TRIGGER
-     });
-
-    </script>
 <script  type="module"   src="/js/Admin/dicionariodedados.js"></script>
-<!-- <scriptsrc="/js/Class/Filtro.js"></script> -->
-<script src="/js/exportar/csv.js"></script>
-
-
 <%- include('../partials/footer'); %>

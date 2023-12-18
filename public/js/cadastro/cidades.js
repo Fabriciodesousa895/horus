@@ -54,11 +54,8 @@ import { SalvaFiltro } from "../Class/Filtro.js";
 
     function SendFiltro(e) {
         e.preventDefault();
-        let PROGRESSO = document.getElementById('PROGRESSO');
         let FILTRO_NOME = document.getElementById('FILTRO_NOME');
         let FILTRO_COD = document.getElementById('FILTRO_COD')
-        //mostra ao usuário a barra de progresso
-        PROGRESSO.style.opacity = '1'
         let ajax = new XMLHttpRequest();
         ajax.open('POST', '/select/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
@@ -72,8 +69,6 @@ import { SalvaFiltro } from "../Class/Filtro.js";
         let JsonData = JSON.stringify(data)
         ajax.onreadystatechange = () => {
             if (ajax.status == 200) {
-                //omite do usuário a barra de progresso
-                PROGRESSO.style.opacity = '0';
                 tbody.innerText = '';
                 let array_registros = JSON.parse(ajax.responseText);
                 array_registros.forEach(rowData => {
@@ -98,8 +93,6 @@ import { SalvaFiltro } from "../Class/Filtro.js";
                     text: ajax.responseText,
                     icon: 'warning'
                 })
-                //omite do usuário a barra de progresso
-                PROGRESSO.style.opacity = '0';
         }
    
     }

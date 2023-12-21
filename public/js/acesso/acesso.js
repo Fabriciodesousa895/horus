@@ -1,3 +1,4 @@
+
 (function readJs(win, doc) {
   'use strict';
   let ID_USU = document.getElementById('ID_USU');
@@ -5,7 +6,6 @@
   let PROGRESSO = document.getElementById('PROGRESSO');
   let TABELA = document.getElementById('TABELA');
   let PERMI = document.getElementById('PERMI');
-  let  P;
    
   function sendForm() {
 
@@ -24,7 +24,6 @@
     //verifica  a resposta da requisição
     ajax.onreadystatechange = function () {
       if (ajax.status === 200) {
-        console.log(ajax.responseText)
         let data = JSON.parse(ajax.responseText);
         const tbody = document.querySelector('tbody');
         tbody.innerText = '';
@@ -65,6 +64,5 @@
     }
     ajax.send(jsonData);
   }
-  ID_USU.addEventListener('change', sendForm, false)
   btn.addEventListener('click', sendForm, false)
 })(window, document);

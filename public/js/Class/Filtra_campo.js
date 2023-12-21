@@ -30,6 +30,7 @@ class filtra_campo{
                     if (dados) {
                         CAMP_1.value = dados[0];
                         CAMP_2.value = dados[1];
+                        
                     } else {
                         CAMP_1.value = '';
                         CAMP_2.value = '';

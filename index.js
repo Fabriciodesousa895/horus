@@ -879,10 +879,11 @@ app.post('/filtro_usuario', async (req, res) => {
     if (err) {
       return res.send('Token inválido, faça login novamente!')
     } else {
-      let nome = req.body.P_NOME;
-      let adm = req.body.P_ADM;
-      let status = req.body.P_STATUS;
-      let grupo = req.body.P_GRUPO;
+      console.log(req.body)
+      let nome = req.body.nome;
+      let adm = req.body.adm;
+      let status = req.body.ativo;
+      let grupo = req.body.ID_GRUPO_F;
       let sql = `SELECT FILTRO_USU (:P_NOME,:P_ADM,:P_STATUS,:P_GRUPO) FROM DUAL`
       let sql2 = `BEGIN INSERI_HIST_USU(:P_NOME,:P_ADM,:P_STATUS,:P_GRUPO,:P_ID_USU); END;`
       let binds = {
@@ -1035,28 +1036,6 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
 
 
 })
-//na tela de acesso faz uma consulta pelo grupo ou usuario
-app.post('/grupousuario', urlencodedParser, async (req, res) => {
-  let objeto = req.body;
-  let sql;
-  if (objeto.TABELA == 'USU_USUARIO') {
-    sql = `SELECT USU_NOME FROM USU_USUARIO WHERE ID_USU = :ID`
-  }
-  if (objeto.TABELA == 'GRP_GRUPO') {
-    sql = `SELECT GRP_NOME FROM GRP_GRUPO WHERE ID_GRUPO = :ID`
-  }
-  let binds = {
-    ID: objeto.ID
-  }
-  if (objeto.TABELA == '') {
-    res.status(500).send('Especifique o filtro,selecione por usuário ou grupo');
-    return
-  } else {
-    let result = await conectar(sql, binds, options)
-    result.rows == '' ? res.status(505).send('Usuário ou grupo não encontrado!') : res.send(result.rows[0][0])
-  }
-})
-
 //acessos
 app.get('/acessos', urlencodedParser, auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -1179,7 +1158,7 @@ app.post('/importar/dados', async (req, res) => {
 
   // }
 
-  importar();
+  // importar();
 })
 
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin

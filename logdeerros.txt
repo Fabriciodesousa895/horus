@@ -975,3 +975,148 @@ Sun Dec 17 2023 21:33:23 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -
 Sun Dec 17 2023 21:33:31 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
 
 Sun Dec 17 2023 21:34:03 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
+
+Mon Dec 18 2023 21:06:01 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 49
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:15:17 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 49
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:15:53 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 49
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:15:55 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 49
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:20:58 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:21:07 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:21:15 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:21:23 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:21:26 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:22:42 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:23:20 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:24:22 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:24:57 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:25:20 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:28:07 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:28:13 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:28:18 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:28:23 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:28:46 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:28:50 GMT-0300 (Horário Padrão de Brasília) -- /select/universal  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
+ORA-06512: em "SYSTEM.FILTRA_CAMPO", line 59
+Help: https://docs.oracle.com/error-help/db/ora-06503/
+
+Mon Dec 18 2023 21:34:00 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Mon Dec 18 2023 21:34:14 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 20 2023 19:57:37 GMT-0300 (Horário Padrão de Brasília) -- /importar/dados  -- AxiosError: Request failed with status code 429
+
+Wed Dec 20 2023 19:57:52 GMT-0300 (Horário Padrão de Brasília) -- /importar/dados  -- AxiosError: Request failed with status code 429
+
+Wed Dec 20 2023 19:57:59 GMT-0300 (Horário Padrão de Brasília) -- /importar/dados  -- AxiosError: Request failed with status code 429
+
+Wed Dec 20 2023 19:58:20 GMT-0300 (Horário Padrão de Brasília) -- /importar/dados  -- AxiosError: Request failed with status code 429
+
+Wed Dec 20 2023 23:46:09 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
+
+Wed Dec 20 2023 23:46:21 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
+
+Wed Dec 20 2023 23:46:34 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
+
+Wed Dec 20 2023 23:46:47 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
+
+Wed Dec 20 2023 23:46:59 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
+
+Wed Dec 20 2023 23:47:06 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
+
+Wed Dec 20 2023 23:54:47 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 20 2023 23:55:43 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 20 2023 23:56:52 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 20 2023 23:57:43 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 20 2023 23:57:46 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 20 2023 23:59:27 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Wed Dec 20 2023 23:59:54 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/

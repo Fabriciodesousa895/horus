@@ -1,6 +1,4 @@
 //Esta class só deve ser usada para requisições mais simples e menores do tipo POST
-
-
 class Ajax {
     constructor(Rota, binds) {
         this.Rota = Rota;

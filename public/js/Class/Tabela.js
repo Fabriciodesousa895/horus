@@ -55,7 +55,31 @@ class Tabela {
 
     }))
   }
+  //Criando um objeto com os values dos inputs
+  InputsValues(array_de_ids) {
 
+    // Inicializa um objeto vazio
+    var objeto = {};
+
+    // Percorre todos os inputs e adiciona suas IDs e valores ao objeto
+    for (var i = 0; i < array_de_ids.length; i++) {
+      var inputs = document.getElementById(array_de_ids[i]);
+      var id = inputs.id;
+      let value
+      if (inputs.type == 'checkbox' || inputs.type == 'radio') {
+          value = inputs.checked ? 'S' : ''
+      }else if(inputs.type == 'text' || inputs.type == 'number'){
+          value = inputs.value      
+      }else if(inputs.type == 'textarea'){
+           value = inputs.innerHTML;
+      }else{
+        value = inputs.value      
+      }
+      objeto[id] = value
+
+  }
+  return objeto
+}
 
 }
 

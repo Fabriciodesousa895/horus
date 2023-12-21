@@ -1,17 +1,12 @@
 'use strict';
-(function readJS(win, doc) {
-
+import { Ajax } from "../Class/Ajax";
   function sendForm() {
     // Seleciona todos os inputs da página
     var inputs = document.querySelectorAll("input[type='text']");
     var checkbox = document.querySelectorAll("input[type='checkbox']");
     var Select = document.getElementsByTagName("select");
-    let PROGRESSO = document.getElementById('PROGRESSO');
-
-
     // Inicializa um objeto vazio
     var objeto = {};
-
     // Percorre todos os inputs e adiciona suas IDs e valores ao objeto
     for (var i = 0; i < inputs.length; i++) {
       var id = inputs[i].id;
@@ -30,38 +25,13 @@
       var valor = Select[i].value;
       objeto[id] = valor;
     }
-
-    let data = JSON.stringify(objeto)
-    //fazendo requisição ajax
-    let ajax = new XMLHttpRequest();
-    ajax.open('POST', '/update_usuario');
-    ajax.setRequestHeader('Content-type', 'application/json');
-    //mostra ao usuário a barra de progresso
-    PROGRESSO.style.opacity = '1'
-    ajax.onreadystatechange = () => {
-      if (ajax.status == 200) {
-        swal({
-          title: ajax.responseText,
-          icon: 'success'
-        });
-        //omite do usuário a barra de progresso
-        PROGRESSO.style.opacity = '0';
-      } else {
-        swal({
-          title: ajax.responseText,
-          icon: 'error'
-        });
-      }
-    }
-    ajax.send(data);
-
+    let data = JSON.stringify(objeto);
+    new Ajax('/update_usuario',data).RequisicaoAjax(false)
   }
-
   //Quando o botão de salvar é chamado a funcao sendForm para fazer a requisição ajax;
   document.getElementById('SALVA').addEventListener('click', sendForm, false);
 
 
-})(window.document)
 
 
 

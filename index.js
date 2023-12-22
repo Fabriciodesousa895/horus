@@ -938,6 +938,7 @@ app.post('/update_usuario', async (req, res) => {
   let token = req.cookies.jwt;
   let saltRounds = 10
   let objeto = req.body; //pegando os dados da requisição ajax
+  console.log(objeto);
   jwt.verify(token, secret, async (err, data) => {
     if (err) return res.send('Token inválido,faça login e tente novamente!');
 
@@ -976,7 +977,6 @@ app.post('/update_usuario', async (req, res) => {
       P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
 
     }
-    // const hash = await 
     try {
       let result = await conectar(sql, binds);
       res.send(result.outBinds.P_MENSAGEM)

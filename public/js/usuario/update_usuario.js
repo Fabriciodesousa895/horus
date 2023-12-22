@@ -1,5 +1,5 @@
 'use strict';
-import { Ajax } from "../Class/Ajax";
+import { Ajax } from "../Class/Ajax.js";
   function sendForm() {
     // Seleciona todos os inputs da página
     var inputs = document.querySelectorAll("input[type='text']");
@@ -26,7 +26,8 @@ import { Ajax } from "../Class/Ajax";
       objeto[id] = valor;
     }
     let data = JSON.stringify(objeto);
-    new Ajax('/update_usuario',data).RequisicaoAjax(false)
+    console.log(objeto);
+    new Ajax('/update_usuario',objeto).RequisicaoAjax(true)
   }
   //Quando o botão de salvar é chamado a funcao sendForm para fazer a requisição ajax;
   document.getElementById('SALVA').addEventListener('click', sendForm, false);

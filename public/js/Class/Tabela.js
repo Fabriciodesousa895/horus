@@ -56,7 +56,19 @@ class Tabela {
     }))
   }
   //Criando um objeto com os values dos inputs
-  InputsValues(array_de_ids) {
+  InputsValues(array_de_ids, valida) {
+    if (valida) {
+      for (var i = 0; i < array_de_ids.length; i++) {
+        var inputs = document.getElementById(array_de_ids[i]);
+        if (inputs.required && inputs.value === '' || inputs.innerHTML === '') {
+          inputs.style.border = '2px solid red';
+          return swal({
+            text: 'Há campos obrigatórios a serem preenchidos',
+            icon: 'error'
+          });
+        }
+      }
+    }
 
     // Inicializa um objeto vazio
     var objeto = {};
@@ -67,19 +79,28 @@ class Tabela {
       var id = inputs.id;
       let value
       if (inputs.type == 'checkbox' || inputs.type == 'radio') {
-          value = inputs.checked ? 'S' : ''
-      }else if(inputs.type == 'text' || inputs.type == 'number'){
-          value = inputs.value      
-      }else if(inputs.type == 'textarea'){
-           value = inputs.innerHTML;
-      }else{
-        value = inputs.value      
+        value = inputs.checked ? 'S' : ''
+      } else if (inputs.type == 'text' || inputs.type == 'number') {
+        value = inputs.value
+      } else if (inputs.type == 'textarea') {
+        value = inputs.innerHTML;
+      } else {
+        value = inputs.value
       }
       objeto[id] = value
 
+    }
+    return objeto
   }
-  return objeto
-}
+  //limpar inputs doo formulario
+  //ID_FORM => Id do formulario
+  LimpaInputs(ID_FORM) {
+    let form = document.getElementById(ID_FORM);
+    let inputs = form.querySelectorAll('input');
+    let textareas = form.querySelectorAll('textarea');
+    inputs.forEach((elementoatual) => { elementoatual.value = '' });
+    textareas.forEach((elementoatual) => { elementoatual.innerHTML = '' });
+  }
 
 }
 

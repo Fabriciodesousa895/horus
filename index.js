@@ -18,13 +18,22 @@ const bycrypt = require('bcrypt');
 const secret = 'M987ggjjj@583';
 //jsonwebtoken
 const jwt = require('jsonwebtoken');
+const multer = require('multer')
+const path = require('path')
+// Configurando multer para uploads de imagens
+const storage = multer.diskStorage({
+    destination:(req,file,callback)=>{callback(null,path.resolve('./public/img/uploads'))},
+    filename: (req,file,callback)=>{
+        const time = new Date().getTime();
+        callback(null,`${time}__${file.originalname}`);
+    }
+})
+const upload = multer({storage:storage})
+
 //configurando cors
 const cors = require('cors');
 let urlencodedParser = bodyparser.urlencoded({ extended: false });
 app.use(cors());
-//
-
-
 //a verificação da licença será feita a cada 60 minutos pelo servidor
 const fs = require('fs');
 let V_truefalse = false;
@@ -37,8 +46,6 @@ toggleValue();
 setInterval(() => { console.log(V_truefalse); }, 50000)
 //no middleware é preciso validar a licença da aplicação que está rodando,na raiz da aplicação existe um arquivo.json que informaos dados da licença
 app.use(async (req, res, next) => {
-
-
   // console.log(response.data)
   console.log('Entre cliente e servidor!');
   let url = req.path;
@@ -276,7 +283,8 @@ function permi_usu(ID_TELA, token) {
           CASE
           WHEN  AN.CFU_ANEXA = 'S' OR AG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S' THEN 'S'
           ELSE 'N'
-          END AS ANEXA
+          END AS ANEXA,
+          U.PATH_IMG AS PATH_IMG
       FROM (
           SELECT CFU_ALTERA
           FROM CONFIG_USU_TELA
@@ -386,7 +394,7 @@ function permi_usu(ID_TELA, token) {
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
-
+console.log(result)
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -635,7 +643,6 @@ app.get('/log/acesso', urlencodedParser, auth, async (req, res) => {
 
 
 })
-
 //faz a conSulta sql que o usuario digitou 
 app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
 
@@ -657,8 +664,6 @@ app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
     res.status(500).send('Erro ao execultar sql! ' + error.message);
   }
 })
-
-
 //grava log de saida das telas
 app.post('/beforeunload', urlencodedParser, async (req, res) => {
   let url_atual = req.body.url_atual
@@ -928,10 +933,7 @@ app.post('/input_usu', async (req, res) => {
     let log = error;
     criarlogtxt(log, req.url);
     res.redirect(`/erroservidor/${error}`);
-
   }
-
-
 })
 //rota para alterar o cadastro de usuario
 app.post('/update_usuario', async (req, res) => {
@@ -987,9 +989,6 @@ app.post('/update_usuario', async (req, res) => {
     }
   })
 })
-
-
-
 app.post('/delete_usu', urlencodedParser, async (req, res) => {
   let ID_USU = req.body.ID_USU;
   let sql = `BEGIN DELETA_USUARIO(:ID_USU,:P_MENSAGEM); END;`;
@@ -1033,8 +1032,6 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
     }
 
   })
-
-
 })
 //acessos
 app.get('/acessos', urlencodedParser, auth, async (req, res) => {
@@ -1074,11 +1071,7 @@ app.post('/copia_usuario', async (req, res) => {
 
   })
 
-
-
 })
-
-
 //CONSULTA PERMISSOES DE TODAS AS TELAS
 app.post('/consulta_acessos', async (req, res) => {
   let ID = req.body.ID;
@@ -1118,9 +1111,6 @@ app.post('/consulta_acessos', async (req, res) => {
     }
   }
 })
-
-
-
 app.post('/importar/dados', async (req, res) => {
   let CGC = req.body.CGC
   try {
@@ -1141,24 +1131,7 @@ app.post('/importar/dados', async (req, res) => {
     }
 
   }
-  // IMPORTAMDO MUNICIPIOS DO IBGE
-  // function importar(){
-  //   fs.readFile('municipios.json','utf-8',(err,data)=>{
-  //     let dados = JSON.parse(data)
-  //     dados.forEach(e=>{
 
-  //     //  console.log( e.id , e.nome)
-  //     let sql = `BEGIN INSERT INTO CIDADE (NOME,COD_DOMICILIO_FISCAL,ID_USU_INCLU,ID_USU_ALTER,DT_INCLUSAO,DT_ALTERACAO) VALUES (:NOME,:ID,362,362,SYSDATE,SYSDATE); COMMIT; END;`
-  //     let binds = {NOME:e.nome,ID:e.id}
-  //       let result =  conectar(sql,binds)
-  //       console.log(result)
-  //      })
-
-  //    })
-
-  // }
-
-  // importar();
 })
 
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
@@ -1241,6 +1214,12 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
     }
   })
 })
+
+app.post('/envioimg',upload.single('file'),(req,res)=>{
+  res.json('ooo')
+
+})
+
 app.listen(8020, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);

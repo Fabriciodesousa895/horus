@@ -60,10 +60,11 @@ class Tabela {
     if (valida) {
       for (var i = 0; i < array_de_ids.length; i++) {
         var inputs = document.getElementById(array_de_ids[i]);
+        var label = document.querySelector('label[for="' + array_de_ids[i] + '"]')
         if (inputs.required && inputs.value === '' || inputs.innerHTML === '') {
           inputs.style.border = '2px solid red';
           return swal({
-            text: 'Há campos obrigatórios a serem preenchidos',
+            text: label,
             icon: 'error'
           });
         }

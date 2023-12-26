@@ -1164,3 +1164,102 @@ Help: https://docs.oracle.com/error-help/db/ora-01403/
 Fri Dec 22 2023 12:59:47 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
 
 Fri Dec 22 2023 13:00:14 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- function () { [native code] }
+
+Fri Dec 22 2023 16:06:36 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:06:57 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:07:11 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:09:11 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:09:14 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:09:16 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:09:22 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:09:31 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:11:34 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Fri Dec 22 2023 16:15:03 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Fri Dec 22 2023 16:15:10 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "ID_TELAA": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Fri Dec 22 2023 16:15:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00937: não é uma função de grupo de grupo simples
+Help: https://docs.oracle.com/error-help/db/ora-00937/
+
+Fri Dec 22 2023 16:16:04 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
+Help: https://docs.oracle.com/error-help/db/ora-00936/
+
+Fri Dec 22 2023 16:16:15 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
+Help: https://docs.oracle.com/error-help/db/ora-00936/
+
+Fri Dec 22 2023 16:21:05 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "NUMROW": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Fri Dec 22 2023 16:21:29 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
+Help: https://docs.oracle.com/error-help/db/ora-00936/
+
+Fri Dec 22 2023 16:22:09 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Fri Dec 22 2023 16:22:43 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Fri Dec 22 2023 16:25:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Fri Dec 22 2023 16:28:15 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Fri Dec 22 2023 16:29:06 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00918: coluna definida de maneira ambígua
+Help: https://docs.oracle.com/error-help/db/ora-00918/
+
+Fri Dec 22 2023 16:32:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "TOTAL": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Fri Dec 22 2023 16:32:44 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "TOTAL": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Sun Dec 24 2023 15:39:52 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sun Dec 24 2023 15:39:55 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Tue Dec 26 2023 12:38:58 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor

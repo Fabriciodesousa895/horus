@@ -11,6 +11,11 @@
         justify-content: center;
         align-items: center;
     }
+    #img{
+        width: 60px;
+        height: 60px;
+        border: none;
+    }
 
 </style>
 
@@ -76,10 +81,11 @@
     </select>
       </div>
     </div>
+   <img src="/img/uploads/<%=D.PATH_IMG%>" width="80px" height="80px" alt="<%=D.PATH_IMG%>">
         
  </nav>
   </nav>
-  
+  <div><%=D.PATH_IMG%></div>
 
 <script>
         const selectElement = document.getElementById('meuSelect');

@@ -16,7 +16,7 @@ function sendForm(evento) {
   let Ajax_res = new Ajax('/usuario', (new Tabela('tabelausuario')
     .InputsValues(['USU_NOME', 'ID_GRUPO', 'USU_SENHA', 'ID_VENDEDOR', 'ID_PARC',
     'CFG_USU_ALT_PARC', 'CFG_USU_CONF_CONFERE_CAIXA', 'CFG_USU_EXC_FIN', 'CFG_USU_FECHA_CAIXA',
-    'CFG_USU_LIB_BLOQ_PARC', 'USU_ADM'],true)))
+    'CFG_USU_LIB_BLOQ_PARC', 'USU_ADM'])))
   Ajax_res.RequisicaoAjax(true)
   new Tabela().LimpaInputs('form')
 

@@ -7,8 +7,9 @@ import { Ajax } from "../Class/Ajax.js";
     let DESCRICAO = document.getElementById('DESCRICAO')
     let NOME_TRIGGER = document.getElementById('NOME_TRIGGER')
     let NOME_PROCEDURE = document.getElementById('NOME_PROCEDURE')
+    let NOME_VIEW = document.getElementById('NOME_VIEW')
     function Salva() {
-        SalvaFiltro(118, NOME_TABELA.value, DESCRICAO.value, NOME_TRIGGER.value, NOME_PROCEDURE.value, '', '', '', '', '', '');
+        SalvaFiltro(118, NOME_TABELA.value, DESCRICAO.value, NOME_TRIGGER.value, NOME_PROCEDURE.value, NOME_VIEW.value, '', '', '', '', '');
     }
     let Tabela_ = new Tabela('tabeladados');
     Tabela_.VisualizaRegistro('/visualiza/dicionario/dados/', 1)
@@ -21,6 +22,10 @@ import { Ajax } from "../Class/Ajax.js";
     let proceduredados = new Tabela('proceduredados');
     proceduredados.VisualizaRegistro('/visualiza/dicionario/dados/procedure/', 2);
     proceduredados.ExportarRegistros('exportarprocedures')
+
+    let viewsdados = new Tabela('tabelaviews');
+    viewsdados.VisualizaRegistro('/vizualiza/dicionario/dados/views',1);
+    viewsdados.ExportarRegistros('exportarview')
 
     function ConsultaTabela(e) {
         e.preventDefault();
@@ -60,6 +65,19 @@ import { Ajax } from "../Class/Ajax.js";
             Salva()
         })
     }
+    function Filtroview() {
+        let data = {
+            sql: `SELECT VIEW_NAME FROM USER_VIEWS WHERE VIEW_NAME LIKE '%${NOME_VIEW.value}%'`,
+            binds: {},
+            mensage_error: 'Não foi encontrado registros!',
+            rows: true
+        }
+        new Ajax('/select/universal', data).RequisicaoAjax(false).then((array_de_dados) => {
+            viewsdados.InseriRegistros(array_de_dados);
+            Salva()
+        })
+    }
     document.getElementById('BuscarFiltro').addEventListener('click', ConsultaTabela, false)
     document.getElementById('BuscarTrigger').addEventListener('click', FiltroTrigger, false)
     document.getElementById('Buscarprocedure').addEventListener('click', FiltroProcedure, false)
+    document.getElementById('Buscarview').addEventListener('click', Filtroview, false)

@@ -12,6 +12,9 @@
   <li class="nav-item">
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Procedures" role="tab" aria-controls="contact" aria-selected="false">Procedures</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#views" role="tab" aria-controls="contact" aria-selected="false">views</a>
+  </li>
 
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -142,8 +145,92 @@
     </div>
   </div>
   </div>
+ <div class="tab-pane fade" id="Procedures" role="tabpanel" aria-labelledby="profile-tab">
+   <!--   Triggres  -->
+   <div class="grad" style="display: flex; height: auto;padding: 30px;">
+    <div style="width: 300px;height: auto;">
+        <form  id="filtro" >
+            <div class="form-group row">
+              <div class="col-sm-10">
+              <label for="NOME_PROCEDURE">Nome da procedure</label>
+                <input type="text" placeholder="Nome da procedure" id="NOME_PROCEDURE"  class="form-control" value="<%=filtro[0][3]%>" >
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <button  class="btn btn-primary mt-3" type="button" id="Buscarprocedure">Buscar</button>
+                <a data-js="export-table" role="button" id="exportarprocedures" class="btn btn-info mt-3" >Exportar CSV</a>
 
+                
+              </div>
+
+            </div>
+          </form>
+    </div> 
+    <!-- Procedures -->
+    <div style="width: 100%;" >
+      <table class="table" style="width: 70%;" id="proceduredados" >
+        <thead>
+          <tr>
+            <th>ID_PROCEDURE</th>
+            <th>PROCEDURE_NAME</th>
+
+            <!-- <th>STATUS</th> -->
+                    </tr>
+        </thead>
+        <tbody id="tabelaprocedure"   >
+               <!-- inserido pela requição ajax apos usar o filtro -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+
+    <!--   views  -->
+  <div class="tab-pane fade" id="views" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="grad" style="display: flex; height: auto;padding: 30px;">
+     <div style="width: 300px;height: auto;">
+         <form  id="filtro" >
+             <div class="form-group row">
+               <div class="col-sm-10">
+               <label for="NOME_VIEW">Nome da view</label>
+                 <input type="text" placeholder="Nome da view" id="NOME_VIEW"  class="form-control" value="<%=filtro[0][4]%>" >
+               </div>
+             </div>
+   
+             <div class="form-group row">
+               <div class="col-sm-10">
+                 <button  class="btn btn-primary mt-3" type="button" id="Buscarview">Buscar</button>
+                 <a data-js="export-table" role="button" id="exportarview" class="btn btn-info mt-3" >Exportar CSV</a>
+ 
+                 
+               </div>
+ 
+             </div>
+           </form>
+     </div> 
+     <!-- views -->
+     <div style="width: 100%;" >
+       <table class="table" style="width: 70%;" id="tabelaviews" >
+         <thead>
+           <tr>
+             <th>ID_VIEW</th>
+             <th>VIEW</th>
+                     </tr>
+         </thead>
+         <tbody   >
+                <!-- inserido pela requição ajax apos usar o filtro -->
+         </tbody>
+       </table>
+     </div>
+   </div>
+   </div>
 
 </div>
+
+
+<!---->
+
 <script  type="module"   src="/js/Admin/dicionariodedados.js"></script>
 <%- include('../partials/footer'); %>

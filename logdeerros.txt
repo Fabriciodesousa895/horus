@@ -1263,3 +1263,8 @@ ORA-06512: em line 1
 Help: https://docs.oracle.com/error-help/db/ora-01403/
 
 Tue Dec 26 2023 12:38:58 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
+
+Tue Dec 26 2023 12:49:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
+
+Tue Dec 26 2023 12:57:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
+Help: https://docs.oracle.com/error-help/db/ora-00900/

@@ -25,7 +25,7 @@ function Salva() {
     SalvaFiltro(201, ID.value, NOME_F.value, CGC.value, IE_RG_F.value, UF_.value, ATIVO.checked ? 'S' : 'N', FORNECEDOR.checked ? 'S' : 'N', BLOQUEADOS.checked ? 'S' : 'N', '', '');
 }
 function Filtro() {
-    let objeto = new Tabela(tabeladados).InputsValues(['ID', 'NOME_F', 'CGC', 'UF', 'IE_RG_F', 'ATIVO', 'FORNECEDOR', 'BLOQUEADOS'],true)
+    let objeto = new Tabela(tabeladados).InputsValues(['ID', 'NOME_F', 'CGC', 'UF', 'IE_RG_F', 'ATIVO', 'FORNECEDOR', 'BLOQUEADOS'])
     let data = {
         sql: `SELECT FILTRO_PARC(:ID,:NOME_F,:CGC,:UF,:IE_RG_F,:ATIVO,:FORNECEDOR,:BLOQUEADOS) FROM DUAL`,
         binds: objeto,

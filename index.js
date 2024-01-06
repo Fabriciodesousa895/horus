@@ -394,7 +394,6 @@ function permi_usu(ID_TELA, token) {
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
-console.log(result)
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -515,12 +514,12 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
   try {
     let Acesso = await valida_acesso(118, token);
     let P_USU = await permi_usu(118, token);
-    let sql = `SELECT COLUMN_NAME, CONSTRAINT_NAME,POSITION,TABLE_NAME
+    let sql = `SELECT  COLUMN_NAME, CONSTRAINT_NAME,POSITION,TABLE_NAME
     FROM ALL_CONS_COLUMNS TT,TABELA_BANCO TB
     WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
     AND TT.TABLE_NAME = TB.TAB_NOME
     `
-    let sql2 = `SELECT TT.COLUMN_NAME, 
+    let sql2 = `SELECT  TT.COLUMN_NAME, 
     TT.DATA_TYPE,
     TT.NULLABLE,
     TT.DATA_LENGTH,
@@ -884,7 +883,6 @@ app.post('/filtro_usuario', async (req, res) => {
     if (err) {
       return res.send('Token inválido, faça login novamente!')
     } else {
-      console.log(req.body)
       let nome = req.body.nome;
       let adm = req.body.adm;
       let status = req.body.ativo;

@@ -1,5 +1,5 @@
 class Tabela {
-  //Requer o id do tbody da tabela
+  //Requer o id  da tabela
   constructor(ID_TABELA) { this.ID_TABELA = ID_TABELA; }
 
   //Métodos

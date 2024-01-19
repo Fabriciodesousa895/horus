@@ -29,14 +29,12 @@
                    <input type="date" min="" class="form-control"  id="P_FIM">
                 </div>
               </div>
-
     <button id="Buscar" class="btn btn-warning">Buscar</button>
     <br>
     <%-include('../components/csv.ejs')%>
       </div> 
-      
       <div style="width: 100%;" >
-        <table class="table" style="width: 70%;" id="tabeladados">
+        <table class="table" style="width: 70%;min-height: 350px;" id="tabelatoken">
           <thead>
             <tr>
                 <th>ID_USU</th>
@@ -44,7 +42,7 @@
                 <th>TOKEN </th>
             </tr>
           </thead>
-          <tbody id="tabela"   >
+          <tbody  >
                  <!-- inserido pela requição ajax apos usar o filtro -->
           </tbody>
         </table>
@@ -63,5 +61,7 @@
         </table>
       </div>
     </div>
-
+    
+<!---->
+<script  type="module"   src="/js/Admin/logacesso.js"></script>
 <%- include('../partials/footer'); %>

@@ -130,6 +130,7 @@ const { error, Console } = require("console");
 const bind = require("function-bind");
 const { date } = require("assert-plus");
 const { forEach } = require("lodash");
+const { object } = require("webidl-conversions");
 const dbconfig = {
   user: 'SYSTEM',
   password: 'host2023',
@@ -284,7 +285,8 @@ function permi_usu(ID_TELA, token) {
           WHEN  AN.CFU_ANEXA = 'S' OR AG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S' THEN 'S'
           ELSE 'N'
           END AS ANEXA,
-          U.PATH_IMG AS PATH_IMG
+          U.PATH_IMG AS PATH_IMG,
+          U.USU_NOME AS USU_NOME
       FROM (
           SELECT CFU_ALTERA
           FROM CONFIG_USU_TELA
@@ -394,6 +396,8 @@ function permi_usu(ID_TELA, token) {
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
+          console.log(Objeto)
+          console.log(Objeto)
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -419,34 +423,73 @@ app.get('/logout', (req, res) => {
 //tela de inicio
 app.get('/', auth, async (req, res) => {
   let token = req.cookies.jwt;
-  try {
-    let sql = `SELECT 
-    TITULO,
-    MENSAGEM,
-    TO_CHAR(DTINICIO,'DD-MM-YYYY') AS INICIO,  
-    TO_CHAR(DTFIM,'DD-MM-YYYY') AS FIM,
-    TO_CHAR(DTCOMUNICADO,'DD-MM-YYYY') AS POSTAGEM,
-    CASE 
-        WHEN TIPO = 'A' THEN 'BLACK'
-        WHEN TIPO = 'B' THEN 'orange'
-        WHEN TIPO = 'C' THEN 'RED'
-        ELSE 'BLACK' 
-    END AS COR,
-USU.USU_NOME
-FROM C_COMUNICADO CC
-INNER JOIN USU_USUARIO USU ON USU.ID_USU = CC.ID_USU
-    WHERE SYSDATE  BETWEEN DTINICIO AND DTFIM + 1
-ORDER BY COR DESC`
-    let result = await conectarbd(sql, [], options_objeto)
-    let P_USU = await permi_usu(1, token);
-    res.render('index', { P_USU, result })
-  } catch (error) {
-    let log = error;
-    criarlogtxt(log, req.url);
-    console.error('Erro:', error);
-    res.status(500).send('Erro ao obter os dados');
-  }
-
+  jwt.verify(token, secret, async (err, data) => {
+    if (err) {
+      console.log('Token inválido');
+      return;
+    } else {
+      let USU_LOGADO = data.ID_USUARIO;
+        try {
+          let sql = `SELECT 
+          TITULO,
+          MENSAGEM,
+          TO_CHAR(DTINICIO,'DD-MM-YYYY') AS INICIO,  
+          TO_CHAR(DTFIM,'DD-MM-YYYY') AS FIM,
+          TO_CHAR(DTCOMUNICADO,'DD-MM-YYYY') AS POSTAGEM,
+          CASE 
+              WHEN TIPO = 'A' THEN 'BLACK'
+              WHEN TIPO = 'B' THEN 'orange'
+              WHEN TIPO = 'C' THEN 'RED'
+              ELSE 'BLACK' 
+          END AS COR,
+      USU.USU_NOME
+      FROM C_COMUNICADO CC
+      INNER JOIN USU_USUARIO USU ON USU.ID_USU = CC.ID_USU
+          WHERE SYSDATE  BETWEEN DTINICIO AND DTFIM + 1
+      ORDER BY COR DESC`
+      let sql_tarefa = `
+      SELECT
+      ID_TAREFA,
+      SUBSTR(TF_MSG,1,80) || ' . . .' AS TF_MSG,
+      TO_CHAR(TF_DT_INCLU,'DD/MM/YY HH24:MM') AS DT_INCLU,
+      TO_CHAR(TF_DT_PRAZO,'DD/MM/YY HH24:MM') AS PRAZO,
+      ID_USU_REM,
+      TF_NIVEL,
+      USU.USU_NOME
+      FROM TF_TAREFA TF
+      INNER JOIN USU_USUARIO USU ON USU.ID_USU = TF.ID_USU_REM
+      WHERE ID_USU_DEST =  :USU_LOGADO
+      AND TF_STATUS = 'A'
+      ORDER BY TF_NIVEL DESC
+       `
+      let binds_tarefa = {USU_LOGADO:USU_LOGADO}
+          let result = await conectarbd(sql, [], options_objeto)
+          let tarefas = await conectarbd(sql_tarefa,binds_tarefa,options_objeto);
+          console.log(tarefas)
+          let P_USU = await permi_usu(1, token);
+          let msg;
+          let HR_ATUAL = new Date();
+          let hora_atual = HR_ATUAL.getHours();
+      
+          if(hora_atual >= 18 || hora_atual < 6){
+            msg = 'Boa noite';
+          }else if(hora_atual >= 12 && hora_atual  < 18){
+            msg = 'Boa tarde';
+          }else{
+            msg = 'Bom dia';
+          }
+          res.render('index', { P_USU, result,msg,tarefas })
+        } catch (error) {
+          let log = error;
+          criarlogtxt(log, req.url);
+          console.error('Erro:', error);
+          res.status(500).send('Erro ao obter os dados');
+        }
+      
+  
+    }
+  })
+  
 })
 app.get('/cadastro/cidades', auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -512,6 +555,7 @@ app.get('/visualiza/dicionario/dados/procedure/:procedure_name', auth, async (re
 app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
   try {
+    
     let Acesso = await valida_acesso(118, token);
     let P_USU = await permi_usu(118, token);
     let sql = `SELECT  COLUMN_NAME, CONSTRAINT_NAME,POSITION,TABLE_NAME
@@ -1165,6 +1209,7 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
 app.post('/select/universal', urlencodedParser, async (req, res) => {
   let Objeto = req.body;
+  console.log(Objeto);
   let novobinds;
   let token = req.cookies.jwt;
   jwt.verify(token, secret, async (error, data) => {
@@ -1174,6 +1219,7 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
       let USU_LOGADO = data.ID_USUARIO;
 
       if (Objeto.USU_LOGADO) {
+
         //CASO USU_LOGADO SEJA true,fazendo o sql com base no usuário logado
         novobinds = { ...Objeto.binds, USU_LOGADO }
         try {
@@ -1218,7 +1264,7 @@ app.post('/envioimg',upload.single('file'),(req,res)=>{
 
 })
 
-app.listen(8020, (err) => {
+app.listen(8050, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);
   } else {

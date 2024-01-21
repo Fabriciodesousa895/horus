@@ -1263,6 +1263,12 @@ app.post('/envioimg',upload.single('file'),(req,res)=>{
   res.json('ooo')
 
 })
+app.get('/dowload/img/ploads_tarefa/:src',upload.single('file'),(req,res)=>{
+  let src = req.params.src
+  console.log(src)
+  res.download(__dirname + '/public/img/uploads_tarefas/' + src)
+
+})
 
 app.listen(8050, (err) => {
   if (err) {

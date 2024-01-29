@@ -85,8 +85,28 @@ app.use(async (req, res, next) => {
     next();
   }
 });
+// Tabela_NCM_Vigente_20240121.json
 
 
+  function importar(){
+    fs.readFile('Tabela_NCM_Vigente_20240121.json','utf-8',(err,data)=>{
+      let dados = JSON.parse(data)
+      console.log( data)
+
+      dados.forEach(e=>{
+
+      //  console.log( e.Codigo)
+      let sql = `BEGIN INSERT INTO NCM (COD_NCM_,NCM_DESC,DT_ALTER,DT_INCLU,COD_USU_ALTER,ID_USU_INCLUSAO) VALUES (:CODIGO,:DESC,SYSDATE,SYSDATE,362,362); COMMIT; END;`
+      let binds = {CODIGO:e.Codigo,DESC:e.Descricao}
+        let result =  conectar(sql,binds)
+        console.log(result)
+       })
+
+     })
+
+  }
+
+// importar();
 
 app.get('/certificado/validacao', (req, res) => {
   let url = req.params.url;
@@ -125,12 +145,12 @@ function auth(req, res, next) {
 // const io = new server(serverHttp);
 //fazendo a chama do banco
 const oracledb = require('oracledb');
-const { status } = require("init");
-const { error, Console } = require("console");
-const bind = require("function-bind");
-const { date } = require("assert-plus");
-const { forEach } = require("lodash");
-const { object } = require("webidl-conversions");
+// const { status } = require("init");
+// const { error, Console } = require("console");
+// const bind = require("function-bind");
+// const { date } = require("assert-plus");
+// const { forEach } = require("lodash");
+// const { object } = require("webidl-conversions");
 const dbconfig = {
   user: 'SYSTEM',
   password: 'host2023',
@@ -287,6 +307,7 @@ function permi_usu(ID_TELA, token) {
           END AS ANEXA,
           U.PATH_IMG AS PATH_IMG,
           U.USU_NOME AS USU_NOME
+          
       FROM (
           SELECT CFU_ALTERA
           FROM CONFIG_USU_TELA
@@ -357,7 +378,7 @@ function permi_usu(ID_TELA, token) {
           ID_USU: data.ID_USUARIO
         }
 
-        let sql3 = `SELECT T_NOME,T_DESCRICAO FROM T_TELA WHERE ID_TELA = :ID_TELA`;
+        let sql3 = `SELECT T_NOME,T_DESCRICAO,ID_TELA FROM T_TELA WHERE ID_TELA = :ID_TELA`;
         let binds3 = {
           ID_TELA: ID_TELA
         }
@@ -409,8 +430,6 @@ function permi_usu(ID_TELA, token) {
   })
 
 }
-
-
 //Redirecionado a rota caso haja um erro no lado do servidor
 app.get('/erroservidor/:error', (req, res) => {
   res.send('Ocorreu um erro ! ' + '<br>' + req.params.error)
@@ -809,7 +828,6 @@ AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) ANEXA
     console.log(error);
   }
 })
-
 //Salvando novo usuário
 app.post('/usuario', urlencodedParser, async (req, res) => {
 
@@ -919,7 +937,14 @@ WHERE U.ID_USU = :ID_USU AND ROWNUM = 1`;
     res.redirect(`/erroservidor/${error}`);
   }
 })
+//Lançador de tarefa
+app.get('/lancador/tarefa',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  let Acesso = await valida_acesso(241,token);
+  let P_USU  = await permi_usu(241,token);
+  res.render('./Admin/lancadortarefa',{P_USU});
 
+})
 app.post('/filtro_usuario', async (req, res) => {
   let token = req.cookies.jwt;
 
@@ -1175,7 +1200,6 @@ app.post('/importar/dados', async (req, res) => {
   }
 
 })
-
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
 app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
   let Objeto = req.body;
@@ -1263,8 +1287,16 @@ app.post('/envioimg',upload.single('file'),(req,res)=>{
   res.json('ooo')
 
 })
+app.get('/dowload/img/ploads_tarefa/:src',upload.single('file'),(req,res)=>{
+  let src = req.params.src
+  console.log(src)
+  res.download(__dirname + '/public/img/uploads_tarefas/' + src)
 
-app.listen(8050, (err) => {
+})
+
+
+
+app.listen(8080, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);
   } else {

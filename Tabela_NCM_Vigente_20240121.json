@@ -1,0 +1,1020 @@
+[
+
+    {
+        "Codigo": "0302.82.00",
+        "Descricao": "-- Raias (\u003ci\u003eRajidae\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.83",
+        "Descricao": "-- Merluza negra e merluza antártica (Marlongas*) (\u003ci\u003eDissostichus\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.83.10",
+        "Descricao": "Merluza negra (\u003ci\u003eDissostichus eleginoides\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.83.20",
+        "Descricao": "Merluza antártica (\u003ci\u003eDissostichus mawsoni\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.84.00",
+        "Descricao": "-- Robalos (\u003ci\u003eDicentrarchus\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.85.00",
+        "Descricao": "-- Esparídeos (\u003ci\u003eSparidae\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.10",
+        "Descricao": "Pargo (\u003ci\u003eLutjanus purpureus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.2",
+        "Descricao": "Cherne-poveiro (\u003ci\u003ePolyprion americanus\u003c/i\u003e), garoupas (\u003ci\u003eAcanthistius\u003c/i\u003e spp.), esturjão (\u003ci\u003eAcipenser baerii\u003c/i\u003e) e peixes-rei (\u003ci\u003eAtherina\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.21",
+        "Descricao": "Cherne-poveiro (\u003ci\u003ePolyprion americanus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.22",
+        "Descricao": "Garoupas (\u003ci\u003eAcanthistius\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.23",
+        "Descricao": "Esturjão (\u003ci\u003eAcipenser baerii\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.24",
+        "Descricao": "Peixes-rei (\u003ci\u003eAtherina\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.3",
+        "Descricao": "Curimatãs (\u003ci\u003eProchilodus\u003c/i\u003e spp.), tilápias (\u003ci\u003eTilapia\u003c/i\u003e spp.\u003ci\u003e, Sarotherodon\u003c/i\u003e spp.\u003ci\u003e, Danakilia\u003c/i\u003e spp.; seus híbridos), surubins (\u003ci\u003ePseudoplatystoma\u003c/i\u003e spp.), traíra (\u003ci\u003eHoplias malabaricus \u0026 H. cf. lacerdae\u003c/i\u003e), piaus (\u003ci\u003eLeporinus\u003c/i\u003e spp.), tainhas (\u003ci\u003eMugil\u003c/i\u003e spp.), pirarucu (\u003ci\u003eArapaima gigas\u003c/i\u003e) e pescadas (\u003ci\u003eCynoscion\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.31",
+        "Descricao": "Curimatãs (\u003ci\u003eProchilodus\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.32",
+        "Descricao": "Tilápias (\u003ci\u003eTilapia\u003c/i\u003e spp.\u003ci\u003e, Sarotherodon\u003c/i\u003e spp.\u003ci\u003e, Danakilia\u003c/i\u003e spp.; seus híbridos)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.33",
+        "Descricao": "Surubins (\u003ci\u003ePseudoplatystoma\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.34",
+        "Descricao": "Traíra (\u003ci\u003eHoplias malabaricus \u0026 H. cf. lacerdae\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.35",
+        "Descricao": "Piaus (\u003ci\u003eLeporinus\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.36",
+        "Descricao": "Tainhas (\u003ci\u003eMugil\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.37",
+        "Descricao": "Pirarucu (\u003ci\u003eArapaima gigas\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.38",
+        "Descricao": "Pescadas (\u003ci\u003eCynoscion\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.4",
+        "Descricao": "Piramutaba (\u003ci\u003eBrachyplatystoma vaillantii\u003c/i\u003e), dourada (\u003ci\u003eBrachyplatystoma flavicans\u003c/i\u003e), pacu (\u003ci\u003ePiaractus mesopotamicus\u003c/i\u003e), tambaqui (\u003ci\u003eColossoma macropomum\u003c/i\u003e) e tambacu (híbrido de tambaqui e pacu)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.41",
+        "Descricao": "Piramutaba (\u003ci\u003eBrachyplatystoma vaillantii\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.42",
+        "Descricao": "Dourada (\u003ci\u003eBrachyplatystoma flavicans\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.43",
+        "Descricao": "Pacu (\u003ci\u003ePiaractus mesopotamicus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.44",
+        "Descricao": "Tambaqui (\u003ci\u003eColossoma macropomum\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.45",
+        "Descricao": "Tambacu (híbrido de tambaqui e pacu)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.89.90",
+        "Descricao": "Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.9",
+        "Descricao": "- Fígados, ovas, gônadas masculinas, barbatanas, cabeças, caudas, bexigas-natatórias e outros subprodutos comestíveis de peixes:",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.91",
+        "Descricao": "-- Fígados, ovas e gônadas masculinas",
+        "Data_Inicio": "01/04/2023",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "440",
+        "Ano_Ato": "2022"
+    },
+    {
+        "Codigo": "0302.91.10",
+        "Descricao": "Ovas de tainhas (\u003ci\u003eMugil\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2023",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "440",
+        "Ano_Ato": "2022"
+    },
+    {
+        "Codigo": "0302.91.90",
+        "Descricao": "Outros",
+        "Data_Inicio": "01/04/2023",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "440",
+        "Ano_Ato": "2022"
+    },
+    {
+        "Codigo": "0302.92.00",
+        "Descricao": "-- Barbatanas de tubarão",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0302.99.00",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "03.03",
+        "Descricao": "Peixes congelados, exceto os filés (filetes) de peixes e outra carne de peixes da posição 03.04.",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.1",
+        "Descricao": "- Salmonídeos, exceto subprodutos comestíveis de peixes das subposições 0303.91 a 0303.99:",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.11.00",
+        "Descricao": "-- Salmão-do-pacífico (salmão-vermelho) (\u003ci\u003eOncorhynchus nerka\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.12.00",
+        "Descricao": "-- Outros salmões-do-pacífico (\u003ci\u003eOncorhynchus gorbuscha, Oncorhynchus keta, Oncorhynchus tschawytscha, Oncorhynchus kisutch, Oncorhynchus masou\u003c/i\u003e e \u003ci\u003eOncorhynchus rhodurus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.13.00",
+        "Descricao": "-- Salmão-do-atlântico (\u003ci\u003eSalmo salar\u003c/i\u003e) e salmão-do-danúbio (\u003ci\u003eHucho hucho\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.14.00",
+        "Descricao": "-- Trutas (\u003ci\u003eSalmo trutta, Oncorhynchus mykiss, Oncorhynchus clarki, Oncorhynchus aguabonita, Oncorhynchus gilae, Oncorhynchus apache\u003c/i\u003e e \u003ci\u003eOncorhynchus chrysogaster\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.19.00",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.2",
+        "Descricao": "- Tilápias (\u003ci\u003eOreochromis\u003c/i\u003e spp.), bagres (peixes-gato*) (\u003ci\u003ePangasius\u003c/i\u003e spp.\u003ci\u003e, Silurus\u003c/i\u003e spp.\u003ci\u003e, Clarias\u003c/i\u003e spp.\u003ci\u003e, Ictalurus\u003c/i\u003e spp.), carpas (\u003ci\u003eCyprinus\u003c/i\u003e spp.\u003ci\u003e, Carassius\u003c/i\u003e spp.\u003ci\u003e, Ctenopharyngodon idellus, Hypophthalmichthys\u003c/i\u003e spp.\u003ci\u003e, Cirrhinus\u003c/i\u003e spp.\u003ci\u003e, Mylopharyngodon piceus, Catla catla, Labeo\u003c/i\u003e spp.\u003ci\u003e, Osteochilus hasselti, Leptobarbus hoeveni, Megalobrama\u003c/i\u003e spp.), enguias (\u003ci\u003eAnguilla\u003c/i\u003e spp.), perca-do-nilo (\u003ci\u003eLates niloticus\u003c/i\u003e) e peixes cabeça-de-serpente (\u003ci\u003eChanna\u003c/i\u003e spp.), exceto subprodutos comestíveis de peixes das subposições 0303.91 a 0303.99:",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.23.00",
+        "Descricao": "-- Tilápias (\u003ci\u003eOreochromis\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.24",
+        "Descricao": "-- Bagres (Peixes-gato*) (\u003ci\u003ePangasius\u003c/i\u003e spp.\u003ci\u003e, Silurus\u003c/i\u003e spp.\u003ci\u003e, Clarias\u003c/i\u003e spp.\u003ci\u003e, Ictalurus\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.24.10",
+        "Descricao": "Bagre americano (\u003ci\u003eIctalurus punctatus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.24.90",
+        "Descricao": "Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.25.00",
+        "Descricao": "-- Carpas (\u003ci\u003eCyprinus\u003c/i\u003e spp.\u003ci\u003e, Carassius\u003c/i\u003e spp.\u003ci\u003e, Ctenopharyngodon idellus, Hypophthalmichthys\u003c/i\u003e spp.\u003ci\u003e, Cirrhinus\u003c/i\u003e spp.\u003ci\u003e, Mylopharyngodon piceus, Catla catla, Labeo\u003c/i\u003e spp.\u003ci\u003e, Osteochilus hasselti, Leptobarbus hoeveni, Megalobrama\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.26.00",
+        "Descricao": "-- Enguias (\u003ci\u003eAnguilla\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.29.00",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.3",
+        "Descricao": "- Peixes chatos (\u003ci\u003ePleuronectidae, Bothidae, Cynoglossidae, Soleidae, Scophthalmidae\u003c/i\u003e e \u003ci\u003eCitharidae\u003c/i\u003e), exceto subprodutos comestíveis de peixes das subposições 0303.91 a 0303.99:",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.31.00",
+        "Descricao": "-- Linguados-gigantes (Alabotes*) (\u003ci\u003eReinhardtius hippoglossoides, Hippoglossus hippoglossus, Hippoglossus stenolepis\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.32.00",
+        "Descricao": "-- Solha (\u003ci\u003ePleuronectes platessa\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.33.00",
+        "Descricao": "-- Linguados (\u003ci\u003eSolea\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.34.00",
+        "Descricao": "-- Pregado (\u003ci\u003ePsetta maxima\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.39.00",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.4",
+        "Descricao": "- Atuns (do gênero \u003ci\u003eThunnus\u003c/i\u003e), bonito-listrado (gaiado*) (\u003ci\u003eKatsuwonus pelamis\u003c/i\u003e), exceto subprodutos comestíveis de peixes das subposições 0303.91 a 0303.99:",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.41.00",
+        "Descricao": "-- Albacora-branca (atum) (\u003ci\u003eThunnus alalunga\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.42.00",
+        "Descricao": "-- Albacora-laje (atum) (\u003ci\u003eThunnus albacares\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.43.00",
+        "Descricao": "-- Bonito-listrado (Gaiado*) (\u003ci\u003eKatsuwonus pelamis\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.44.00",
+        "Descricao": "-- Albacora-bandolim (atum) (\u003ci\u003eThunnus obesus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.45.00",
+        "Descricao": "-- Atuns-azuis (atuns) (\u003ci\u003eThunnus thynnus, Thunnus orientalis\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.46.00",
+        "Descricao": "-- Atum-azul do sul (atum) (\u003ci\u003eThunnus maccoyii\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.49.00",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.5",
+        "Descricao": "- Arenques (\u003ci\u003eClupea harengus, Clupea pallasii\u003c/i\u003e), anchovas (biqueirões*) (\u003ci\u003eEngraulis\u003c/i\u003e spp.), sardinhas (\u003ci\u003eSardina pilchardus, Sardinops\u003c/i\u003e spp.\u003ci\u003e, Sardinella\u003c/i\u003e spp.) (sardinha (\u003ci\u003eSardina pilchardus\u003c/i\u003e) e sardinelas (\u003ci\u003eSardinops\u003c/i\u003e spp., \u003ci\u003eSardinella\u003c/i\u003e spp.)*), anchoveta (espadilha*) (\u003ci\u003eSprattus sprattus\u003c/i\u003e), cavalinhas (sardas e cavalas*) (\u003ci\u003eScomber scombrus, Scomber australasicus, Scomber japonicus\u003c/i\u003e), cavalas-do-índico (\u003ci\u003eRastrelliger\u003c/i\u003e spp.), serras (\u003ci\u003eScomberomorus\u003c/i\u003e spp.), carapaus (\u003ci\u003eTrachurus\u003c/i\u003e spp.), xaréus (\u003ci\u003eCaranx\u003c/i\u003e spp.), bijupirá (cobia*) (\u003ci\u003eRachycentron canadum\u003c/i\u003e), pampos-prateado (\u003ci\u003ePampus\u003c/i\u003e spp.), agulhão-do-japão (\u003ci\u003eCololabis saira\u003c/i\u003e), charros (\u003ci\u003eDecapterus\u003c/i\u003e spp.), capelim (\u003ci\u003eMallotus villosus\u003c/i\u003e), espadarte (\u003ci\u003eXiphias gladius\u003c/i\u003e), merma-oriental (\u003ci\u003eEuthynnus affinis\u003c/i\u003e), bonitos (\u003ci\u003eSarda\u003c/i\u003e spp.), espadins, marlins, veleiros (\u003ci\u003eIstiophoridae\u003c/i\u003e), exceto subprodutos comestíveis de peixes das subposições 0303.91 a 0303.99:",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.51.00",
+        "Descricao": "-- Arenques (\u003ci\u003eClupea harengus, Clupea pallasii\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.53.00",
+        "Descricao": "-- Sardinhas (\u003ci\u003eSardina pilchardus, Sardinops\u003c/i\u003e spp.\u003ci\u003e, Sardinella\u003c/i\u003e spp.) (Sardinha (\u003ci\u003eSardina pilchardus\u003c/i\u003e) e sardinelas (\u003ci\u003eSardinops\u003c/i\u003e spp.,\u003ci\u003e \u003c/i\u003e\u003ci\u003eSardinella\u003c/i\u003e spp.)*), anchoveta (espadilha*) (\u003ci\u003eSprattus sprattus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.54.00",
+        "Descricao": "-- Cavalinhas (Sardas e cavalas*) (\u003ci\u003eScomber scombrus, Scomber australasicus, Scomber japonicus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.55.00",
+        "Descricao": "-- Carapaus (\u003ci\u003eTrachurus\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.56.00",
+        "Descricao": "-- Bijupirá (Cobia*) (\u003ci\u003eRachycentron canadum\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.57.00",
+        "Descricao": "-- Espadarte (\u003ci\u003eXiphias gladius\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.59",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.59.10",
+        "Descricao": "Espadins, marlins, veleiros (\u003ci\u003eIstiophoridae\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.59.20",
+        "Descricao": "Anchoita (\u003ci\u003eEngraulis anchoita\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.59.90",
+        "Descricao": "Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.6",
+        "Descricao": "- Peixes das famílias \u003ci\u003eBregmacerotidae\u003c/i\u003e, \u003ci\u003eEuclichthyidae\u003c/i\u003e, \u003ci\u003eGadidae\u003c/i\u003e, \u003ci\u003eMacrouridae\u003c/i\u003e, \u003ci\u003eMelanonidae\u003c/i\u003e, \u003ci\u003eMerlucciidae\u003c/i\u003e, \u003ci\u003eMoridae\u003c/i\u003e e \u003ci\u003eMuraenolepididae\u003c/i\u003e, exceto subprodutos comestíveis de peixes das subposições 0303.91 a 0303.99:",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.63.00",
+        "Descricao": "-- Bacalhau-do-atlântico (\u003ci\u003eGadus morhua\u003c/i\u003e), bacalhau-da-groelândia (\u003ci\u003eGadus ogac\u003c/i\u003e) e bacalhau-do-pacífico (\u003ci\u003eGadus macrocephalus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.64.00",
+        "Descricao": "-- Hadoque (Arinca*) (\u003ci\u003eMelanogrammus aeglefinus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.65.00",
+        "Descricao": "-- Saithe (Escamudo*) (\u003ci\u003ePollachius virens\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.66.00",
+        "Descricao": "-- Merluzas (Pescadas*) e abróteas (\u003ci\u003eMerluccius\u003c/i\u003e spp., \u003ci\u003eUrophycis\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.67.00",
+        "Descricao": "-- Polaca-do-alasca (Escamudo-do-alasca*) (\u003ci\u003eTheragra chalcogramma\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.68.00",
+        "Descricao": "-- Verdinhos (\u003ci\u003eMicromesistius poutassou, Micromesistius australis\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.69",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.69.10",
+        "Descricao": "Merluza rosada (\u003ci\u003eMacruronus magellanicus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.69.90",
+        "Descricao": "Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.8",
+        "Descricao": "- Outros peixes, exceto subprodutos comestíveis de peixes das subposições 0303.91 a 0303.99:",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.81",
+        "Descricao": "-- Cação e outros tubarões",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.81.1",
+        "Descricao": "Tubarão-azul (\u003ci\u003ePrionace glauca\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.81.11",
+        "Descricao": "Inteiro",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.81.12",
+        "Descricao": "Eviscerado, sem cabeça e sem barbatanas",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.81.13",
+        "Descricao": "Em pedaços, com pele",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.81.14",
+        "Descricao": "Em pedaços, sem pele",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.81.19",
+        "Descricao": "Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.81.90",
+        "Descricao": "Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.82.00",
+        "Descricao": "-- Raias (\u003ci\u003eRajidae\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.83",
+        "Descricao": "-- Merluza negra e merluza antártica (Marlongas*) (\u003ci\u003eDissostichus\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.83.1",
+        "Descricao": "Merluza negra (\u003ci\u003eDissostichus eleginoides\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.83.11",
+        "Descricao": "Evisceradas, sem cabeça e sem cauda",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.83.19",
+        "Descricao": "Outras",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.83.2",
+        "Descricao": "Merluza antártica (\u003ci\u003eDissostichus mawsoni\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.83.21",
+        "Descricao": "Evisceradas, sem cabeça e sem cauda",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.83.29",
+        "Descricao": "Outras",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.84.00",
+        "Descricao": "-- Robalos (\u003ci\u003eDicentrarchus\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89",
+        "Descricao": "-- Outros",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.10",
+        "Descricao": "Corvina (\u003ci\u003eMicropogonias furnieri\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.20",
+        "Descricao": "Pescadas (\u003ci\u003eCynoscion\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.3",
+        "Descricao": "Pargo (\u003ci\u003eLutjanus purpureus\u003c/i\u003e) e peixe-sapo (\u003ci\u003eLophius gastrophysus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.32",
+        "Descricao": "Pargo (\u003ci\u003eLutjanus purpureus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.33",
+        "Descricao": "Peixe-sapo (\u003ci\u003eLophius gastrophysus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.4",
+        "Descricao": "Cherne-poveiro (\u003ci\u003ePolyprion americanus\u003c/i\u003e), garoupas (\u003ci\u003eAcanthistius\u003c/i\u003e spp.), tainhas (\u003ci\u003eMugil\u003c/i\u003e spp.), esturjões (\u003ci\u003eAcipenser baerii, Acipenser gueldenstaedtii, Acipenser persicus, Acipenser stellatus\u003c/i\u003e), peixes-rei (\u003ci\u003eAtherina\u003c/i\u003e spp.) e nototenias (\u003ci\u003ePatagonotothen\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.41",
+        "Descricao": "Cherne-poveiro (\u003ci\u003ePolyprion americanus\u003c/i\u003e)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.42",
+        "Descricao": "Garoupas (\u003ci\u003eAcanthistius\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    },
+    {
+        "Codigo": "0303.89.43",
+        "Descricao": "Tainhas (\u003ci\u003eMugil\u003c/i\u003e spp.)",
+        "Data_Inicio": "01/04/2022",
+        "Data_Fim": "31/12/9999",
+        "Tipo_Ato": "Res Camex",
+        "Numero_Ato": "272",
+        "Ano_Ato": "2021"
+    }
+    ]

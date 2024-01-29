@@ -2,7 +2,41 @@
 
 
 <%- include('../partials/header'); %>
+<button type="button" class="btn btn-primary" style="display: none;" data-toggle="modal" id="AnexoModal" data-target="#ModalAnexo">
+  Abrir modal de demonstração
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="ModalAnexo" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 600px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="TituloModalCentralizado">Título do modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table" id="TabelaAnexo">
+          <thead>
+              <td>Id</td>
+              <td>Nome</td>
+              <td>Data inclusão</td>
+              <td>Deletar</td>
+              <td>Baixar</td>
+          </thead>
+          <tbody id="Tbody">
+              <!-- Dados sendo inseridos pelo js -->
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal extra grande -->
 
 
@@ -241,6 +275,8 @@
 <script src="/js/usuario/input_copia.js"></script>
 <script src="/js/usuario/input_copia2.js"></script>
 <script type="module" src="/js/usuario/usuario_http.js"></script>
+<script type="module" src="/js/Anexos.js"></script>
+
 
 
 <%- include('../partials/footer'); %>

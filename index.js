@@ -22,13 +22,13 @@ const multer = require('multer')
 const path = require('path')
 // Configurando multer para uploads de imagens
 const storage = multer.diskStorage({
-    destination:(req,file,callback)=>{callback(null,path.resolve('./public/img/uploads'))},
-    filename: (req,file,callback)=>{
-        const time = new Date().getTime();
-        callback(null,`${time}__${file.originalname}`);
-    }
+  destination: (req, file, callback) => { callback(null, path.resolve('./public/img/uploads')) },
+  filename: (req, file, callback) => {
+    const time = new Date().getTime();
+    callback(null, `${time}__${file.originalname}`);
+  }
 })
-const upload = multer({storage:storage})
+const upload = multer({ storage: storage })
 
 //configurando cors
 const cors = require('cors');
@@ -88,23 +88,22 @@ app.use(async (req, res, next) => {
 // Tabela_NCM_Vigente_20240121.json
 
 
-  function importar(){
-    fs.readFile('Tabela_NCM_Vigente_20240121.json','utf-8',(err,data)=>{
-      let dados = JSON.parse(data)
-      console.log( data)
+function importar() {
+  fs.readFile('Tabela_NCM_Vigente_20240121.json', 'utf-8', (err, data) => {
+    let dados = JSON.parse(data)
 
-      dados.forEach(e=>{
+    dados.forEach(e => {
 
       //  console.log( e.Codigo)
       let sql = `BEGIN INSERT INTO NCM (COD_NCM_,NCM_DESC,DT_ALTER,DT_INCLU,COD_USU_ALTER,ID_USU_INCLUSAO) VALUES (:CODIGO,:DESC,SYSDATE,SYSDATE,362,362); COMMIT; END;`
-      let binds = {CODIGO:e.Codigo,DESC:e.Descricao}
-        let result =  conectar(sql,binds)
-        console.log(result)
-       })
+      let binds = { CODIGO: e.Codigo, DESC: e.Descricao }
+      let result = conectar(sql, binds)
+      console.log(result)
+    })
 
-     })
+  })
 
-  }
+}
 
 // importar();
 
@@ -417,8 +416,7 @@ function permi_usu(ID_TELA, token) {
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
-          console.log(Objeto)
-          console.log(Objeto)
+     
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -448,8 +446,8 @@ app.get('/', auth, async (req, res) => {
       return;
     } else {
       let USU_LOGADO = data.ID_USUARIO;
-        try {
-          let sql = `SELECT 
+      try {
+        let sql = `SELECT 
           TITULO,
           MENSAGEM,
           TO_CHAR(DTINICIO,'DD-MM-YYYY') AS INICIO,  
@@ -466,7 +464,7 @@ app.get('/', auth, async (req, res) => {
       INNER JOIN USU_USUARIO USU ON USU.ID_USU = CC.ID_USU
           WHERE SYSDATE  BETWEEN DTINICIO AND DTFIM + 1
       ORDER BY COR DESC`
-      let sql_tarefa = `
+        let sql_tarefa = `
       SELECT
       ID_TAREFA,
       SUBSTR(TF_MSG,1,80) || ' . . .' AS TF_MSG,
@@ -481,34 +479,33 @@ app.get('/', auth, async (req, res) => {
       AND TF_STATUS = 'A'
       ORDER BY TF_NIVEL DESC
        `
-      let binds_tarefa = {USU_LOGADO:USU_LOGADO}
-          let result = await conectarbd(sql, [], options_objeto)
-          let tarefas = await conectarbd(sql_tarefa,binds_tarefa,options_objeto);
-          console.log(tarefas)
-          let P_USU = await permi_usu(1, token);
-          let msg;
-          let HR_ATUAL = new Date();
-          let hora_atual = HR_ATUAL.getHours();
-      
-          if(hora_atual >= 18 || hora_atual < 6){
-            msg = 'Boa noite';
-          }else if(hora_atual >= 12 && hora_atual  < 18){
-            msg = 'Boa tarde';
-          }else{
-            msg = 'Bom dia';
-          }
-          res.render('index', { P_USU, result,msg,tarefas })
-        } catch (error) {
-          let log = error;
-          criarlogtxt(log, req.url);
-          console.error('Erro:', error);
-          res.status(500).send('Erro ao obter os dados');
+        let binds_tarefa = { USU_LOGADO: USU_LOGADO }
+        let result = await conectarbd(sql, [], options_objeto)
+        let tarefas = await conectarbd(sql_tarefa, binds_tarefa, options_objeto);
+        let P_USU = await permi_usu(1, token);
+        let msg;
+        let HR_ATUAL = new Date();
+        let hora_atual = HR_ATUAL.getHours();
+
+        if (hora_atual >= 18 || hora_atual < 6) {
+          msg = 'Boa noite';
+        } else if (hora_atual >= 12 && hora_atual < 18) {
+          msg = 'Boa tarde';
+        } else {
+          msg = 'Bom dia';
         }
-      
-  
+        res.render('index', { P_USU, result, msg, tarefas })
+      } catch (error) {
+        let log = error;
+        criarlogtxt(log, req.url);
+        console.error('Erro:', error);
+        res.status(500).send('Erro ao obter os dados');
+      }
+
+
     }
   })
-  
+
 })
 app.get('/cadastro/cidades', auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -562,8 +559,8 @@ app.get('/visualiza/dicionario/dados/procedure/:procedure_name', auth, async (re
     FROM ALL_SOURCE ASS,USER_PROCEDURES US WHERE
     US.OBJECT_NAME = ASS.NAME  AND TYPE = 'PROCEDURE'
    AND OBJECT_NAME = '${procedure_nome}'`;
-   let result = await conectarbd(sql,[],options_objeto);
-    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizaprocedure', { P_USU,result});
+    let result = await conectarbd(sql, [], options_objeto);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizaprocedure', { P_USU, result });
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
@@ -574,7 +571,7 @@ app.get('/visualiza/dicionario/dados/procedure/:procedure_name', auth, async (re
 app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
   try {
-    
+
     let Acesso = await valida_acesso(118, token);
     let P_USU = await permi_usu(118, token);
     let sql = `SELECT  COLUMN_NAME, CONSTRAINT_NAME,POSITION,TABLE_NAME
@@ -938,11 +935,11 @@ WHERE U.ID_USU = :ID_USU AND ROWNUM = 1`;
   }
 })
 //Lançador de tarefa
-app.get('/lancador/tarefa',auth,async(req,res)=>{
+app.get('/lancador/tarefa', auth, async (req, res) => {
   let token = req.cookies.jwt;
-  let Acesso = await valida_acesso(241,token);
-  let P_USU  = await permi_usu(241,token);
-  res.render('./Admin/lancadortarefa',{P_USU});
+  let Acesso = await valida_acesso(241, token);
+  let P_USU = await permi_usu(241, token);
+  res.render('./Admin/lancadortarefa', { P_USU });
 
 })
 app.post('/filtro_usuario', async (req, res) => {
@@ -1007,7 +1004,6 @@ app.post('/update_usuario', async (req, res) => {
   let token = req.cookies.jwt;
   let saltRounds = 10
   let objeto = req.body; //pegando os dados da requisição ajax
-  console.log(objeto);
   jwt.verify(token, secret, async (err, data) => {
     if (err) return res.send('Token inválido,faça login e tente novamente!');
 
@@ -1233,7 +1229,6 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
 app.post('/select/universal', urlencodedParser, async (req, res) => {
   let Objeto = req.body;
-  console.log(Objeto);
   let novobinds;
   let token = req.cookies.jwt;
   jwt.verify(token, secret, async (error, data) => {
@@ -1283,14 +1278,51 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
   })
 })
 
-app.post('/envioimg',upload.single('file'),(req,res)=>{
-  res.json('ooo')
+
+app.get('/dowload/img/ploads_tarefa/:src', upload.single('file'), (req, res) => {
+  let src = req.params.src
+  res.download(__dirname + '/public/img/uploads_tarefas/' + src)
 
 })
-app.get('/dowload/img/ploads_tarefa/:src',upload.single('file'),(req,res)=>{
-  let src = req.params.src
-  console.log(src)
-  res.download(__dirname + '/public/img/uploads_tarefas/' + src)
+app.post('/Deleta/Anexo', async (req, res) => {
+  let IdRegistro = req.body.IdRegistro
+  let binds = { IdRegistro: IdRegistro }
+
+  let sql = `BEGIN DELETE FROM  ANEXO WHERE ID_ANEXO = :IdRegistro;COMMIT; END;`
+  let result = await conectar(sql, binds);
+
+  let sql2 = ` SELECT PATH FROM ANEXO WHERE ID_ANEXO = :IdRegistro`
+  let path = await conectar(sql2, binds);
+
+  fs.unlink(__dirname + '/public/img/Anexos/' + path.rows, (err) => {
+    if (err) {
+      console.error('Erro ao excluir o arquivo:', err);
+      res.send('Erro ao excluir o arquivo:', err);
+
+      return;
+    }
+    res.send('Registro deletado com sucesso;')
+  })
+
+
+})
+
+app.get('/Baixar/Anexo/:IdRegistro', async (req, res) => {
+  let IdRegistro = req.params.IdRegistro;
+  try {
+    let binds = { ID: IdRegistro }
+    let sql = ` SELECT PATH FROM ANEXO WHERE ID_ANEXO = :ID`
+    let path = await conectar(sql, binds);
+    res.download(__dirname + '/public/img/Anexos/' + path.rows);
+
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.send('Ocorreu um erro ao baixar arquivo! --' + error);
+    console.log(error);
+  }
+
+
 
 })
 

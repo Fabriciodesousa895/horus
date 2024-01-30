@@ -43,37 +43,40 @@ BtnModal.addEventListener('click', () => {
       row.appendChild(tdb);
     });
     AnexoModal.click();
-    Escutadorevento();
+    EscutadorBaixar();
+    EscutadorDelete();
 
   })
 })
 
-function Escutadorevento (){
+function EscutadorBaixar() {
   let BtnBaixar = document.querySelectorAll('.BtnBaixar');
   BtnBaixar.forEach((e) => {
-    e.addEventListener('click',(t)=>{
+    e.addEventListener('click', (t) => {
       let IdRegistro = ((((t.target).parentNode).parentNode).cells[0]).textContent
-    console.log(IdRegistro)
-    // let data = {
-    //   sql: `BEGIN
-    //     UPDATE `,
-    //   binds: { ID_TELA: Id_Tela.value },
-    //   mensage_error: 'Houve um erro ao conultar os anexos!',
-    //   rows: true,
-    //   USU_LOGADO: true
-    // }
-    // new Ajax('/rota/universal',data)
-    let AJax = new XMLHttpRequest();
-    Ajax.open('POST','/Baixar')
-      
+      let b = document.createElement('iframe');
+      b.setAttribute('src', 'http://localhost:8080/Baixar/Anexo/' + IdRegistro);
+      document.querySelector('#baixar')
+        .appendChild(b)
+        .setAttribute('style', 'display:none')
+
+    })
+  })
+}
+function EscutadorDelete() {
+  let BtnBaixar = document.querySelectorAll('.BtnDeletar');
+  BtnBaixar.forEach((e) => {
+    e.addEventListener('click', (t) => {
+      let IdRegistro = ((((t.target).parentNode).parentNode).cells[0]).textContent
+        console.log(IdRegistro)
+        let binds = {
+          IdRegistro:IdRegistro
+        }
+     let Req =  new Ajax('/Deleta/Anexo',binds).RequisicaoAjax(true)
+    
+
+
     })
   })
 }
 
-BtnDowload.addEventListener('click', () => {
-  let b = document.createElement('iframe');
-  b.setAttribute('src', 'http://localhost:8050/dowload/img/anexos/' + srcarquivo.value);
-  document.querySelector('#baixar')
-      .appendChild(b)
-      .setAttribute('style', 'display:none')
-})

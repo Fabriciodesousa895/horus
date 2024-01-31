@@ -4,6 +4,7 @@ import { Tabela } from "./Class/Tabela.js";
 
 let BtnModal = document.getElementById('ANEXO');
 let Id_Tela = document.getElementById('Id_Tela');
+let BtnAnexo = document.getElementById('BtnAnexo');
 let AnexoModal = document.getElementById('AnexoModal');
 BtnModal.addEventListener('click', () => {
   let data = {
@@ -68,7 +69,6 @@ function EscutadorDelete() {
   BtnBaixar.forEach((e) => {
     e.addEventListener('click', (t) => {
       let IdRegistro = ((((t.target).parentNode).parentNode).cells[0]).textContent
-        console.log(IdRegistro)
         let binds = {
           IdRegistro:IdRegistro
         }

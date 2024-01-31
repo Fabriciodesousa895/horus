@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const axios = require('axios');
+
 'use strict';
 //view engine
 app.set("view engine", "ejs");
@@ -1284,47 +1285,51 @@ app.get('/dowload/img/ploads_tarefa/:src', upload.single('file'), (req, res) => 
   res.download(__dirname + '/public/img/uploads_tarefas/' + src)
 
 })
+
 app.post('/Deleta/Anexo', async (req, res) => {
-  let IdRegistro = req.body.IdRegistro
-  let binds = { IdRegistro: IdRegistro }
-
-  let sql = `BEGIN DELETE FROM  ANEXO WHERE ID_ANEXO = :IdRegistro;COMMIT; END;`
-  let result = await conectar(sql, binds);
-
-  let sql2 = ` SELECT PATH FROM ANEXO WHERE ID_ANEXO = :IdRegistro`
-  let path = await conectar(sql2, binds);
-
-  fs.unlink(__dirname + '/public/img/Anexos/' + path.rows, (err) => {
-    if (err) {
-      console.error('Erro ao excluir o arquivo:', err);
-      res.send('Erro ao excluir o arquivo:', err);
-
-      return;
+    try {
+        const idRegistro = req.body.IdRegistro;
+        const binds = { IdRegistro: idRegistro };
+        const selectSql = `SELECT PATH FROM ANEXO WHERE ID_ANEXO = :IdRegistro`;
+        const pathResult = await conectar(selectSql, binds);
+        // Deleta o registro do banco de dados
+        const deleteSql = `BEGIN DELETE FROM  ANEXO WHERE ID_ANEXO = :IdRegistro;COMMIT;END;`;
+        await conectar(deleteSql, binds);
+ 
+        console.log( pathResult.rows[0][0])
+        // Exclui o arquivo
+        fs.unlink(__dirname + '/public/img/Anexos/' + pathResult.rows[0][0], (err) => {
+            if (err) {
+                console.error('Erro ao excluir o arquivo:', err);
+                res.status(500).send('Erro ao excluir o arquivo: ' + err.message);
+                return;
+            }
+            res.send('Registro deletado com sucesso.');
+        });
+    } catch (error) {
+        console.error('Erro ao deletar o anexo:', error);
+        res.status(500).send('Erro ao deletar o anexo: ' + error.message);
     }
-    res.send('Registro deletado com sucesso;')
-  })
-
-
-})
+});
 
 app.get('/Baixar/Anexo/:IdRegistro', async (req, res) => {
-  let IdRegistro = req.params.IdRegistro;
   try {
-    let binds = { ID: IdRegistro }
-    let sql = ` SELECT PATH FROM ANEXO WHERE ID_ANEXO = :ID`
-    let path = await conectar(sql, binds);
-    res.download(__dirname + '/public/img/Anexos/' + path.rows);
-
+      const idRegistro = req.params.IdRegistro;
+      const binds = { ID: idRegistro };
+      const sql = `SELECT PATH FROM ANEXO WHERE ID_ANEXO = :ID`;
+      const pathResult = await conectar(sql, binds);
+      const path = pathResult.rows[0][0];
+      // Realiza o download do anexo
+      res.download(__dirname + '/public/img/Anexos/' + path);
   } catch (error) {
-    let log = error;
-    criarlogtxt(log, req.url);
-    res.send('Ocorreu um erro ao baixar arquivo! --' + error);
-    console.log(error);
+      // Em caso de erro, registra o erro em um log e retorna uma mensagem de erro ao cliente
+      const errorMessage = 'Ocorreu um erro ao baixar arquivo! --' + error.message;
+      console.error(errorMessage);
+      criarlogtxt(error, req.url);
+      res.status(500).send(errorMessage);
   }
+});
 
-
-
-})
 
 
 
@@ -1332,6 +1337,6 @@ app.listen(8080, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);
   } else {
-    console.log("Servidor rodando, localhost:8020");
+    console.log("Servidor rodando, https:localhost:8080/login");
   }
 });

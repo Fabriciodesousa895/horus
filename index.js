@@ -23,7 +23,7 @@ const multer = require('multer')
 const path = require('path')
 // Configurando multer para uploads de imagens
 const storage = multer.diskStorage({
-  destination: (req, file, callback) => { callback(null, path.resolve('./public/img/uploads')) },
+  destination: (req, file, callback) => { callback(null, path.resolve('./public/img/Anexos')) },
   filename: (req, file, callback) => {
     const time = new Date().getTime();
     callback(null, `${time}__${file.originalname}`);
@@ -131,26 +131,16 @@ function auth(req, res, next) {
   const token = req.cookies.jwt;
 
   if (!token) {
-    res.status(500).send('Token inválido,faça login novamente!');
+    res.render('Token')
   } else {
     const decoded = jwt.verify(token, secret);
     req.ID_USUARIO = decoded;
     next();
   }
 }
-//sockte.io
-// const server = require('socket.io');
-// const http = require('http')
-// const serverHttp = http.createServer(app);
-// const io = new server(serverHttp);
-//fazendo a chama do banco
+
 const oracledb = require('oracledb');
-// const { status } = require("init");
-// const { error, Console } = require("console");
-// const bind = require("function-bind");
-// const { date } = require("assert-plus");
-// const { forEach } = require("lodash");
-// const { object } = require("webidl-conversions");
+
 const dbconfig = {
   user: 'SYSTEM',
   password: 'host2023',
@@ -417,7 +407,7 @@ function permi_usu(ID_TELA, token) {
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
-     
+
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -1287,49 +1277,68 @@ app.get('/dowload/img/ploads_tarefa/:src', upload.single('file'), (req, res) => 
 })
 
 app.post('/Deleta/Anexo', async (req, res) => {
-    try {
-        const idRegistro = req.body.IdRegistro;
-        const binds = { IdRegistro: idRegistro };
-        const selectSql = `SELECT PATH FROM ANEXO WHERE ID_ANEXO = :IdRegistro`;
-        const pathResult = await conectar(selectSql, binds);
-        // Deleta o registro do banco de dados
-        const deleteSql = `BEGIN DELETE FROM  ANEXO WHERE ID_ANEXO = :IdRegistro;COMMIT;END;`;
-        await conectar(deleteSql, binds);
- 
-        console.log( pathResult.rows[0][0])
-        // Exclui o arquivo
-        fs.unlink(__dirname + '/public/img/Anexos/' + pathResult.rows[0][0], (err) => {
-            if (err) {
-                console.error('Erro ao excluir o arquivo:', err);
-                res.status(500).send('Erro ao excluir o arquivo: ' + err.message);
-                return;
-            }
-            res.send('Registro deletado com sucesso.');
-        });
-    } catch (error) {
-        console.error('Erro ao deletar o anexo:', error);
-        res.status(500).send('Erro ao deletar o anexo: ' + error.message);
-    }
+  try {
+    const idRegistro = req.body.IdRegistro;
+    const binds = { IdRegistro: idRegistro };
+    const selectSql = `SELECT PATH FROM ANEXO WHERE ID_ANEXO = :IdRegistro`;
+    const pathResult = await conectar(selectSql, binds);
+    // Deleta o registro do banco de dados
+    const deleteSql = `BEGIN DELETE FROM  ANEXO WHERE ID_ANEXO = :IdRegistro;COMMIT;END;`;
+    await conectar(deleteSql, binds);
+
+    console.log(pathResult.rows[0][0])
+    // Exclui o arquivo
+    fs.unlink(__dirname + '/public/img/Anexos/' + pathResult.rows[0][0], (err) => {
+      if (err) {
+        console.error('Erro ao excluir o arquivo:', err);
+        res.status(500).send('Erro ao excluir o arquivo: ' + err.message);
+        return;
+      }
+      res.send('Registro deletado com sucesso.');
+    });
+  } catch (error) {
+    console.error('Erro ao deletar o anexo:', error);
+    res.status(500).send('Erro ao deletar o anexo: ' + error.message);
+  }
 });
 
 app.get('/Baixar/Anexo/:IdRegistro', async (req, res) => {
   try {
-      const idRegistro = req.params.IdRegistro;
-      const binds = { ID: idRegistro };
-      const sql = `SELECT PATH FROM ANEXO WHERE ID_ANEXO = :ID`;
-      const pathResult = await conectar(sql, binds);
-      const path = pathResult.rows[0][0];
-      // Realiza o download do anexo
-      res.download(__dirname + '/public/img/Anexos/' + path);
+    const idRegistro = req.params.IdRegistro;
+    const binds = { ID: idRegistro };
+    const sql = `SELECT PATH FROM ANEXO WHERE ID_ANEXO = :ID`;
+    const pathResult = await conectar(sql, binds);
+    const path = pathResult.rows[0][0];
+    // Realiza o download do anexo
+    res.download(__dirname + '/public/img/Anexos/' + path);
   } catch (error) {
-      // Em caso de erro, registra o erro em um log e retorna uma mensagem de erro ao cliente
-      const errorMessage = 'Ocorreu um erro ao baixar arquivo! --' + error.message;
-      console.error(errorMessage);
-      criarlogtxt(error, req.url);
-      res.status(500).send(errorMessage);
+    // Em caso de erro, registra o erro em um log e retorna uma mensagem de erro ao cliente
+    const errorMessage = 'Ocorreu um erro ao baixar arquivo! --' + error.message;
+    console.error(errorMessage);
+    criarlogtxt(error, req.url);
+    res.status(500).send(errorMessage);
   }
 });
 
+app.post('/Upload/Anexo', upload.single('FileAnexo'), (req, res) => {
+  let Id_Tela = req.body.Id_Tela;
+  let token = req.cookies.jwt;
+  try {
+    jwt.verify(token, secret, (err, data) => {
+      if (err) {
+        res.status(400).send('Error');
+
+      } else {
+        let ID_USU = data.ID_USUARIO;
+        let sql = 'BEGIN INSERT INTO ANEXO (ID_TELA,ID_USU,PATH,DT_INCLU) VALUES(:ID_TELA,:ID_USU,:PATH,SYSDATE);COMMIT;END;'
+        let binds = { ID_USU: ID_USU, ID_TELA: Id_Tela }
+        console.log(storage);
+      }
+    })
+  } catch (error) {
+    res.status(400).send('Error');
+  }
+})
 
 
 

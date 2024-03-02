@@ -19,7 +19,39 @@
 
 </style>
 <!-- Botão para acionar modal -->
-C
+<!-- Inicio Anexo -->
+<button type="button" class="btn btn-primary" style="display: none;" data-toggle="modal" id="AnexoModal" data-target="#ModalAnexo">
+    Abrir modal de demonstração
+  </button>
+  <div id="baixar"></div>
+  <!-- Modal -->
+<div class="modal fade" id="ModalAnexo" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 600px;">
+<div class="modal-content">
+<div class="modal-body">
+<table class="table" id="TabelaAnexo">
+  <thead>
+      <td>Id</td>
+      <td>Nome</td>
+      <td>Data inclusão</td>
+      <td>Deletar</td>
+      <td>Baixar</td>
+  </thead>
+  <tbody id="Tbody">
+      <!-- Dados sendo inseridos pelo js -->
+  </tbody>
+</table>
+</div>
+<div class="modal-footer">
+<form action="/Upload/Anexo" enctype="multipart/form-data" method="post">
+<input type="file" class="form-control" name="FileAnexo" id="FileAnexo">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+<button type="submit" id="BtnAnexo" class="btn btn-warning">Salvar Anexo</button>
+</form>
+</div>
+</div>
+</div>
+</div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- valida o acessos -->

@@ -5,6 +5,7 @@ import { Ajax } from "../Class/Ajax.js";
 import { filtra_campo } from "../Class/Filtra_campo.js";
 new filtra_campo('ID_CID', 'NOME_CID', 'CIDADE').Filtra()
 new filtra_campo('ID_CID_F', 'NOME_CID_F', 'CIDADE').Filtra()
+new Tabela('tabeladados').VisualizaRegistro('/visualizaparceiro/',1)
 
 let bairro = document.getElementById('PARC_BAIRRO')
 let logradouro = document.getElementById('PARC_LOGRA')
@@ -46,7 +47,7 @@ function Filtro() {
 
 function Importar(e) {
     e.preventDefault()
-    let CGC = document.getElementById('PARC_CGC')
+    let CGC = document.getElementById('PARC_CGC_')
     let ajax = new XMLHttpRequest();
     ajax.open('POST', '/importar/dados');
     ajax.setRequestHeader('Content-type', 'application/json');
@@ -77,7 +78,9 @@ function Importar(e) {
             }
             var selectedIndex = dados.uf
             UF.value = selectedIndex
-            NOME_CID.value = dados.bairro
+            NOME_CID.value = dados.municipio
+            let evento =  new Event('change');
+            NOME_CID.dispatchEvent(evento);
 
         }
         else {
@@ -123,7 +126,7 @@ function salvardados(e) {
                                      USU_INCLUSAO,USU_ALTER,
                                      DT_INCLU,DT_ALTER)
             VALUES                   ('${Objeto.PARC_NOME}','${Objeto.PARC_N_RAZAO_SOCIAL}',
-                                      '${Objeto.PARC_CGC}',${Objeto.PARC_IR_RG},
+                                      '${Objeto.PARC_CGC_}',${Objeto.PARC_IR_RG},
                                       '${Objeto.PARC_EMAIL}',TO_DATE('${Objeto.PARC_NASC}','YYYY-MM-DD'),
                                       '${Objeto.PARC_TEL}',
                                       '${Objeto.PARC_TEL_2}',

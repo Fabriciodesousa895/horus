@@ -309,9 +309,47 @@ let DEFAULT = document.getElementById('DEFAULT');
     }
     ajax.send(JsonData)
   }
-  //Quando o usuário clicar em Salvar
+        // Array de palavras reservadas do Oracle
+        const palavrasReservadas = [
+          'ALL', 'ALTER', 'AND', 'ANY', 'AS', 'ASC', 'BETWEEN', 'BY', 'CHAR', 'CHECK',
+          'CLUSTER', 'COLUMN', 'COMMENT', 'COMPRESS', 'CONNECT', 'CREATE', 'CURRENT',
+          'DATE', 'DECIMAL', 'DEFAULT', 'DELETE', 'DESC', 'DISTINCT', 'DROP', 'ELSE',
+          'EXCLUSIVE', 'EXISTS', 'FILE', 'FLOAT', 'FOR', 'FROM', 'GRANT', 'GROUP',
+          'HAVING', 'IDENTIFIED', 'IMMEDIATE', 'IN', 'INCREMENT', 'INDEX', 'INITIAL',
+          'INSERT', 'INTEGER', 'INTERSECT', 'INTO', 'IS', 'LEVEL', 'LIKE', 'LOCK',
+          'LONG', 'MAXEXTENTS', 'MINUS', 'MLSLABEL', 'MODE', 'MODIFY', 'NOAUDIT',
+          'NOCOMPRESS', 'NOT', 'NOWAIT', 'NULL', 'NUMBER', 'OF', 'OFFLINE', 'ON',
+          'ONLINE', 'OPTION', 'OR', 'ORDER', 'PCTFREE', 'PRIOR', 'PRIVILEGES', 'PUBLIC',
+          'RAW', 'RENAME', 'RESOURCE', 'REVOKE', 'ROW', 'ROWID', 'ROWNUM', 'ROWS',
+          'SELECT', 'SESSION', 'SET', 'SHARE', 'SIZE', 'SMALLINT', 'START', 'SUCCESSFUL',
+          'SYNONYM', 'SYSDATE', 'TABLE', 'THEN', 'TO', 'TRIGGER', 'UID', 'UNION',
+          'UNIQUE', 'UPDATE', 'USER', 'VALIDATE', 'VALUES', 'VARCHAR', 'VARCHAR2',
+          'VIEW', 'WHENEVER', 'WHERE', 'WITH', 'WORK'
+      ];
 
+        // Adiciona um listener para o evento 'input'
+      sql.addEventListener('input', function() {
+          // Obtém o texto do textarea
+          let texto = sql.value;
+
+          // Separa o texto em palavras
+          let palavras = texto.split(/\s+/);
+
+          // Itera sobre as palavras do texto
+          palavras.forEach(palavra => {
+              // Verifica se a palavra está na lista de palavras reservadas
+              if (palavrasReservadas.includes(palavra.toUpperCase())) {
+                  // Se estiver, envolve a palavra em uma tag <span> com a classe 'reservada'
+                  texto = texto.replace(new RegExp('\\b' + palavra + '\\b', 'g'), '<div style="color: red;">' + palavra  + '</div>');
+              }
+          });
+          // Atualiza o conteúdo do textarea com as palavras coloridas
+          sql.innerHTML = texto;
+      });
+  //Quando o usuário clicar em Salvar
   document.getElementById('Salvar').addEventListener('click', sendsalvasql, false)
+  //Usando o atalho F8
+  window.addEventListener('keydown',(e)=>{if(e.key == 'F8'){sendForm()}})
   //Quando o usuário consutar a query
   document.getElementById('btn').addEventListener('click', sendForm, false)
   //Quando o usuário  cilcar em Salvar query

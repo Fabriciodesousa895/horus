@@ -60,7 +60,8 @@ import { SalvaFiltro } from "../Class/Filtro.js";
         ajax.open('POST', '/select/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
         let data = {
-            sql: `SELECT ID,NOME,COD_DOMICILIO_FISCAL FROM CIDADE WHERE  COD_DOMICILIO_FISCAL LIKE  '%${FILTRO_COD.value}%' AND ( NOME LIKE '%${FILTRO_NOME.value}%' OR NOME  IS NULL)`,
+            sql: `SELECT ID,NOME,COD_DOMICILIO_FISCAL FROM CIDADE WHERE  (COD_DOMICILIO_FISCAL LIKE  '%${FILTRO_COD.value}%' OR  COD_DOMICILIO_FISCAL IS NULL)
+                                                                     AND ( NOME LIKE '%${FILTRO_NOME.value}%' OR NOME  IS NULL)`,
             binds: {},
             mensage_error: 'Houve um errro ao consultar so resgitros!',
             USU_LOGADO: false,

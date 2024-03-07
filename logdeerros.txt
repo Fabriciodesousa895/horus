@@ -1,56 +1,10 @@
 
-Fri Feb 02 2024 19:53:34 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
+Wed Mar 06 2024 22:39:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
 
-Fri Feb 02 2024 19:53:57 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
+Wed Mar 06 2024 22:39:49 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
 
-Fri Feb 02 2024 19:53:58 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
+Wed Mar 06 2024 23:24:59 GMT-0300 (Horário Padrão de Brasília) -- /importar/dados  -- AxiosError: Request failed with status code 429
 
-Fri Feb 02 2024 19:54:07 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Fri Feb 02 2024 19:54:30 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Fri Feb 02 2024 19:55:20 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Fri Feb 02 2024 19:58:54 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Fri Feb 02 2024 19:59:41 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Fri Feb 02 2024 20:00:01 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Fri Feb 02 2024 20:00:01 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 8
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Fri Feb 02 2024 20:02:00 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
-Help: https://docs.oracle.com/error-help/db/ora-00942/
-
-Sat Mar 02 2024 11:38:46 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
-Help: https://docs.oracle.com/error-help/db/ora-00900/
+Wed Mar 06 2024 23:25:11 GMT-0300 (Horário Padrão de Brasília) -- /importar/dados  -- AxiosError: Request failed with status code 429

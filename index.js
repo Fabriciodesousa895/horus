@@ -131,7 +131,7 @@ function auth(req, res, next) {
   const token = req.cookies.jwt;
 
   if (!token) {
-    res.render('Token')
+    res.render('Error')
   } else {
     const decoded = jwt.verify(token, secret);
     req.ID_USUARIO = decoded;
@@ -214,7 +214,6 @@ app.post('/login', async (req, res) => {
                 res.status(200)
                   .cookie("jwt", token, { httpOnly: true, maxAge: 8000000 })
                   .send('Operação realizada com sucesso');
-
               }
             }
           )
@@ -271,7 +270,6 @@ function valida_acesso(ID_TELA, token) {
 
 //valia as permições na tela em que o usuário está
 function permi_usu(ID_TELA, token) {
-
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, async (err, data) => {
       if (err) { reject('token inválido') }
@@ -353,8 +351,6 @@ function permi_usu(ID_TELA, token) {
       USU_USUARIO U
       WHERE U.ID_USU = :P_ID_USU`;
         let binds = { P_ID_USU: data.ID_USUARIO, P_ID_TELA: ID_TELA };
-
-
         let sql2 = ` SELECT  TL.T_NOME,TL.ROTA
           FROM USU_USUARIO U
           LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
@@ -394,7 +390,6 @@ function permi_usu(ID_TELA, token) {
           ID_TELA: ID_TELA,
           ID_USU: data.ID_USUARIO
         }
-
         try {
           let result = await conectarbd(sql, binds, options_objeto);
           let result2 = await conectar(sql2, binds2, options);
@@ -407,7 +402,6 @@ function permi_usu(ID_TELA, token) {
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
-
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -697,7 +691,7 @@ app.get('/log/acesso', urlencodedParser, auth, async (req, res) => {
 app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
 
   try {
-    let result = await conectar(req.body.sql, [], options_objeto);
+    let result = await conectar(req.body.sql, []);
     let arrayobjetos = result.metaData
     let array_colunas = [];
     let array_registros = []
@@ -725,6 +719,7 @@ app.post('/beforeunload', urlencodedParser, async (req, res) => {
     } else {
       let USU_LOGADO = data.ID_USUARIO;
       try {
+        console.log(url_atual)
         let sql4 = `BEGIN HIST_TELA_SAIDA(:P_TOKEN,:P_URL,:P_USU_LOGADO); END;`;
         let binds4 = {
           P_TOKEN: token,
@@ -1096,6 +1091,14 @@ app.get('/acessos', urlencodedParser, auth, async (req, res) => {
   res.render('./acesso/acesso', { P_USU });
 
 })
+app.get('/visualizaparceiro/:id',urlencodedParser,auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  let Acesso = valida_acesso(201,token);
+  let P_USU =  await permi_usu(201,token);
+  if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
+  res.render('./parceiro/visualizaparceiro', { P_USU });
+
+})
 
 //Copia permissões
 app.post('/copia_usuario', async (req, res) => {
@@ -1170,7 +1173,24 @@ app.post('/importar/dados', async (req, res) => {
   try {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
-
+  
+    console.log(data.municipio)
+    //Caso não exista uma cidade cadastrada  será inserido automaticamente pelo sistema
+    if(data.municipio != ''){
+      let sql = `BEGIN
+      DECLARE
+      V_COUNT INT(5);
+      BEGIN
+          SELECT COUNT(*) INTO V_COUNT FROM CIDADE WHERE NOME = UPPER(:NOME);
+          IF V_COUNT = 0 THEN
+          INSERT INTO CIDADE(NOME, DT_INCLUSAO, DT_ALTERACAO) VALUES (:NOME, SYSDATE, SYSDATE);
+          COMMIT;
+       END IF; 
+      END;
+     END;`
+   let binds = {NOME:data.municipio};
+      conectar(sql,binds)
+    }
     res.status(200).json(data);
   } catch (error) {
     let log = error;
@@ -1276,69 +1296,6 @@ app.get('/dowload/img/ploads_tarefa/:src', upload.single('file'), (req, res) => 
 
 })
 
-app.post('/Deleta/Anexo', async (req, res) => {
-  try {
-    const idRegistro = req.body.IdRegistro;
-    const binds = { IdRegistro: idRegistro };
-    const selectSql = `SELECT PATH FROM ANEXO WHERE ID_ANEXO = :IdRegistro`;
-    const pathResult = await conectar(selectSql, binds);
-    // Deleta o registro do banco de dados
-    const deleteSql = `BEGIN DELETE FROM  ANEXO WHERE ID_ANEXO = :IdRegistro;COMMIT;END;`;
-    await conectar(deleteSql, binds);
-
-    console.log(pathResult.rows[0][0])
-    // Exclui o arquivo
-    fs.unlink(__dirname + '/public/img/Anexos/' + pathResult.rows[0][0], (err) => {
-      if (err) {
-        console.error('Erro ao excluir o arquivo:', err);
-        res.status(500).send('Erro ao excluir o arquivo: ' + err.message);
-        return;
-      }
-      res.send('Registro deletado com sucesso.');
-    });
-  } catch (error) {
-    console.error('Erro ao deletar o anexo:', error);
-    res.status(500).send('Erro ao deletar o anexo: ' + error.message);
-  }
-});
-
-app.get('/Baixar/Anexo/:IdRegistro', async (req, res) => {
-  try {
-    const idRegistro = req.params.IdRegistro;
-    const binds = { ID: idRegistro };
-    const sql = `SELECT PATH FROM ANEXO WHERE ID_ANEXO = :ID`;
-    const pathResult = await conectar(sql, binds);
-    const path = pathResult.rows[0][0];
-    // Realiza o download do anexo
-    res.download(__dirname + '/public/img/Anexos/' + path);
-  } catch (error) {
-    // Em caso de erro, registra o erro em um log e retorna uma mensagem de erro ao cliente
-    const errorMessage = 'Ocorreu um erro ao baixar arquivo! --' + error.message;
-    console.error(errorMessage);
-    criarlogtxt(error, req.url);
-    res.status(500).send(errorMessage);
-  }
-});
-
-app.post('/Upload/Anexo', upload.single('FileAnexo'), (req, res) => {
-  let Id_Tela = req.body.Id_Tela;
-  let token = req.cookies.jwt;
-  try {
-    jwt.verify(token, secret, (err, data) => {
-      if (err) {
-        res.status(400).send('Error');
-
-      } else {
-        let ID_USU = data.ID_USUARIO;
-        let sql = 'BEGIN INSERT INTO ANEXO (ID_TELA,ID_USU,PATH,DT_INCLU) VALUES(:ID_TELA,:ID_USU,:PATH,SYSDATE);COMMIT;END;'
-        let binds = { ID_USU: ID_USU, ID_TELA: Id_Tela }
-        console.log(storage);
-      }
-    })
-  } catch (error) {
-    res.status(400).send('Error');
-  }
-})
 
 
 

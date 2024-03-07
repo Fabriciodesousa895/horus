@@ -1091,12 +1091,22 @@ app.get('/acessos', urlencodedParser, auth, async (req, res) => {
   res.render('./acesso/acesso', { P_USU });
 
 })
-app.get('/visualizaparceiro/:id',urlencodedParser,auth,async(req,res)=>{
+app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
   let token = req.cookies.jwt;
-  let Acesso = valida_acesso(201,token);
-  let P_USU =  await permi_usu(201,token);
-  if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
-  res.render('./parceiro/visualizaparceiro', { P_USU });
+  let ID = req.params.id;
+  let sql = `SELECT * FROM PRC_PARCEIRO WHERE ID_PARC = :ID`;
+  let binds = { ID: ID };
+  try {
+    let Acesso = valida_acesso(201, token);
+    let P_USU = await permi_usu(201, token);
+    let result = await conectarbd(sql, binds, options_objeto);
+    if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
+    res.render('./parceiro/visualizaparceiro', { P_USU,result });
+    console.log(result)
+  } catch (error) {
+
+  }
+
 
 })
 
@@ -1173,10 +1183,10 @@ app.post('/importar/dados', async (req, res) => {
   try {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
-  
+
     console.log(data.municipio)
     //Caso não exista uma cidade cadastrada  será inserido automaticamente pelo sistema
-    if(data.municipio != ''){
+    if (data.municipio != '') {
       let sql = `BEGIN
       DECLARE
       V_COUNT INT(5);
@@ -1188,8 +1198,8 @@ app.post('/importar/dados', async (req, res) => {
        END IF; 
       END;
      END;`
-   let binds = {NOME:data.municipio};
-      conectar(sql,binds)
+      let binds = { NOME: data.municipio };
+      conectar(sql, binds)
     }
     res.status(200).json(data);
   } catch (error) {

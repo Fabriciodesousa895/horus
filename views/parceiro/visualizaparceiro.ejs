@@ -1,4 +1,158 @@
 <%- include('../partials/head'); %>
 
+<div class="row">
+    <%result.forEach(result=>{%>
+    <div class="col-sm-3" style="padding: 50px;width: 356px;">
+
+        <p><span class="mt-2">Nome</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Nome do parceiro"  value="<%=result.PARC_NOME%>"  id="PARC_N_RAZAO_SOCIAL" required>
+        </div>
+
+        <label for="">Razão social</label>
+        <div style="display: flex; flex-direction: row;">
+        </div>
+            <input type="text" class="form-control" placeholder="Razão social" value="<%=result.PARC_N_RAZAO_SOCIAL%>"   id="PARC_NOME" required>
+        <label for="">CPF/CNPJ</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="number" class="form-control" placeholder="CPF/CNPJ" value="<%=result.PARC_CGC_%>"   id="PARC_CGC_" required>
+        </div>
+        <label for="">IE/RG</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="number" class="form-control" placeholder="IE/RG"  value="<%=result.IE_RG%>"   id="PARC_IR_RG" required>
+        </div>
+        <label for="">Email</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="exemplo@gmail.com"  value="<%=result.PARC_EMAIL%>" id="PARC_EMAIL" required>
+        </div>
+        <label for="">Nascimento/fundação</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="date" class="form-control" placeholder="exemplo@gmail.com" id="PARC_NASC" required>
+        </div>
+
+        <p><span class="mt-2">Telefone</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Telefone 1"  value="<%=result.PARC_TEL%>"  id="PARC_TEL" required>
+        </div>
+        <p><span class="mt-2">Telefone</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Telefone 2"  value="<%=result.PARC_TEL_2%>"  id="PARC_TEL_2">
+        </div>
+
+    </div>
+    <div class="col-sm-3" style="padding: 50px;width: 356px;">
+
+        <p><span class="mt-2">Empresa de trabalho</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Empresa de trabalho" value="<%=result.PARC_TRABALHO_N%>"   id="PARC_TRABALHO_N">
+        </div>
+        <p><span class="mt-2">CEP do trabalho</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="CEP do trabalho"  value="<%=result.PARC_CEP_T%>"  id="PARC_CEP_T">
+        </div>
+        <p><span class="mt-2">Bairro do trabalho</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Bairro do trabalho" value="<%=result.PARC_BAIRRO_T%>"   id="PARC_BAIRRO_T">
+        </div>
+        <label for="">Cidade</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" required  id="ID_CID_F" style="width: 80px;margin-right: 8px;" class="form-control mt-2 cidade">
+            <input type="text" required   id="NOME_CID_F" class="form-control mt-2 " placeholder="Cidade" >
+           </div>
+        <p><span class="mt-2">Logradouro do trabalho</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Logradouro do trabalho"  value="<%=result.PARC_LOGRA_T%>"   id="PARC_LOGRA_T">
+        </div>
+        <p><span class="mt-2">Numero do trabalho</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Numero do trabalho"   value="<%=result.PARC_NUM_T%>"  id="PARC_NUM_T">
+        </div>
+        <p><span class="mt-2">Complemento do trabalho</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Complemento do trabalho"   value="<%=result.PARC_COMP_T%>"  id="PARC_COMP_T">
+        </div>
+        <p><span class="mt-2">Telefone do trabalho</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Complemento do trabalho"  value="<%=result.PARC_TEL_T%>"   id="PARC_TEL_T">
+        </div>
+        <p><span class="mt-2">Salário base</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="number" class="form-control" placeholder="Salário base"  value="<%=result.PARC_SALARIO%>"   id="PARC_SALARIO">
+        </div>
+        <p><span class="mt-2">Data admissão</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="date" class="form-control" value="<%=result.PARC_ADMISSAO%>"   id="PARC_ADMISSAO">
+        </div>
+ 
+    </div>
+
+    <div class="col-sm-3" style="padding: 50px;width: 356px;">
+
+        <label for="">CEP</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Cep"  value="<%=result.PARC_ADMISSAO%>"  id="PARC_CEP" required>
+        </div>
+        <label for="ESTADO">Estado</label>
+        <select id="ESTADO" name="ESTADO"   class="form-control" required >
+            <option value="">Selecione</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espirito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+        </select>
+        <label for="">Cidade</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="number" required  id="ID_CID" style="width: 80px;margin-right: 8px;" value="<%=result.ID_CID%>"  class="form-control mt-2 cidade">
+            <input type="text"    id="NOME_CID" class="form-control mt-2 "  placeholder="Cidade" >
+           </div>
+        <label for="">Bairro</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Bairro"  value="<%=result.PARC_BAIRRO%>"    id="PARC_BAIRRO" required>
+        </div>
+        <label for="">Logradouro</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Logradouro" value="<%=result.PARC_BAIRRO%>"   id="PARC_LOGRA" required>
+        </div>
+        <label for="">Numero</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Numero"  value="<%=result.PARC_NUM%>"   id="PARC_NUM" required>
+        </div>
+        <label for="">Complemento</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Complemento"  value="<%=result.PARC_COMP%>"   id="PARC_COMP">
+        </div>
+
+        <div class="custom-control custom-checkbox"> 
+            <input type="checkbox" class="custom-control-input"  id="PARC_FORNEC" >
+            <label class="custom-control-label"  for="PARC_FORNEC">Fornecedor?</label>
+          </div> 
+     </div>
+     <%})%>
+</div>
+<script type="module" src="/js/parceiro/visualizaparceiro.js"></script>
+
 
 <%- include('../partials/footer'); %>

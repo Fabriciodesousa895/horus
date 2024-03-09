@@ -1094,7 +1094,15 @@ app.get('/acessos', urlencodedParser, auth, async (req, res) => {
 app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
   let token = req.cookies.jwt;
   let ID = req.params.id;
-  let sql = `SELECT * FROM PRC_PARCEIRO WHERE ID_PARC = :ID`;
+  let sql = `SELECT PR.*,U.USU_NOME AS USU_ALTER_NOME,T.USU_NOME  AS USU_INCLU_NOME,TO_CHAR(PR.DT_INCLU,'DD/MM/YYYY HH24:MI:SS') AS DATA_INCLU,
+  TO_CHAR(PR.DT_ALTER,'DD/MM/YYYY HH24:MI:SS') AS DATA_ALTER,
+  TO_CHAR(TO_CHAR(PR.PARC_NASC,'yyyy-MM-dd')) AS PARCNASC,
+  TO_CHAR(TO_CHAR(PR.PARC_ADMISSAO,'yyyy-MM-dd')) AS PARCADMISSAO,
+  PARC_CGC_ AS PARC_CGC
+              FROM PRC_PARCEIRO PR 
+              LEFT JOIN USU_USUARIO U ON U.ID_USU = PR.USU_ALTER 
+              LEFT JOIN USU_USUARIO T ON T.ID_USU = PR.USU_INCLUSAO 
+              WHERE PR.ID_PARC = :ID   `;
   let binds = { ID: ID };
   try {
     let Acesso = valida_acesso(201, token);
@@ -1104,7 +1112,7 @@ app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
     res.render('./parceiro/visualizaparceiro', { P_USU,result });
     console.log(result)
   } catch (error) {
-
+    console.log(error)
   }
 
 

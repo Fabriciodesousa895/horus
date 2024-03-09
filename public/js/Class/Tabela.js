@@ -33,7 +33,8 @@ class Tabela {
       let posicao = (Coluna == 0 ? Coluna = 0 : Coluna - 1)
       let conteudocelula = elementopai.cells[posicao]
       let Celula = conteudocelula.textContent
-      location.href = `${Rota}${Celula}`
+      window.open(`${Rota}${Celula}`, '_blank');
+
 
     })
 

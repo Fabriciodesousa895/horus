@@ -1,21 +1,29 @@
 <%- include('../partials/head'); %>
 
-<div class="row">
+<div class="row" id="form">
     <%result.forEach(result=>{%>
     <div class="col-sm-3" style="padding: 50px;width: 356px;">
-
+        <p><span class="mt-2">ID</span></p>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" disabled value="<%=result.ID_PARC%>"  id="ID" required>
+ 
+        </div>
+        <div class="custom-control custom-checkbox"> 
+            <input type="checkbox" class="custom-control-input"   id="PARC_STATUS"   <%if(result.PARC_STATUS == 'S'){%>checked="true" <%} %>>
+            <label class="custom-control-label"  for="PARC_STATUS"  >Ativo?</label>
+          </div> 
         <p><span class="mt-2">Nome</span></p>
         <div style="display: flex; flex-direction: row;">
-            <input type="text" class="form-control" placeholder="Nome do parceiro"  value="<%=result.PARC_NOME%>"  id="PARC_N_RAZAO_SOCIAL" required>
+            <input type="text" class="form-control" placeholder="Nome do parceiro"  value="<%=result.PARC_NOME%>"  id="PARC_NOME" required>
         </div>
 
         <label for="">Razão social</label>
         <div style="display: flex; flex-direction: row;">
         </div>
-            <input type="text" class="form-control" placeholder="Razão social" value="<%=result.PARC_N_RAZAO_SOCIAL%>"   id="PARC_NOME" required>
+            <input type="text" class="form-control" placeholder="Razão social" value="<%=result.PARC_N_RAZAO_SOCIAL%>"   id="PARC_N_RAZAO_SOCIAL" required>
         <label for="">CPF/CNPJ</label>
         <div style="display: flex; flex-direction: row;">
-            <input type="number" class="form-control" placeholder="CPF/CNPJ" value="<%=result.PARC_CGC_%>"   id="PARC_CGC_" required>
+            <input type="number" class="form-control" placeholder="CPF/CNPJ" value="<%=result.PARC_CGC%>"   id="PARC_CGC_" required>
         </div>
         <label for="">IE/RG</label>
         <div style="display: flex; flex-direction: row;">
@@ -27,9 +35,10 @@
         </div>
         <label for="">Nascimento/fundação</label>
         <div style="display: flex; flex-direction: row;">
-            <input type="date" class="form-control" placeholder="exemplo@gmail.com" id="PARC_NASC" required>
+            <input type="date" class="form-control"  id="PARC_NASC" required>
+    
         </div>
-
+        <input type="hidden" class="form-control" value="<%=result.PARCNASC%>" id="DT_FORMATA"> DS
         <p><span class="mt-2">Telefone</span></p>
         <div style="display: flex; flex-direction: row;">
             <input type="text" class="form-control" placeholder="Telefone 1"  value="<%=result.PARC_TEL%>"  id="PARC_TEL" required>
@@ -38,6 +47,8 @@
         <div style="display: flex; flex-direction: row;">
             <input type="text" class="form-control" placeholder="Telefone 2"  value="<%=result.PARC_TEL_2%>"  id="PARC_TEL_2">
         </div>
+        <%- include('../components/salvadeleta_V'); %>
+
 
     </div>
     <div class="col-sm-3" style="padding: 50px;width: 356px;">
@@ -56,7 +67,7 @@
         </div>
         <label for="">Cidade</label>
         <div style="display: flex; flex-direction: row;">
-            <input type="text" required  id="ID_CID_F" style="width: 80px;margin-right: 8px;" class="form-control mt-2 cidade">
+            <input type="text" required  id="ID_CID_F" style="width: 80px;margin-right: 8px;"  value="<%=result.PARC_CID_F%>"  class="form-control mt-2 cidade">
             <input type="text" required   id="NOME_CID_F" class="form-control mt-2 " placeholder="Cidade" >
            </div>
         <p><span class="mt-2">Logradouro do trabalho</span></p>
@@ -81,7 +92,7 @@
         </div>
         <p><span class="mt-2">Data admissão</span></p>
         <div style="display: flex; flex-direction: row;">
-            <input type="date" class="form-control" value="<%=result.PARC_ADMISSAO%>"   id="PARC_ADMISSAO">
+            <input type="date" class="form-control"  value="<%=result.PARCADMISSAO%>"  id="PARC_ADMISSAO">
         </div>
  
     </div>
@@ -90,11 +101,12 @@
 
         <label for="">CEP</label>
         <div style="display: flex; flex-direction: row;">
-            <input type="text" class="form-control" placeholder="Cep"  value="<%=result.PARC_ADMISSAO%>"  id="PARC_CEP" required>
+            <input type="text" class="form-control" placeholder="Cep"  value="<%=result.PARC_CEP%>"  id="PARC_CEP" required>
         </div>
+        <input type="hidden"  value="<%=result.UF%>" id="UF_ESTADO" >
         <label for="ESTADO">Estado</label>
-        <select id="ESTADO" name="ESTADO"   class="form-control" required >
-            <option value="">Selecione</option>
+        <select id="ESTADO" name="ESTADO"   value="<%=result.UF%>" class="form-control" required >
+            <option selected value="">Selecione</option>
             <option value="AC">Acre</option>
             <option value="AL">Alagoas</option>
             <option value="AP">Amapá</option>
@@ -125,7 +137,7 @@
         </select>
         <label for="">Cidade</label>
         <div style="display: flex; flex-direction: row;">
-            <input type="number" required  id="ID_CID" style="width: 80px;margin-right: 8px;" value="<%=result.ID_CID%>"  class="form-control mt-2 cidade">
+            <input type="number" required  id="ID_CID" style="width: 80px;margin-right: 8px;" value="<%=result.ID_CIDADE%>"  class="form-control mt-2 cidade">
             <input type="text"    id="NOME_CID" class="form-control mt-2 "  placeholder="Cidade" >
            </div>
         <label for="">Bairro</label>
@@ -142,17 +154,42 @@
         </div>
         <label for="">Complemento</label>
         <div style="display: flex; flex-direction: row;">
-            <input type="text" class="form-control" placeholder="Complemento"  value="<%=result.PARC_COMP%>"   id="PARC_COMP">
+            <input type="text" class="form-control"  value="<%=result.PARC_COMP%>"   id="PARC_COMP">
+        </div>
+        <div class="custom-control custom-checkbox"> 
+            <input type="checkbox" class="custom-control-input"   <%if(result.PARC_FORNEC == 'S'){%>checked="true" <%} %> id="PARC_FORNEC" >
+            <label class="custom-control-label"  for="PARC_FORNEC"  >Fornecedor?</label>
+          </div> 
+        <div class="custom-control custom-checkbox"> 
+            <input type="checkbox" class="custom-control-input"   <%if(result.PARC_BLOQUEADO == 'S'){%>checked="true" <%} %> id="PARC_BLOQUEADO" >
+            <label class="custom-control-label"  for="PARC_BLOQUEADO"  >Bloqueado?</label>
+          </div> 
+          <br>
+
+        <label for="">Usuário inclusão</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" disabled  value="<%=result.USU_INCLU_NOME%>"   >
+        </div>
+        <label for="">Data/hora inclusão</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" disabled placeholder="Complemento"  value="<%=result.DATA_INCLU%>"  >
+        </div>
+        <label for="">Usuário alteração</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control"  disabled value="<%=result.USU_ALTER_NOME%>"   >
+        </div>
+        <label for="">Data/hora alteração</label>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" disabled value="<%=result.DATA_ALTER%>"   >
         </div>
 
-        <div class="custom-control custom-checkbox"> 
-            <input type="checkbox" class="custom-control-input"  id="PARC_FORNEC" >
-            <label class="custom-control-label"  for="PARC_FORNEC">Fornecedor?</label>
-          </div> 
+    </div>
+
      </div>
      <%})%>
+     
 </div>
-<script type="module" src="/js/parceiro/visualizaparceiro.js"></script>
+<script type="module" src="/js/parceiro/visualiza.js"></script>
 
 
 <%- include('../partials/footer'); %>

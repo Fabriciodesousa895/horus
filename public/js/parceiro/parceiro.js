@@ -22,6 +22,7 @@ let UF = document.getElementById('ESTADO')
 let NOME_CID = document.getElementById('NOME_CID');
 let CGC = document.getElementById('CGC')
 let UF_ = document.getElementById('UF')
+let NOME_F = document.getElementById('NOME_F')
 function Salva() {
     SalvaFiltro(201, ID.value, NOME_F.value, CGC.value, IE_RG_F.value, UF_.value, ATIVO.checked ? 'S' : 'N', FORNECEDOR.checked ? 'S' : 'N', BLOQUEADOS.checked ? 'S' : 'N', '', '');
 }
@@ -70,6 +71,8 @@ function Importar(e) {
             var dataform = data.split('/');
             var newdata = dataform[2] + '-' + dataform[1] + '-' + dataform[0]
             PARC_NASC.value = newdata;
+            console.log( PARC_NASC.value)
+
             var tel = dados.telefone
             var telNew = tel.split('/');
             telefone.value = telNew[0];
@@ -111,7 +114,7 @@ function salvardados(e) {
     let data = {
         sql: `BEGIN
             INSERT INTO PRC_PARCEIRO(PARC_NOME,PARC_N_RAZAO_SOCIAL,
-                                     PARC_CGC,IE_RG,
+                                     PARC_CGC_,IE_RG,
                                      PARC_EMAIL,PARC_NASC,
                                      PARC_TEL,PARC_TEL_2,
                                      PARC_TRABALHO_N,PARC_CEP_T,

@@ -25,7 +25,8 @@
     ajax.onreadystatechange = function () {
       if (ajax.status === 200) {
         let data = JSON.parse(ajax.responseText);
-        const tbody = document.querySelector('tbody');
+        console.log(data)
+        const tbody = document.getElementById('tabelaacesso')
         tbody.innerText = '';
         data.forEach(rowData => {
           const row = document.createElement('tr');
@@ -33,13 +34,13 @@
             const cell = document.createElement('td');
 
             // Verifique se o valor é 'S' para criar um checkbox marcado como true
-            if (cellData === 'S') {
+            if (cellData == 'S') {
               const checkbox = document.createElement('input');
               checkbox.type = 'checkbox';
               checkbox.checked = true;
               checkbox.disabled = ( PERMI.value == 'N' ? true : false )
               cell.appendChild(checkbox);
-            } else if (cellData === 'N') {
+            } else if (cellData == 'N') {
               const checkbox = document.createElement('input');
               checkbox.type = 'checkbox';
               checkbox.disabled = ( PERMI.value == 'N' ? true : false )

@@ -1,14 +1,7 @@
 <% let P = P_USU.P_USU %>
 <% let D = P[0] %>
 <!-- Verificando se usuario altera -->
-<% if (D.ALTERA === 'N') { %> 
-<button  disabled class="btn btn-warning">Salvar</button>
-<% }else{ %>
-    <button id="SALVA"    class="btn btn-warning">Salvar</button>
-<%}%>
+<button  <% if (D.ALTERA === 'N') { %>  disabled  <% }  %>  id="SALVA"  class="btn btn-warning">Salvar</button>
 <!-- Verificando se usuario deleta -->
-<% if (D.DELETA === 'N') { %> 
-<button class="btn btn-danger" disabled type="button"    data-toggle="modal" >Deletar</button>
-<% }else{ %>
-    <button id="DELETA"   class="btn btn-warning">Deletar</button>
-<%}%> 
+<button class="btn btn-danger" <% if (D.DELETA === 'N') { %>  disabled <% } %>type="button" id="DELETA"   data-toggle="modal" >Deletar</button>
+

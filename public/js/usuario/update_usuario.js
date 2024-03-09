@@ -30,10 +30,10 @@ import { Ajax } from "../Class/Ajax.js";
     new Ajax('/update_usuario',objeto).RequisicaoAjax(true)
   }
   //Quando o botão de salvar é chamado a funcao sendForm para fazer a requisição ajax;
-  document.getElementById('SALVA').addEventListener('click', sendForm, false);
+  document.getElementById('EDITAR').addEventListener('click', sendForm, false);
 
 
-
+  
 
 
 

@@ -136,7 +136,7 @@ function salvardados(e) {
                                       '${Objeto.PARC_TRABALHO_N}',
                                       '${Objeto.PARC_CEP_T}',
                                       '${Objeto.PARC_BAIRRO_T}',
-                                      ${Objeto.ID_CID_F},
+                                      '${Objeto.ID_CID_F}',
                                       '${Objeto.PARC_LOGRA_T}',
                                       '${Objeto.PARC_NUM_T}',
                                       '${Objeto.PARC_COMP_T}',

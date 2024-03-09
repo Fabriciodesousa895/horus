@@ -1,0 +1,332 @@
+
+Sat Mar 09 2024 09:05:11 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:09:49 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:12:09 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:12:50 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:14:48 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:14:54 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:15:35 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:16:38 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:16:57 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:17:17 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:18:00 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:19:22 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:20:43 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:20:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:20:46 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:21:48 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:21:48 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:21:57 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:21:57 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:22:18 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:22:18 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:23:11 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:23:21 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:23:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:23:51 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:24:23 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:24:34 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:30:54 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:35:33 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:35:39 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:38:38 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:38:43 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:45:49 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:46:49 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:47:21 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:47:26 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:48:43 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:49:40 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_PARC) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:49:46 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:49:50 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:50:03 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 2, coluna 45:
+PL/SQL: ORA-00936: expressão não encontrada
+ORA-06550: linha 2, coluna 13:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Sat Mar 09 2024 09:50:08 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:50:15 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sat Mar 09 2024 09:51:42 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:55:50 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 09:57:39 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 10:01:56 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 10:07:27 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-20005: Nome de usuário ( FABRICIO) já existe
+ORA-06512: em "SYSTEM.INSERI_USUARIO", line 86
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-20005/
+
+Sat Mar 09 2024 10:07:51 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-20005: Nome de usuário ( ffufjhfcjhfjh) já existe
+ORA-06512: em "SYSTEM.INSERI_USUARIO", line 86
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-20005/
+
+Sat Mar 09 2024 10:08:25 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-20005: Nome de usuário ( rereretretrere) já existe
+ORA-06512: em "SYSTEM.INSERI_USUARIO", line 86
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-20005/
+
+Sat Mar 09 2024 10:11:02 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-20005: Nome de usuário ( trtretreetre) já existe
+ORA-06512: em "SYSTEM.INSERI_USUARIO", line 86
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-20005/
+
+Sat Mar 09 2024 10:13:04 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-20005: Nome de usuário ( FABRICIOggg) já existe
+ORA-06512: em "SYSTEM.INSERI_USUARIO", line 86
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-20005/
+
+Sat Mar 09 2024 10:25:30 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 10:29:53 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
+
+Sat Mar 09 2024 10:40:54 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 22
+ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.HIST_TELA_SAIDA", line 9
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/

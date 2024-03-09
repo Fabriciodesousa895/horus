@@ -1,6 +1,6 @@
 (function readJS(win,doc){
   'use strict';
-  let DELETA = document.getElementById('DELETA');
+  let DELETA = document.getElementById('EXCLUIR');
   let ID_USU = document.getElementById('ID_USU');
 
   function sendForm(){

@@ -42,10 +42,6 @@ function Salvar(e) {
         }
         Objeto[id] = value;
     }
-    console.log(Objeto)
-    console.log(Data.value)
-    console.log(PARC_NASC.value)
-    console.log(PARC_CGC_.value)
     let data = {
         sql: `BEGIN
           UPDATE PRC_PARCEIRO SET 
@@ -60,7 +56,7 @@ function Salvar(e) {
           PARC_TRABALHO_N          = '${Objeto.PARC_TRABALHO_N}',
           PARC_CEP_T               = '${Objeto.PARC_CEP_T}',
           PARC_BAIRRO_T            = '${Objeto.PARC_BAIRRO_T}',
-          PARC_CID_F               =  ${Objeto.ID_CID_F},
+          PARC_CID_F               =  '${Objeto.ID_CID_F}',
           PARC_LOGRA_T             = '${Objeto.PARC_LOGRA_T}',
           PARC_COMP_T              =  '${Objeto.PARC_COMP_T}',
           PARC_TEL_T               =  '${Objeto.PARC_TEL_T}',
@@ -90,6 +86,25 @@ function Salvar(e) {
     }
     new Ajax('/rota/universal', data).RequisicaoAjax(true);
 }
+function Deletar (e){
+    e.preventDefault();
+    let ID = document.getElementById('ID');
+    let data ={
+        sql:`BEGIN 
+         DELETE PRC_PARCEIRO WHERE ID_PARC = :ID;
+         COMMIT;
+        END;`,
+    binds:{ID:ID.value},
+    USU_LOGADO:false,
+    mensagem_error: 'Error ao deletar registro!',
+    mensagem_sucess: 'Registro deletado com sucesso!'
+    }
+    new Ajax('/rota/universal',data).RequisicaoAjax(true)
+    setTimeout(function(){location.reload()} ,5000)
+    
+
+}
 
 
-document.getElementById('SALVA').addEventListener('click', Salvar, false)
+document.getElementById('EDITAR').addEventListener('click', Salvar, false)
+document.getElementById('EXCLUIR').addEventListener('click', Deletar, false)

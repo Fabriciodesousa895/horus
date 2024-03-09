@@ -364,7 +364,7 @@ function permi_usu(ID_TELA, token) {
           ID_USU: data.ID_USUARIO
         }
 
-        let sql3 = `SELECT T_NOME,T_DESCRICAO,ID_TELA FROM T_TELA WHERE ID_TELA = :ID_TELA`;
+        let sql3 = `SELECT T_NOME,T_DESCRICAO,ID_TELA,TABELA FROM T_TELA WHERE ID_TELA = :ID_TELA`;
         let binds3 = {
           ID_TELA: ID_TELA
         }
@@ -402,6 +402,7 @@ function permi_usu(ID_TELA, token) {
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
+          console.log(Objeto)
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -868,7 +869,7 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
         res.send(result.outBinds.P_RESULTADO);
 
       } catch (err) {
-        let log = error;
+        let log = err;
         criarlogtxt(log, req.url);
         res.status(500).send('Ocorreu um erro!' + err);
 
@@ -1161,7 +1162,8 @@ app.post('/consulta_acessos', async (req, res) => {
    FROM
    CONFIG_USU_TELA U
    INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
-    WHERE ID_USU = :ID`
+    WHERE ID_USU = :ID
+    AND T.TIPO <> 'F'`
     }
     if (TABELA == 'GRP_GRUPO') {
       sql = `SELECT T.ID_TELA,T.T_NOME,GRUP_ALTERA,GRUP_INCLUI,GRUP_DELETA,GRUP_CONSULTA,GRP_ANEXA
@@ -1169,7 +1171,8 @@ app.post('/consulta_acessos', async (req, res) => {
    CONFIG_GRUPO_TELA U
    INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
    INNER JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
-    WHERE U.ID_GRUPO = :ID`
+    WHERE U.ID_GRUPO = :ID
+    AND T.TIPO <> 'F'`
     }
 
     let binds = {

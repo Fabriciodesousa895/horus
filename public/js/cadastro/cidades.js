@@ -8,7 +8,6 @@ import { SalvaFiltro } from "../Class/Filtro.js";
         SalvaFiltro(181, FILTRO_NOME.value, FILTRO_COD.value,'','','','','','','','');
     }
     let tbody = document.getElementById('tabela');
-    let editar = document.getElementById('EDITAR');
     let NOME_UP = document.getElementById('NOME_UP');
     let ID_SELECIONADO = document.getElementById('ID_SELECIONADO');
     let COD_UP = document.getElementById('COD_UP');
@@ -197,16 +196,13 @@ import { SalvaFiltro } from "../Class/Filtro.js";
     }
 
     tbody.addEventListener('dblclick', (e) => {
+    let editar = document.getElementById('EDITAR');
+
         let elementoclicado = e.target;
         let elementopai = elementoclicado.parentNode;
         let ID = (elementopai.cells[0]).innerText
         let Nome = (elementopai.cells[1]).innerText
         let COD = (elementopai.cells[2]).innerText
-        console.log(ID)
-        console.log(Nome)
-        console.log(COD)
-
-
         NOME_UP.value = Nome;
         ID_SELECIONADO.value = ID;
         COD_UP.value = COD;

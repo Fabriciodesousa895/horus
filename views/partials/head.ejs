@@ -79,7 +79,7 @@
      <!--VALIDANDO SE O USUÁRIO PODE EXCLUIR-->
      <button class="btn btn-danger"  style="margin-right: 15px;"  <% if (D.DELETA == 'N') { %> disable  {%> <%} %>  data-toggle="modal" id="EXCLUIR">-</button>
      <!--VALIDANDO SE O USUÁRIO PODE ALTERAR-->
-        <button class="btn btn-warning" style="margin-right: 15px;"  <% if (D.ALTERA == 'N') { %> disable  {%> <%} %> data-toggle="modal" id="EDITAR">A</button>
+        <button class="btn btn-warning" style="margin-right: 15px;"  <% if (D.ALTERA == 'N') { %> disable  {%> <%} %> data-toggle="modal" data-target=".EDITAR"  id="EDITAR">A</button>
 
     <button type="button"  class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<%=T_USU[1]%>" style="margin-right: 15px;"> ?</button>
     <button type="button"  class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<%=T_USU[3]%>" style="margin-right: 15px;"> #</button>
@@ -110,11 +110,9 @@
     </select>
       </div>
     </div>
-   <img src="/img/uploads/<%=D.PATH_IMG%>" width="80px" height="80px" alt="<%=D.PATH_IMG%>">
         
  </nav>
   </nav>
-  <div><%=D.PATH_IMG%></div>
 
 <script>
         const selectElement = document.getElementById('meuSelect');

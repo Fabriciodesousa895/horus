@@ -836,6 +836,7 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
       let USU_ADM = req.body.USU_ADM;
       let ID_GRUPO = req.body.ID_GRUPO
       let USU_LOGADO = data.ID_USUARIO;
+      let CAIXA = data.CAIXA;
       // Gerando o hash da senha usando bcrypt 
       const hash = await bycrypt.hash(USU_SENHA, saltRounds);
       let sql = `BEGIN
@@ -844,7 +845,7 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
                   :ID_PARC,:USU_ADM,:USU_LOGADO, 
                   :ID_GRUPO, :CFG_USU_ALT_PARC, 
                   :CFG_USU_CONF_CONFERE_CAIXA, :CFG_USU_LIB_BLOQ_PARC, 
-                  :CFG_USU_EXC_FIN, :CFG_USU_FECHA_CAIXA,:P_RESULTADO);
+                  :CFG_USU_EXC_FIN, :CFG_USU_FECHA_CAIXA,:CAIXA,:P_RESULTADO);
   END;
   `
       let binds = {
@@ -860,6 +861,7 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
         CFG_USU_LIB_BLOQ_PARC: CFG_USU_LIB_BLOQ_PARC,
         CFG_USU_EXC_FIN: CFG_USU_EXC_FIN,
         CFG_USU_FECHA_CAIXA: CFG_USU_FECHA_CAIXA,
+        CAIXA: CAIXA,
         P_RESULTADO: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
       }
       try {
@@ -898,7 +900,8 @@ app.get('/visualiza_usuario/:ID_USU', auth, async (req, res) => {
   CG.CFG_USU_EXC_FIN AS EX_FIN,
   CG.CFG_USU_FECHA_CAIXA AS F_CAIXA,
   P.PARC_NOME,
-  V.VND_NOME 
+  V.VND_NOME ,
+  U.CAIXA AS CAIXA
 FROM
 USU_USUARIO U
 LEFT JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
@@ -1006,11 +1009,11 @@ app.post('/update_usuario', async (req, res) => {
       :CFG_USU_FECHA_CAIXA,
       :CFG_USU_EXC_FIN,
       :CFG_USU_CONF_CONFERE_CAIXA,
-     :CFG_USU_ALT_PARC,
+      :CFG_USU_ALT_PARC,
+      :CAIXA,
      :USU_LOGADO,
      :P_MENSAGEM);
       END;`;
-
     let binds = {
       ID_USU: objeto.ID_USU,
       USU_NOME: objeto.USU_NOME,
@@ -1025,17 +1028,20 @@ app.post('/update_usuario', async (req, res) => {
       CFG_USU_EXC_FIN: objeto.CFG_USU_EXC_FIN,
       CFG_USU_CONF_CONFERE_CAIXA: objeto.CFG_USU_CONF_CONFERE_CAIXA,
       CFG_USU_ALT_PARC: objeto.CFG_USU_ALT_PARC,
+      CAIXA:objeto.CAIXA,
       USU_LOGADO: data.ID_USUARIO,
       P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
 
     }
+console.log(binds)
+
     try {
       let result = await conectar(sql, binds);
       res.send(result.outBinds.P_MENSAGEM)
     } catch (error) {
       let log = error;
       criarlogtxt(log, req.url);
-      res.send('Erro no lado do servidor ' + error);
+      res.send('Erro : ' + error);
     }
   })
 })
@@ -1261,6 +1267,7 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
 app.post('/select/universal', urlencodedParser, async (req, res) => {
   let Objeto = req.body;
+  console.log(Objeto)
   let novobinds;
   let token = req.cookies.jwt;
   jwt.verify(token, secret, async (error, data) => {

@@ -75,11 +75,11 @@
         <% let P = P_USU.P_USU %>
         <% let D = P[0] %>
      <!--VALIDANDO SE O USUÁRIO PODE INCLUIR-->
-        <button class="btn btn-primary" style="margin-right: 15px;"  <% if (D.INCLUI == 'N') { %> disable  {%> <%} %> data-toggle="modal" data-target=".PRINCIPAL"  >+</button>
+        <button class="btn btn-primary" style="margin-right: 15px;"  <% if (D.INCLUI == 'N') { %> disabled  {%> <%} %> data-toggle="modal" data-target=".PRINCIPAL"  >+</button>
      <!--VALIDANDO SE O USUÁRIO PODE EXCLUIR-->
-     <button class="btn btn-danger"  style="margin-right: 15px;"  <% if (D.DELETA == 'N') { %> disable  {%> <%} %>  data-toggle="modal" id="EXCLUIR">-</button>
+     <button class="btn btn-danger"  style="margin-right: 15px;"  <% if (D.DELETA == 'N') { %> disabled  {%> <%} %>  data-toggle="modal" id="EXCLUIR">-</button>
      <!--VALIDANDO SE O USUÁRIO PODE ALTERAR-->
-        <button class="btn btn-warning" style="margin-right: 15px;"  <% if (D.ALTERA == 'N') { %> disable  {%> <%} %> data-toggle="modal" data-target=".EDITAR"  id="EDITAR">A</button>
+        <button class="btn btn-warning" style="margin-right: 15px;"   <% if (D.ALTERA == 'N') { %> disabled  {%> <%} %> data-toggle="modal" data-target=".EDITAR"  id="EDITAR">A</button>
 
     <button type="button"  class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<%=T_USU[1]%>" style="margin-right: 15px;"> ?</button>
     <button type="button"  class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<%=T_USU[3]%>" style="margin-right: 15px;"> #</button>

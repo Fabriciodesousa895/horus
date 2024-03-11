@@ -1074,8 +1074,6 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
         COMMIT;
         END;`
       }
-
-
       let binds = {
         VALOR: objeto.VALOR,
         ID_TELA: objeto.ID_TELA,
@@ -1083,11 +1081,30 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
       }
       let result = await conectar(sql, binds)
       res.send(result);
-
-
     }
 
   })
+})
+//Cadastro de vendedor
+app.get('/vendedores',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  let Acesso = await valida_acesso(161, token);
+  let P_USU = await permi_usu(161, token);
+  res.render('./cadastro/vendedor', { P_USU });
+})
+//Cadastro de grupos
+app.get('/grupo',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  let Acesso = await valida_acesso(119, token);
+  let P_USU = await permi_usu(119, token);
+  res.render('./cadastro/grupo', { P_USU });
+})
+//Cadastro de ncm
+app.get('/ncm',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  let Acesso = await valida_acesso(162, token);
+  let P_USU = await permi_usu(162, token);
+  res.render('./cadastro/ncm', { P_USU });
 })
 //acessos
 app.get('/acessos', urlencodedParser, auth, async (req, res) => {
@@ -1311,8 +1328,6 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
           res.send('Ocorreu um erro no lado do servidor! --' + error);
           console.log(error);
         }
-
-
     }
   })
 })
@@ -1324,8 +1339,29 @@ app.get('/dowload/img/ploads_tarefa/:src', upload.single('file'), (req, res) => 
 
 })
 
+// const nodemailer = require('nodemailer');
+// var transport = nodemailer.createTransport({
+//   host: "live.smtp.mailtrap.io",
+//   port: 587,
+//   auth: {
+//     user: "api",
+//     pass: "3862b536e6d8ba9265ea5a5b36e5b715"
+//   }
+// });
+// const send = (to,subject,body)=>{
+//   transport.sendMail({
+//    from:'sousafabricio583@gmail.com',
+//    to,
+//    subject,
+//    text:body })
+// }
 
+// function enviaemail(){
 
+// send('sousafabricio583@gmail.com','envio','dfdsfsdfdsf')
+// }
+
+// enviaemail()
 
 app.listen(8080, (err) => {
   if (err) {

@@ -1,4 +1,3 @@
-(function (win, doc) {
     'use strict';
     let PROGRESSO = document.getElementById('PROGRESSO')
 
@@ -18,7 +17,6 @@
 
         ajax.onreadystatechange = () => {
             if (ajax.status === 200) {
-
                  let tbody = document.getElementById('query');
                  let array_registros = JSON.parse(ajax.responseText)
                  tbody.innerText = '';
@@ -63,4 +61,3 @@
     //quando o usuario clicar em anexos,chama a função e é feita a consulta das querys que o usuario salvou na base de dados
     document.getElementById('ANEXO').addEventListener('click', sendForm, false);
 
-})(window, document)

@@ -86,27 +86,27 @@ app.use(async (req, res, next) => {
     next();
   }
 });
-// Tabela_NCM_Vigente_20240121.json
 
 
-function importar() {
-  fs.readFile('Tabela_NCM_Vigente_20240121.json', 'utf-8', (err, data) => {
-    let dados = JSON.parse(data)
+// function importar() {
 
-    dados.forEach(e => {
+//   fs.readFile('ncm.json', 'utf-8', (err, data) => {
+//     let dados = JSON.parse(data)
+//   let num =1;
 
-      //  console.log( e.Codigo)
-      let sql = `BEGIN INSERT INTO NCM (COD_NCM_,NCM_DESC,DT_ALTER,DT_INCLU,COD_USU_ALTER,ID_USU_INCLUSAO) VALUES (:CODIGO,:DESC,SYSDATE,SYSDATE,362,362); COMMIT; END;`
-      let binds = { CODIGO: e.Codigo, DESC: e.Descricao }
-      let result = conectar(sql, binds)
-      console.log(result)
-    })
+//     // dados.forEach(e => {
+//       //  console.log( e.Codigo)
+//       let sql = `BEGIN PROCESSAR_JSON(:dados); END;`
+//       let binds = { dados:data }
+//       let result = conectar(sql, binds)
+//       console.log(data)
+//     // })
 
-  })
+//   })
 
-}
+// }
 
-// importar();
+// importar();:
 
 app.get('/certificado/validacao', (req, res) => {
   let url = req.params.url;
@@ -1105,6 +1105,13 @@ app.get('/ncm',auth,async(req,res)=>{
   let Acesso = await valida_acesso(162, token);
   let P_USU = await permi_usu(162, token);
   res.render('./cadastro/ncm', { P_USU });
+})
+//Visulaiza de ncm
+app.get('/VisualizaNcm/:cod_ncm',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  let Acesso = await valida_acesso(162, token);
+  let P_USU = await permi_usu(162, token);
+  res.render('./cadastro/VisualizaNcm', { P_USU });
 })
 //acessos
 app.get('/acessos', urlencodedParser, auth, async (req, res) => {

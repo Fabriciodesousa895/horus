@@ -1,4 +1,41 @@
 <%-include('../partials/head')%>
+<div class="" style="display: flex;height: auto;padding: 30px;">
+    <form action="">
+<!--  -->
+    <div class="row">
+        <%result.forEach(result=>{%>
+
+                <div class="col-sm-7">
+               
+                    <span>Código Ncm</span>
+                <input type="text" placeholder="Código Ncm" id="COD_NCM_" value="<%=result.COD_NCM_%>" class="form-control">
+               
+                <span>Descrição</span>
+                
+                <textarea  id="NCM_DESC" placeholder="Descrição do Ncm" class="form-control" value="<%=result.NCM_DESC%>" cols="30" rows="10"></textarea>
+                </div>
+
+               <div class="col-sm-5">
+                <span>Usuário inclusão</span>
+                <input type="text" disabled class="form-control" value="<%=result.USU_INCLUSAO%>">
+
+                <span>Data/hora inclusao</span>
+                <input type="text" disabled class="form-control" value="<%=result.DT_INCLU%>">
+
+                <span>Usuário alteração</span>
+                <input type="text" disabled class="form-control" value="<%=result.USU_ALTER%>">
+                  
+                <span>Data/hora alteração</span>
+                <input type="text" disabled class="form-control" value="<%=result.DT_ALTER%>">
+
+                </div>
+        <%})%>
+
+    </div>
+
+</form>
+    
+</div>
 
 
 <%-include('../partials/footer')%>

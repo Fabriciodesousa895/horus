@@ -402,7 +402,6 @@ function permi_usu(ID_TELA, token) {
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
-          console.log(Objeto)
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -1106,12 +1105,30 @@ app.get('/ncm',auth,async(req,res)=>{
   let P_USU = await permi_usu(162, token);
   res.render('./cadastro/ncm', { P_USU });
 })
-//Visulaiza de ncm
+//Visulaiza d ncm
 app.get('/VisualizaNcm/:cod_ncm',auth,async(req,res)=>{
-  let token = req.cookies.jwt;
-  let Acesso = await valida_acesso(162, token);
-  let P_USU = await permi_usu(162, token);
-  res.render('./cadastro/VisualizaNcm', { P_USU });
+  let ncm = req.params.cod_ncm;
+  let sql = `SELECT NCM_DESC,COD_NCM_,
+             TO_CHAR(N.DT_ALTER,'DD/MM/YYYY HH24:MM:SS') AS DT_ALTER,
+             TO_CHAR(N.DT_INCLU,'DD/MM/YYYY HH24:MM:SS') AS DT_INCLU ,
+             US.USU_NOME AS USU_ALTER,
+             U.USU_NOME AS USU_INCLUSAO
+             FROM NCM N
+             LEFT JOIN USU_USUARIO U ON U.ID_USU = N.ID_USU_INCLUSAO	
+             LEFT JOIN USU_USUARIO US ON US.ID_USU = N.COD_USU_ALTER	
+              WHERE N.COD_NCM_ = :COD_NCM`;
+  let binds = {COD_NCM:ncm};
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(162, token);
+    let P_USU = await permi_usu(162, token);
+    let result = await conectarbd(sql,binds,options_objeto);
+    console.log(result)
+    res.render('./cadastro/VisualizaNcm', { P_USU,result });
+  } catch (error) {
+    console.log(error)
+  }
+
 })
 //acessos
 app.get('/acessos', urlencodedParser, auth, async (req, res) => {

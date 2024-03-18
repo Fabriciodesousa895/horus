@@ -94,6 +94,8 @@
 
  </nav>
  <!---->
+
+
  
  <nav>
 
@@ -101,32 +103,38 @@
     <div class="input-group-prepend">
       <label class="input-group-text" id="irParaLink" for="irParaLink">Pesquisar</label>
     </div>
-    <select style="width: 200px;" class="custom-select" id="meuSelect">
-        <option value="" >consulte suas telas</option>
-        <% let usu = P_USU.T_USU %>
-        <% usu.forEach(a => { %>
-            <option value="<%= a[1] %>"><%= a[0] %></option>
-        <% }) %>
-    </select>
-      </div>
-    </div>
+    <input list="meuSelect" type="text" class="form-control" id="inputText" >
+    <datalist  id="meuSelect" >
+        <option value="" >Consulte suas telas</option>
+
+    </datalist>
+  </div>
+  </div>
         
  </nav>
   </nav>
 
 <script>
-        const selectElement = document.getElementById('meuSelect');
-        const buttonElement = document.getElementById('irParaLink');
-
+        let selectElement = document.getElementById('inputText');
+        let buttonElement = document.getElementById('irParaLink');
         buttonElement.addEventListener('click', function() {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            if (selectedOption.value) {
-                window.location.href = selectedOption.value;
+            if (selectElement.value ) {
+                window.location.href = selectElement.value;
             }
         });
 
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
 
+          let PROGRESSO = document.getElementById('PROGRESSO');
+          document.getElementById('irParaLink').addEventListener('click',()=>{
+          //mostra ao usuário a barra de progresso
+          if(document.getElementById('inputText').value != ''){
+            PROGRESSO.style.opacity = '1'
 
+          }
+          })
 </script>
 </body>
 </html>

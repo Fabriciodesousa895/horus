@@ -1,0 +1,216 @@
+<%-include('../partials/head')%>
+<div class="grad" style="display: flex;height: auto;padding: 30px;">
+    <!-- Filtro -->
+    <div style="width: 300px;height: 400px;">
+     <form id="FormFiltro">
+  <%let filtro = P_USU.T_FILTRO%> 
+  
+      <div class="form-group row">
+  
+          <div class="form-group row">
+              <span >Código produto</span>
+              <input type="number"  class="form-control" placeholder="ID" id="COD" value="<%=filtro[0][0]%>">
+          </div>
+   
+          <div class="form-group row">
+              <span >Nome</span>
+              <input type="text"  class="form-control" placeholder="Nome" id="NOME" value="<%=filtro[0][1]%>">
+          </div>
+          <div class="form-group row">
+              <span >Descrição</span>
+              <input type="text"  class="form-control" placeholder="Descrição" id="DESCRICAO" value="<%=filtro[0][2]%>">
+          </div>
+          <div class="form-group row">
+              <span >Caracteristica</span>
+              <input type="text"  class="form-control" placeholder="Caracteristicas" id="CARACT" value="<%=filtro[0][3]%>">
+          </div>
+        
+<%let usado = filtro[0][4]%>
+          <div   class="form-group row">
+              <span >Usado como</span>
+              <select  id="USADO" class="form-control" >
+                <option value="">Todos</option>
+                <option value="R" <%if(usado == 'R'){%>selected <%}%> >Revenda</option>
+                <option value="B"  <%if(usado == 'B'){%>selected <%}%>>Brinde</option>
+                <option value="A"  <%if(usado == 'A'){%>selected <%}%>>Amostra</option>
+                <option value="P"  <%if(usado == 'P'){%>selected <%}%>>Patrimonio</option>
+                <option value="U"  <%if(usado == 'U'){%>selected <%}%>>Uso e consumo</option>
+                <option value="D"  <%if(usado == 'D'){%>selected <%}%>>Demostração</option>
+              </select>
+          </div>
+<%let status = filtro[0][5]%>
+          <div class="form-group row">
+            <span>Status</span>
+           <select  class="form-control" id="STATUS" >
+            <option value="">Todos</option>
+            <option value="A"  <%if(status == 'A'){%>selected <%}%>>Somente ativo</option>
+            <option value="I"  <%if(status == 'I'){%>selected <%}%>>Somente inativo</option>
+           </select>
+          </div>
+          <div class="form-group row">
+            <p><span class="mt-2">Ncm</span></p>
+        
+            <div style="display: flex; flex-direction: row;">
+                <input type="text"   id="NCM" class="form-control mt-2 " placeholder="Ncm" value="<%=filtro[0][6]%>" >
+            </div>
+
+          </div>
+
+
+
+      </div>
+
+  
+      <button id="filtro" class="btn btn-primary">Buscar</button>
+  
+     </form>
+    </div>
+    <!-- Tabela -->
+    <table class="table table-hover" id="TabelaProduto">
+        <thead>
+            <tr>
+                <td>Código</td>
+                <td>Nome</td>
+                <td>Usado como</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+      <!-- Inseri produto -->
+      <div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+              <form class="needs-validation" id="formproduto" novalidate>
+                  <div class="container" >
+                      <div class="row">
+                          
+                          <div class="col-sm-4" >
+
+                              <span >Nome</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="text" class="form-control" placeholder="Nome do produto"    id="PRDT_NOME" required>
+                              </div>
+
+                              <label >Descrição</label>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="text" class="form-control" placeholder="Descrição"  id="PRDT_DESC" required>
+                              </div>
+                              <label >Nr. peças</label>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="Nr. de peças"   id="PRDT_NR_PECA" required>
+                              </div>
+
+                              <label f>Categoria</label>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="text" required  id="PRDT_ID_CTG" style="width: 80px;margin-right: 8px;" class="form-control">
+                                  <input type="text" required   id="PRDT_NOME_CTG" class="form-control  " placeholder="Categoria" >
+                                 </div>
+                              <label >Marca</label>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="text" required  id="PRDT_MARCA" style="width: 80px;margin-right: 8px;" class="form-control ">
+                                  <input type="text" required   id="PRDT_MARCA_NOME" class="form-control  " placeholder="Marca" >
+                                 </div>
+                              <label >Usado como</label>
+                              <div style="display: flex; flex-direction: row;">
+                                <select  id="PRDT_USADO_COMO" class="form-control" required>
+                                    <option value="">Selecione uma opção</option>
+                                    <option value="R"  >Revenda</option>
+                                    <option value="B"  >Brinde</option>
+                                    <option value="A"  >Amostra</option>
+                                    <option value="P"  >Patrimonio</option>
+                                    <option value="U"  >Uso e consumo</option>
+                                    <option value="D"  >Demostração</option>
+                                  </select>
+                              </div>
+
+                              <label >Ncm</label>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="text" required  id="PRDT_NCM" style="width: 90px;margin-right: 8px;" class="form-control ">
+                                  <input type="text" required   id="PRDT_NCM_DESC" class="form-control  " placeholder="Descrição Ncm" >
+                                 </div>
+
+                              <span >Estoque minimo</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="00,000"    id="PRDT_EST_MIN">
+                              </div>
+                              <span >Estoque máximo</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="00,000"    id="PRDT_EST_MAX">
+                              </div>
+
+                          </div>
+                          <div class="col-sm-4" >
+                            
+                              <span >Peso bruto</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="00,000"    id="PRDT_P_BRUTO">
+                              </div>
+                              <span >Peso liquido</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="00,000"    id="PRDT_P_LIQUIDO">
+                              </div>
+                              <span >Altura em centimetro</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="Altura"    id="PRDT_ALTURA">
+                              </div>
+           
+                              <span >Largura em centimetro</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="Largura"    id="PRDT_LARGURA">
+                              </div>
+                              <span >Margem de lucro (%)</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="% 000,00"    id="PRDT_MARGEM_LUCRO">
+                              </div>
+                              <span >Comissão vendedor (%)</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="% 000,00"    id="PRDT_COMISSAO_VND">
+                              </div>
+                              <span >Comissão gerente (%)</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="number" class="form-control" placeholder="% 000,00"    id="PRDT_COMISSAO_GER">
+                              </div>
+                              <div class="custom-control custom-checkbox"> 
+                                <input type="checkbox" class="custom-control-input"  id="PRDT_CAL_COMISSAO" >
+                                <label class="custom-control-label"  for="PRDT_CAL_COMISSAO">Calcula comissão?</label>
+                              </div> 
+ 
+                       
+                          </div>     
+                          <div class="col-sm-4" >
+
+                              <span >Desconto máximo (%)</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="text" class="form-control" placeholder=" % 000,00"    id="PRDT_DESC_MAX">
+                              </div>
+   
+                              <span >Código de barra</span>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="text" class="form-control" placeholder="Código de barra"    id="PRDT_COD_BARRA">
+                              </div>
+                              <span >Caracteristicas</span>
+                              <div style="display: flex; flex-direction: row;">
+                                <textarea  name="CARACT_PRDT" id="CARACT_PRDT" cols="30" rows="10" class="form-control"></textarea>
+                              </div>
+                       
+                          </div>     
+  
+                      </div>
+
+                      </div>
+                      <button  type="submit" style="margin-left: 50px;" class="btn btn-success mt-3">Salvar</button>
+          
+          
+                    </form>
+
+                  </div>
+     
+          </div>
+
+   </div>
+<script type="module" src="/js/cadastro/produto.js"></script>
+<%-include('../partials/footer')%>

@@ -57,15 +57,19 @@ class Tabela {
     }))
   }
   //Criando um objeto com os values dos inputs
-  InputsValues(array_de_ids, valida) {
+  InputsValues(array_de_ids, valida,ID_FORM) {
     if (valida) {
       for (var i = 0; i < array_de_ids.length; i++) {
         var inputs = document.getElementById(array_de_ids[i]);
-        var label = document.querySelector('label[for="' + array_de_ids[i] + '"]')
-        if (inputs.required && inputs.value === '' || inputs.innerHTML === '') {
-          inputs.style.border = '2px solid red';
+        // var label = document.querySelector('label[for="' + array_de_ids[i] + '"]')
+        if (inputs.required && inputs.value == '' ) {
+          // inputs.style.border = '2px solid red';
+          document.getElementById(ID_FORM).addEventListener('submit',(e)=>{
+            e.preventDefault();
+          })
+          
           return swal({
-            text: label,
+            text: 'Prencha todos os campos obrigatorios',
             icon: 'error'
           });
         }
@@ -85,8 +89,17 @@ class Tabela {
       } else if (inputs.type == 'text' || inputs.type == 'number') {
         value = inputs.value
       } else if (inputs.type == 'textarea') {
-        value = inputs.innerHTML;
-      } else {
+        value = inputs.value;
+      }else if(inputs.multiple){
+        let selecionados  = []
+        for (let i = 0; i <inputs.options.length;i++){
+         if(inputs.options[i].selected){
+            selecionados.push(inputs.options[i].value)
+         }
+        }
+        value = selecionados;
+      }
+       else{
         value = inputs.value
       }
       objeto[id] = value

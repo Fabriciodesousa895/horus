@@ -267,6 +267,32 @@ function valida_acesso(ID_TELA, token) {
     });
   });
 }
+app.post('/filtra/acesso',async(req,res)=>{
+
+let token = req.cookies.jwt;
+jwt.verify(token,secret,async(err,data)=>{
+  let sql2 = ` SELECT  TL.T_NOME,TL.ROTA
+  FROM USU_USUARIO U
+  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
+  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
+  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
+  WHERE U.ID_USU = :ID_USU
+    AND CG.ID_TELA = TL.ID_TELA
+    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
+    AND TL.TIPO <> 'V'`
+
+try {
+  let binds2 = {
+    ID_USU: data.ID_USUARIO
+  }
+  let result = await conectar(sql2,binds2)
+  res.send(result.rows)
+} catch (error) {
+  res.redirect('/login')
+}
+
+})
+})
 
 //valia as permições na tela em que o usuário está
 function permi_usu(ID_TELA, token) {
@@ -350,19 +376,9 @@ function permi_usu(ID_TELA, token) {
 ) AG,
       USU_USUARIO U
       WHERE U.ID_USU = :P_ID_USU`;
+
         let binds = { P_ID_USU: data.ID_USUARIO, P_ID_TELA: ID_TELA };
-        let sql2 = ` SELECT  TL.T_NOME,TL.ROTA
-          FROM USU_USUARIO U
-          LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-          LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-          LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-          WHERE U.ID_USU = :ID_USU
-            AND CG.ID_TELA = TL.ID_TELA
-            AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
-            AND TL.TIPO <> 'V'`
-        let binds2 = {
-          ID_USU: data.ID_USUARIO
-        }
+
 
         let sql3 = `SELECT T_NOME,T_DESCRICAO,ID_TELA,TABELA FROM T_TELA WHERE ID_TELA = :ID_TELA`;
         let binds3 = {
@@ -392,13 +408,11 @@ function permi_usu(ID_TELA, token) {
         }
         try {
           let result = await conectarbd(sql, binds, options_objeto);
-          let result2 = await conectar(sql2, binds2, options);
           let result3 = await conectar(sql3, binds3, options);
           let result4 = await conectar(sql4, binds4, options);
           let result5 = await conectar(sql5, binds5, options);
           let Objeto = {
             P_USU: result,
-            T_USU: result2.rows,
             T_NOME: result3.rows[0],
             T_FILTRO: result5.rows
           }
@@ -1091,6 +1105,13 @@ app.get('/vendedores',auth,async(req,res)=>{
   let P_USU = await permi_usu(161, token);
   res.render('./cadastro/vendedor', { P_USU });
 })
+//Cadastro de produtos
+app.get('/produtos',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  let Acesso = await valida_acesso(281, token);
+  let P_USU = await permi_usu(281, token);
+  res.render('./cadastro/produto', { P_USU });
+})
 //Cadastro de grupos
 app.get('/grupo',auth,async(req,res)=>{
   let token = req.cookies.jwt;
@@ -1108,7 +1129,7 @@ app.get('/ncm',auth,async(req,res)=>{
 //Visulaiza d ncm
 app.get('/VisualizaNcm/:cod_ncm',auth,async(req,res)=>{
   let ncm = req.params.cod_ncm;
-  let sql = `SELECT NCM_DESC,COD_NCM_,
+  let sql = `SELECT NCM_DESC,COD_NCM_ AS COD,
              TO_CHAR(N.DT_ALTER,'DD/MM/YYYY HH24:MM:SS') AS DT_ALTER,
              TO_CHAR(N.DT_INCLU,'DD/MM/YYYY HH24:MM:SS') AS DT_INCLU ,
              US.USU_NOME AS USU_ALTER,
@@ -1244,7 +1265,7 @@ app.post('/importar/dados', async (req, res) => {
 
     console.log(data.municipio)
     //Caso não exista uma cidade cadastrada  será inserido automaticamente pelo sistema
-    if (data.municipio != '') {
+    if (data.municipio !== undefined) {
       let sql = `BEGIN
       DECLARE
       V_COUNT INT(5);
@@ -1333,7 +1354,7 @@ app.post('/select/universal', urlencodedParser, async (req, res) => {
 
           }
         } catch (error) {
-          res.send('Ocorreu um erro no lado do servidor! ' + error);
+          res.send('Ocorreu um erro! ' + error);
           console.log(error);
         }
       } else
@@ -1387,10 +1408,10 @@ app.get('/dowload/img/ploads_tarefa/:src', upload.single('file'), (req, res) => 
 
 // enviaemail()
 
-app.listen(8080, (err) => {
+app.listen(80, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);
   } else {
-    console.log("Servidor rodando, https:localhost:8080/login");
+    console.log("Servidor rodando, https:localhost:80/login ou no link   https://marlin-quality-nicely.ngrok-free.app/login");
   }
 });

@@ -6,13 +6,13 @@
         <%result.forEach(result=>{%>
 
                 <div class="col-sm-7">
-               
                     <span>Código Ncm</span>
-                <input type="text" placeholder="Código Ncm" id="COD_NCM_" value="<%=result.COD_NCM_%>" class="form-control">
+                <input type="text" placeholder="Código Ncm" id="COD_NCM_NEW" value="<%=result.COD%>" class="form-control">
+                <input type="hidden" placeholder="Código Ncm" id="COD_NCM_OLD" value="<%=result.COD%>" class="form-control">
                
                 <span>Descrição</span>
                 
-                <textarea  id="NCM_DESC" placeholder="Descrição do Ncm" class="form-control" value="<%=result.NCM_DESC%>" cols="30" rows="10"></textarea>
+                <textarea  id="NCM_DESC" placeholder="Descrição do Ncm" class="form-control" cols="30" rows="10"><%=result.NCM_DESC%></textarea>
                 </div>
 
                <div class="col-sm-5">
@@ -37,5 +37,5 @@
     
 </div>
 
-
+<script type="module" src="/js/cadastro/VisualizaNcm.js"></script>
 <%-include('../partials/footer')%>

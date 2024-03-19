@@ -71,8 +71,6 @@ function Importar(e) {
             var dataform = data.split('/');
             var newdata = dataform[2] + '-' + dataform[1] + '-' + dataform[0]
             PARC_NASC.value = newdata;
-            // console.log( PARC_NASC.value)
-
             var tel = dados.telefone
             var telNew = tel.split('/');
             telefone.value = telNew[0];
@@ -83,8 +81,8 @@ function Importar(e) {
             UF.value = selectedIndex
             NOME_CID.value = dados.municipio
             let evento =  new Event('change');
-            NOME_CID.dispatchEvent(evento);
-
+            document.getElementById('NOME_CID').dispatchEvent(evento);
+console.log('sd')
         }
         else {
             swal({
@@ -107,9 +105,9 @@ document.getElementById('form').addEventListener('submit', (e)=>{
                  'PARC_CEP','ID_CID','PARC_BAIRRO','PARC_LOGRA','PARC_NUM', 'PARC_COMP','PARC_FORNEC','ESTADO'])
     let data = {
         sql: `BEGIN
-             INSERI_PARCEIRO   (:PARC_NOME,:PARC_N_RAZAO_SOCIAL,:PARC_CGC_,:PARC_IR_RG,:PARC_EMAIL,:PARC_NASC,:PARC_TEL,:PARC_TEL_2,
+                INSERI_PARCEIRO      (:PARC_NOME,:PARC_N_RAZAO_SOCIAL,:PARC_CGC_,:PARC_IR_RG,:PARC_EMAIL,TO_DATE(:PARC_NASC,'YYYY-MM-DD'),:PARC_TEL,:PARC_TEL_2,
                                       :PARC_TRABALHO_N,:PARC_CEP_T,:PARC_BAIRRO_T,:ID_CID_F,:PARC_LOGRA_T,:PARC_NUM_T,:PARC_COMP_T,:PARC_TEL_T,
-                                      :PARC_SALARIO,:PARC_ADMISSAO,:PARC_CEP,:ESTADO,:ID_CID,:PARC_BAIRRO,:PARC_LOGRA,:PARC_NUM,:PARC_COMP,
+                                      :PARC_SALARIO,TO_DATE(:PARC_ADMISSAO,'YYYY-MM-DD'),:PARC_CEP,:ESTADO,:ID_CID,:PARC_BAIRRO,:PARC_LOGRA,:PARC_NUM,:PARC_COMP,
                                       :PARC_FORNEC,:USU_LOGADO); END;`,
         binds: dados,
         mensagem_error: 'Error ',

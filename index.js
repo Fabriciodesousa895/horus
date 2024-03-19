@@ -212,7 +212,7 @@ app.post('/login', async (req, res) => {
                 return;
               } else {
                 res.status(200)
-                  .cookie("jwt", token, { httpOnly: true, maxAge: 8000000 })
+                  .cookie("jwt", token, { httpOnly: true, maxAge: 36000000 })
                   .send('Operação realizada com sucesso');
               }
             }

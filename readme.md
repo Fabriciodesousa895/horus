@@ -64,23 +64,11 @@ Toda pagina html dever ser informado os componentes abaixo,caso não informe dev
 
 <%- include('../partials/head'); %>
 
-<%- include('../partials/header'); %>
-
 html a ser exibido ao usuário
 
 <%- include('../partials/footer'); %>
 
 OBS: Na pasta views/components há arquivos quem são componentes que podem ser usados nas páginas html =>    <%-include('../components/csv.ejs')%>
-
---------------------------------------------------------------------------------------------------------------------------------------------------
-                                    => Componente para exportar Tabelas para CSV <= 
-
-
--É preicso definir o ID da tabela como => id="tabeladados"
--Referenciar o script que gera o CSV no no final da página html => <script src="/js/exportar/csv.js"></script>
--Incluir componente  botão => <%-include('../components/csv.ejs')%>
-
--Desta forma ao clicar no botão,será gerado um arquivo.csv com os dados da tabela referenciada.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
                                      => Padronização de rotas gets <= 

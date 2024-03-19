@@ -1312,6 +1312,7 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
       } catch (error) {
         res.status(500).send(Objeto.mensagem_error + error)
       }
+      console.log(Objeto)
     } else {
       try {
         let result = await conectar(Objeto.sql, Objeto.binds);

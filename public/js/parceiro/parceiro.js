@@ -71,7 +71,7 @@ function Importar(e) {
             var dataform = data.split('/');
             var newdata = dataform[2] + '-' + dataform[1] + '-' + dataform[0]
             PARC_NASC.value = newdata;
-            console.log( PARC_NASC.value)
+            // console.log( PARC_NASC.value)
 
             var tel = dados.telefone
             var telNew = tel.split('/');
@@ -95,84 +95,29 @@ function Importar(e) {
     };
     ajax.send(JsonData);
 }
-function salvardados(e) {
-    e.preventDefault();
-    let form = document.getElementById('form');
-    let inputs = form.querySelectorAll('input');
-    let Objeto = {}
-    for (let i = 0; i < inputs.length; i++) {
-        let id = inputs[i].id
-        let value
-        if (inputs[i].type == 'checkbox') {
-            value = inputs[i].checked ? 'S' : 'N'
-        } else {
-            value = inputs[i].value
-        }
-        Objeto[id] = value
-    }
-    // let eee = ['PARC_NOME', 'PARC_N_RAZAO_SOCIAL', 'PARC_CGC', 'PARC_IR_RG', 'PARC_EMAIL', 'PARC_NASC', 'PARC_TEL', 'PARC_TEL_2', 'PARC_TRABALHO_N', 'PARC_CEP_T','PARC_BAIRRO_T','ID_CID_F','PARC_LOGRA_T','PARC_NUM_T','PARC_COMP_T','','','','' ]
-    let data = {
-        sql: `BEGIN
-            INSERT INTO PRC_PARCEIRO(PARC_NOME,PARC_N_RAZAO_SOCIAL,
-                                     PARC_CGC_,IE_RG,
-                                     PARC_EMAIL,PARC_NASC,
-                                     PARC_TEL,PARC_TEL_2,
-                                     PARC_TRABALHO_N,PARC_CEP_T,
-                                     PARC_BAIRRO_T,PARC_CID_F,
-                                     PARC_LOGRA_T,PARC_NUM_T,
-                                     PARC_COMP_T,PARC_TEL_T,
-                                     PARC_SALARIO,PARC_ADMISSAO,
-                                     PARC_CEP,UF,
-                                     ID_CIDADE,PARC_BAIRRO,
-                                     PARC_LOGRA,PARC_NUM,
-                                     PARC_COMP,PARC_FORNEC,
-                                     USU_INCLUSAO,USU_ALTER,
-                                     DT_INCLU,DT_ALTER)
-            VALUES                   ('${Objeto.PARC_NOME}','${Objeto.PARC_N_RAZAO_SOCIAL}',
-                                      '${Objeto.PARC_CGC_}',${Objeto.PARC_IR_RG},
-                                      '${Objeto.PARC_EMAIL}',TO_DATE('${Objeto.PARC_NASC}','YYYY-MM-DD'),
-                                      '${Objeto.PARC_TEL}',
-                                      '${Objeto.PARC_TEL_2}',
-                                      '${Objeto.PARC_TRABALHO_N}',
-                                      '${Objeto.PARC_CEP_T}',
-                                      '${Objeto.PARC_BAIRRO_T}',
-                                      ${Objeto.ID_CID_F},
-                                      '${Objeto.PARC_LOGRA_T}',
-                                      '${Objeto.PARC_NUM_T}',
-                                      '${Objeto.PARC_COMP_T}',
-                                      '${Objeto.PARC_TEL_T}',
-                                      ${Objeto.PARC_SALARIO},
-                                      TO_DATE('${Objeto.PARC_ADMISSAO}','YYYY-MM-DD'),
-                                      '${Objeto.PARC_CEP}',
-                                   '${UF.value}',
-                                      ${Objeto.ID_CID},
-                                      '${Objeto.PARC_BAIRRO}',
-                                      '${Objeto.PARC_LOGRA}',
-                                      '${Objeto.PARC_NUM}',
-                                      '${Objeto.PARC_COMP}',
-                                      '${Objeto.PARC_FORNEC}',
-                                      :USU_LOGADO,
-                                      :USU_LOGADO,
-                                      SYSDATE,
-                                      SYSDATE
-
-            );
-            
-            COMMIT;
-          END;`,
-        binds: {},
-        USU_LOGADO: true,
-        mensagem_error: 'Error ao inserir registro!',
-        mensagem_sucess: 'Registro inserido com sucesso!'
-    };
-    new Ajax('/rota/universal', data).RequisicaoAjax(true).then(()=>{
-    new Tabela().LimpaInputs('form');
-    })
-}
 // Usando o filtro
 document.getElementById('Buscar').addEventListener('click', Filtro, false);
 //importando os dados
 document.getElementById('IMPORTAR').addEventListener('click', Importar, false);
-document.getElementById('SALVAR').addEventListener('click', salvardados, false);
 
+document.getElementById('form').addEventListener('submit', (e)=>{
+    e.preventDefault();
+     let dados = new Tabela().InputsValues(['PARC_NOME', 'PARC_N_RAZAO_SOCIAL', 'PARC_CGC_', 'PARC_IR_RG', 'PARC_EMAIL','PARC_NASC', 'PARC_TEL', 'PARC_TEL_2', 'PARC_TRABALHO_N',
+                 'PARC_CEP_T','PARC_BAIRRO_T','ID_CID_F','PARC_LOGRA_T','PARC_NUM_T','PARC_COMP_T','PARC_TEL_T','PARC_SALARIO','PARC_ADMISSAO',
+                 'PARC_CEP','ID_CID','PARC_BAIRRO','PARC_LOGRA','PARC_NUM', 'PARC_COMP','PARC_FORNEC','ESTADO'])
+    let data = {
+        sql: `BEGIN
+             INSERI_PARCEIRO   (:PARC_NOME,:PARC_N_RAZAO_SOCIAL,:PARC_CGC_,:PARC_IR_RG,:PARC_EMAIL,:PARC_NASC,:PARC_TEL,:PARC_TEL_2,
+                                      :PARC_TRABALHO_N,:PARC_CEP_T,:PARC_BAIRRO_T,:ID_CID_F,:PARC_LOGRA_T,:PARC_NUM_T,:PARC_COMP_T,:PARC_TEL_T,
+                                      :PARC_SALARIO,:PARC_ADMISSAO,:PARC_CEP,:ESTADO,:ID_CID,:PARC_BAIRRO,:PARC_LOGRA,:PARC_NUM,:PARC_COMP,
+                                      :PARC_FORNEC,:USU_LOGADO); END;`,
+        binds: dados,
+        mensagem_error: 'Error ',
+        mensagem_sucess: 'Registro inserido com sucesso!',
+        USU_LOGADO: true
+    };
+    console.log(data)
+
+     new Ajax('/rota/universal', data).RequisicaoAjax(true,'form')
+});
 

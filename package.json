@@ -69,6 +69,7 @@
     "depd": "^2.0.0",
     "destroy": "^1.2.0",
     "detect-libc": "^2.0.2",
+    "dotenv": "^16.4.5",
     "dottie": "^2.0.6",
     "ecc-jsbn": "^0.1.2",
     "ecdsa-sig-formatter": "^1.0.11",

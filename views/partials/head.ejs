@@ -83,7 +83,7 @@
 
     <button type="button"  class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<%=T_USU[1]%>" style="margin-right: 15px;"> ?</button>
     <button type="button"  class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="<%=T_USU[3]%>" style="margin-right: 15px;"> #</button>
-   <form action="/logout" method="get"> <button type="submit"  class="btn btn-secondary mt-3"    >Sair</button></form>
+   <form action="/logout" method="post"> <button type="submit"  class="btn btn-secondary mt-3"    >Sair</button></form>
    
 
 </nav>
@@ -91,6 +91,7 @@
  <!---->
  <nav>
     <div ><%=T_USU[0]%></div> 
+    <input type="hidden" value="<%=T_USU[2]%>" id="ID_TELA_ATUAL">
 
  </nav>
  <!---->

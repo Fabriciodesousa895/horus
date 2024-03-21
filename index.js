@@ -1,7 +1,15 @@
 const express = require("express");
 const app = express();
 const axios = require('axios');
+const EventEmitter = require('node:events');
 
+// const eventEmitter = new EventEmitter();
+// eventEmitter.on('start', () => {
+//   console.log('started');
+// });
+// eventEmitter.emit('start');
+
+require('dotenv').config()
 'use strict';
 //view engine
 app.set("view engine", "ejs");
@@ -16,7 +24,6 @@ const cookieparser = require('cookie-parser');
 app.use(cookieparser());
 //bycrypt para hash
 const bycrypt = require('bcrypt');
-const secret = 'M987ggjjj@583';
 //jsonwebtoken
 const jwt = require('jsonwebtoken');
 const multer = require('multer')
@@ -30,6 +37,38 @@ const storage = multer.diskStorage({
   }
 })
 const upload = multer({ storage: storage })
+
+const oracledb = require('oracledb');
+
+const dbconfig = {
+  user: process.env.SYSTEM,
+  password: process.env.PASSWORD,
+  connectString: process.env.CONNECT
+}
+
+async function conectarbd(sql, binds, options) {
+  let connection = await oracledb.getConnection(dbconfig);
+  let result = await connection.execute(`${sql}`, binds, options);
+  return result.rows;
+}
+async function conectar(sql, binds) {
+  let connection = await oracledb.getConnection(dbconfig);
+  let result = await connection.execute(`${sql}`, binds);
+  return result;
+}
+
+//resultado vem em array de array
+const options = {
+  autoCommit: true,
+  outFormat: oracledb.OUT_FORMAT_ARRAY
+}
+//resultado vem em array de objeto
+const options_objeto = {
+  autoCommit: true,
+  outFormat: oracledb.OUT_FORMAT_OBJECT
+}
+
+
 
 //configurando cors
 const cors = require('cors');
@@ -88,26 +127,6 @@ app.use(async (req, res, next) => {
 });
 
 
-// function importar() {
-
-//   fs.readFile('ncm.json', 'utf-8', (err, data) => {
-//     let dados = JSON.parse(data)
-//   let num =1;
-
-//     // dados.forEach(e => {
-//       //  console.log( e.Codigo)
-//       let sql = `BEGIN PROCESSAR_JSON(:dados); END;`
-//       let binds = { dados:data }
-//       let result = conectar(sql, binds)
-//       console.log(data)
-//     // })
-
-//   })
-
-// }
-
-// importar();:
-
 app.get('/certificado/validacao', (req, res) => {
   let url = req.params.url;
   let menssage = req.params.menssage;
@@ -124,128 +143,161 @@ function criarlogtxt(log, url) {
     console.error('Erro ao escrever no arquivo: ', err);
   }
 }
-
+let inactivityTimer;// Função para resetar o temporizador de inatividade
+let TempoSessao = 0;
+async function resetInactivityTimer(token) {
+  if (inactivityTimer) {
+      clearTimeout(inactivityTimer);
+  }
+  let sql = `SELECT TEMPO_S_INATIVA FROM PREFERENCES`;
+  let binds = {};
+  let consulta = await conectar(sql, binds);
+  TempoSessao = consulta.rows[0][0];
+  inactivityTimer = setTimeout(() => {
+      console.log('Usuário inativo por 5 minuto.');
+      try {
+          let sql = `BEGIN UPDATE LOG_LOGIN SET DT_SAIDA = SYSDATE,KILL = 'S' WHERE TOKEN = :TOKEN; COMMIT; END;`;
+          let binds = {TOKEN:token};
+          conectar(sql, binds);
+             } catch (error) {
+          let log = error;
+          console.log(error);
+      }
+  },  TempoSessao);
+}
 
 //middleware de autenticação;
-function auth(req, res, next) {
-  const token = req.cookies.jwt;
+async function auth(req, res, next) {
+  let token = req.cookies.jwt;
+resetInactivityTimer(token)
+
+  //Verificando se o metodo é get
+    try {
+      //SE kill for S a sessão é
+      let sql = `SELECT KILL FROM LOG_LOGIN WHERE TOKEN = :TOKEN `;
+      let binds = { TOKEN: token };
+      let result = await conectarbd(sql, binds, options_objeto);
+      let KILL
+      result.forEach((e) => { KILL = e.KILL });
+      console.log(KILL);
+      if (KILL == 'S') {
+
+        res.redirect('/login');
+        console.log('Sessão encerrada');
+
+      }
+      next()
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+
+
 
   if (!token) {
-    res.render('Error')
+    console.log('error');
+
   } else {
-    const decoded = jwt.verify(token, secret);
-    req.ID_USUARIO = decoded;
-    next();
+    try {
+      const decoded = jwt.verify(req.cookies.jwt, process.env.SECRET);
+      req.ID_USUARIO = decoded;
+      return next();
+    } catch (error) {
+      let log = error;
+      criarlogtxt(log, req.url);
+      console.log(error);
+    }
   }
 }
 
-const oracledb = require('oracledb');
 
-const dbconfig = {
-  user: 'SYSTEM',
-  password: 'host2023',
-  connectString: 'localhost:1521'
-}
-const dbconfig_consulta = {
-  user: 'DIP',
-  password: 'HTML@583',
-  connectString: 'localhost:1521'
-}
-
-async function conectarbd(sql, binds, options) {
-  let connection = await oracledb.getConnection(dbconfig);
-  let result = await connection.execute(`${sql}`, binds, options);
-  return result.rows;
-}
-async function conectar(sql, binds) {
-  let connection = await oracledb.getConnection(dbconfig);
-  let result = await connection.execute(`${sql}`, binds);
-  return result;
-}
-async function consultaOracle(sql, binds) {
-  let connection = await oracledb.getConnection(dbconfig_consulta);
-  let result = await connection.execute(`${sql}`, binds);
-  return result;
-}
-//resultado vem em array de array
-const options = {
-  autoCommit: true,
-  outFormat: oracledb.OUT_FORMAT_ARRAY
-}
-//resultado vem em array de objeto
-const options_objeto = {
-  autoCommit: true,
-  outFormat: oracledb.OUT_FORMAT_OBJECT
-}
 
 //login
 app.get('/login', (req, res) => {
   res.render('./usuario/login')
 })
+
 app.post('/login', async (req, res) => {
   let USU_SENHA = req.body.USU_SENHA;
   let USU_NOME = req.body.USU_NOME;
   let sql = `SELECT USU_SENHA, ID_USU FROM USU_USUARIO WHERE USU_NOME = :USU_NOME AND USU_STATUS = 'S'`;
   let binds = { USU_NOME: USU_NOME }
   let result = await conectarbd(sql, binds, options);
-
+  //Verifica se há um token,caso haja é finalizado a sessão
+  let TOKEN = req.cookies.jwt;
+  if (TOKEN) {
+    res.clearCookie("jwt");
+    let sql2 = `BEGIN UPDATE LOG_LOGIN SET DT_SAIDA = SYSDATE WHERE TOKEN = :TOKEN; COMMIT; END;`;
+    let binds2 = { TOKEN: TOKEN }
+    conectar(sql2, binds2)
+  }
   // Verifica se o resultado está vazio (nenhum usuário encontrado)
   if (result.length === 0) {
-    res.send('Usuário não encontrado ou está inativo');
-  } else {
-    let senha_salva = result[0][0];
-    let ID_USU = result[0][1];
-    try {
-      // Valida a senha
-      bycrypt.compare(USU_SENHA, senha_salva, (err, resultt) => {
-        if (resultt) {
-          // Gera o token da sessão
-          jwt.sign(
-            {
-              ID_USUARIO: ID_USU
-            },
-            secret,
-            { expiresIn: '10h' },
-            (err, token) => {
-              if (err) {
-                res.send('Ocorreu um erro ao gerar o token da sessão!');
-                return;
-              } else {
-                res.status(200)
-                  .cookie("jwt", token, { httpOnly: true, maxAge: 8000000 })
-                  .send('Operação realizada com sucesso');
-              }
-            }
-          )
-
-        } else {
-          return res.status(505).send('Senha inválida,verifique sua senha e tente novamente!');
-        }
-      })
-
-    } catch (error) {
-      let log = error;
-      criarlogtxt(log, req.url);
-      res.send(error)
-    }
-
-
+    return res.status(404).send('Usuário não encontrado ou está inativo');
   }
-})
-//usuario desloga
 
+  let senha_salva = result[0][0];
+  let ID_USU = result[0][1];
+
+  // Valida a senha
+  try {
+    const match = await bycrypt.compare(USU_SENHA, senha_salva);
+    if (match) {
+      // Gera o token da sessão
+      let ID_USUARIO = ID_USU;
+      jwt.sign({ ID_USUARIO }, process.env.SECRET, { expiresIn: '10h' }, (error, token) => {
+        if (error) {
+          return res.status(500).send('Ocorreu um erro ao gerar o token da sessão!');
+        }
+        res.status(200).cookie("jwt", token, { httpOnly: true, maxAge: 36000000 }).send();
+        try {
+          let sql = `BEGIN INSERT INTO LOG_LOGIN (TOKEN,IP_ADRESS,ID_USU,DT_ENTRADA,NAVEGADOR,SO_COMPUTADOR)VALUES(:TOKEN,:IP_ADRESS,:ID_USU,SYSDATE,:NAVEGADOR,:SO_COMPUTADOR); COMMIT; END;`
+
+          let binds = {
+            TOKEN: token,
+            IP_ADRESS: req.headers['x-forwarded-for'],
+            NAVEGADOR: req.headers['sec-ch-ua'],
+            SO_COMPUTADOR: req.headers['sec-ch-ua-platform'],
+            ID_USU: ID_USUARIO
+          }
+          conectar(sql, binds);
+        } catch (error) {
+          console.log(error)
+        }
+      });
+    } else {
+      return res.status(401).send('Senha inválida, verifique sua senha e tente novamente!');
+    }
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.status(500).send(error);
+  }
+});
+
+//usuario desloga
 app.post("/logout", (req, res) => {
-  res.clearCookie("jwt");
-  console.log('Usuário deslogou');
-  res.redirect("/login");
+  try {
+    let TOKEN = req.cookies.jwt;
+    res.clearCookie("jwt");
+    let sql = `BEGIN UPDATE LOG_LOGIN SET DT_SAIDA = SYSDATE WHERE TOKEN = :TOKEN; COMMIT; END;`;
+    let binds = { TOKEN: TOKEN }
+    conectar(sql, binds)
+    res.redirect("/login");
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.status(500).send(error);
+  }
+
 });
 
 //valida se o usuário tem acesso a tela
 function valida_acesso(ID_TELA, token) {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, secret, async (err, data) => {
+    jwt.verify(token, process.env.SECRET, async (err, data) => {
       if (err) {
-        reject('Token inválido!');
+        reject('Token inválido!r');
       } else {
         let sql = `BEGIN VALIDA_CONSULTAS(:P_ID_USU, :P_ID_TELA, :P_RESULT); END;`;
 
@@ -260,18 +312,18 @@ function valida_acesso(ID_TELA, token) {
           resolve(result.outBinds.P_RESULT);
         } catch (error) {
           let log = error;
-          criarlogtxt(log, req.url);
+          criarlogtxt(log);
           reject(error);
         }
       }
     });
   });
 }
-app.post('/filtra/acesso',async(req,res)=>{
+app.post('/filtra/acesso', async (req, res) => {
 
-let token = req.cookies.jwt;
-jwt.verify(token,secret,async(err,data)=>{
-  let sql2 = ` SELECT  TL.T_NOME,TL.ROTA
+  let token = req.cookies.jwt;
+  jwt.verify(token, process.env.SECRET, async (err, data) => {
+    let sql2 = ` SELECT  TL.T_NOME,TL.ROTA
   FROM USU_USUARIO U
   LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
   LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
@@ -281,23 +333,23 @@ jwt.verify(token,secret,async(err,data)=>{
     AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
     AND TL.TIPO <> 'V'`
 
-try {
-  let binds2 = {
-    ID_USU: data.ID_USUARIO
-  }
-  let result = await conectar(sql2,binds2)
-  res.send(result.rows)
-} catch (error) {
-  res.redirect('/login')
-}
+    try {
+      let binds2 = {
+        ID_USU: data.ID_USUARIO
+      }
+      let result = await conectar(sql2, binds2)
+      res.send(result.rows)
+    } catch (error) {
+      res.redirect('/login')
+    }
 
-})
+  })
 })
 
 //valia as permições na tela em que o usuário está
 function permi_usu(ID_TELA, token) {
   return new Promise((resolve, reject) => {
-    jwt.verify(token, secret, async (err, data) => {
+    jwt.verify(token, process.env.SECRET, async (err, data) => {
       if (err) { reject('token inválido') }
       else {
         //tr´s as permissões do usuario na teala especificada
@@ -417,9 +469,11 @@ function permi_usu(ID_TELA, token) {
             T_FILTRO: result5.rows
           }
           resolve(Objeto);
+          console.log(Objeto)
         } catch (error) {
           let log = error;
-          criarlogtxt(log, req.url);
+          console.log
+          criarlogtxt(log);
           reject(error);
         }
       }
@@ -439,66 +493,25 @@ app.get('/logout', (req, res) => {
 //tela de inicio
 app.get('/', auth, async (req, res) => {
   let token = req.cookies.jwt;
-  jwt.verify(token, secret, async (err, data) => {
+
+  jwt.verify(token, process.env.SECRET, async (err, data) => {
     if (err) {
       console.log('Token inválido');
       return;
     } else {
       let USU_LOGADO = data.ID_USUARIO;
       try {
-        let sql = `SELECT 
-          TITULO,
-          MENSAGEM,
-          TO_CHAR(DTINICIO,'DD-MM-YYYY') AS INICIO,  
-          TO_CHAR(DTFIM,'DD-MM-YYYY') AS FIM,
-          TO_CHAR(DTCOMUNICADO,'DD-MM-YYYY') AS POSTAGEM,
-          CASE 
-              WHEN TIPO = 'A' THEN 'BLACK'
-              WHEN TIPO = 'B' THEN 'orange'
-              WHEN TIPO = 'C' THEN 'RED'
-              ELSE 'BLACK' 
-          END AS COR,
-      USU.USU_NOME
-      FROM C_COMUNICADO CC
-      INNER JOIN USU_USUARIO USU ON USU.ID_USU = CC.ID_USU
-          WHERE SYSDATE  BETWEEN DTINICIO AND DTFIM + 1
-      ORDER BY COR DESC`
-        let sql_tarefa = `
-      SELECT
-      ID_TAREFA,
-      SUBSTR(TF_MSG,1,80) || ' . . .' AS TF_MSG,
-      TO_CHAR(TF_DT_INCLU,'DD/MM/YY HH24:MM') AS DT_INCLU,
-      TO_CHAR(TF_DT_PRAZO,'DD/MM/YY HH24:MM') AS PRAZO,
-      ID_USU_REM,
-      TF_NIVEL,
-      USU.USU_NOME
-      FROM TF_TAREFA TF
-      INNER JOIN USU_USUARIO USU ON USU.ID_USU = TF.ID_USU_REM
-      WHERE ID_USU_DEST =  :USU_LOGADO
-      AND TF_STATUS = 'A'
-      ORDER BY TF_NIVEL DESC
-       `
-        let binds_tarefa = { USU_LOGADO: USU_LOGADO }
-        let result = await conectarbd(sql, [], options_objeto)
-        let tarefas = await conectarbd(sql_tarefa, binds_tarefa, options_objeto);
-        let P_USU = await permi_usu(1, token);
-        let msg;
-        let HR_ATUAL = new Date();
-        let hora_atual = HR_ATUAL.getHours();
 
-        if (hora_atual >= 18 || hora_atual < 6) {
-          msg = 'Boa noite';
-        } else if (hora_atual >= 12 && hora_atual < 18) {
-          msg = 'Boa tarde';
-        } else {
-          msg = 'Bom dia';
-        }
-        res.render('index', { P_USU, result, msg, tarefas })
+
+        let Acesso = await valida_acesso(101, token);
+
+        let P_USU = await permi_usu(101, token);
+
+        res.render('index', { P_USU, })
       } catch (error) {
         let log = error;
-        criarlogtxt(log, req.url);
         console.error('Erro:', error);
-        res.status(500).send('Erro ao obter os dados');
+        // res.status(500).send('Erro ao obter os dados');
       }
 
 
@@ -512,6 +525,19 @@ app.get('/cadastro/cidades', auth, async (req, res) => {
     let Acesso = await valida_acesso(181, token);
     let P_USU = await permi_usu(181, token);
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./cadastro/cidades', { P_USU })
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.send('Error:' + error);
+  }
+})
+//monitor de sesão
+app.get('/monitordesessao',auth,async(req,res)=>{
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(301, token);
+    let P_USU = await permi_usu(301, token);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/monitordesessao', { P_USU })
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
@@ -723,21 +749,21 @@ app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
   }
 })
 //grava log de saida das telas
-app.post('/beforeunload', urlencodedParser, async (req, res) => {
-  let url_atual = req.body.url_atual
+app.post('/beforeunload', async (req, res) => {
+  let ID_TELA = req.body.ID_TELA
+
   let token = req.cookies.jwt;
-  jwt.verify(token, secret, async (err, data) => {
+  jwt.verify(token, process.env.SECRET, async (err, data) => {
     if (err) {
-      console.log('Token inválido');
+      console.log('Token inválidogggff');
       return;
     } else {
       let USU_LOGADO = data.ID_USUARIO;
       try {
-        console.log(url_atual)
-        let sql4 = `BEGIN HIST_TELA_SAIDA(:P_TOKEN,:P_URL,:P_USU_LOGADO); END;`;
+        let sql4 = `BEGIN HIST_TELA_SAIDA(:P_TOKEN,:ID_TELA,:P_USU_LOGADO); END;`;
         let binds4 = {
           P_TOKEN: token,
-          P_URL: url_atual,
+          ID_TELA: ID_TELA,
           P_USU_LOGADO: USU_LOGADO
         }
         await conectar(sql4, binds4, options)
@@ -832,9 +858,9 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
 
   const token = req.cookies.jwt;
 
-  jwt.verify(token, secret, async (err, data) => {
+  jwt.verify(token, process.env.SECRET, async (err, data) => {
     if (err) {
-      return res.status(500).send('Token inválido!' + 'Não foi possivel realizar esta operação.')
+      return res.status(500).send('Token inválido!f' + 'Não foi possivel realizar esta operação.')
 
     } else {
       let USU_NOME = req.body.USU_NOME;
@@ -948,7 +974,7 @@ app.get('/lancador/tarefa', auth, async (req, res) => {
 app.post('/filtro_usuario', async (req, res) => {
   let token = req.cookies.jwt;
 
-  jwt.verify(token, secret, async (err, data) => {
+  jwt.verify(token, process.env.SECRET, async (err, data) => {
     if (err) {
       return res.send('Token inválido, faça login novamente!')
     } else {
@@ -1007,7 +1033,7 @@ app.post('/update_usuario', async (req, res) => {
   let token = req.cookies.jwt;
   let saltRounds = 10
   let objeto = req.body; //pegando os dados da requisição ajax
-  jwt.verify(token, secret, async (err, data) => {
+  jwt.verify(token, process.env.SECRET, async (err, data) => {
     if (err) return res.send('Token inválido,faça login e tente novamente!');
 
     let sql = `BEGIN ALTERA_USUARIO ( :ID_USU,
@@ -1041,12 +1067,12 @@ app.post('/update_usuario', async (req, res) => {
       CFG_USU_EXC_FIN: objeto.CFG_USU_EXC_FIN,
       CFG_USU_CONF_CONFERE_CAIXA: objeto.CFG_USU_CONF_CONFERE_CAIXA,
       CFG_USU_ALT_PARC: objeto.CFG_USU_ALT_PARC,
-      CAIXA:objeto.CAIXA,
+      CAIXA: objeto.CAIXA,
       USU_LOGADO: data.ID_USUARIO,
       P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
 
     }
-console.log(binds)
+    console.log(binds)
 
     try {
       let result = await conectar(sql, binds);
@@ -1070,7 +1096,7 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
   let objeto = req.body
   let token = req.cookies.jwt;
 
-  jwt.verify(token, secret, async (err, data) => {
+  jwt.verify(token, process.env.SECRET, async (err, data) => {
     if (err) { res.send('Token invãlido') } else {
       let sql;
       //verifica se o usuario está alterando um usuario
@@ -1099,35 +1125,104 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
   })
 })
 //Cadastro de vendedor
-app.get('/vendedores',auth,async(req,res)=>{
-  let token = req.cookies.jwt;
-  let Acesso = await valida_acesso(161, token);
-  let P_USU = await permi_usu(161, token);
-  res.render('./cadastro/vendedor', { P_USU });
+app.get('/vendedores', auth, async (req, res) => {
+
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(161, token);
+    let P_USU = await permi_usu(161, token);
+    res.render('./cadastro/vendedor', { P_USU });
+  } catch (error) {
+    res.redirect('/login')
+    
+  }
 })
 //Cadastro de produtos
-app.get('/produtos',auth,async(req,res)=>{
-  let token = req.cookies.jwt;
-  let Acesso = await valida_acesso(281, token);
-  let P_USU = await permi_usu(281, token);
-  res.render('./cadastro/produto', { P_USU });
+app.get('/produtos', auth, async (req, res) => {
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(281, token);
+    let P_USU = await permi_usu(281, token);
+  
+    res.render('./cadastro/produto', { P_USU })
+  } catch (error) {
+    console.log('error')
+    res.redirect('/login')
+  }
+ 
+
+})
+//Visualizar de produtos
+app.get('/visualizaproduto/:ID', auth, async (req, res) => {
+
+  try {
+    let ID = req.params.ID;
+    console.log(ID)
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(281, token);
+    let P_USU = await permi_usu(281, token);
+    let sql = `SELECT PRDT_NOME,
+    PRDT_DESCRICAO,
+    PRDT_CARACT,
+    PRDT_USADO_COMO,
+    PRDT_CAL_COMISSAO,
+    PRDT_NCM,
+    PRDT_EST_MIN,
+    PRDT_EST_MAX,
+    PRDT_NR_PECA,
+    PRDT_MARGEM_LUCRO,
+    PRDT_COMISSAO_VND,
+    PRDT_COMISSAO_GER,
+    PRDT_P_LIQUIDO,
+    PRDT_P_BRUTO,
+    PRDT_ID_CTG,
+    PRDT_COD_BARRA,
+    PRDT_MARCA,
+    PRDT_ALTURA,
+    PRDT_LARGURA,
+    PRDT_DESC_MAX,
+    TO_CHAR(DT_INCLU,'YYYY-MM-DD') AS DT_INCLU,
+    TO_CHAR(DT_ALTER,'YYYY-MM-DD') AS DT_ALTER,
+    ID_USU_ALTER,
+    ID_USU_INCLUSAO FROM PRDT_PRODUTO WHERE PRDT_ID = :ID`;
+    let binds = { ID: ID };
+    let result = await conectarbd(sql, binds, options_objeto);
+    res.render('./cadastro/visualizaproduto', { P_USU, result });
+
+    console.log(result)
+  } catch (error) {
+    console.log(error)
+    res.redirect('/login')
+  }
 })
 //Cadastro de grupos
-app.get('/grupo',auth,async(req,res)=>{
-  let token = req.cookies.jwt;
-  let Acesso = await valida_acesso(119, token);
-  let P_USU = await permi_usu(119, token);
-  res.render('./cadastro/grupo', { P_USU });
+app.get('/grupo', auth, async (req, res) => {
+
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(119, token);
+    let P_USU = await permi_usu(119, token);
+    res.render('./cadastro/grupo', { P_USU });
+  } catch (error) {
+    res.redirect('/login')
+    
+  }
 })
 //Cadastro de ncm
-app.get('/ncm',auth,async(req,res)=>{
-  let token = req.cookies.jwt;
-  let Acesso = await valida_acesso(162, token);
-  let P_USU = await permi_usu(162, token);
-  res.render('./cadastro/ncm', { P_USU });
+app.get('/ncm', auth, async (req, res) => {
+
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(162, token);
+    let P_USU = await permi_usu(162, token);
+    res.render('./cadastro/ncm', { P_USU });
+  } catch (error) {
+    res.redirect('/login')
+    
+  }
 })
 //Visulaiza d ncm
-app.get('/VisualizaNcm/:cod_ncm',auth,async(req,res)=>{
+app.get('/VisualizaNcm/:cod_ncm', auth, async (req, res) => {
   let ncm = req.params.cod_ncm;
   let sql = `SELECT NCM_DESC,COD_NCM_ AS COD,
              TO_CHAR(N.DT_ALTER,'DD/MM/YYYY HH24:MM:SS') AS DT_ALTER,
@@ -1138,14 +1233,14 @@ app.get('/VisualizaNcm/:cod_ncm',auth,async(req,res)=>{
              LEFT JOIN USU_USUARIO U ON U.ID_USU = N.ID_USU_INCLUSAO	
              LEFT JOIN USU_USUARIO US ON US.ID_USU = N.COD_USU_ALTER	
               WHERE N.COD_NCM_ = :COD_NCM`;
-  let binds = {COD_NCM:ncm};
+  let binds = { COD_NCM: ncm };
   try {
     let token = req.cookies.jwt;
     let Acesso = await valida_acesso(162, token);
     let P_USU = await permi_usu(162, token);
-    let result = await conectarbd(sql,binds,options_objeto);
+    let result = await conectarbd(sql, binds, options_objeto);
     console.log(result)
-    res.render('./cadastro/VisualizaNcm', { P_USU,result });
+    res.render('./cadastro/VisualizaNcm', { P_USU, result });
   } catch (error) {
     console.log(error)
   }
@@ -1178,7 +1273,7 @@ app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
     let P_USU = await permi_usu(201, token);
     let result = await conectarbd(sql, binds, options_objeto);
     if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
-    res.render('./parceiro/visualizaparceiro', { P_USU,result });
+    res.render('./parceiro/visualizaparceiro', { P_USU, result });
     console.log(result)
   } catch (error) {
     console.log(error)
@@ -1190,7 +1285,7 @@ app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
 //Copia permissões
 app.post('/copia_usuario', async (req, res) => {
   let token = req.cookies.jwt;
-  jwt.verify(token, secret, async (error, data) => {
+  jwt.verify(token, process.env.SECRET, async (error, data) => {
     if (error) { return res.status(500).send('Token inválido!') }
     else {
       let ID_F = req.body.ID_FORNECE;
@@ -1301,7 +1396,7 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
   let Objeto = req.body;
   let token = req.cookies.jwt;
   let novobinds;
-  jwt.verify(token, secret, async (error, data) => {
+  jwt.verify(token, process.env.SECRET, async (error, data) => {
     if (error) { return res.status(500).send('Token inválido!') }
     if (Objeto.USU_LOGADO) {
       let USU_LOGADO = data.ID_USUARIO;
@@ -1329,11 +1424,13 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
 })
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
 app.post('/select/universal', urlencodedParser, async (req, res) => {
+  // req.on('information',(info)=>{
+  // console.log(info,'-----')
+  // })
   let Objeto = req.body;
-  console.log(Objeto)
   let novobinds;
   let token = req.cookies.jwt;
-  jwt.verify(token, secret, async (error, data) => {
+  jwt.verify(token, process.env.SECRET, async (error, data) => {
     if (error) {
       res.status(500).send('Token inválido,faça login e tente novamente!')
     } else {
@@ -1385,29 +1482,6 @@ app.get('/dowload/img/ploads_tarefa/:src', upload.single('file'), (req, res) => 
 
 })
 
-// const nodemailer = require('nodemailer');
-// var transport = nodemailer.createTransport({
-//   host: "live.smtp.mailtrap.io",
-//   port: 587,
-//   auth: {
-//     user: "api",
-//     pass: "3862b536e6d8ba9265ea5a5b36e5b715"
-//   }
-// });
-// const send = (to,subject,body)=>{
-//   transport.sendMail({
-//    from:'sousafabricio583@gmail.com',
-//    to,
-//    subject,
-//    text:body })
-// }
-
-// function enviaemail(){
-
-// send('sousafabricio583@gmail.com','envio','dfdsfsdfdsf')
-// }
-
-// enviaemail()
 
 app.listen(80, (err) => {
   if (err) {
@@ -1416,3 +1490,4 @@ app.listen(80, (err) => {
     console.log("Servidor rodando, https:localhost:80/login ou no link   https://marlin-quality-nicely.ngrok-free.app/login");
   }
 });
+

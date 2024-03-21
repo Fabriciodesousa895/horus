@@ -17,11 +17,7 @@ function sendForm(evento){
        ajax.setRequestHeader('Content-type', 'application/json');
        ajax.onreadystatechange = function (){
         if (ajax.status == 200 ) {
-            swal({
-              title: ajax.response,
-              icon:'warning'
-            });
-            setInterval(() => {
+                setInterval(() => {
                 location.href = '/'
             }, 3000);
            

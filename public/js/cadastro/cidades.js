@@ -59,12 +59,9 @@ import { SalvaFiltro } from "../Class/Filtro.js";
         ajax.open('POST', '/select/universal');
         ajax.setRequestHeader('Content-type', 'application/json');
         let data = {
-            sql: `SELECT ID,NOME,COD_DOMICILIO_FISCAL FROM CIDADE WHERE  (COD_DOMICILIO_FISCAL LIKE  '%${FILTRO_COD.value}%' OR  COD_DOMICILIO_FISCAL IS NULL)
-                                                                     AND ( NOME LIKE '%${FILTRO_NOME.value}%' OR NOME  IS NULL)`,
-            binds: {},
-            mensage_error: 'Houve um errro ao consultar so resgitros!',
+            sql: `SELECT FITRA_CIDADE(:FILTRO_COD,:FILTRO_NOME) FROM DUAL`,
+            binds: {FILTRO_COD:FILTRO_COD.value,FILTRO_NOME:FILTRO_NOME.value},
             USU_LOGADO: false,
-            rows: true
         };
         let JsonData = JSON.stringify(data)
         ajax.onreadystatechange = () => {
@@ -87,7 +84,6 @@ import { SalvaFiltro } from "../Class/Filtro.js";
 
                 })
                 document.getElementById('TOTAL').innerText = array_registros.length
-                console.log(array_registros.length)
             } else {
                 swal({
                     text: ajax.responseText,
@@ -196,8 +192,7 @@ import { SalvaFiltro } from "../Class/Filtro.js";
     }
 
     tbody.addEventListener('dblclick', (e) => {
-    let editar = document.getElementById('EDITAR');
-
+        let editar = document.getElementById('EDITAR');
         let elementoclicado = e.target;
         let elementopai = elementoclicado.parentNode;
         let ID = (elementopai.cells[0]).innerText

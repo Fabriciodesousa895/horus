@@ -16,17 +16,18 @@
                             <option value=" BETWEEN ">( BETWEEN ) entre</option>
                             <option value=" INNER JOIN ">INNER JOIN</option>
                             <option value=" LEFT JOIN ">LEFT JOIN</option>
+                            <option value=" TO_CHAR(SEU_CAMPO,'DD/MM/YYYY HH24:MI:SS') AS SEU_CAMPO ">Data hora formatada</option>
                         </select>
                         <input type="text" id="NOME_TABELA" class="form-control mt-3" placeholder="Nome da tabela">
 
-                        <table class="table mt-3 table-striped table-bordered table-hover">
+                        <table class="table mt-3 table-striped table-bordered table-hover" id="dadostables">
                             <thead>
                                 <tr>
                                     <td>Nome</td>
                                     <td>Dado</td>
                                 </tr>
                             </thead>
-                            <tbody id="tbody">
+                            <tbody>
                                 <!--registros sendo preenchidas dinamicamento pelo js-->
                             </tbody>
                         </table>
@@ -39,14 +40,11 @@
                         <button id="TOTAL" class="btn btn-success mt-3">00</button>
 
                         <% if (D.ALTERA=='S' ) { %> <button id="SalvarEdicao" style="display: none;" class="btn btn-warning mt-3">Salvar</button><%}%>
-                                <% if (D.DELETA=='S' ) { %> <button id="DeletarSQL" style="display: none;" class="btn btn-danger mt-3">Deletar</button><%}%>
                                 <% if (D.INCLUI=='S' ) { %>   <button id="Salvar" class="btn btn-success mt-3">Salvar</button><%}%>
-                     <button class="btn btn-primary MT-3"  style="margin-right: 15px;" data-toggle="modal" data-target=".ANEXO" id="ANEXO" >Querys salvas</button>     
-
-                                <%-include('../components/csv.ejs')%>
-                                <input type="button" id="gerapdf" class="btn btn-danger mt-3" value="Gerar pdf">
-                                                <table class="table mt-3 table-striped table-bordered table-hover"id="tabeladados">
-                                                    <thead id="cabecalho">
+                     <button class="btn btn-primary MT-3"   data-toggle="modal" data-target=".ANEXO" id="ANEXO" >Querys salvas</button>     
+                                <input type="button" id="Limpar" class="btn btn-danger mt-3" value="Limpar">
+                                                <table class="table mt-3 table-bordered table-hover"id="tabeladados">
+                                                    <thead id="cabecalho" style="background-color: rgb(146, 143, 139);" >
                                                         <!--colunas sendo preenchidas dinamicamento pelo js-->
                                                     </thead>
                                                     <tbody id="dados">
@@ -56,7 +54,7 @@
                     </div>
                 </div>
                 <!--quando u usuário selecionar uma query salva,o input abaixo irá receber o ID do registro para poder enviar para o servidor-->
-                <input type="hidden" id="ID_SQL">
+                <input type="hidden" id="ID_SQL" >
                 <!--modal para visualizar as query salva do usuario-->
 
 
@@ -64,7 +62,7 @@
                     aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content" style="padding: 30px;">
-                            <table class="table  table-hover">
+                            <table class="table  table-hover" id="query">
                                 <thead>
                                     <th>ID</th>
                                     <th>NOME</th>
@@ -73,7 +71,7 @@
                                     <th>DT_ALTERAÇÃO</th>
 
                                 </thead>
-                                <tbody id="query">
+                                <tbody >
                                     <!--Dados sendo inseridos dinamicamente pelo js-->
                                 </tbody>
                             </table>
@@ -180,24 +178,8 @@
                         </div>
                         <input type="hidden" id="sql_sql">
 
-                    </div>
-                    <script>
-                        let gerapdf = document.getElementById('gerapdf');
-                        gerapdf.addEventListener('click', () => {
-                    
-                            let tabela = document.getElementById('tabeladados');
-                            const options = {
-                                margin: [10, 10, 10, 10],
-                                filename: 'arquivo.pdf',
-                                html2canvas: { scale: 2 },
-                                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                            }
-                    
-                            html2pdf().set(options).from(tabela).save();
-                        });
-                    </script>
-                    
-                    <script src="/js/sql/DBE_explorer.js"></script>
-                    <script src="/js/sql/manipulaelementos.js"></script>
+                    </div>                  
                     <script src="/js/sql/buscatabela.js"></script>
+                    <script src="/js/sql/manipulaelementos.js"></script>
+                    <script type="module" src="/js/sql/DBE_explorer.js"></script>
                     <%- include('../partials/footer'); %>

@@ -23,15 +23,17 @@ class Ajax {
                                 title: ajax.responseText,
                                 icon: 'info'
                             }
+
                             ));
+
                             if(idform){
                                 new Tabela().LimpaInputs(idform)
                             }
                         barra_progresso.style.opacity = 0
 
                     } else {
-                        resolve(JSON.parse(ajax.responseText));
                         barra_progresso.style.opacity = 0
+                        resolve(JSON.parse(ajax.responseText));
 
                     }
 
@@ -39,7 +41,7 @@ class Ajax {
 
                     reject(
                         swal({
-                            title: ajax.responseText + 'Error',
+                            title: ajax.responseText + ajax.status + '  Error :',
                             icon: 'error'
                         }
                         ));

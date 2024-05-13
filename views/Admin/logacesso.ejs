@@ -1,5 +1,10 @@
 <%- include('../partials/head'); %>
-
+<style>
+  .tabela-wrapper {
+    max-height: 350px; 
+    overflow-y: auto; 
+  }
+</style>
 <!--Filtro e tabela-->
 <div class="grad" style="display: flex; height: auto;padding: 30px;">
     <% let filtro = P_USU.T_FILTRO %>
@@ -7,14 +12,8 @@
           <form  id="filtro" >
               <div class="form-group row">
                 <div class="col-sm-10">
-                    <label for="ID_TELA">ID da tela</label>
-                  <input type="text" placeholder="ID_TELA" id="ID_TELA" value="<%=filtro[0][0]%>" class="form-control"  >
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-10">
                     <label for="NOME_USU">Nome de usuário</label>
-                  <input type="text" placeholder="NOME_USU" id="NOME_USU" value="<%=filtro[0][1]%>" class="form-control"  >
+                  <input type="text" placeholder="NOME_USU" id="NOME_USU" value="<%=filtro[0][0]%>" class="form-control"  >
                 </div>
               </div>
               <div class="form-group row">
@@ -23,34 +22,39 @@
                     <label for="P_FIM">Fim</label>
                 </div>
                 <div class="col-sm-10" style="display: flex;">
-                   <input type="date" class="form-control"  id="P_INICIO">
-                   <input type="date" min="" class="form-control"  id="P_FIM">
+                   <input type="date" class="form-control"  id="P_INICIO" value="<%=filtro[0][1]%>">
+                   <input type="date" min="" class="form-control"  id="P_FIM" value="<%=filtro[0][2]%>">
                 </div>
               </div>
     <button id="Buscar" class="btn btn-warning">Buscar</button>
     <br>
     <%-include('../components/csv.ejs')%>
       </div> 
-      <div style="width: 100%;" >
-        <table class="table" style="width: 70%;min-height: 350px;" id="tabelatoken">
+      <div style="width: 100%;"  >
+        <div class="tabela-wrapper">
+
+        <table class="table tabelatoken" style="width: 70%;min-height: 350px;" id="tabelatoken">
           <thead>
             <tr>
-                <th>ID_USU</th>
-                <th>NOME_USU</th>
-                <th>TOKEN </th>
+                <th>ID SESSÃO</th>
+                <th>USUÁRIOS</th>
+                <th>DATA ENTRADA </th>
+                <th>DATA SAIDA </th>
             </tr>
           </thead>
-          <tbody  >
+          <tbody id="tbodytabelatoken" >
                  <!-- inserido pela requição ajax apos usar o filtro -->
           </tbody>
         </table>
+                  
+      </div>
         <table class="table" style="width: 70%;" id="tabeladados">
           <thead>
             <tr>
-                <th>ID_TELA</th>
-                <th>TELA_NOME</th>
-                <th>DT_ENTRADA </th>
-                <th>DT_SAIDA </th>
+                <th>ID TELA</th>
+                <th>TELA NOME</th>
+                <th>DATA ENTRADA </th>
+                <th>DATA SAIDA </th>
             </tr>
           </thead>
           <tbody id="tabela"   >

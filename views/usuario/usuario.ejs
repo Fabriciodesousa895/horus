@@ -75,13 +75,13 @@
 <% let filtro = P_USU.T_FILTRO %>
   <div style="width: 300px;height: 400px;">
       <form  >
-          <div class="form-group row">
-            <div class="col-sm-10">
-              <input type="text" placeholder="Nome" id="nome" value="<%=filtro[0][0]%>" class="form-control" id="inputEmail3" >
-            </div>
-          </div>
+
 
           <div class="form-group row">
+            <div class="col-sm-10">
+              <span>Usuário</span>
+              <input type="text" placeholder="Nome" id="nome" value="<%=filtro[0][0]%>" class="form-control"  >
+            </div>
             <p><span class="mt-2">Grupo</span></p>
             <div style="display: flex; flex-direction: row;">
              <input type="text" required  id="ID_GRUPO_F" style="width: 100px;margin-right: 8px;" class="form-control mt-2" placeholder="Cod. grupo">
@@ -123,28 +123,17 @@
             </div>
           </div>
         </form>
-
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Ações
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" data-toggle="modal" data-target="#modalExemplo"> Copiar conf. usuário</a>
-            <a class="dropdown-item" href="#">Outra ação</a>
-            <a class="dropdown-item" href="#">Alguma coisa aqui</a>
-          </div>
-        </div>
-
   </div> 
   
   <div style="width: 100%;" >
     <table class="table" style="width: 70%;" id="tabelausuario" >
+
       <thead>
         <tr>
           <th>Código</th>
           <th>Nome</th>
           <th>Grupo</th>
-          <th>Dt inclusão</th>
+          <th>Dt inclusão <div style="margin-left: 30px;" class="btn btn-secondary Count" >0</div></th>
         </tr>
       </thead>
       <tbody>
@@ -158,7 +147,7 @@
 
 
 <!-- Botão para acionar modal de acao de copiar usuario -->
-<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="IDCOPIASUSU" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -169,20 +158,16 @@
       </div>
       <div class="modal-body">
         <div class="form-group row">
-          <!-- <div class="progress" id="PROGRE" style="opacity: 0;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated"  role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-          </div> -->
-
           <p><span class="mt-2">Usuário de origem</span></p>
           <div style="display: flex; flex-direction: row;">
-           <input type="number" required id="ID_FORNECE" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
-           <input type="text" readonly id="NOME_USU_F" class="form-control mt-2 insert" placeholder="Nome do usuario" >
+           <input type="number" required id="ID_FORNECE" style="width: 100px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
+           <input type="text"  id="NOME_USU_F" class="form-control mt-2 insert" placeholder="Nome do usuario" >
           </div>
 
           <p><span class="mt-2">Usuário que ira receber a copia</span></p>
           <div style="display: flex; flex-direction: row;">
-           <input type="number" required id="ID_RECEBE" style="width: 150px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
-           <input type="text" readonly id="NOME_USU_R" class="form-control mt-2 insert" placeholder="Nome do usuario" >
+           <input type="number" required id="ID_RECEBE" style="width: 100px;margin-right: 8px;" class="form-control mt-2 insert" placeholder="Cod. usuário">
+           <input type="text"  id="NOME_USU_R" class="form-control mt-2 insert" placeholder="Nome do usuario" >
           </div>
 
 
@@ -195,33 +180,8 @@
     </div>
   </div>
 </div>
-
-<script>
-  // inserindo a imagem selecionada pelo usuário
-  let input = document.getElementById('img')
-
-  input.addEventListener('change', (e) => {
-    const img = e.target || window.event.srcElement;
-    const files = img.files;
-
-    if (files.length > 0) {
-      const fr = new FileReader();
-      fr.onload = () => {
-        document.getElementById('inputimg').src = fr.result;
-        const binaryData = fr.result.split(',')[1]; 
-        console.log(binaryData);
-        document.getElementById('BLOB').value = binaryData;
-      };
-      fr.readAsDataURL(files[0]);
-      
-    }
-  });
-</script>
-
 <script type="module" src="/js/usuario/filtro_usuario.js"></script>
-<script src="/js/usuario/copia_usuario.js"></script>
-<script src="/js/usuario/input_copia.js"></script>
-<script src="/js/usuario/input_copia2.js"></script>
+<script type="module" src="/js/usuario/copia_usuario.js"></script>
 <script type="module" src="/js/usuario/usuario_http.js"></script>
 
 

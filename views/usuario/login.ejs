@@ -29,6 +29,59 @@
         height: 60px;
         border: none;
     }
+    .input-container {
+  position: relative;
+  margin: 50px auto;
+  width: 200px;
+}
+
+.input-container input[type="text"] ,
+.input-container input[type="password"] 
+{
+  font-size: 20px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container .label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ccc;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-container input[type="text"]:focus ~ .label,
+.input-container input[type="text"]:valid ~ .label 
+.input-container input[type="password"]:focus ~ .label,
+.input-container input[type="password"]:valid ~ .label {
+  top: -20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-container .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #333;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.input-container input[type="text"]:focus ~ .underline,
+.input-container input[type="text"]:valid ~ .underline,
+.input-container input[type="password"]:focus ~ .underline,
+.input-container input[type="password"]:valid ~ .underline {
+  transform: scaleX(1);
+}
 
 </style>
 <style>
@@ -41,14 +94,19 @@
     }
 </style>
 
-<div style="width: 400px;border: 2px solid black;padding: 30px;">
+<div style="width: 400px;border: 1px solid rgb(100, 95, 95);padding: 30px;border-radius: 10px;">
     <form class="needs-validation" novalidate>
-        <span>Usuário</span>
-        <input type="text" id="USU_NOME" placeholder="Nome do usuário"  class="form-control" required>
-        <span>Senha</span>
-        <input type="password" id="USU_SENHA" placeholder="Senha" class="form-control" required>
-
-        <button id="btn" class="btn btn-warning mt-2">Entrar</button>
+      <div class="input-container">
+        <input type="text" id="USU_NOME" required="">
+        <label for="input" class="label">Usuário</label>
+        <div class="underline"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" id="USU_SENHA" required="" >
+        <label for="input" class="label">Senha</label>
+        <div class="underline"></div>
+      </div>
+    <button id="btn" class="btn btn-primary">Entrar</button>
     </form>
 </div>
 

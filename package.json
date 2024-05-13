@@ -1,6 +1,6 @@
 {
   "name": "horus",
-  "version": "1.0.0",
+  "version": "1.1.8",
   "description": "=> Rota universal <=",
   "main": "index.js",
   "dependencies": {
@@ -295,8 +295,11 @@
     "yauzl": "^2.4.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cannon":" npx autocannon -c 5 -a 100 http://localhost:80/select/universal",
+    "start":" node index.js",
+    "restart":" npm restart "
   },
-  "author": "",
+  "author": "Fabricio_m1000",
   "license": "ISC"
 }

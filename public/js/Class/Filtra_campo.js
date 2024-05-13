@@ -18,22 +18,19 @@ class filtra_campo{
                     CAMP_2: '',
                     TABELA: this.TABELA
                 },
-                mensage_error: 'Houve um erro ao consultar registros',
-                rows: true,
                 USU_LOGADO: false
             };
             let JsonData = JSON.stringify(data);
             ajax.onload = function () {
                 if (ajax.status === 200) {
                     let arraydedados = JSON.parse(ajax.responseText);
-                    let dados = arraydedados[0][0][0];
-                    if (dados) {
-                        CAMP_1.value = dados[0];
-                        CAMP_2.value = dados[1];
+                    if (arraydedados) {
+                        CAMP_1.value = arraydedados[0][0];
+                        CAMP_2.value = arraydedados[0][1];
                         
                     } else {
                         CAMP_1.value = '';
-                        CAMP_2.value = '';
+                        CAMP_2.value = 'nao';
                     }
                 } else {
                     swal({
@@ -48,7 +45,6 @@ class filtra_campo{
 
 
             CAMP_2.addEventListener('change',()=>{
-                console.log('..testando...')
                 let ajax = new XMLHttpRequest();
                 ajax.open('POST', '/select/universal');
                 ajax.setRequestHeader('Content-type', 'application/json');
@@ -66,13 +62,12 @@ class filtra_campo{
                 let JsonData = JSON.stringify(data);
                 ajax.onload = function () {
                     if (ajax.status === 200) {
-                        let arraydedados = JSON.parse(ajax.responseText);
-                console.log(arraydedados)
 
-                        let dados = arraydedados[0][0][0];
-                        if (dados) {
-                                CAMP_1.value = dados[0];
-                                CAMP_2.value = dados[1];
+                let arraydedados = JSON.parse(ajax.responseText);
+
+                        if (arraydedados) {
+                            CAMP_1.value = arraydedados[0][0];
+                            CAMP_2.value = arraydedados[0][1];
                      
                        
                         } else {

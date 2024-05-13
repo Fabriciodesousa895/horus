@@ -1,6 +1,11 @@
 'use strict'
 import { filtra_campo } from "../Class/Filtra_campo.js";
 import { Ajax } from "../Class/Ajax.js";
+let PARC_CEP = document.getElementById('PARC_CEP')
+let complemento = document.getElementById('PARC_COMP')
+let ID_CID = document.getElementById('ID_CID')
+let bairro = document.getElementById('PARC_BAIRRO')
+let UF = document.getElementById('ESTADO')
 
 
 new filtra_campo('ID_CID', 'NOME_CID', 'CIDADE').Filtra()
@@ -104,6 +109,36 @@ function Deletar (e){
     
 
 }
+PARC_CEP.addEventListener('change', async() => {
+    let CepFormatado = PARC_CEP.value.replace(/\D/g, "");
+    let ValApi = {sql:`SELECT FILT_API FROM DUAL`,binds:{}};
+    new Ajax('/select/universal',ValApi).RequisicaoAjax(false).then(async(response)=>{
+        if (response[0] == 'S' ){
+            if (CepFormatado.length == 8) {
+            let data = {CEP:CepFormatado}
+              await  new Ajax('/api/via/cep', data).RequisicaoAjax(false)
+                await   new  Ajax('/select/universal',{sql:`SELECT FILT_CEP(:CEP) FROM DUAL`,binds:{CEP:CepFormatado}}).RequisicaoAjax(false)
+                    .then((response)=>{
+                      if(response.length != 0){
+                        let event = new Event('change')
+                        UF.value = response[0][2]
+                        ID_CID.value = response[0][0]
+                        bairro.value = response[0][1]
+                        complemento.value = response[0][3];
+                        ID_CID.dispatchEvent(event);
+                      }
+      })       
+   
+            } else {
+                swal({
+                    info: 'info',
+                    title: 'Cep deve conter 8 digitos!'
+                })
+            }
+        }
+    });
+
+})
 
 
 document.getElementById('EDITAR').addEventListener('click', Salvar, false)

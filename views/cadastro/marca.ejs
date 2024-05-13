@@ -9,10 +9,8 @@
           <div class="container" style="padding: 40px;" >
               <div class="row">
                 <div class="col-sm"  >
-                    <label for="GRP_NOME">Nome</label>
-                   <input type="text" class="form-control"  id="GRP_NOME" required>
-                    <label for="GRP_DESC">Descrição</label>
-                   <input type="text" class="form-control"  id="GRP_DESC" required>
+                    <label for="NCM_DESC">Descrição</label>
+                   <input type="text" class="form-control"  id="NOME_DESC" required>
                 </div>
               </div>
           
@@ -60,17 +58,13 @@
     <div class="form-group row">
 
         <div class="col-sm-10">
-            <span >Código do grupo</span>
-            <input type="number"  class="form-control" placeholder="ID" name="" id="ID_GRUPO" value="<%=filtro[0][0]%>">
+            <span >Código marca</span>
+            <input type="number"  class="form-control" placeholder="ID" name="" id="ID_MARCA" value="<%=filtro[0][0]%>">
         </div>
  
         <div class="col-sm-10">
-            <span >Nome</span>
-            <input type="text"  class="form-control" placeholder="Nome" name="" id="NOME_GRUPO" value="<%=filtro[0][1]%>">
-        </div>
-        <div class="col-sm-10">
             <span >Descrição</span>
-            <input type="text"  class="form-control" placeholder="Descrição" name="" id="DESCRICAO_GRUPO" value="<%=filtro[0][1]%>">
+            <input type="text"  class="form-control" placeholder="Descrição" name="" id="NOME" value="<%=filtro[0][1]%>">
         </div>
 
     </div>
@@ -93,5 +87,5 @@
   </table>
 </div>
 
-<script type="module" src="/js/cadastro/grupo.js"></script>
+<script type="module" src="/js/cadastro/marca.js"></script>
 <%-include('../partials/footer')%>

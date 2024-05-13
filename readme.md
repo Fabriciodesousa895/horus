@@ -144,6 +144,41 @@ import { SalvaFiltro } from "../Class/Tabela.js";
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
+app.use(async (req, res, next) => {
+  if(req.method == 'GET' && req.url !== '/certificado/validacao')
+  console.log('Entre cliente e servidorr!');
+  if (V_truefalse) {
+    try {
+      fs.readFile('licenca.json', 'utf-8', async (err, data) => {
+        if (err) {
+          res.json('Houve um erro ao ler o certificado da aplicação, por favor contactar setor de TI');
+          console.log('err');
+          return;
+        } else {
+          // faz uma requisição get para o gerenciador de licença passando o json com os dados
+          try {
+            const response = await axios.get(`http://localhost:8030/licenca/${data}`);
+            let response_data = response.data;
+            // validando o resultado da requisição
+            next()
+            console.log(response_data)
+          } catch (error) {
+              res.status(500).redirect('/certificado/validacao' );
+                  
+          }
+
+        }
+      });
+    } catch (error) {
+      let log = error;
+      criarlogtxt(log, req.url);
+      console.log('Erro ao se comunicar com o gerenciador de licenças: ', error);
+      res.status(500).send('Internal Server Error');
+    }
+  } else {
+    next();
+  }
+});
 
 
 

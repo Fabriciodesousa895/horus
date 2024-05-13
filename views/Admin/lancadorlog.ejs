@@ -1,0 +1,74 @@
+<%- include('../partials/head'); %>
+<style>
+    .dragging{
+        background-color: aquamarine;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-4">
+        <span >Nome da Tablela para receber o LOG</span>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Nome da Tablela para receber o LOG"    id="TABELA_LOG" required>
+        </div>
+        <span >Nome da trigger</span>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Nome da trigger"    id="NOME_TRIGGER" required>
+        </div>
+        <span >Nome da tabela</span>
+        <div style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" placeholder="Nome da Tabela"    id="NOME_TABELA" required>
+        </div>
+        <table class="table table-hover mt-2 table-bordered" id="dadostables">
+            <thead>
+                <tr>
+                    <td >Campo</td>
+                </tr>
+            </thead>
+            <tbody >
+
+            </tbody>
+        </table>
+    <button class="btn btn-warning" id="GerarLog">Gerar Log</button>
+    </div>
+    <div class="col-sm-4">
+        <span><strong><h5>Campos que receberão o log</h5></strong> </span>
+
+        <table class="table table-hover table-bordered"  id="TableCamposLog">
+            <thead>
+                <tr>
+                    <td>Campo</td>
+                </tr>
+            </thead>
+            <tbody id="TbodyCam">
+
+            </tbody>
+        </table>
+
+        <span><strong><h5>Campo que se refere ao ID do registro</h5></strong> </span>
+
+        <table class="table table-hover table-bordered" id="ID_REGISTRO" >
+            <thead>
+                <tr>
+                    <td>Campo</td>
+                </tr>
+            </thead>
+            <tbody id="TbobyRegistro" >
+
+            </tbody>
+        </table>
+        <span><strong><h5>Campo que se refere ao ID do usuário de alteração</h5></strong> </span>
+
+        <table class="table table-hover" id="ID_USU_ALT" >
+            <thead>
+                <tr>
+                    <td>Campo</td>
+                </tr>
+            </thead>
+            <tbody id="TbodyAlt" >
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="module" src="/js/Admin/lancadorlog.js"></script>
+<%- include('../partials/footer'); %>

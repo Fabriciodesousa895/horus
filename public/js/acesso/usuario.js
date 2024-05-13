@@ -2,7 +2,6 @@
 let tbody = document.getElementById('tabelaacesso');
 let ID = document.getElementById('ID_USU');
 let PROGRESSO = document.getElementById('PROGRESSO');
-let TABELA = document.getElementById('TABELA');
 
 
 tbody.addEventListener('change', (e) => {
@@ -11,17 +10,11 @@ tbody.addEventListener('change', (e) => {
     if (!cell) {
         return; // Não é uma célula com checkbox
     }
-
-    let rowIndex = cell.parentNode.rowIndex;
     let cellIndex = cell.cellIndex;
-
-    // Verifica se a célula contém um checkbox (a partir da terceira coluna)
+        // Verifica se a célula contém um checkbox (a partir da terceira coluna)
     if (cellIndex >= 2) {
         // Acessa a linha, a primeira célula da linha (ID_TELA)
-        let elementopai = cell.parentNode;
-        let conteudocelula = elementopai.cells[0];
-        let ID_TELA = conteudocelula.textContent;
-
+        let ID_TELA = (cell.parentNode.cells[0]).textContent;
         // Verifica se o checkbox está marcado (true) e recebe S; ou desmarcado (false) recebe N
         let isChecked = (checkbox.checked ? 'S' : 'N');
         let POSICAO;
@@ -40,9 +33,6 @@ tbody.addEventListener('change', (e) => {
                     break;
                 case 5:
                     POSICAO = 'CFU_CONSULTA'
-                    break;
-                case 6:
-                    POSICAO = 'CFU_ANEXA'
                     break;
                 
                 default:
@@ -64,16 +54,11 @@ tbody.addEventListener('change', (e) => {
                     POSICAO = 'GRUP_CONSULTA'
                     break;
                 case 6:
-                    POSICAO = 'GRP_ANEXA'
-                    break;
                 
                 default:
                     break;
              }
         }
-
-
-
         let objeto = {
             ID_TELA: ID_TELA,
             VALOR: isChecked,
@@ -81,7 +66,6 @@ tbody.addEventListener('change', (e) => {
             ID:ID.value,
             TABELA: TABELA.value
         };
-        console.log(objeto);
         let ajax = new XMLHttpRequest();
         let jsonData = JSON.stringify(objeto);
         ajax.open('POST', '/usuario_acesso');
@@ -94,10 +78,12 @@ tbody.addEventListener('change', (e) => {
         PROGRESSO.style.opacity = '0'
            }else{
             swal({
-                tiltle: ajax.responseText,
+                title: ajax.responseText,
                 icon: 'error'
             })
            }
+           PROGRESSO.style.opacity = '0'
+
         }
         ajax.send(jsonData)
     }

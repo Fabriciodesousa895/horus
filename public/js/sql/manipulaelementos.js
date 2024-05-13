@@ -10,10 +10,7 @@ let NOME_TABLE = document.getElementById('NOME_TABLE');
 let DESCRICAO = document.getElementById('DESCRICAO');
 let SQL = ''
 let count = 0
-//Quando o usuário selecionar Numero unico no select
-select.addEventListener('change', () => {
-    textarea.value += select.value;
-});
+
 //Quando o usuário selecionar o tipo de dado do campo
 TIPO.addEventListener('change', () => {
     if (TIPO.value == ' INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY') {

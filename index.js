@@ -1,18 +1,14 @@
 const express = require("express");
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server)
 const axios = require('axios');
-const EventEmitter = require('node:events');
-
-// const eventEmitter = new EventEmitter();
-// eventEmitter.on('start', () => {
-//   console.log('started');
-// });
-// eventEmitter.emit('start');
-
+let packge = require('./package.json');
 require('dotenv').config()
 'use strict';
 //view engine
 app.set("view engine", "ejs");
+
 //static public
 app.use(express.static("public"));
 //body-parser
@@ -36,8 +32,6 @@ const storage = multer.diskStorage({
     callback(null, `${time}__${file.originalname}`);
   }
 })
-const upload = multer({ storage: storage })
-
 const oracledb = require('oracledb');
 
 const dbconfig = {
@@ -70,68 +64,34 @@ const options_objeto = {
 
 
 
+
+//Esta função recebe o objeto que contém um objeto  com os valores da licença que estão hasheados 
+function Deshashea(stringObject) {
+  let stringhash = (stringObject).substring(0, stringObject.length - 1)
+  let Posisao = stringObject.substring(stringObject.length - 2, stringObject.length)
+  let resolvestring = '';
+  for (let i = 1; i < stringhash.length; i++) {
+    if (i % 2 == 0) { resolvestring += stringObject[i] }
+  };
+  return `${Posisao.substring(2, 1)}${resolvestring}${Posisao.substring(1, 1)}`
+}
+const upload = multer({ storage: storage })
+
+
 //configurando cors
 const cors = require('cors');
 let urlencodedParser = bodyparser.urlencoded({ extended: false });
 app.use(cors());
 //a verificação da licença será feita a cada 60 minutos pelo servidor
 const fs = require('fs');
-let V_truefalse = false;
-function toggleValue() {
-  setInterval(() => {
-    V_truefalse = !V_truefalse;
-  }, 80000);
-}
-toggleValue();
-setInterval(() => { console.log(V_truefalse); }, 50000)
-//no middleware é preciso validar a licença da aplicação que está rodando,na raiz da aplicação existe um arquivo.json que informaos dados da licença
-app.use(async (req, res, next) => {
-  // console.log(response.data)
-  console.log('Entre cliente e servidor!');
-  let url = req.path;
-  if (V_truefalse) {
-    try {
-      fs.readFile('licenca.json', 'utf-8', async (err, data) => {
-        if (err) {
-          res.json('Houve um erro ao ler o certificado da aplicação, por favor contactar setor de TI');
-          console.log(err);
-          return;
-        } else {
-          // faz uma requisição get para o gerenciador de licença passando o json com os dados
-          const response = await axios.get(`http://localhost:8030/licenca/${data}`);
-          let response_data = response.data;
-          // validando o resultado da requisição
-          if (response_data[0].status === 200) {
-            // aplicação segue o curso,pois certificado está tubo certo
-            next();
-            return;
-          } else {
-            //quando o status for <> de 200,o usuário será redirecionado para uma rota get passando a url e a mensagem para a rota
-            // res.redirect(`/certificado/validacao/${url}/${response_data[1].menssage}`);
-            // res.redirect(`/certificado/validacao}`);
-            // console.log(url + '<br>' + response_data[1].menssage);
-            res.json(response_data[1].menssage)
-
-          }
-        }
-      });
-    } catch (error) {
-      let log = error;
-      criarlogtxt(log, req.url);
-      console.log('Erro ao se comunicar com o gerenciador de licenças: ', error);
-      res.status(500).send('Internal Server Error');
-    }
-  } else {
-    next();
-  }
-});
+const { split, stubString, toInteger } = require("lodash");
 
 
 app.get('/certificado/validacao', (req, res) => {
   let url = req.params.url;
-  let menssage = req.params.menssage;
-  res.render('certificado', { url, menssage });
-  console.log(url + '<br>' + menssage);
+  console.log(url + '<br>');
+
+  res.render('certificado', { url });
 })
 //gera log de erros do servidor no geral
 function criarlogtxt(log, url) {
@@ -147,50 +107,50 @@ let inactivityTimer;// Função para resetar o temporizador de inatividade
 let TempoSessao = 0;
 async function resetInactivityTimer(token) {
   if (inactivityTimer) {
-      clearTimeout(inactivityTimer);
+    clearTimeout(inactivityTimer);
   }
   let sql = `SELECT TEMPO_S_INATIVA FROM PREFERENCES`;
   let binds = {};
   let consulta = await conectar(sql, binds);
   TempoSessao = consulta.rows[0][0];
   inactivityTimer = setTimeout(() => {
-      console.log('Usuário inativo por 5 minuto.');
-      try {
-          let sql = `BEGIN UPDATE LOG_LOGIN SET DT_SAIDA = SYSDATE,KILL = 'S' WHERE TOKEN = :TOKEN; COMMIT; END;`;
-          let binds = {TOKEN:token};
-          conectar(sql, binds);
-             } catch (error) {
-          let log = error;
-          console.log(error);
-      }
-  },  TempoSessao);
+    console.log('Usuário inativo por 5 minuto.');
+    try {
+      let sql = `BEGIN UPDATE LOG_LOGIN SET DT_SAIDA = SYSDATE,KILL = 'S' WHERE TOKEN = :TOKEN; COMMIT; END;`;
+      let binds = { TOKEN: token };
+      conectar(sql, binds);
+    } catch (error) {
+      let log = error;
+      console.log(error);
+    }
+  }, TempoSessao);
 }
 
 //middleware de autenticação;
 async function auth(req, res, next) {
   let token = req.cookies.jwt;
-resetInactivityTimer(token)
+  resetInactivityTimer(token)
 
   //Verificando se o metodo é get
-    try {
-      //SE kill for S a sessão é
-      let sql = `SELECT KILL FROM LOG_LOGIN WHERE TOKEN = :TOKEN `;
-      let binds = { TOKEN: token };
-      let result = await conectarbd(sql, binds, options_objeto);
-      let KILL
-      result.forEach((e) => { KILL = e.KILL });
-      console.log(KILL);
-      if (KILL == 'S') {
+  try {
+    //SE kill for S a sessão é
+    let sql = `SELECT KILL FROM LOG_LOGIN WHERE TOKEN = :TOKEN `;
+    let binds = { TOKEN: token };
+    let result = await conectarbd(sql, binds, options_objeto);
+    let KILL
+    result.forEach((e) => { KILL = e.KILL });
+    if (KILL == 'S') {
 
-        res.redirect('/login');
-        console.log('Sessão encerrada');
+      // res.redirect('/login');
+      res.send('Token inválido!')
 
-      }
-      next()
-      return;
-    } catch (error) {
-      console.log(error);
+
     }
+    next()
+    return;
+  } catch (error) {
+    console.log(error);
+  }
 
 
 
@@ -210,7 +170,60 @@ resetInactivityTimer(token)
   }
 }
 
+app.get('/AdministracaoServidor', auth, async (req, res) => {
+  let tokenn = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(324, tokenn);
+    let P_USU = await permi_usu(324, tokenn);
+    let Sql = `SELECT NVL(USU_ALT_USU,'N') AS USU_ALT_USU ,TEMPO_S_INATIVA,NVL(VAL_CGC,'N') AS VAL_CGC,CORRIGE_CID,VIA_CEP,D_USU_INAT FROM PREFERENCES WHERE ROWNUM < 2`;
+    let Sql_results = await conectarbd(Sql, [], options_objeto);
+    let Dadoslicenca = {}
+    let Token_licenca
+    fs.readFile('licenca.json', 'utf-8', async (err, data) => {
+      JSON.parse(data).forEach((e) => {
+        Token_licenca = e.token;
+      })
+      let tokensplit = split(atob(Token_licenca), '=')
+      Dadoslicenca['DT_LIMITE'] = tokensplit[0];
+      Dadoslicenca['SESSOES'] = tokensplit[1];
+      Dadoslicenca['CNPJ'] = tokensplit[2];
+      Dadoslicenca['USUER_BANCO'] = process.env.SYSTEM;
+      Dadoslicenca['RAZAO_SOCIAL'] = tokensplit[3];
+      Dadoslicenca['V_NODE'] = process.version;
+      Dadoslicenca['V_OS'] = process.platform;
+      Dadoslicenca['V_APP'] = packge.version;
 
+      console.log(Sql_results)
+      Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/AdministracaoServidor', { P_USU, Dadoslicenca, Sql_results })
+
+    })
+
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.send('Error:' + error);
+  }
+})
+app.post('/AtualizaLicenca', (req, res) => {
+  let ArrayToken = []
+  let Token = {}
+  Token['token'] = Deshashea(req.body.Token)
+  ArrayToken.push(Token)
+  let Token64 = atob(Deshashea(req.body.Token))
+  try {
+    console.log(isNaN(Token64.substring(5, 7)))
+    if (Token64.length < 40 || isNaN(Token64.substring(0, 4)) || isNaN(Token64.substring(5, 7)) || toInteger(Token64.substring(5, 7)) > 12) {
+      return res.status(500).send('Verifique o token,estrutura inválida!');
+
+    } else {
+      atob(Deshashea(req.body.Token));
+      fs.writeFileSync('licenca.json', JSON.stringify(ArrayToken));
+      return res.send('certificado alterado com sucesso');
+    }
+  } catch (error) {
+    res.status(500).send('Error ao atualizar o certificado,verifique seu token')
+  }
+})
 
 //login
 app.get('/login', (req, res) => {
@@ -225,53 +238,99 @@ app.post('/login', async (req, res) => {
   let result = await conectarbd(sql, binds, options);
   //Verifica se há um token,caso haja é finalizado a sessão
   let TOKEN = req.cookies.jwt;
-  if (TOKEN) {
-    res.clearCookie("jwt");
-    let sql2 = `BEGIN UPDATE LOG_LOGIN SET DT_SAIDA = SYSDATE WHERE TOKEN = :TOKEN; COMMIT; END;`;
-    let binds2 = { TOKEN: TOKEN }
-    conectar(sql2, binds2)
-  }
-  // Verifica se o resultado está vazio (nenhum usuário encontrado)
-  if (result.length === 0) {
-    return res.status(404).send('Usuário não encontrado ou está inativo');
-  }
-
-  let senha_salva = result[0][0];
-  let ID_USU = result[0][1];
-
-  // Valida a senha
+  // t
   try {
-    const match = await bycrypt.compare(USU_SENHA, senha_salva);
-    if (match) {
-      // Gera o token da sessão
-      let ID_USUARIO = ID_USU;
-      jwt.sign({ ID_USUARIO }, process.env.SECRET, { expiresIn: '10h' }, (error, token) => {
-        if (error) {
-          return res.status(500).send('Ocorreu um erro ao gerar o token da sessão!');
-        }
-        res.status(200).cookie("jwt", token, { httpOnly: true, maxAge: 36000000 }).send();
-        try {
-          let sql = `BEGIN INSERT INTO LOG_LOGIN (TOKEN,IP_ADRESS,ID_USU,DT_ENTRADA,NAVEGADOR,SO_COMPUTADOR)VALUES(:TOKEN,:IP_ADRESS,:ID_USU,SYSDATE,:NAVEGADOR,:SO_COMPUTADOR); COMMIT; END;`
+    fs.readFile('licenca.json', 'utf-8', async (err, data) => {
+      if (err) {
+        res.status(500).send('Houve um erro ao ler o token da licença,contactar o departamento de TI')
+      } else {
+        let tokenLicenca;
+        Object(JSON.parse(data)).forEach((key) => {
+          tokenLicenca = key.token;
+        })
 
-          let binds = {
-            TOKEN: token,
-            IP_ADRESS: req.headers['x-forwarded-for'],
-            NAVEGADOR: req.headers['sec-ch-ua'],
-            SO_COMPUTADOR: req.headers['sec-ch-ua-platform'],
-            ID_USU: ID_USUARIO
+        if (tokenLicenca == undefined || tokenLicenca == '' || tokenLicenca.length < 40) {
+          res.status(500).send('Houve um erro ao ler o token da licença,contactar o departamento de TI')
+        } else {
+          let TokenSplit = split(atob(tokenLicenca), '=')
+          let DataAtual = new Date();
+          let ano = DataAtual.getFullYear();
+          let mes = (DataAtual.getMonth() + 1).toString().padStart(2, '0');
+          let dia = DataAtual.getDate().toString().padStart(2, '0');
+
+          let DataFormatada = `${dia}/${mes}/${ano}`;
+
+          if (TokenSplit[0] < new Date()) {
+            console.log(new Date())
+            return res.status(500).send(`Licenca vencida,favor contactar setor de TI.${TokenSplit[0]} -- ${DataFormatada}`,)
+          } else {
+            //Se já houver um token de sessao é finalizado a sessão anterior
+            if (TOKEN) {
+              res.clearCookie("jwt");
+              let sql2 = `BEGIN UPDATE LOG_LOGIN SET DT_SAIDA = SYSDATE WHERE TOKEN = :TOKEN; COMMIT; END;`;
+              let binds2 = { TOKEN: TOKEN }
+              conectar(sql2, binds2);
+            }
+            let SqlNum = `  SELECT COUNT(*) AS COUNT
+          FROM LOG_lOGIN
+          WHERE DT_SAIDA IS NULL
+          AND KILL IS NULL
+          AND DT_ENTRADA >=  SYSDATE - INTERVAL '10' HOUR`;
+            let NumSession = await conectar(SqlNum, []);
+            let LimitSession = Math.ceil(parseInt(TokenSplit[1]) + parseFloat(TokenSplit[1] * 5 / 100))
+            //Valida a quantidade de sessoes ativas 
+            if (NumSession.rows[0][0] >= LimitSession) {
+              //O limite de sessoes foi atingido
+              return res.status(500).send('Excedido o limite de usuários logados')
+            } else {
+              // Verifica se o resultado está vazio (nenhum usuário encontrado)
+              if (result.length === 0) {
+                return res.status(404).send('Usuário não encontrado ou está inativo');
+              }
+              // Valida a senha
+              try {
+                const match = await bycrypt.compare(USU_SENHA, result[0][0]);
+                if (match) {
+                  // Gera o token da sessão
+                  let ID_USUARIO = result[0][1];
+                  jwt.sign({ ID_USUARIO }, process.env.SECRET, { expiresIn: '10h' }, (error, token) => {
+                    if (error) {
+                      return res.status(500).send('Ocorreu um erro ao gerar o token da sessão!');
+                    }
+                    res.status(200).cookie("jwt", token, { httpOnly: true, maxAge: 36000000 }).send();
+                    try {
+                      let sql = `BEGIN INSERT INTO LOG_LOGIN (TOKEN,IP_ADRESS,ID_USU,DT_ENTRADA,NAVEGADOR,SO_COMPUTADOR)VALUES(:TOKEN,:IP_ADRESS,:ID_USU,SYSDATE,:NAVEGADOR,:SO_COMPUTADOR); COMMIT; END;`
+
+                      let binds = {
+                        TOKEN: token,
+                        IP_ADRESS: req.headers['x-forwarded-for'],
+                        NAVEGADOR: req.headers['sec-ch-ua'],
+                        SO_COMPUTADOR: req.headers['sec-ch-ua-platform'],
+                        ID_USU: ID_USUARIO
+                      }
+                      conectar(sql, binds);
+                    } catch (error) {
+                      res.status(500).send('Error ', error);
+                      console.log(error);
+                    }
+                  });
+                } else {
+                  return res.status(401).send('Senha inválida, verifique sua senha e tente novamente!');
+                }
+              } catch (error) {
+                let log = error;
+                criarlogtxt(log, req.url);
+                res.status(500).send(error);
+              }
+            }
+
           }
-          conectar(sql, binds);
-        } catch (error) {
-          console.log(error)
         }
-      });
-    } else {
-      return res.status(401).send('Senha inválida, verifique sua senha e tente novamente!');
-    }
+      }
+    });
+
   } catch (error) {
-    let log = error;
-    criarlogtxt(log, req.url);
-    res.status(500).send(error);
+    res.status(500).send('Houve um erro ao ler o token da licença,contactar o departamento de TI')
   }
 });
 
@@ -367,10 +426,6 @@ function permi_usu(ID_TELA, token) {
           ELSE 'N'
           END AS INCLUI,
           U.USU_ADM,
-          CASE
-          WHEN  AN.CFU_ANEXA = 'S' OR AG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S' THEN 'S'
-          ELSE 'N'
-          END AS ANEXA,
           U.PATH_IMG AS PATH_IMG,
           U.USU_NOME AS USU_NOME
           
@@ -413,19 +468,6 @@ function permi_usu(ID_TELA, token) {
           WHERE ID_USU  = :P_ID_USU
           AND ID_TELA = :P_ID_TELA
       ) GIN,
-      (
-      SELECT CFU_ANEXA
-      FROM CONFIG_USU_TELA
-      WHERE ID_USU = :P_ID_USU
-      AND ID_TELA = :P_ID_TELA
-  ) AN,     
-   (
-    SELECT T.GRP_ANEXA 
-    FROM CONFIG_GRUPO_TELA T 
-    INNER JOIN USU_USUARIO U ON U.ID_GRUPO = T.ID_GRUPO
-    WHERE ID_USU  = :P_ID_USU
-    AND ID_TELA = :P_ID_TELA
-) AG,
       USU_USUARIO U
       WHERE U.ID_USU = :P_ID_USU`;
 
@@ -458,21 +500,28 @@ function permi_usu(ID_TELA, token) {
           ID_TELA: ID_TELA,
           ID_USU: data.ID_USUARIO
         }
+        let sql6 = `SELECT A.DESCRICAO,A.ID_JS 
+         FROM ACAO A
+         INNER JOIN USU_ACAO U ON  U.ID_ACAO =  A.ID
+         WHERE U.ID_USU = :ID_USU
+           AND EXECUTA = 'S'
+           AND U.ID_TELA = :ID_TELA
+           AND A.STATUS = 'A'`
         try {
           let result = await conectarbd(sql, binds, options_objeto);
           let result3 = await conectar(sql3, binds3, options);
           let result4 = await conectar(sql4, binds4, options);
           let result5 = await conectar(sql5, binds5, options);
+          let result6 = await conectarbd(sql6, binds5, options_objeto);
           let Objeto = {
             P_USU: result,
             T_NOME: result3.rows[0],
-            T_FILTRO: result5.rows
+            T_FILTRO: result5.rows,
+            T_ACAO: result6
           }
           resolve(Objeto);
-          console.log(Objeto)
         } catch (error) {
           let log = error;
-          console.log
           criarlogtxt(log);
           reject(error);
         }
@@ -496,21 +545,22 @@ app.get('/', auth, async (req, res) => {
 
   jwt.verify(token, process.env.SECRET, async (err, data) => {
     if (err) {
-      console.log('Token inválido');
-      return;
+      console.log('Token inválidfo');
+      res.send('Token inválidfo')
     } else {
       let USU_LOGADO = data.ID_USUARIO;
       try {
 
 
-        let Acesso = await valida_acesso(101, token);
+        let Acesso = await valida_acesso(323, token);
 
-        let P_USU = await permi_usu(101, token);
+        let P_USU = await permi_usu(323, token);
 
         res.render('index', { P_USU, })
       } catch (error) {
         let log = error;
-        console.error('Erro:', error);
+        console.error('Erro:', error)
+        res.status(500).send(error)
         // res.status(500).send('Erro ao obter os dados');
       }
 
@@ -532,7 +582,7 @@ app.get('/cadastro/cidades', auth, async (req, res) => {
   }
 })
 //monitor de sesão
-app.get('/monitordesessao',auth,async(req,res)=>{
+app.get('/monitordesessao', auth, async (req, res) => {
   let token = req.cookies.jwt;
   try {
     let Acesso = await valida_acesso(301, token);
@@ -555,8 +605,7 @@ app.get('/usuario', auth, async (req, res) => {
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
-    res.send(error);
-    console.log(error)
+    res.status(500).send(error)
   }
 });
 app.get('/dicionario/de/dados', auth, async (req, res) => {
@@ -589,7 +638,7 @@ app.get('/visualiza/dicionario/dados/procedure/:procedure_name', auth, async (re
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
-    res.send(error);
+    res.status(500).send(error)
   }
 });
 //Rota pára gráfico de usuario
@@ -599,11 +648,8 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
 
     let Acesso = await valida_acesso(118, token);
     let P_USU = await permi_usu(118, token);
-    let sql = `SELECT  COLUMN_NAME, CONSTRAINT_NAME,POSITION,TABLE_NAME
-    FROM ALL_CONS_COLUMNS TT,TABELA_BANCO TB
-    WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
-    AND TT.TABLE_NAME = TB.TAB_NOME
-    `
+
+
     let sql2 = `SELECT  TT.COLUMN_NAME, 
     TT.DATA_TYPE,
     TT.NULLABLE,
@@ -625,36 +671,35 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
                 FROM ALL_TRIGGERS 
                 WHERE TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`
     let Objeto = {}
-    const result = await conectar(sql, []);
+    let sql6 = `SELECT
+    UC.CONSTRAINT_NAME AS FK,
+    UCC.COLUMN_NAME AS FK_COLUNA,
+    CC.TABLE_NAME  AS FK_TABELA,
+    CCC.COLUMN_NAME AS COLUNA_REFRENCIADA   
+    FROM
+    USER_CONSTRAINTS UC
+    INNER JOIN   USER_CONS_COLUMNS UCC ON UC.CONSTRAINT_NAME = UCC.CONSTRAINT_NAME
+    INNER JOIN  USER_CONSTRAINTS CC ON UC.R_CONSTRAINT_NAME= CC.CONSTRAINT_NAME
+    INNER JOIN   USER_CONS_COLUMNS CCC ON CC.CONSTRAINT_NAME= CCC.CONSTRAINT_NAME 
+    WHERE    UC.CONSTRAINT_TYPE= 'R' 
+    AND    UC.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`
     const result2 = await conectar(sql2, []);
     const result3 = await conectar(sql3, []);
     const result4 = await conectar(sql4, []);
     const result5 = await conectar(sql5, []);
-    let CONSTRAINT = result.rows
+    const result6 = await conectar(sql6, []);
     let CAMPOS = result2.rows
     let INDEXES = result3.rows
     let TABELA_NOME = result4.rows
     let TRIGGRES = result5.rows
-    Objeto = { CAMPOS, CONSTRAINT, INDEXES, TABELA_NOME, TRIGGRES }
+    let FKS = result6.rows
+    Objeto = { CAMPOS, INDEXES, TABELA_NOME, TRIGGRES, FKS }
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
-    res.send(error);
-  }
-})
+    res.status(500).send(error)
 
-app.get('/dash_usuario', auth, urlencodedParser, async (req, res) => {
-  let token = req.cookies.jwt;
-  try {
-    let Acesso = await valida_acesso(121, token);
-    let P_USU = await permi_usu(121, token);
-
-    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/dash_usuario', { P_USU })
-  } catch (error) {
-    let log = error;
-    criarlogtxt(log, req.url);
-    res.send(error);
   }
 })
 //rota para a consulta e dados no lado do usuário DBE_explorer
@@ -668,7 +713,7 @@ app.get('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
-    res.send(error);
+    res.status(500).send(error)
   }
 })
 app.get('/cadastro/parceiro', auth, urlencodedParser, async (req, res) => {
@@ -680,22 +725,10 @@ app.get('/cadastro/parceiro', auth, urlencodedParser, async (req, res) => {
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
-    res.send(error);
+    res.status(500).send(error)
   }
 })
-app.get('/comunicado/usuarios', auth, urlencodedParser, async (req, res) => {
-  let token = req.cookies.jwt;
-  try {
-    let Acesso = await valida_acesso(224, token);
-    let P_USU = await permi_usu(224, token);
 
-    Acesso === 'N' ? res.send('Usuário nao tem,permissão!') : res.render('./Admin/comunicado', { P_USU })
-  } catch (error) {
-    let log = error;
-    criarlogtxt(log, req.url);
-    res.send(error);
-  }
-})
 //Rota para visuaçlizar trigger
 app.get('/visualiza/dicionario/dados/trigger/:trigger_name', urlencodedParser, auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -709,7 +742,8 @@ app.get('/visualiza/dicionario/dados/trigger/:trigger_name', urlencodedParser, a
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
-    res.send('Error:' + error)
+    res.status(500).send('Error', error)
+
   }
 })
 //Tela de log de acesso
@@ -723,13 +757,24 @@ app.get('/log/acesso', urlencodedParser, auth, async (req, res) => {
     let log = error;
     criarlogtxt(log, req.url);
     res.send('Error:' + error)
+    res.status(500).send('Error:' + error)
   }
-
-
+})
+app.get('/lancador/log', urlencodedParser, auth, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(341, token);
+    let P_USU = await permi_usu(341, token);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/lancadorlog', { P_USU })
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.send('Error:' + error)
+    res.status(500).send('Error:' + error)
+  }
 })
 //faz a conSulta sql que o usuario digitou 
 app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
-
   try {
     let result = await conectar(req.body.sql, []);
     let arrayobjetos = result.metaData
@@ -777,81 +822,7 @@ app.post('/beforeunload', async (req, res) => {
   })
 })
 
-app.post('/dash_usuario', urlencodedParser, async (req, res) => {
-  let ID_TELA = req.body.ID_TELA
-  let sql = `SELECT * FROM (SELECT  TL.T_NOME,COUNT(*) AS CONSULTA
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')
-    AND TL.TIPO <> 'V'
-    AND TL.ID_TELA = :ID_TELA
-GROUP BY  TL.T_NOME) CONSULTA,   
-(SELECT COUNT(*) AS ALTERA
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  AND TL.TIPO <> 'V'
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_ALTERA = 'S' OR CG.GRUP_ALTERA = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA
-  AND TL.TIPO <> 'V'
-    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S'  OR U.USU_ADM = 'S')) ALTERA,   
-(SELECT  COUNT(*) AS DELETA
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_DELETA = 'S' OR CG.GRUP_DELETA = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA
-  AND TL.TIPO <> 'V'
-    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S')) DELETA,
-    (SELECT COUNT(*) AS INCLUI
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_INCLUI = 'S' OR CG.GRUP_INCLUI = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA 
-  AND TL.TIPO <> 'V'
-    AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) INCLUI,
-(   SELECT  COUNT(*) AS ANEXA
-  FROM USU_USUARIO U
-  LEFT JOIN CONFIG_USU_TELA CU ON CU.ID_USU = U.ID_USU
-  LEFT JOIN T_TELA TL ON TL.ID_TELA = CU.ID_TELA
-  LEFT JOIN CONFIG_GRUPO_TELA CG ON CG.ID_GRUPO = U.ID_GRUPO
-  WHERE CG.ID_TELA = TL.ID_TELA
-    AND (CU.CFU_ANEXA = 'S' OR CG.GRP_ANEXA = 'S' OR U.USU_ADM = 'S')
-    AND TL.ID_TELA = :ID_TELA
-  AND TL.TIPO <> 'V'
-AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )) ANEXA `;
-  let binds = { ID_TELA: ID_TELA }
-  try {
 
-    let result = await conectar(sql, binds)
-
-    result.rows[0] == undefined ? res.status(500).send('Registro não encontrado!') : res.send(result.rows[0]);
-
-  } catch (error) {
-    res.send(error);
-    let log = error
-    try {
-      fs.appendFile('logdeerros.txt', `${log}`, { encoding: 'utf8' });
-      console.log('Arquivo editado com sucesso.');
-    } catch (err) {
-      let log = error;
-      criarlogtxt(log, req.url);
-      console.error('Erro ao escrever no arquivo:', err);
-    }
-    console.log(error);
-  }
-})
-//Salvando novo usuário
 app.post('/usuario', urlencodedParser, async (req, res) => {
 
   const saltRounds = 10;
@@ -965,10 +936,15 @@ WHERE U.ID_USU = :ID_USU AND ROWNUM = 1`;
 })
 //Lançador de tarefa
 app.get('/lancador/tarefa', auth, async (req, res) => {
-  let token = req.cookies.jwt;
-  let Acesso = await valida_acesso(241, token);
-  let P_USU = await permi_usu(241, token);
-  res.render('./Admin/lancadortarefa', { P_USU });
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(241, token);
+    let P_USU = await permi_usu(241, token);
+    res.render('./Admin/lancadortarefa', { P_USU });
+  } catch (error) {
+    'Error:'
+  }
+
 
 })
 app.post('/filtro_usuario', async (req, res) => {
@@ -1002,32 +978,19 @@ app.post('/filtro_usuario', async (req, res) => {
       try {
         let result = await conectarbd(sql, binds, options);
         let result2 = await conectarbd(sql2, binds2, options);
-        res.send(result[0][0])
+        res.send(result[0][0]);
+        console.log(binds);
+        console.log(result[0][0]);
       } catch (error) {
         let log = error;
         criarlogtxt(log, req.url);
-        res.redirect(`/erroservidor/${error}`);
+        res.send(error);
       }
 
     }
   })
 })
-//copia usuario campo para colocar usuario
-app.post('/input_usu', async (req, res) => {
-  let ID_USU = req.body.ID_USU;
 
-  let sql = `SELECT USU_NOME FROM USU_USUARIO WHERE ID_USU = :ID_USU `;
-  let binds = { ID_USU: ID_USU }
-
-  try {
-    let result = await conectarbd(sql, binds, options)
-    result.length === 0 ? res.status(505).send('Usuário não encontrado!') : res.send(result[0][0])
-  } catch (error) {
-    let log = error;
-    criarlogtxt(log, req.url);
-    res.redirect(`/erroservidor/${error}`);
-  }
-})
 //rota para alterar o cadastro de usuario
 app.post('/update_usuario', async (req, res) => {
   let token = req.cookies.jwt;
@@ -1072,7 +1035,6 @@ app.post('/update_usuario', async (req, res) => {
       P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
 
     }
-    console.log(binds)
 
     try {
       let result = await conectar(sql, binds);
@@ -1080,19 +1042,25 @@ app.post('/update_usuario', async (req, res) => {
     } catch (error) {
       let log = error;
       criarlogtxt(log, req.url);
-      res.send('Erro : ' + error);
+      res.status(500).end('Erro : ' + error);
+
     }
   })
 })
 app.post('/delete_usu', urlencodedParser, async (req, res) => {
-  let ID_USU = req.body.ID_USU;
-  let sql = `BEGIN DELETA_USUARIO(:ID_USU,:P_MENSAGEM); END;`;
-  let binds = { ID_USU: ID_USU, P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING } }
-  let result = await conectar(sql, binds)
-  res.send(result.outBinds.P_MENSAGEM)
+  try {
+    let ID_USU = req.body.ID_USU;
+    let sql = `BEGIN DELETA_USUARIO(:ID_USU,:P_MENSAGEM); END;`;
+    let binds = { ID_USU: ID_USU, P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING } }
+    let result = await conectar(sql, binds)
+    res.send(result.outBinds.P_MENSAGEM)
+  } catch (error) {
+    res.status(500).send('Error' + error)
+  }
+
 })
 //faz update nas configuraçõesde tela dos usuarios
-app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
+app.post('/usuario_acesso', async (req, res) => {
   let objeto = req.body
   let token = req.cookies.jwt;
 
@@ -1101,125 +1069,141 @@ app.post('/usuario_acesso', urlencodedParser, async (req, res) => {
       let sql;
       //verifica se o usuario está alterando um usuario
       if (objeto.TABELA == 'USU_USUARIO') {
-        sql = `BEGIN
-         UPDATE CONFIG_USU_TELA SET ${objeto.POSICAO} = :VALOR WHERE ID_TELA = :ID_TELA AND ID_USU = :ID;
-         COMMIT;
-         END;`
+        sql = `BEGIN UPD_USUA(:P_POSICAO,:P_VALOR,:USU_LOGADO,:P_ID_TELA,:P_ID);END;`
       }
-      //verifica se o usuario está alterando um grupo
       if (objeto.TABELA == 'GRP_GRUPO') {
-        sql = `BEGIN
-        UPDATE CONFIG_GRUPO_TELA SET ${objeto.POSICAO} = :VALOR WHERE ID_TELA = :ID_TELA AND ID_GRUPO = :ID;
-        COMMIT;
-        END;`
+        sql = `BEGIN UPD_GRPA(:P_POSICAO,:P_VALOR,:USU_LOGADO,:P_ID_TELA,:P_ID);END;`
       }
       let binds = {
-        VALOR: objeto.VALOR,
-        ID_TELA: objeto.ID_TELA,
-        ID: objeto.ID
+        P_VALOR: objeto.VALOR,
+        P_ID_TELA: objeto.ID_TELA,
+        P_ID: objeto.ID,
+        USU_LOGADO: data.ID_USUARIO,
+        P_POSICAO: objeto.POSICAO
       }
-      let result = await conectar(sql, binds)
-      res.send(result);
+      try {
+        let result = await conectar(sql, binds)
+        res.send(result);
+      } catch (error) {
+        res.status(500).send('Error' + error)
+      }
+
     }
 
   })
-})
-//Cadastro de vendedor
-app.get('/vendedores', auth, async (req, res) => {
 
-  try {
-    let token = req.cookies.jwt;
-    let Acesso = await valida_acesso(161, token);
-    let P_USU = await permi_usu(161, token);
-    res.render('./cadastro/vendedor', { P_USU });
-  } catch (error) {
-    res.redirect('/login')
-    
-  }
+
+
 })
+
 //Cadastro de produtos
 app.get('/produtos', auth, async (req, res) => {
   try {
     let token = req.cookies.jwt;
     let Acesso = await valida_acesso(281, token);
     let P_USU = await permi_usu(281, token);
-  
     res.render('./cadastro/produto', { P_USU })
   } catch (error) {
-    console.log('error')
-    res.redirect('/login')
+    res.status(500).send(error)
   }
- 
-
 })
+//Marca de produtos
+app.get('/marca/produtos', auth, async (req, res) => {
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(361, token);
+    let P_USU = await permi_usu(361, token);
+    res.render('./cadastro/marca', { P_USU })
+  } catch (error) {
+    res.status(500).send(error)
+  }
+})
+app.get('/categoria/produtos', auth, async (req, res) => {
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(362, token);
+    let P_USU = await permi_usu(362, token);
+    res.render('./cadastro/categoriaproduto', { P_USU })
+  } catch (error) {
+    res.status(500).send(error)
+  }
+})
+
 //Visualizar de produtos
 app.get('/visualizaproduto/:ID', auth, async (req, res) => {
-
+  let ID = req.params.ID;
+  let token = req.cookies.jwt;
+  let Acesso = await valida_acesso(281, token);
+  let P_USU = await permi_usu(281, token);
   try {
-    let ID = req.params.ID;
-    console.log(ID)
-    let token = req.cookies.jwt;
-    let Acesso = await valida_acesso(281, token);
-    let P_USU = await permi_usu(281, token);
-    let sql = `SELECT PRDT_NOME,
-    PRDT_DESCRICAO,
-    PRDT_CARACT,
-    PRDT_USADO_COMO,
-    PRDT_CAL_COMISSAO,
-    PRDT_NCM,
-    PRDT_EST_MIN,
-    PRDT_EST_MAX,
-    PRDT_NR_PECA,
-    PRDT_MARGEM_LUCRO,
-    PRDT_COMISSAO_VND,
-    PRDT_COMISSAO_GER,
-    PRDT_P_LIQUIDO,
-    PRDT_P_BRUTO,
-    PRDT_ID_CTG,
-    PRDT_COD_BARRA,
-    PRDT_MARCA,
-    PRDT_ALTURA,
-    PRDT_LARGURA,
-    PRDT_DESC_MAX,
-    TO_CHAR(DT_INCLU,'YYYY-MM-DD') AS DT_INCLU,
-    TO_CHAR(DT_ALTER,'YYYY-MM-DD') AS DT_ALTER,
-    ID_USU_ALTER,
-    ID_USU_INCLUSAO FROM PRDT_PRODUTO WHERE PRDT_ID = :ID`;
+    let sql = `SELECT 
+    P.PRDT_ID,
+    PRDT_NOME,
+    P.PRDT_DESCRICAO,
+    P.PRDT_CARACT,
+    P.PRDT_USADO_COMO,
+    P.PRDT_CAL_COMISSAO,
+    P.PRDT_NCM,
+    P.PRDT_EST_MIN,
+    P.PRDT_EST_MAX,
+    P.PRDT_NR_PECA,
+    P.PRDT_MARGEM_LUCRO,
+    P.PRDT_COMISSAO_VND,
+    P.PRDT_COMISSAO_GER,
+    P.PRDT_P_LIQUIDO,
+    P.PRDT_P_BRUTO,
+    P.PRDT_ID_CTG,
+    P.PRDT_COD_BARRA,
+    P.PRDT_MARCA,
+    P.PRDT_ALTURA,
+    P.PRDT_LARGURA,
+    P.PRDT_DESC_MAX,
+    TO_CHAR(P.DT_INCLU,'DD-MM-YYYY  HH24:MI:SS') AS DT_INCLU,
+    TO_CHAR(P.DT_ALTER,'DD-MM-YYYY  HH24:MI:SS') AS DT_ALTER,
+    P.ID_USU_ALTER || ' - ' || U.USU_NOME AS ID_USU_ALT ,
+    P.ID_USU_INCLUSAO || ' - ' || US.USU_NOME AS ID_USU_INCLUSAO ,
+    M.NOME AS MARCA_NOME,
+    G.CTG_DESCRICAO,
+    P.PRDT_STATUS,
+    N.NCM_DESC
+    FROM PRDT_PRODUTO P
+    LEFT JOIN MARCA M ON M.ID_MARCA = P.PRDT_MARCA 
+    LEFT JOIN CTG_PRODUTO G ON G.ID_CATEGORIA = P.PRDT_ID_CTG 
+    LEFT JOIN USU_USUARIO U ON U.ID_USU = P.ID_USU_ALTER 
+    LEFT JOIN USU_USUARIO US ON US.ID_USU = P.ID_USU_INCLUSAO 
+    LEFT JOIN NCM N ON N.COD_NCM_ = P.PRDT_NCM 
+    WHERE PRDT_ID = :ID`;
     let binds = { ID: ID };
     let result = await conectarbd(sql, binds, options_objeto);
     res.render('./cadastro/visualizaproduto', { P_USU, result });
-
-    console.log(result)
   } catch (error) {
+    res.status(500).send(error)
     console.log(error)
-    res.redirect('/login')
   }
 })
 //Cadastro de grupos
 app.get('/grupo', auth, async (req, res) => {
-
   try {
     let token = req.cookies.jwt;
     let Acesso = await valida_acesso(119, token);
     let P_USU = await permi_usu(119, token);
     res.render('./cadastro/grupo', { P_USU });
   } catch (error) {
-    res.redirect('/login')
-    
+    res.status(500).send(error)
   }
+
 })
 //Cadastro de ncm
 app.get('/ncm', auth, async (req, res) => {
-
   try {
     let token = req.cookies.jwt;
     let Acesso = await valida_acesso(162, token);
     let P_USU = await permi_usu(162, token);
     res.render('./cadastro/ncm', { P_USU });
   } catch (error) {
-    res.redirect('/login')
-    
+    res.status(500).send(error)
   }
+
 })
 //Visulaiza d ncm
 app.get('/VisualizaNcm/:cod_ncm', auth, async (req, res) => {
@@ -1239,21 +1223,23 @@ app.get('/VisualizaNcm/:cod_ncm', auth, async (req, res) => {
     let Acesso = await valida_acesso(162, token);
     let P_USU = await permi_usu(162, token);
     let result = await conectarbd(sql, binds, options_objeto);
-    console.log(result)
     res.render('./cadastro/VisualizaNcm', { P_USU, result });
   } catch (error) {
-    console.log(error)
+    res.status(500).send(error)
   }
 
 })
 //acessos
 app.get('/acessos', urlencodedParser, auth, async (req, res) => {
   let token = req.cookies.jwt;
-  let Acesso = valida_acesso(2, token)
-  let P_USU = await permi_usu(2, token);
-  if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
-  res.render('./acesso/acesso', { P_USU });
-
+  try {
+    let Acesso = valida_acesso(2, token)
+    let P_USU = await permi_usu(2, token);
+    if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
+    res.render('./acesso/acesso', { P_USU });
+  } catch (error) {
+    res.status(500).send(error)
+  }
 })
 app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
   let token = req.cookies.jwt;
@@ -1274,9 +1260,9 @@ app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
     let result = await conectarbd(sql, binds, options_objeto);
     if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
     res.render('./parceiro/visualizaparceiro', { P_USU, result });
-    console.log(result)
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    res.status(500).send(error)
   }
 
 
@@ -1284,6 +1270,7 @@ app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
 
 //Copia permissões
 app.post('/copia_usuario', async (req, res) => {
+  console.log(req.body)
   let token = req.cookies.jwt;
   jwt.verify(token, process.env.SECRET, async (error, data) => {
     if (error) { return res.status(500).send('Token inválido!') }
@@ -1300,11 +1287,12 @@ app.post('/copia_usuario', async (req, res) => {
 
       try {
         let result = await conectar(sql, binds)
-        res.status(200).send(result.outBinds.P_RESULTADO)
+        res.status(200).send(result.outBinds.P_RESULTADO);
+        console.log(result.outBinds.P_RESULTADO, ' -----')
       } catch (error) {
         let log = error;
         criarlogtxt(log, req.url);
-        res.send('Erro no lado do servidor ' + error)
+        res.status(500).send('Ocorreu um erro! ' + error);
       }
     }
 
@@ -1321,7 +1309,7 @@ app.post('/consulta_acessos', async (req, res) => {
   } else {
     let sql;
     if (TABELA == 'USU_USUARIO') {
-      sql = `SELECT T.ID_TELA,T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA,CFU_ANEXA
+      sql = `SELECT T.ID_TELA,T.T_NOME,CFU_ALTERA,CFU_INCLUI,CFU_DELETA,CFU_CONSULTA
    FROM
    CONFIG_USU_TELA U
    INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
@@ -1329,7 +1317,7 @@ app.post('/consulta_acessos', async (req, res) => {
     AND T.TIPO <> 'F'`
     }
     if (TABELA == 'GRP_GRUPO') {
-      sql = `SELECT T.ID_TELA,T.T_NOME,GRUP_ALTERA,GRUP_INCLUI,GRUP_DELETA,GRUP_CONSULTA,GRP_ANEXA
+      sql = `SELECT T.ID_TELA,T.T_NOME,GRUP_ALTERA,GRUP_INCLUI,GRUP_DELETA,GRUP_CONSULTA
    FROM
    CONFIG_GRUPO_TELA U
    INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
@@ -1348,7 +1336,7 @@ app.post('/consulta_acessos', async (req, res) => {
     } catch (error) {
       let log = error;
       criarlogtxt(log, req.url);
-      res.send('Erro no lado do servidor ' + error);
+      res.status(500).send('Ocorreu um erro! ' + error);
     }
   }
 })
@@ -1358,7 +1346,6 @@ app.post('/importar/dados', async (req, res) => {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
 
-    console.log(data.municipio)
     //Caso não exista uma cidade cadastrada  será inserido automaticamente pelo sistema
     if (data.municipio !== undefined) {
       let sql = `BEGIN
@@ -1392,7 +1379,7 @@ app.post('/importar/dados', async (req, res) => {
 
 })
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
-app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
+app.post('/rota/universal', async (req, res) => {
   let Objeto = req.body;
   let token = req.cookies.jwt;
   let novobinds;
@@ -1405,9 +1392,8 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
         let result = await conectar(Objeto.sql, novobinds);
         res.status(200).send(Objeto.mensagem_sucess);
       } catch (error) {
-        res.status(500).send(Objeto.mensagem_error + error)
+        res.status(500).send('Error :' + error)
       }
-      console.log(Objeto)
     } else {
       try {
         let result = await conectar(Objeto.sql, Objeto.binds);
@@ -1423,71 +1409,53 @@ app.post('/rota/universal', auth, urlencodedParser, async (req, res) => {
 
 })
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
-app.post('/select/universal', urlencodedParser, async (req, res) => {
-  // req.on('information',(info)=>{
-  // console.log(info,'-----')
-  // })
-  let Objeto = req.body;
-  let novobinds;
-  let token = req.cookies.jwt;
-  jwt.verify(token, process.env.SECRET, async (error, data) => {
-    if (error) {
-      res.status(500).send('Token inválido,faça login e tente novamente!')
-    } else {
-      let USU_LOGADO = data.ID_USUARIO;
-
-      if (Objeto.USU_LOGADO) {
-
-        //CASO USU_LOGADO SEJA true,fazendo o sql com base no usuário logado
-        novobinds = { ...Objeto.binds, USU_LOGADO }
-        try {
-          let result = await conectarbd(Objeto.sql, novobinds, options);
-          //validando se o resultado é pra retornar em array de array
-          if (Objeto.rows) {
-            let result = await conectar(Objeto.sql, novobinds);
-            result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
-
-          } else {
-            result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
-
-          }
-        } catch (error) {
-          res.send('Ocorreu um erro! ' + error);
-          console.log(error);
-        }
-      } else
-
-        try {
-          let result = await conectarbd(Objeto.sql, Objeto.binds, options);
-          if (Objeto.rows) {
-            let result = await conectar(Objeto.sql, Objeto.binds);
-            result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result.rows)
-          } else {
-            result.length === 0 ? res.status(505).send(Objeto.mensage_error) : res.status(200).send(result[0][0])
-          }
-        } catch (error) {
-          let log = error;
-          criarlogtxt(log, req.url);
-          res.send('Ocorreu um erro no lado do servidor! --' + error);
-          console.log(error);
-        }
+app.post('/select/universal', async (req, res) => {
+  let Binds = req.body.binds;
+  jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
+    let USU_LOGADO = data.ID_USUARIO;
+    if (req.body.USU_LOGADO) {
+      Binds.USU_LOGADO = USU_LOGADO;
     }
-  })
-})
+    try {
+      let result = await conectar(req.body.sql, Binds);
+      res.status(200).send(result.rows[0][0]);
+    } catch (error) {
+      res.status(500).send('Ocorreu um erro! ' + error);
+    }
 
+  });
+});
 
 app.get('/dowload/img/ploads_tarefa/:src', upload.single('file'), (req, res) => {
   let src = req.params.src
   res.download(__dirname + '/public/img/uploads_tarefas/' + src)
 
 })
+//Api via cep
+app.post('/api/via/cep', async (req, res) => {
+  try {
+    let response = await axios(`https://viacep.com.br/ws/${req.body.CEP}/json/`);
+    let data = response.data;
+
+    if (!data.erro) {
+      conectarbd(`BEGIN API_CEP(:CEP,:CIDADE,:IBGE,:UF,:BAIRRO,:COMPLEMENTO); END;`, { CEP: data.cep, CIDADE: data.localidade, IBGE: data.ibge, UF: data.uf, BAIRRO: data.bairro, COMPLEMENTO: data.complemento }, options_objeto);
+      res.json({ 'status': 'ok' })
+    } else {
+      res.status(500).send('CEP não é valido ou não existe!');
+    }
+  } catch (error) {
+    res.status(500).send('CEP não é valido ou não existe! Error');
+  }
 
 
-app.listen(80, (err) => {
+})
+
+
+server.listen(80, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);
   } else {
-    console.log("Servidor rodando, https:localhost:80/login ou no link   https://marlin-quality-nicely.ngrok-free.app/login");
+    console.log("Servidor rodando, https://localhost:80/login ou no link   https://grub-pumped-quietly.ngrok-free.app/login");
   }
 });
 

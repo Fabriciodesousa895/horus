@@ -30,10 +30,10 @@ import { Ajax } from "../Class/Ajax.js";
     function ConsultaTabela(e) {
         e.preventDefault();
         let data = {
-            sql: `SELECT * FROM TABELA_BANCO WHERE TAB_NOME LIKE '%${NOME_TABELA.value}%' AND (TAB_DESCRICAO LIKE '%${DESCRICAO.value}%' OR TAB_DESCRICAO IS NULL )`,
-            binds: {},
-            mensage_error: 'Não foi encontrado registros!',
-            rows: true
+            sql: `SELECT FILTRA_TABELAS(:NOME_,:DESC_) FROM DUAL`,
+            binds: {NOME_:NOME_TABELA.value,DESC_:DESCRICAO.value},
+            USU_LOGADO:false
+
         }
         new Ajax('/select/universal', data).RequisicaoAjax(false).then((arra_de_dados) => {
             Tabela_.InseriRegistros(arra_de_dados)
@@ -43,34 +43,36 @@ import { Ajax } from "../Class/Ajax.js";
     function FiltroTrigger(e) {
         e.preventDefault()
         let data = {
-            sql: `SELECT TRIGGER_NAME,TRIGGER_TYPE,TRIGGERING_EVENT,TABLE_NAME,STATUS FROM USER_TRIGGERS WHERE TRIGGER_NAME LIKE '%${NOME_TRIGGER.value}%'`,
-            binds: {},
-            mensage_error: 'Não foi encontrado registros!',
-            rows: true
+            sql: `SELECT FILTRA_TRIGGER(:NOME) FROM DUAL`,
+            binds: {NOME:NOME_TRIGGER.value},
+            USU_LOGADO:false
+
         }
-        new Ajax('/select/universal', data).RequisicaoAjax(false).then((array_de_dados) => {
+       let ReqTrigger = new Ajax('/select/universal', data).RequisicaoAjax(false)
+           
+        ReqTrigger.then((array_de_dados)=>{
             tabelatrigger.InseriRegistros(array_de_dados)
+            console.log(array_de_dados)
             Salva()
-        })
+        }) 
     }
     function FiltroProcedure() {
         let data = {
-            sql: `SELECT US.OBJECT_ID,US.OBJECT_NAME FROM ALL_PROCEDURES AL,USER_PROCEDURES US WHERE AL.OBJECT_NAME = US.OBJECT_NAME AND US.OBJECT_TYPE= 'PROCEDURE' AND AL.OWNER = 'SYSTEM' AND  US.OBJECT_NAME LIKE '%${NOME_PROCEDURE.value}%'`,
-            binds: {},
-            mensage_error: 'Não foi encontrado registros!',
-            rows: true
+            sql: `SELECT FILTRA_PROCEDURES(:NOME) FROM DUAL  `,
+            binds: {NOME:NOME_PROCEDURE.value},
+            USU_LOGADO:false
         }
         new Ajax('/select/universal', data).RequisicaoAjax(false).then((array_de_dados) => {
             proceduredados.InseriRegistros(array_de_dados);
             Salva()
         })
     }
+    // SELECT FILTRA_VIEW(:NOME) FROM DUAL  NOME_VIEW.value
     function Filtroview() {
         let data = {
-            sql: `SELECT VIEW_NAME FROM USER_VIEWS WHERE VIEW_NAME LIKE '%${NOME_VIEW.value}%'`,
-            binds: {},
-            mensage_error: 'Não foi encontrado registros!',
-            rows: true
+            sql: `SELECT FILTRA_VIEW(:NOME) FROM DUAL`,
+            binds: {NOME:NOME_VIEW.value},
+            USU_LOGADO:false
         }
         new Ajax('/select/universal', data).RequisicaoAjax(false).then((array_de_dados) => {
             viewsdados.InseriRegistros(array_de_dados);

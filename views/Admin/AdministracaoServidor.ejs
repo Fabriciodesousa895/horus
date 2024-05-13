@@ -1,0 +1,141 @@
+<%-include('../partials/head')%>
+<details draggable="true" >
+    <summary>Comunicado aos usuários</summary>
+    <div class="row">
+        <div class="col-sm-3">
+
+            <span>Destino:</span>
+            <select id="Destino" class="form-control">
+                <option value="">Selecione um opção</option>
+                <option value="AllUsers">Todos os usuários</option>
+                <option value="Grup">Grupo especifico</option>
+                <option value="User">Usuários especificos</option>
+            </select>
+            <div style="display: flex; flex-direction: row;display: none;" class="mt-3" id="EnviaGrupo" >
+                <input type="number" id="ID_GRUPO"   style="width: 60px;margin-right: 6px;" class="form-control "  placeholder="Cod."> 
+                <input type="text"    id="NOME_GRUPO" class="form-control " placeholder="Selecione um grupo" >
+            </div>
+            <div style="display: flex; flex-direction: row;display: none;" class="mt-3" id="ListUser" >
+                <input type="number" id="ID_USU"   style="width: 70px;margin-right: 6px;" class="form-control " placeholder="Cod.">
+                <input type="text"    id="NOME_USU" class="form-control " placeholder="Selecione um usuário" > <img style="cursor: pointer;" src="/img/botao-adicionar (1).png" alt="+" id="Adicionar" width="40px" height="40px">
+            </div>
+            <table class="table table-hover mt-3" id="TableForm" style="display: none;width: 100%;">
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Nome</td>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    
+                </tbody>
+            </table>
+            <span>Icone</span>
+            <select id="Icon" class="form-control" >
+                <option value="">Selecione um opção</option>
+                <option value="info">Informação</option>
+                <option value="error">Aviso importante</option>
+                <option value="warning">Sugestão</option>
+                <option value="success">Confirmação</option>
+            </select>
+            <span>Intervalo(minutos)</span>
+            <input type="number" class="form-control" id="Interval" min="1" value="1">
+            <span>Qtd a ser enviadas</span>
+            <input type="number" class="form-control" id="Repit" min="1" value="1">
+
+        <button id="chat" style="left: 0px; top: 0px;" class="btn btn-info mt-3" draggable="true">Enviar</button>
+
+        </div>
+        <div class="col-sm-8">
+            <textarea id="textareamensage" cols="20" rows="10" class="form-control"></textarea>
+
+        </div>
+    </div>
+
+
+</details>
+<details>
+    <summary><i>Configurações gerais</i></summary>
+    <div class="row">
+        <%Sql_results.forEach(Sql_results=>{%>
+   
+        <div class="col-sm-4">
+
+            <div class="custom-control custom-checkbox"> 
+
+                <input type="checkbox" class="custom-control-input"  <%if(Sql_results.USU_ALT_USU ==  'S'){%> checked="true" <%}%> id="USU_ALT_USU"  >
+                <label class="custom-control-label"  for="USU_ALT_USU"  >Usuário pode alterar próprio usuário?</label>
+                
+              </div> 
+            <div class="custom-control custom-checkbox"> 
+                <input type="checkbox" class="custom-control-input" id="VIA_CEP" <%if(Sql_results.VIA_CEP ==  'S'){%> checked="true" <%}%> >
+                <label class="custom-control-label"  for="VIA_CEP"  >Importa CEP via API?</label>
+              </div> 
+            <div class="custom-control custom-checkbox"> 
+                <input type="checkbox" class="custom-control-input" id="CORRIGE_CID" <%if(Sql_results.CORRIGE_CID ==  'S'){%> checked="true" <%}%> >
+                <label class="custom-control-label"  for="CORRIGE_CID"  >Corrige cidade via API?</label>
+              </div> 
+            <div class="custom-control custom-checkbox"> 
+                <input type="checkbox" class="custom-control-input" id="VAL_CGC"   <%if(Sql_results.VAL_CGC ==  'S'){%> checked <%}%>  >
+                <label class="custom-control-label"  for="VAL_CGC"  >Valida CPF/CNPJ no cadastro de parceiro?</label>
+            </div> 
+              <span>Tempo inativo para sessão(minutos)</span>
+              <input type="number" class="form-control multi" id="TEMPO_S_INATIVA" min="5" max="600" value="<%=Sql_results.TEMPO_S_INATIVA / 60000%>">
+              
+              <span>Dias para inativar usuário</span>
+              <input type="number" class="form-control" id="D_USU_INAT" min="5" max="600" value="<%=Sql_results.D_USU_INAT%>">
+
+               <%})%>
+        </div>
+    </div>
+
+</details>
+<details>
+
+    <summary> <i>Licença</i></summary>
+    <div class="row">
+          
+        <div class="col-sm-3">
+            <span>Cnpj</span>
+            <input type="number" value="<%=Dadoslicenca.CNPJ%>" class="form-control" disabled >
+
+            <span>Nome razão social</span>
+            <input type="text" value="<%=Dadoslicenca.RAZAO_SOCIAL%>" class="form-control" disabled>
+        </div>
+
+        <div class="col-sm-3">
+            <span>Data limite acesso</span>
+            <input type="text" value="<%=Dadoslicenca.DT_LIMITE%>"  class="form-control" disabled>
+            <span>Limite de sessoes ativas</span>
+            <input type="number"  value="<%=Dadoslicenca.SESSOES%>"  class="form-control" disabled>
+        </div>
+        </div>
+    </div>
+    <button class="btn btn-warning mt-3" id="AtualizaLicenca">Atualizar certificado</button>
+</details>
+
+
+<details>
+    <summary><i>Informações gerais</i></summary>
+    <div class="row">
+        <div class="col-sm-3">
+            <span>Versão do node : <%=Dadoslicenca.V_NODE%></span><br>
+            <span>Versão do sistema operacional : <%=Dadoslicenca.V_OS%></span><br>
+            <span>Versão da aplicação: <%=Dadoslicenca.V_APP%></span><br>
+            <span>Usuário do banco: <%=Dadoslicenca.USUER_BANCO%></span>
+        </div>
+    </div>
+</details>
+<details>
+    <summary>Servidor</summary>
+    <div class="row">
+        <div class="col-sm-3">
+            <button class="btn btn-warning" id="REINCIAR">Reiniciar aplicação</button>
+            <button class="btn btn-info" id="LOG">Baixar log de erros</button>
+        </div>
+    </div>
+</details>
+
+
+<script type="module" src="../js/Admin/AdministracaoServidor.js"></script>
+<%-include('../partials/footer')%>

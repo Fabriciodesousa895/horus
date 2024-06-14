@@ -1,7 +1,9 @@
 import { Ajax } from "../Class/Ajax.js";
 import { Tabela } from "../Class/Tabela.js";
+import { ActionForm } from "../FormClass/ActionForm.js";
 import { SalvaFiltro } from "../Class/Filtro.js";
 let form = document.getElementById('form')
+new ActionForm('filtargrupo').Insert('GRP_GRUPO')
 //Inserindo um novo registro
 form.addEventListener('submit', (e) => {
   e.preventDefault();

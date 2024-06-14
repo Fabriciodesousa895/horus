@@ -1,5 +1,6 @@
 </body>
 </div>
+<script type="module" src="/js/exports.js"></script>
 
 <script src="/js/Admin/beforeunload.js"></script>
 <script type="module" src="/js/filtro.js"></script>
@@ -38,6 +39,9 @@
   })
 </script>
 <script>
+
+
+
   let table_ = document.querySelectorAll('table');
 
   table_.forEach(elementtable => {
@@ -55,6 +59,42 @@
       }
     });
   });
+
+
+  document.querySelectorAll('.ExportaCsv').forEach((e) => {
+    e.addEventListener('click', (k) => {
+      let Elementopai = e.parentNode.parentNode;
+      let table = Elementopai.querySelector('table');
+      let exportbtn = Elementopai.querySelector('div');
+
+      if (table && table.rows.length > 0) {
+        let tablerows = table.querySelectorAll('tr');
+
+        let CSV = Array.from(tablerows)
+          .map(row => Array.from(row.cells)
+            .map(cell => cell.textContent.trim().replace(/,/g, ' ')).join(',')).join('\n');
+
+        let csvData = `data:text/csv;charset=utf-8,${encodeURIComponent(CSV)}`;
+        let Data = new Date();
+        let downloadLink = document.createElement('a');
+        downloadLink.href = csvData;
+        downloadLink.target = '_blank';
+        downloadLink.download = 'Dadosexportados_dia' + Data.getDate() + '_' + Data.getHours() + 'hrs_' + Data.getMinutes() + 'min.csv';
+        exportbtn.appendChild(downloadLink);
+        downloadLink.click();
+        exportbtn.removeChild(downloadLink);
+      }
+    });
+  });
+
+
+
+
+
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+
+
 
 </html>

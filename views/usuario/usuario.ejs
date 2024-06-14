@@ -125,15 +125,17 @@
         </form>
   </div> 
   
-  <div style="width: 100%;" >
-    <table class="table" style="width: 70%;" id="tabelausuario" >
+  <div style="width: 80%;display: block;" >
+    <%- include('../components/exporta.ejs');%>
+
+    <table class="table" style="width: 100%;" id="tabelausuario" >
 
       <thead>
         <tr>
           <th>Código</th>
           <th>Nome</th>
           <th>Grupo</th>
-          <th>Dt inclusão <div style="margin-left: 30px;" class="btn btn-secondary Count" >0</div></th>
+          <th>Data cadastro</th>
         </tr>
       </thead>
       <tbody>

@@ -132,12 +132,16 @@ document.getElementById('IMPORTAR').addEventListener('click', Importar, false);
 
 document.getElementById('form').addEventListener('submit', (e) => {
     e.preventDefault();
-    let dados = new Tabela().InputsValues(['PARC_NOME', 'PARC_N_RAZAO_SOCIAL', 'PARC_CGC_', 'PARC_IR_RG', 'PARC_EMAIL', 'PARC_NASC', 'PARC_TEL', 'PARC_TEL_2', 'PARC_TRABALHO_N',
+    let dados = new Tabela().InputsValues(['PARC_NOME', 'PARC_N_RAZAO_SOCIAL', 'PARC_CGC_', 'PARC_IR_RG', 'PARC_EMAIL', 'PARC_TEL', 'PARC_TEL_2', 'PARC_TRABALHO_N',
         'PARC_CEP_T', 'PARC_BAIRRO_T', 'ID_CID_F', 'PARC_LOGRA_T', 'PARC_NUM_T', 'PARC_COMP_T', 'PARC_TEL_T', 'PARC_SALARIO', 'PARC_ADMISSAO',
         'PARC_CEP', 'ID_CID', 'PARC_BAIRRO', 'PARC_LOGRA', 'PARC_NUM', 'PARC_COMP', 'PARC_FORNEC', 'ESTADO'])
+        let DT_NASC = (document.getElementById('PARC_NASC').value).split('-');
+        console.log(document.getElementById('PARC_NASC').value)
+        let DT_NASC_SPLIT = `${DT_NASC[0]}-${DT_NASC[1]}-${DT_NASC[2]}`
+        dados['DT_NASC_SPLIT'] = DT_NASC_SPLIT
     let data = {
         sql: `BEGIN
-                INSERI_PARCEIRO      (:PARC_NOME,:PARC_N_RAZAO_SOCIAL,:PARC_CGC_,:PARC_IR_RG,:PARC_EMAIL,TO_DATE(:PARC_NASC,'YYYY-MM-DD'),:PARC_TEL,:PARC_TEL_2,
+                INSERI_PARCEIRO      (:PARC_NOME,:PARC_N_RAZAO_SOCIAL,:PARC_CGC_,:PARC_IR_RG,:PARC_EMAIL,TO_DATE(:DT_NASC_SPLIT),:PARC_TEL,:PARC_TEL_2,
                                       :PARC_TRABALHO_N,:PARC_CEP_T,:PARC_BAIRRO_T,:ID_CID_F,:PARC_LOGRA_T,:PARC_NUM_T,:PARC_COMP_T,:PARC_TEL_T,
                                       :PARC_SALARIO,TO_DATE(:PARC_ADMISSAO,'YYYY-MM-DD'),:PARC_CEP,:ESTADO,:ID_CID,:PARC_BAIRRO,:PARC_LOGRA,:PARC_NUM,:PARC_COMP,
                                       :PARC_FORNEC,:USU_LOGADO); END;`,
@@ -146,6 +150,7 @@ document.getElementById('form').addEventListener('submit', (e) => {
         mensagem_sucess: 'Registro inserido com sucesso!',
         USU_LOGADO: true
     };
+
     console.log(data)
 
     new Ajax('/rota/universal', data).RequisicaoAjax(true, 'form')

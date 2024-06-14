@@ -70,12 +70,10 @@
                 </div>
               </div>
     <button id="Buscar" type="button" class="btn btn-warning">Buscar</button>
-    <button id="TOTAL" class="btn btn-success">00</button>
     <br>
-    <%-include('../components/csv.ejs')%>
       </div> 
-      
-      <div style="width: 100%;" >
+      <div style="width: 100%;display: block;" >
+      <%- include('../components/exporta.ejs');%>
         <table class="table" style="width: 70%;" id="tabeladados">
           <thead>
             <tr>

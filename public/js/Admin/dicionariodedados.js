@@ -13,19 +13,19 @@ import { Ajax } from "../Class/Ajax.js";
     }
     let Tabela_ = new Tabela('tabeladados');
     Tabela_.VisualizaRegistro('/visualiza/dicionario/dados/', 1)
-    Tabela_.ExportarRegistros('exportatabelas')
+    // Tabela_.ExportarRegistros('exportatabelas')
 
     let tabelatrigger = new Tabela('tabelatriggerdados');
     tabelatrigger.VisualizaRegistro('/visualiza/dicionario/dados/trigger/', 1);
-    tabelatrigger.ExportarRegistros('exportatriggers')
+    // tabelatrigger.ExportarRegistros('exportatriggers')
 
     let proceduredados = new Tabela('proceduredados');
     proceduredados.VisualizaRegistro('/visualiza/dicionario/dados/procedure/', 2);
-    proceduredados.ExportarRegistros('exportarprocedures')
+    // proceduredados.ExportarRegistros('exportarprocedures')
 
     let viewsdados = new Tabela('tabelaviews');
     viewsdados.VisualizaRegistro('/vizualiza/dicionario/dados/views',1);
-    viewsdados.ExportarRegistros('exportarview')
+    // viewsdados.ExportarRegistros('exportarview')
 
     function ConsultaTabela(e) {
         e.preventDefault();

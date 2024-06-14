@@ -1,185 +1,196 @@
 <%- include('../partials/head'); %>
-        <% let P=P_USU.P_USU %>
-    
-            <% let D=P[0] %>
+    <% let P=P_USU.P_USU %>
+
+        <% let D=P[0] %>
 
 
-                <div class="grad" style="display: flex; height: auto;">
-                    <div style="width: 300px;height: auto;">
-                        <select style="width: 300px;" id="select" class="form-control">
-                            <option value="">Selecione as expressões</option>
-                            <option value=" > ">( > ) maior que</option>
-                            <option value=" < ">( < ) menor que</option>
-                            <option value=" = ">( = ) igual</option>
-                            <option value=" <> ">( <> ) diferente dê</option>
-                            <option value=" LIKE ">( LIKE ) contém</option>
-                            <option value=" BETWEEN ">( BETWEEN ) entre</option>
-                            <option value=" INNER JOIN ">INNER JOIN</option>
-                            <option value=" LEFT JOIN ">LEFT JOIN</option>
-                            <option value=" TO_CHAR(SEU_CAMPO,'DD/MM/YYYY HH24:MI:SS') AS SEU_CAMPO ">Data hora formatada</option>
-                        </select>
-                        <input type="text" id="NOME_TABELA" class="form-control mt-3" placeholder="Nome da tabela">
+            <div class="grad" style="display: flex; height: auto;">
+                <div style="width: 300px;height: auto;">
+                    <select style="width: 300px;" id="select" class="form-control">
+                        <option value="">Selecione as expressões</option>
+                        <option value=" > ">( > ) maior que</option>
+                        <option value=" < ">( < ) menor que</option>
+                        <option value=" = ">( = ) igual</option>
+                        <option value=" <> ">( <> ) diferente dê</option>
+                        <option value=" LIKE ">( LIKE ) contém</option>
+                        <option value=" BETWEEN ">( BETWEEN ) entre</option>
+                        <option value=" INNER JOIN ">INNER JOIN</option>
+                        <option value=" LEFT JOIN ">LEFT JOIN</option>
+                        <option value=" TO_CHAR(SEU_CAMPO,'DD/MM/YYYY HH24:MI:SS') AS SEU_CAMPO ">Data hora formatada
+                        </option>
+                    </select>
+                    <input type="text" id="NOME_TABELA" class="form-control mt-3" placeholder="Nome da tabela">
 
-                        <table class="table mt-3 table-striped table-bordered table-hover" id="dadostables">
+                    <table class="table mt-3 table-striped table-bordered table-hover" id="dadostables">
+                        <thead>
+                            <tr>
+                                <td>Nome</td>
+                                <td>Dado</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--registros sendo preenchidas dinamicamento pelo js-->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="width: 100%;padding-left: 20px;">
+                    <textarea style="flex: 20px;height: 300px; margin-left: 10px; " class="form-control"
+                        id="sql"></textarea>
+                    <button id="btn" class="btn btn-warning mt-3">Consultar</button>
+                    <button id="TOTAL" class="btn btn-success mt-3">00</button>
+
+                    <% if (D.ALTERA=='S' ) { %> <button id="SalvarEdicao" style="display: none;"
+                            class="btn btn-warning mt-3">Salvar</button>
+                        <%}%>
+                            <% if (D.INCLUI=='S' ) { %> <button id="Salvar" class="btn btn-success mt-3">Salvar</button>
+                                <%}%>
+                                    <button class="btn btn-primary MT-3" data-toggle="modal" data-target=".ANEXO"
+                                        id="ANEXO">Querys salvas</button>
+
+                                    <input type="button" id="Limpar" class="btn btn-danger mt-3" value="Limpar">
+             <div>
+                <!-- <div class="barratarefa alert-info ExportaCsv mt-2" style="width: 100px;">CSV</div> -->
+                <table class="table mt-3 table-bordered table-hover" id="tabeladados">
+                    <thead id="cabecalho" style="background-color: rgb(146, 143, 139);">
+                        <!--colunas sendo preenchidas dinamicamento pelo js-->
+                    </thead>
+                    <tbody id="dados">
+                        <!--registros sendo preenchidas dinamicamento pelo js-->
+                    </tbody>
+                </table>
+             </div>
+     
+                </div>
+            </div>
+            <!--quando u usuário selecionar uma query salva,o input abaixo irá receber o ID do registro para poder enviar para o servidor-->
+            <input type="hidden" id="ID_SQL">
+            <!--modal para visualizar as query salva do usuario-->
+
+
+            <div class="modal fade ANEXO" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content" style="padding: 10px;">
+                        <table class="table  table-hover" id="query">
                             <thead>
-                                <tr>
-                                    <td>Nome</td>
-                                    <td>Dado</td>
-                                </tr>
+                                <th>ID</th>
+                                <th>NOME</th>
+                                <th>SQL</th>
+                                <th>DT_INCLUSÃO</th>
+                                <th>DT_ALTERAÇÃO</th>
+
                             </thead>
                             <tbody>
-                                <!--registros sendo preenchidas dinamicamento pelo js-->
+                                <!--Dados sendo inseridos dinamicamente pelo js-->
                             </tbody>
                         </table>
                     </div>
-
-                    <div style="width: 100%;padding-left: 20px;">
-                        <textarea style="flex: 20px;height: 300px; margin-left: 10px; " class="form-control"
-                            id="sql"></textarea>
-                        <button id="btn" class="btn btn-warning mt-3">Consultar</button>
-                        <button id="TOTAL" class="btn btn-success mt-3">00</button>
-
-                        <% if (D.ALTERA=='S' ) { %> <button id="SalvarEdicao" style="display: none;" class="btn btn-warning mt-3">Salvar</button><%}%>
-                                <% if (D.INCLUI=='S' ) { %>   <button id="Salvar" class="btn btn-success mt-3">Salvar</button><%}%>
-                     <button class="btn btn-primary MT-3"   data-toggle="modal" data-target=".ANEXO" id="ANEXO" >Querys salvas</button>     
-                                <input type="button" id="Limpar" class="btn btn-danger mt-3" value="Limpar">
-                                                <table class="table mt-3 table-bordered table-hover"id="tabeladados">
-                                                    <thead id="cabecalho" style="background-color: rgb(146, 143, 139);" >
-                                                        <!--colunas sendo preenchidas dinamicamento pelo js-->
-                                                    </thead>
-                                                    <tbody id="dados">
-                                                        <!--registros sendo preenchidas dinamicamento pelo js-->
-                                                    </tbody>
-                                                </table>
-                    </div>
                 </div>
-                <!--quando u usuário selecionar uma query salva,o input abaixo irá receber o ID do registro para poder enviar para o servidor-->
-                <input type="hidden" id="ID_SQL" >
-                <!--modal para visualizar as query salva do usuario-->
+            </div>
+            <!--modal para inserir uma nova tabela na base de dados-->
+            <div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content" style="padding: 30px;">
+                        <div class="grad" style="display: flex; height: auto;">
+                            <div style="width: 500px;height: auto;">
+                                <input type="hidden" id="INSERTTABLE;">
+                                <form class="needs-validation" novalidate id="FORM">
+                                    <div class="row">
+                                        <span> Nome da tabela</span>
+                                        <div class="col"><input type="text" class="form-control" id="NOME_TABLE"
+                                                required></div>
+                                    </div>
+                                    <div class="row">
+                                        <span>Descrição da tabela</span>
+                                        <div class="col">
+                                            <input type="text" id="DESCRICAO" class="form-control"
+                                                placeholder="Descrição" required>
 
-
-                <div class="modal fade ANEXO" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content" style="padding: 30px;">
-                            <table class="table  table-hover" id="query">
-                                <thead>
-                                    <th>ID</th>
-                                    <th>NOME</th>
-                                    <th>SQL</th>
-                                    <th>DT_INCLUSÃO</th>
-                                    <th>DT_ALTERAÇÃO</th>
-
-                                </thead>
-                                <tbody >
-                                    <!--Dados sendo inseridos dinamicamente pelo js-->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!--modal para inserir uma nova tabela na base de dados-->
-                <div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content" style="padding: 30px;">
-                            <div class="grad" style="display: flex; height: auto;">
-                                <div style="width: 500px;height: auto;">
-                                    <input type="hidden" id="INSERTTABLE;">
-                                    <form class="needs-validation" novalidate id="FORM">
-                                        <div class="row">
-                                            <span> Nome da tabela</span>
-                                            <div class="col"><input type="text" class="form-control" id="NOME_TABLE"
-                                                    required></div>
                                         </div>
-                                        <div class="row">
-                                            <span>Descrição da tabela</span>
-                                            <div class="col">
-                                                <input type="text" id="DESCRICAO" class="form-control"
-                                                    placeholder="Descrição" required>
-
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <span> Nome do campo</span>
+                                            <input type="text" id="NOME" class="form-control"
+                                                placeholder="Nome do campo" required>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <span> Nome do campo</span>
-                                                <input type="text" id="NOME" class="form-control"
-                                                    placeholder="Nome do campo" required>
-                                            </div>
-                                            <div class="col">
-                                                <span>Tipo de dado</span>
-                                                <select id="TIPO" class="form-control" required>
-                                                    <option value=""></option>
-                                                    <option value=" VARCHAR2(200)">Varchar2(200)</option>
-                                                    <option value=" VARCHAR2(100)">Varchar2 (100)</option>
-                                                    <option value=" INT">Int</option>
-                                                    <option value=" NUMBER(10,2)">Number(10,2)</option>
-                                                    <option value=" TIMESTAMP(6)">TIMESTAMP(6)</option>
-                                                    <option value=" DATE">DATE</option>
-                                                    <option value=" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY">Número
-                                                        único</option>
-                                                </select>
-                                            </div>
+                                        <div class="col">
+                                            <span>Tipo de dado</span>
+                                            <select id="TIPO" class="form-control" required>
+                                                <option value=""></option>
+                                                <option value=" VARCHAR2(200)">Varchar2(200)</option>
+                                                <option value=" VARCHAR2(100)">Varchar2 (100)</option>
+                                                <option value=" INT">Int</option>
+                                                <option value=" NUMBER(10,2)">Number(10,2)</option>
+                                                <option value=" TIMESTAMP(6)">TIMESTAMP(6)</option>
+                                                <option value=" DATE">DATE</option>
+                                                <option value=" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY">Número
+                                                    único</option>
+                                            </select>
                                         </div>
-                                        <div class="row" id="OMITE">
+                                    </div>
+                                    <div class="row" id="OMITE">
 
-                                            <div class="col">
-                                                <span>Valor default</span>
-                                                <input type="text" id="DEFAULT" class="form-control"
-                                                    placeholder="Valor default">
-                                            </div>
+                                        <div class="col">
+                                            <span>Valor default</span>
+                                            <input type="text" id="DEFAULT" class="form-control"
+                                                placeholder="Valor default">
+                                        </div>
 
-                                            <div class="col mt-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="NULO">
-                                                    <label class="form-check-label" for="defaultCheck1">
-                                                        Aceita nulo?
-                                                    </label>
-                                                </div>
-
+                                        <div class="col mt-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="NULO">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    Aceita nulo?
+                                                </label>
                                             </div>
 
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <button type="submit" id="ADICIONA"
-                                                    class="btn btn-warning mt-3">Adionar</button>
-                                                <button type="submit" id="GERA_SQL" class="btn btn-warning mt-3">Gerar
-                                                    DDL</button>
-                                                <button type="submit" style="display: none;" id="EXECUTAR"
-                                                    class="btn btn-danger mt-3">Executar</button>
-                                                <button id="LIMPAR" class="btn btn-danger mt-3">Limpar</button>
 
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button type="submit" id="ADICIONA"
+                                                class="btn btn-warning mt-3">Adionar</button>
+                                            <button type="submit" id="GERA_SQL" class="btn btn-warning mt-3">Gerar
+                                                DDL</button>
+                                            <button type="submit" style="display: none;" id="EXECUTAR"
+                                                class="btn btn-danger mt-3">Executar</button>
+                                            <button id="LIMPAR" class="btn btn-danger mt-3">Limpar</button>
+
+
                                         </div>
-                                    </form>
-
-                                </div>
-
-                                <div style="width: 60%;">
-                                    <textarea style="flex: 20px;height: 300px; margin-left: 10px; " disabled
-                                        id="SQL_TABLE" class="form-control">            </textarea>
-
-                                </div>
+                                    </div>
+                                </form>
 
                             </div>
-                            <table class="table table">
-                                <thead>
-                                    <th>Nome campo</th>
-                                    <th>Tipo</th>
-                                    <th>Descrição</th>
-                                    <th>Default</th>
-                                    <th>Nulo</th>
-                                </thead>
-                                <tbody id="table_table">
 
-                                </tbody>
-                            </table>
+                            <div style="width: 60%;">
+                                <textarea style="flex: 20px;height: 300px; margin-left: 10px; " disabled id="SQL_TABLE"
+                                    class="form-control">            </textarea>
+
+                            </div>
+
                         </div>
-                        <input type="hidden" id="sql_sql">
+                        <table class="table table">
+                            <thead>
+                                <th>Nome campo</th>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                                <th>Default</th>
+                                <th>Nulo</th>
+                            </thead>
+                            <tbody id="table_table">
 
-                    </div>                  
-                    <script src="/js/sql/buscatabela.js"></script>
-                    <script src="/js/sql/manipulaelementos.js"></script>
-                    <script type="module" src="/js/sql/DBE_explorer.js"></script>
-                    <%- include('../partials/footer'); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <input type="hidden" id="sql_sql">
+
+                </div>
+                <script src="/js/sql/buscatabela.js"></script>
+                <script src="/js/sql/manipulaelementos.js"></script>
+                <script type="module" src="/js/sql/DBE_explorer.js"></script>
+                <%- include('../partials/footer'); %>

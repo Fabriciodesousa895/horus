@@ -8,8 +8,10 @@ class Tabela {
   //array_de_dados => um array de array com os registros a serem inseridos
   InseriRegistros(array_de_registros) {
     let table_ = document.getElementById(this.ID_TABELA)
-    let Count = table_.getElementsByTagName('div')
-    Count.textContent = array_de_registros.length
+    let Count = (table_.parentNode).querySelector('.Count')
+    if(Count){
+      Count.innerHTML = array_de_registros.length
+    }
     let Tbody = table_.querySelector('tbody')
     Tbody.innerText = '';
     array_de_registros.forEach(RowData => {
@@ -110,7 +112,6 @@ class Tabela {
         }else{
           value = '';
         }
-        console.log(inputs.value)
 
       }
       else {

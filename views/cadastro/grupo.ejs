@@ -54,7 +54,7 @@
 <!--  -->
 <div class="grad" style="display: flex;height: auto;padding: 30px;">
   <div style="width: 300px;height: 400px;">
-   <form>
+   <form id="filtargrupo">
 <%let filtro = P_USU.T_FILTRO%> 
 
     <div class="form-group row">
@@ -70,7 +70,7 @@
         </div>
         <div class="col-sm-10">
             <span >Descrição</span>
-            <input type="text"  class="form-control" placeholder="Descrição" name="" id="DESCRICAO_GRUPO" value="<%=filtro[0][1]%>">
+            <input type="text"  class="form-control" placeholder="Descrição" name="" id="DESCRICAO_GRUPO" value="<%=filtro[0][2]%>">
         </div>
 
     </div>
@@ -80,11 +80,12 @@
    </form>
   </div>
   <!-- Tabela -->
-  <table class="table table-hover" id="Marca" style="height: auto;width: 700px;">
+  <table class="table table-hover" id="TabelaGrupo" style="height: auto;width: 700px;">
     <thead>
         <tr>
-            <td>Código</td>
-            <td>Descrição</td>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Data inclusão</th>
         </tr>
     </thead>
     <tbody id="tbodytable">

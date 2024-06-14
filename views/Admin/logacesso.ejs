@@ -28,12 +28,13 @@
               </div>
     <button id="Buscar" class="btn btn-warning">Buscar</button>
     <br>
-    <%-include('../components/csv.ejs')%>
       </div> 
-      <div style="width: 100%;"  >
-        <div class="tabela-wrapper">
+      <div  style="width: 80%;display: block;" >
 
-        <table class="table tabelatoken" style="width: 70%;min-height: 350px;" id="tabelatoken">
+        <div class="tabela-wrapper" style="width:80%;display: block;" >
+          <%- include('../components/exporta.ejs');%>
+
+        <table class="table tabelatoken" style="width: 100%;min-height: 350px;" id="tabelatoken">
           <thead>
             <tr>
                 <th>ID SESSÃO</th>
@@ -48,7 +49,9 @@
         </table>
                   
       </div>
-        <table class="table" style="width: 70%;" id="tabeladados">
+      <div style="width: 80%;display: block;" >
+        <%- include('../components/exporta.ejs');%>
+        <table class="table" style="width: 100%;" id="tabeladados">
           <thead>
             <tr>
                 <th>ID TELA</th>
@@ -61,6 +64,8 @@
                  <!-- inserido pela requição ajax apos usar o filtro -->
           </tbody>
         </table>
+      </div>
+
       </div>
     </div>
     

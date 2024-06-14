@@ -114,7 +114,7 @@ async function resetInactivityTimer(token) {
   let consulta = await conectar(sql, binds);
   TempoSessao = consulta.rows[0][0];
   inactivityTimer = setTimeout(() => {
-    console.log('Usuário inativo por 5 minuto.');
+    console.log('Usuário inativo .');
     try {
       let sql = `BEGIN UPDATE LOG_LOGIN SET DT_SAIDA = SYSDATE,KILL = 'S' WHERE TOKEN = :TOKEN; COMMIT; END;`;
       let binds = { TOKEN: token };
@@ -140,13 +140,14 @@ async function auth(req, res, next) {
     let KILL
     result.forEach((e) => { KILL = e.KILL });
     if (KILL == 'S') {
+      console.log('---------------')
+   res.status(500).send('Token inválido!!');
 
-      // res.redirect('/login');
-      res.send('Token inválido!')
 
-
+    }else{
+      next()
     }
-    next()
+
     return;
   } catch (error) {
     console.log(error);
@@ -175,7 +176,7 @@ app.get('/AdministracaoServidor', auth, async (req, res) => {
   try {
     let Acesso = await valida_acesso(324, tokenn);
     let P_USU = await permi_usu(324, tokenn);
-    let Sql = `SELECT NVL(USU_ALT_USU,'N') AS USU_ALT_USU ,TEMPO_S_INATIVA,NVL(VAL_CGC,'N') AS VAL_CGC,CORRIGE_CID,VIA_CEP,D_USU_INAT FROM PREFERENCES WHERE ROWNUM < 2`;
+    let Sql = `SELECT NVL(USU_ALT_USU,'N') AS USU_ALT_USU ,TEMPO_S_INATIVA,NVL(VAL_CGC,'N') AS VAL_CGC,CORRIGE_CID,VIA_CEP,D_USU_INAT,DIAS_ATUALIZAR_PARC FROM PREFERENCES WHERE ROWNUM < 2`;
     let Sql_results = await conectarbd(Sql, [], options_objeto);
     let Dadoslicenca = {}
     let Token_licenca
@@ -1455,7 +1456,7 @@ server.listen(80, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);
   } else {
-    console.log("Servidor rodando, https://localhost:80/login ou no link   https://grub-pumped-quietly.ngrok-free.app/login");
+    console.log("Servidor rodando,no link https://ft42zqfb-80.brs.devtunnels.ms/login");
   }
 });
 

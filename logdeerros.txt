@@ -1,1342 +1,359 @@
 
-Sun Mar 24 2024 13:59:45 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
+Thu May 16 2024 13:30:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
+Help: https://docs.oracle.com/error-help/db/ora-00900/
 
-Sun Mar 24 2024 13:59:47 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
+Thu May 16 2024 13:31:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
 
-Sun Mar 24 2024 13:59:51 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
+Fri May 17 2024 13:19:19 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
 
-Sun Mar 24 2024 13:59:54 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
+Fri May 17 2024 13:31:36 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
 
-Sun Mar 24 2024 14:01:56 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 14:01:58 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 14:03:42 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 14:27:45 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
-Help: https://docs.oracle.com/error-help/db/ora-00942/
-
-Sun Mar 24 2024 14:37:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
-
-Sun Mar 24 2024 15:00:53 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:00:56 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:00:59 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:01:03 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:01:06 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:04:10 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:06:56 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:08:20 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:08:21 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:14:19 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:24:26 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 15:24:26 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
-ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 16
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01403/
-
-Sun Mar 24 2024 17:50:26 GMT-0300 (Horário Padrão de Brasília) -- /AdministracaoServidor  -- ReferenceError: cnpj is not defined
-
-Sun Mar 24 2024 17:53:14 GMT-0300 (Horário Padrão de Brasília) -- /AdministracaoServidor  -- ReferenceError: cnpj is not defined
-
-Sun Mar 24 2024 17:53:55 GMT-0300 (Horário Padrão de Brasília) -- /AdministracaoServidor  -- ReferenceError: cnpj is not defined
-
-Sun Mar 24 2024 22:05:48 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00979: não é uma expressão GROUP BY
-Help: https://docs.oracle.com/error-help/db/ora-00979/
-
-Sun Mar 24 2024 22:11:52 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00979: não é uma expressão GROUP BY
-Help: https://docs.oracle.com/error-help/db/ora-00979/
-
-Sun Mar 24 2024 22:17:55 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_PARC) violada - registro filho localizado
+Mon May 20 2024 12:46:32 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_PARC) violada - registro filho localizado
 ORA-06512: em line 2
 Help: https://docs.oracle.com/error-help/db/ora-02292/
 
-Sun Mar 24 2024 22:20:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+Mon May 20 2024 13:00:18 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
 
-Sun Mar 24 2024 22:20:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+Mon May 20 2024 13:03:23 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
 
-Sun Mar 24 2024 22:20:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+Mon May 20 2024 13:03:38 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01403: dados não encontrados
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01403/
 
-Mon Mar 25 2024 13:34:16 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-097: no bind placeholder named ":VALOR" was found in the statement text
+Mon May 20 2024 13:04:44 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
 
-Mon Mar 25 2024 13:35:05 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-097: no bind placeholder named ":VALOR" was found in the statement text
+Mon May 20 2024 13:04:53 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
 
-Mon Mar 25 2024 13:37:28 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-097: no bind placeholder named ":VALOR" was found in the statement text
+Mon May 20 2024 13:06:37 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "ID_USU": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
 
-Mon Mar 25 2024 13:39:27 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-097: no bind placeholder named ":VALOR" was found in the statement text
+Mon May 20 2024 13:25:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
 
-Mon Mar 25 2024 13:40:53 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-097: no bind placeholder named ":VALOR" was found in the statement text
+Mon May 27 2024 15:42:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
 
-Mon Mar 25 2024 13:41:19 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-097: no bind placeholder named ":CAMPO" was found in the statement text
+Mon May 27 2024 15:52:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
 
-Mon Mar 25 2024 13:41:57 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 6:
-PLS-00103: Encontrado o símbolo ";" quando um dos seguintes símbolos era esperado:
+Tue May 28 2024 11:17:05 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
 
-   ( begin case declare exit for goto if loop mod null pragma
-   raise return select update while with <um identificador>
+Wed May 29 2024 17:08:09 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Wed May 29 2024 17:15:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Wed May 29 2024 17:16:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Wed May 29 2024 17:38:33 GMT-0300 (Horário Padrão de Brasília) -- /monitordesessao  -- Token inválido!r
+
+Wed May 29 2024 17:43:00 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Wed May 29 2024 17:43:21 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Wed May 29 2024 17:45:06 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Wed May 29 2024 17:45:40 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 4, coluna 8:
+PLS-00103: Encontrado o símbolo "]" quando um dos seguintes símbolos era esperado:
+
+   ( begin case declare end exception exit for goto if loop mod
+   null pragma raise return select update while with
+   <um identificador>
    <um identificador delimitado por aspas duplas>
    <uma variável de ligação> << continue close current delete
    fetch lock insert open rollback savepoint set sql execute
    commit forall merge standard pipe purge json_object
-O símbolo "exit" foi substituído por ";" para continuar.
+O símbolo "]" foi ignorado.
 Help: https://docs.oracle.com/error-help/db/ora-06550/
 
-Mon Mar 25 2024 13:42:21 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 6:
-PLS-00103: Encontrado o símbolo ";" quando um dos seguintes símbolos era esperado:
+Wed May 29 2024 17:46:36 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
+Help: https://docs.oracle.com/error-help/db/ora-00900/
 
-   ( begin case declare exit for goto if loop mod null pragma
-   raise return select update while with <um identificador>
-   <um identificador delimitado por aspas duplas>
-   <uma variável de ligação> << continue close current delete
-   fetch lock insert open rollback savepoint set sql execute
-   commit forall merge standard pipe purge json_object
-O símbolo "exit" foi substituído por ";" para continuar.
-Help: https://docs.oracle.com/error-help/db/ora-06550/
+Thu May 30 2024 12:17:30 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
 
-Mon Mar 25 2024 13:42:41 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 30:
-PL/SQL: ORA-00904: "USU_USU": identificador inválido
-ORA-06550: linha 1, coluna 7:
-PL/SQL: SQL Statement ignored
-Help: https://docs.oracle.com/error-help/db/ora-06550/
+Thu May 30 2024 12:17:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
 
-Mon Mar 25 2024 18:43:20 GMT-0300 (Horário Padrão de Brasília) -- /AdministracaoServidor  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
+Thu May 30 2024 12:20:52 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=UoCNw26I/R46Vsc5fyVtGQ==)
+Cause: ORA-12518
 
-Tue Mar 26 2024 23:49:36 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00979: não é uma expressão GROUP BY
-Help: https://docs.oracle.com/error-help/db/ora-00979/
+Thu May 30 2024 12:20:52 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=GaShNwnN9A7tZQVAGTlV4Q==)
+Cause: ORA-12518
 
-Wed Mar 27 2024 08:32:41 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 29
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
+Thu May 30 2024 12:20:52 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=OImJzbvXupGm/7ke8imqKg==)
+Cause: ORA-12518
 
-Wed Mar 27 2024 08:38:13 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 29
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
+Thu May 30 2024 12:20:53 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=ehg361GHfQN6NyXFV0F0Qg==)
+Cause: ORA-12518
 
-Wed Mar 27 2024 08:45:42 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 29
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
+Thu May 30 2024 12:20:53 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=rJDbeXS9r/dIXDN6D87j9Q==)
+Cause: ORA-12518
 
-Wed Mar 27 2024 11:38:18 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Thu May 30 2024 12:20:54 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=POK7ShpkVO5QprWe3lFNZw==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:54 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=KB9H/AaF2X3CeLnyBrN6bA==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:54 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=a+fII7fzEPDGjgIbxpZHMw==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:54 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=/Jl3Lw3yb3cMV5B/sgDfpw==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:54 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=7awuTKJIaogR15KXIL+wkw==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:55 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=kdKq6N6+GihQ4U/HJfc7Vg==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:55 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=PPLXd0bfGKgQhw0/p0rEDQ==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:56 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=pc024dQfTJCEVitVKYttoA==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:57 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=9T42s56zSmbOczIj2YhfBg==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:57 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=q3pWAHuyw1gu1EnGRI8KSQ==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:57 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=HPXipz56mnAWxYG2BjFgkA==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:57 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=JdZbPUF0qEzbrwbtMtqDKQ==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:58 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=mmoG/I4Wmb7zmK0tyUZDoQ==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:58 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=tpNQFj7gBd3owEj9oY1iAA==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:58 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=zGQMItSvFA+ed5CsnYHTdw==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:59 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=ycEeDr5NRsBBfuUZdHFBHA==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:59 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=skQqH4Ve13ofc37hPYzVfw==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:59 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=3M+KSg1DhszFh6YUVh+P0A==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:20:59 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=w4cJ6BEGr/1X2f2hAZWBcw==)
+Cause: ORA-12518
+
+Thu May 30 2024 12:21:00 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-511: connection to listener at host 127.0.0.1 port 1521 was refused. (CONNECTION_ID=uW9S5WXS5LIvQYquNZAROg==)
+Cause: ORA-12518
+
+Fri May 31 2024 12:53:06 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
+Help: https://docs.oracle.com/error-help/db/ora-00923/
+
+Fri May 31 2024 12:53:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
 Help: https://docs.oracle.com/error-help/db/ora-00942/
 
-Wed Mar 27 2024 11:39:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00936/
-
-Wed Mar 27 2024 11:48:40 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
-
-Wed Mar 27 2024 12:44:58 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Mar 27 2024 13:31:46 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Wed Mar 27 2024 13:53:12 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-01722: número inválido
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01722/
-
-Wed Mar 27 2024 13:53:49 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-01722: número inválido
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01722/
-
-Wed Mar 27 2024 13:55:02 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-01722: número inválido
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01722/
-
-Wed Mar 27 2024 13:58:28 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-01722: número inválido
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01722/
-
-Wed Mar 27 2024 13:58:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-01722: número inválido
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01722/
-
-Wed Mar 27 2024 14:00:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
-
-Wed Mar 27 2024 14:12:41 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-20223: Tempo para inativo não pode ser menor de 5 minutos
-ORA-06512: em "SYSTEM.VAL_T_SESSAO", line 5
-ORA-04088: erro durante a execução do gatilho 'SYSTEM.VAL_T_SESSAO'
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20223/
-
-Wed Mar 27 2024 14:13:01 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-20223: Tempo para inativo não pode ser menor de 5 minutos
-ORA-06512: em "SYSTEM.VAL_T_SESSAO", line 5
-ORA-04088: erro durante a execução do gatilho 'SYSTEM.VAL_T_SESSAO'
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20223/
-
-Wed Mar 27 2024 14:57:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
-Help: https://docs.oracle.com/error-help/db/ora-00942/
-
-Wed Mar 27 2024 14:57:47 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
-Help: https://docs.oracle.com/error-help/db/ora-00942/
-
-Wed Mar 27 2024 14:57:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
-Help: https://docs.oracle.com/error-help/db/ora-00942/
-
-Wed Mar 27 2024 15:50:49 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 2, coluna 45:
-PL/SQL: ORA-00936: expressão não encontrada
-ORA-06550: linha 2, coluna 13:
-PL/SQL: SQL Statement ignored
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Wed Mar 27 2024 22:23:27 GMT-0300 (Horário Padrão de Brasília) -- /AdministracaoServidor  -- Error: ORA-00936: expressão não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00936/
-
-Thu Mar 28 2024 22:19:02 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
-
-Thu Mar 28 2024 22:49:23 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Thu Mar 28 2024 22:50:42 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Thu Mar 28 2024 22:54:29 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Sun Mar 31 2024 22:05:53 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 48:
-PL/SQL: ORA-00911: caractere inválido
-ORA-06550: linha 2, coluna 1:
-PL/SQL: SQL Statement ignored
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Sun Mar 31 2024 22:06:04 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 50:
-PL/SQL: ORA-00911: caractere inválido
-ORA-06550: linha 2, coluna 1:
-PL/SQL: SQL Statement ignored
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Sun Mar 31 2024 22:06:20 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 50:
-PL/SQL: ORA-00911: caractere inválido
-ORA-06550: linha 2, coluna 1:
-PL/SQL: SQL Statement ignored
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Sun Mar 31 2024 22:06:39 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 46:
-PL/SQL: ORA-00911: caractere inválido
-ORA-06550: linha 2, coluna 1:
-PL/SQL: SQL Statement ignored
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Sun Mar 31 2024 22:07:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 46:
-PL/SQL: ORA-00911: caractere inválido
-ORA-06550: linha 2, coluna 1:
-PL/SQL: SQL Statement ignored
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Sun Mar 31 2024 22:07:43 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 48:
-PL/SQL: ORA-00911: caractere inválido
-ORA-06550: linha 2, coluna 1:
-PL/SQL: SQL Statement ignored
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Sun Mar 31 2024 22:23:05 GMT-0300 (Horário Padrão de Brasília) -- /cadastro/parceiro  -- Token inválido!r
-
-Sat Apr 06 2024 20:16:58 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00926: palavra-chave VALUES não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00926/
-
-Sat Apr 06 2024 20:17:05 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
-
-Sat Apr 06 2024 20:17:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
-
-Sat Apr 06 2024 20:18:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
-
-Sat Apr 06 2024 20:19:52 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00920: operador relacional inválido
-Help: https://docs.oracle.com/error-help/db/ora-00920/
-
-Sat Apr 06 2024 20:22:53 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
-
-Sun Apr 07 2024 14:52:30 GMT-0300 (Horário Padrão de Brasília) -- /beforeunload  -- Error: NJS-125: "connectString" cannot be empty or undefined. Bequeath connections are not supported in Thin mode
-
-Sun Apr 07 2024 14:52:30 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-125: "connectString" cannot be empty or undefined. Bequeath connections are not supported in Thin mode
-
-Sun Apr 07 2024 15:22:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01821: formato de data não reconhecido
-Help: https://docs.oracle.com/error-help/db/ora-01821/
-
-Sun Apr 07 2024 15:23:03 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01821: formato de data não reconhecido
-Help: https://docs.oracle.com/error-help/db/ora-01821/
-
-Sun Apr 07 2024 15:23:10 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01821: formato de data não reconhecido
-Help: https://docs.oracle.com/error-help/db/ora-01821/
-
-Sun Apr 07 2024 15:27:45 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Sun Apr 07 2024 16:18:11 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 1 positional bind values are required but 0 were provided
-
-Sun Apr 07 2024 16:18:20 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
+Fri May 31 2024 12:56:58 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
 Help: https://docs.oracle.com/error-help/db/ora-00907/
 
-Sun Apr 07 2024 16:18:26 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
+Fri May 31 2024 13:04:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "PARC_CGC": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Sun Jun 02 2024 20:16:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
+
+Tue Jun 04 2024 11:38:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00905: palavra-chave não encontrada
+Help: https://docs.oracle.com/error-help/db/ora-00905/
+
+Tue Jun 04 2024 11:40:02 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00906: parêntese esquerdo não encontrado
+Help: https://docs.oracle.com/error-help/db/ora-00906/
+
+Tue Jun 04 2024 11:40:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00906: parêntese esquerdo não encontrado
+Help: https://docs.oracle.com/error-help/db/ora-00906/
+
+Tue Jun 04 2024 11:40:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00906: parêntese esquerdo não encontrado
+Help: https://docs.oracle.com/error-help/db/ora-00906/
+
+Tue Jun 04 2024 11:40:42 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00906: parêntese esquerdo não encontrado
+Help: https://docs.oracle.com/error-help/db/ora-00906/
+
+Tue Jun 04 2024 11:47:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:47:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:48:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:49:08 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:49:17 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:49:30 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:50:19 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:51:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:53:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00911: caractere inválido
+Help: https://docs.oracle.com/error-help/db/ora-00911/
+
+Tue Jun 04 2024 11:53:48 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
+Help: https://docs.oracle.com/error-help/db/ora-00923/
+
+Tue Jun 04 2024 12:13:17 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "LAST_DAY": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Tue Jun 04 2024 12:15:00 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Tue Jun 04 2024 12:15:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00909: número de argumentos inválido
+Help: https://docs.oracle.com/error-help/db/ora-00909/
+
+Tue Jun 04 2024 12:16:09 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00909: número de argumentos inválido
+Help: https://docs.oracle.com/error-help/db/ora-00909/
+
+Tue Jun 04 2024 12:19:30 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00909: número de argumentos inválido
+Help: https://docs.oracle.com/error-help/db/ora-00909/
+
+Tue Jun 04 2024 12:26:36 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00909: número de argumentos inválido
+Help: https://docs.oracle.com/error-help/db/ora-00909/
+
+Tue Jun 04 2024 12:27:37 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
 Help: https://docs.oracle.com/error-help/db/ora-00907/
 
-Wed Apr 17 2024 12:21:02 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00957: nome de coluna duplicado
-Help: https://docs.oracle.com/error-help/db/ora-00957/
+Tue Jun 04 2024 12:28:17 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 2 positional bind values are required but 0 were provided
 
-Wed Apr 17 2024 12:47:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
-Help: https://docs.oracle.com/error-help/db/ora-00942/
+Tue Jun 04 2024 12:32:55 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01481: modelo inválido para formato de número
+Help: https://docs.oracle.com/error-help/db/ora-01481/
 
-Wed Apr 17 2024 13:04:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00920: operador relacional inválido
-Help: https://docs.oracle.com/error-help/db/ora-00920/
+Tue Jun 04 2024 12:33:13 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01481: modelo inválido para formato de número
+Help: https://docs.oracle.com/error-help/db/ora-01481/
 
-Wed Apr 17 2024 13:05:19 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00920: operador relacional inválido
-Help: https://docs.oracle.com/error-help/db/ora-00920/
+Tue Jun 04 2024 12:33:26 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01481: modelo inválido para formato de número
+Help: https://docs.oracle.com/error-help/db/ora-01481/
 
-Wed Apr 17 2024 13:06:36 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00936/
+Tue Jun 04 2024 12:33:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01481: modelo inválido para formato de número
+Help: https://docs.oracle.com/error-help/db/ora-01481/
 
-Wed Apr 17 2024 13:10:46 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-00001: restrição exclusiva (SYSTEM.ID_PARC_) violada
-ORA-06512: em "SYSTEM.INSERI_USUARIO", line 26
-ORA-06512: em line 2
-Help: https://docs.oracle.com/error-help/db/ora-00001/
+Tue Jun 04 2024 12:39:13 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
 
-Wed Apr 17 2024 19:17:20 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: NJS-097: no bind placeholder named ":ID_USU" was found in the statement text
+Thu Jun 06 2024 13:45:20 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00909: número de argumentos inválido
+Help: https://docs.oracle.com/error-help/db/ora-00909/
 
-Wed Apr 17 2024 19:54:24 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00904: "CFU_ANEXA": identificador inválido
+Thu Jun 06 2024 13:45:55 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00909: número de argumentos inválido
+Help: https://docs.oracle.com/error-help/db/ora-00909/
+
+Thu Jun 06 2024 13:51:09 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
+Help: https://docs.oracle.com/error-help/db/ora-00907/
+
+Thu Jun 06 2024 13:51:17 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava CHAR obteve DATE
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:51:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava CHAR obteve DATE
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:52:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:53:36 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:53:56 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:56:29 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:57:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:57:39 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:58:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:58:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 13:59:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava NUMBER obteve INTERVAL DAY TO SECOND
+Help: https://docs.oracle.com/error-help/db/ora-00932/
+
+Thu Jun 06 2024 14:51:44 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-04098: gatilho 'SYSTEM.VALIDA_TABELA_BANCO' é inválido e a revalidação falhou
+Help: https://docs.oracle.com/error-help/db/ora-04098/
+
+Fri Jun 07 2024 09:07:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00904: : identificador inválido
 Help: https://docs.oracle.com/error-help/db/ora-00904/
 
-Wed Apr 17 2024 19:57:29 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00904: "T"."GRP_ANEXA": identificador inválido
+Fri Jun 07 2024 09:08:03 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00904: : identificador inválido
 Help: https://docs.oracle.com/error-help/db/ora-00904/
 
-Wed Apr 17 2024 19:59:55 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00904: "T"."GRP_ANEXA": identificador inválido
+Fri Jun 07 2024 09:08:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00904: : identificador inválido
 Help: https://docs.oracle.com/error-help/db/ora-00904/
 
-Wed Apr 17 2024 20:00:53 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00904: "T"."GRP_ANEXA": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
+Fri Jun 07 2024 09:16:00 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
+Help: https://docs.oracle.com/error-help/db/ora-00900/
 
-Wed Apr 17 2024 20:01:43 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00904: "T"."GRP_ANEXA": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Wed Apr 17 2024 20:01:46 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00904: "T"."GRP_ANEXA": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Wed Apr 17 2024 20:02:40 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Wed Apr 17 2024 20:02:57 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Wed Apr 17 2024 20:03:29 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Wed Apr 17 2024 20:03:51 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Wed Apr 17 2024 20:04:41 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Wed Apr 17 2024 20:06:21 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Wed Apr 17 2024 20:07:27 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00904: "T"."GRP_ANEXA": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Wed Apr 17 2024 20:08:33 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:08:35 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:08:53 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:09:28 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:09:56 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:09:58 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:10:27 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:10:29 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:11:06 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:12:55 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:13:22 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:13:35 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:14:11 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Wed Apr 17 2024 20:14:48 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-00904: "T"."GRP_ANEXA": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Thu Apr 18 2024 20:45:15 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-107: invalid cursor
-
-Thu Apr 18 2024 20:45:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "PARC_CGC": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Thu Apr 18 2024 23:47:11 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 29
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
-
-Fri Apr 19 2024 07:55:09 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 07:58:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 07:59:34 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 08:01:11 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 08:01:14 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 08:01:16 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 08:01:19 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 08:01:25 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 12:00:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 12:03:56 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 12:04:01 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 12:05:02 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 12:05:05 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 12:05:52 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
-
-Fri Apr 19 2024 12:07:30 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 14:
-PL/SQL: ORA-00903: nome de tabela inválido
-ORA-06550: linha 1, coluna 7:
-PL/SQL: SQL Statement ignored
-ORA-06550: linha 1, coluna 84:
-PLS-00103: Encontrado o símbolo "end-of-file" quando um dos seguintes símbolos era esperado:
-
-   ( begin case declare end exception exit for goto if loop mod
-   null pragma raise return select update while with
-   <um identificador>
-   <um identificador delimitado por aspas duplas>
-   <uma variável de ligação> << continue close current delete
-   fetch lock insert open rollback savepoint set sql execute
-   commit forall merge standard pipe purge json_object
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Fri Apr 19 2024 12:09:00 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 93:
-PLS-00103: Encontrado o símbolo "end-of-file" quando um dos seguintes símbolos era esperado:
-
-   ( begin case declare end exception exit for goto if loop mod
-   null pragma raise return select update while with
-   <um identificador>
-   <um identificador delimitado por aspas duplas>
-   <uma variável de ligação> << continue close current delete
-   fetch lock insert open rollback savepoint set sql execute
-   commit forall merge standard pipe purge json_object
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Fri Apr 19 2024 12:09:29 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 93:
-PLS-00103: Encontrado o símbolo "end-of-file" quando um dos seguintes símbolos era esperado:
-
-   ( begin case declare end exception exit for goto if loop mod
-   null pragma raise return select update while with
-   <um identificador>
-   <um identificador delimitado por aspas duplas>
-   <uma variável de ligação> << continue close current delete
-   fetch lock insert open rollback savepoint set sql execute
-   commit forall merge standard pipe purge json_object
-Help: https://docs.oracle.com/error-help/db/ora-06550/
-
-Fri Apr 19 2024 12:18:39 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Fri Apr 19 2024 13:46:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Fri Apr 19 2024 13:46:34 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Fri Apr 19 2024 21:00:02 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 29
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
-
-Fri Apr 19 2024 21:02:37 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 29
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
-
-Fri Apr 19 2024 21:05:21 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 30
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
-
-Fri Apr 19 2024 21:05:51 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 30
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
-
-Fri Apr 19 2024 21:18:19 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 30
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
-
-Fri Apr 19 2024 21:25:46 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20015: Usuário logado não pode alterar o próprio registro na tela de usuários.
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 30
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20015/
-
-Fri Apr 19 2024 21:38:41 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-01400: não é possível inserir NULL em ("SYSTEM"."USU_USUARIO"."USU_NOME")
-ORA-06512: em "SYSTEM.INSERI_USUARIO", line 26
-ORA-06512: em line 2
-Help: https://docs.oracle.com/error-help/db/ora-01400/
-
-Fri Apr 19 2024 21:56:50 GMT-0300 (Horário Padrão de Brasília) -- /copia_usuario  -- Error: ORA-04080: o gatilho 'USU_VAL_CONFIG' não existe
-ORA-06512: em "SYSTEM.COPIA_CONFIG_USU", line 116
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-04080/
-
-Mon Apr 22 2024 10:42:07 GMT-0300 (Horário Padrão de Brasília) -- /copia_usuario  -- Error: ORA-06550: linha 1, coluna 7:
-PLS-00905: o objeto SYSTEM.COPIA_CONFIG_USU é inválido
-ORA-06550: linha 1, coluna 7:
+Fri Jun 07 2024 09:23:24 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 1:
+PLS-00306: número incorreto de tipos de argumentos na chamada para 'INSERI_MOVI'
+ORA-06550: linha 2, coluna 1:
 PL/SQL: Statement ignored
 Help: https://docs.oracle.com/error-help/db/ora-06550/
 
-Mon Apr 22 2024 11:21:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
-Help: https://docs.oracle.com/error-help/db/ora-00900/
-
-Mon Apr 22 2024 11:24:26 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "STATUS": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Mon Apr 22 2024 11:35:37 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-20301: Não é possivel desativar usuário,pois o mesmo possui um caixa em aberto!
-ORA-06512: em "SYSTEM.ALTERA_USUARIO", line 39
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20301/
-
-Mon Apr 22 2024 12:23:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-04098: gatilho 'SYSTEM.VALIDA_TABELA_BANCO' é inválido e a revalidação falhou
-Help: https://docs.oracle.com/error-help/db/ora-04098/
-
-Mon Apr 22 2024 12:24:09 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-30669: a tabela pode ter apenas uma coluna de identidade
-Help: https://docs.oracle.com/error-help/db/ora-30669/
-
-Mon Apr 22 2024 12:24:09 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-04098: gatilho 'SYSTEM.VALIDA_TABELA_BANCO' é inválido e a revalidação falhou
-Help: https://docs.oracle.com/error-help/db/ora-04098/
-
-Mon Apr 22 2024 12:25:22 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-30669: a tabela pode ter apenas uma coluna de identidade
-Help: https://docs.oracle.com/error-help/db/ora-30669/
-
-Mon Apr 22 2024 12:25:29 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-30669: a tabela pode ter apenas uma coluna de identidade
-Help: https://docs.oracle.com/error-help/db/ora-30669/
-
-Mon Apr 22 2024 12:26:04 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00955: nome já está sendo usado por um objeto existente
-Help: https://docs.oracle.com/error-help/db/ora-00955/
-
-Mon Apr 22 2024 20:40:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Mon Apr 22 2024 20:44:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Mon Apr 22 2024 21:57:33 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:35 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=XASY7HEd+6rchJDQHaUU5w==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:35 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=F0QkOjN0hNSljlDVfKuD1Q==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:35 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=xGuMilU/X5INGmR9ebNi3g==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:35 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=gWSwgaa+i7Pw3rHpxyyHtA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:35 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=VrFAxJHvicYuVvWyrKQHzg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=wYX1E6JXu4zqzE3N9QRb/g==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=T8YtAhARnKvLKYwcnfPl/g==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=PvnvRazFHkruDj/MWOdnKg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=0XvCN2pkYQuyUE1xrztTvA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=gId8JJ2tHNRpodJ6Hs01Mg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=J6nEFTErDZmxU2GpkjkW2Q==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=egQOsIF/wTaT5CV08Yki5A==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:37 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=Sp1KIAU/XUzgUTHBWPtYQQ==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:37 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=mZQgG0GVAqs5xNn/9RyX/g==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:37 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=JNUTRR5E+mbXvOgsqnbBOw==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:37 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=DIg4fFsyKlmTogHeIBIVdg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:37 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=h28BIueMyCd90KgrseoiGQ==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:37 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=YnUTmhPAjT8T6pjUDwPjkA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:38 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=HWUWjNDxWofuUlsQ5nQ6CA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:38 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=TLDEKU1Ngd8lHawdQAtJYg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:38 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=0eUnJk7fUD2F2YNPx+Mc8Q==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:38 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=KnpJQGo93mB0BfCY/eteEA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:38 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=tRpX8g5wQ2rz1uPzf+6WaA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=Nnv15JqrFEZZuxy5zQqEDw==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=5VrqZZG6pOQ8QQ+R9/smRA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=tmJW0jmP5SNypbPrUl1K0Q==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=BcyFw4iM1L6poUBYjmPAGg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=YDjAnekQbatwnJA69MFu0g==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=t8XIDYJonXTTn8cXX0johg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:39 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=N0khsL/13h4PWxueZAF9IQ==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:40 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=VwQ1+7rpTC5lKvLakj019g==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:40 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=7EB70lWsLmiX2ZuMeFdegA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:40 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=sg39Bstdy+5SRQEmVLMJaA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:40 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=WVpol3qaFjZRsHrUR/M42Q==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:40 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=CWsn0O4XxrScPSlTvD9aNw==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:40 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=wy16rzQ5g7GZVyp1XhmJZA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:41 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=Fb7C5CThcWm0xlRXe0SY6Q==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:41 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=izmUGdN6ujwh4/4P2JBAyA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:41 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=PCJ+BM3ZERzoPBBzjKizzg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:41 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=nLmpQoFxNqspwelPubwP1g==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=6thpU9JqtgKctpEXJs24yw==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=baYZHnPldC2yn2yS6VKXqA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=zhbF314TV9B3gr6n5Vtudg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=NoSiFnE0v8PufPZt9zYX2Q==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=qNXmRrPEuoCt51y2/sD+Rw==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=Br/fdZwpNVc7UuE+r53KjA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=LLzwvFuJIRnRj3wmiWepDQ==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=l9X0OLGimb3irWXcLOBG1w==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=OdurBApAWJxnGpbv7qi12Q==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=mAH692YjTVlHYu5HX+8XMg==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:42 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=SYmlV9v43faCK5A56P4olA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:43 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=/T8tFdswmJHwwLa+hq65MA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:43 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=k9J+2hkYnf3V5a7NAZwtow==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:44 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=YSE3mMOMc9Vz8xLEtm7ESA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:44 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=CO3l44coAqIh9wv9ePMX/w==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:44 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=LUifaynCsQEPVDCK440fSA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:44 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-503: connection to host 127.0.0.1 port 1521 could not be established. (CONNECTION_ID=ZiZPhMXcOCkSHIsxxiIFBA==)
-connect ECONNREFUSED 127.0.0.1:1521
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:45 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:46 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:48 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:48 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:48 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:48 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:48 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:48 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:48 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:49 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:49 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:49 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:49 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:50 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:50 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:50 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:50 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:51 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:51 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:51 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:51 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:52 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:52 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:52 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:53 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:53 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:53 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:53 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:54 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Mon Apr 22 2024 21:57:54 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Tue Apr 23 2024 12:33:53 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Tue Apr 23 2024 12:35:14 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-005: invalid value for parameter 2
-
-Tue Apr 23 2024 12:37:14 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Tue Apr 23 2024 12:43:37 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Tue Apr 23 2024 12:43:59 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Tue Apr 23 2024 12:47:58 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Tue Apr 23 2024 12:49:50 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Tue Apr 23 2024 12:52:04 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Tue Apr 23 2024 12:53:53 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00922: opção não encontrada ou inválida
-Help: https://docs.oracle.com/error-help/db/ora-00922/
-
-Wed Apr 24 2024 19:46:49 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-04070: nome de gatilho inválido
-Help: https://docs.oracle.com/error-help/db/ora-04070/
-
-Fri Apr 26 2024 13:15:46 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Fri Apr 26 2024 13:15:55 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00937: não é uma função de grupo de grupo simples
-Help: https://docs.oracle.com/error-help/db/ora-00937/
-
-Fri Apr 26 2024 13:16:09 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Fri Apr 26 2024 13:16:31 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Fri Apr 26 2024 13:16:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "ENTRADA": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Fri Apr 26 2024 13:17:02 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "ENTRADA": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Fri Apr 26 2024 13:17:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00979: não é uma expressão GROUP BY
-Help: https://docs.oracle.com/error-help/db/ora-00979/
-
-Fri Apr 26 2024 13:19:23 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
-Help: https://docs.oracle.com/error-help/db/ora-00907/
-
-Fri Apr 26 2024 13:19:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
-Help: https://docs.oracle.com/error-help/db/ora-00907/
-
-Fri Apr 26 2024 13:19:44 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
-Help: https://docs.oracle.com/error-help/db/ora-00907/
-
-Fri Apr 26 2024 13:19:49 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
-Help: https://docs.oracle.com/error-help/db/ora-00907/
-
-Fri Apr 26 2024 13:22:56 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Fri Apr 26 2024 13:25:27 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Fri Apr 26 2024 13:47:18 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Fri Apr 26 2024 13:57:43 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Fri Apr 26 2024 19:26:53 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Token inválido!r
-
-Sat Apr 27 2024 21:39:50 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Sat Apr 27 2024 21:39:53 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00905: palavra-chave não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00905/
-
-Sat Apr 27 2024 21:44:08 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-20203: TOKEN - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRF9VU1VBUklPIjo2NDQsImlhdCI6MTcxNDI1OTkzNiwiZXhwIjoxNzE0Mjk1OTM2fQ.f5VHWI8-s3C0YO_NIAIZrjtnyFanWi9jElmRGUfPOrU
-ORA-06512: em "SYSTEM.P_HIST_TELA", line 21
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20203/
-
-Sat Apr 27 2024 21:44:08 GMT-0300 (Horário Padrão de Brasília) -- /log/acesso  -- Error: ORA-20203: TOKEN - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRF9VU1VBUklPIjo2NDQsImlhdCI6MTcxNDI1OTkzNiwiZXhwIjoxNzE0Mjk1OTM2fQ.f5VHWI8-s3C0YO_NIAIZrjtnyFanWi9jElmRGUfPOrU
-ORA-06512: em "SYSTEM.P_HIST_TELA", line 21
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-20203/
-
-Sun Apr 28 2024 19:14:48 GMT-0300 (Horário Padrão de Brasília) -- /log/acesso  -- Token inválido!r
-
-Sun Apr 28 2024 22:39:37 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Sun Apr 28 2024 23:00:09 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Sun Apr 28 2024 23:08:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
-Help: https://docs.oracle.com/error-help/db/ora-00942/
-
-Sun Apr 28 2024 23:28:59 GMT-0300 (Horário Padrão de Brasília) -- /visualiza/dicionario/dados/42  -- ReferenceError: CONSTRAINT is not defined
-
-Mon Apr 29 2024 12:37:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Mon Apr 29 2024 12:37:25 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Mon Apr 29 2024 12:42:34 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00905: palavra-chave não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00905/
-
-Mon Apr 29 2024 12:42:45 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Mon Apr 29 2024 12:42:59 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Mon Apr 29 2024 12:46:06 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Mon Apr 29 2024 12:46:29 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Mon Apr 29 2024 14:43:26 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "PARC_CGC": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Tue Apr 30 2024 12:12:29 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
-Help: https://docs.oracle.com/error-help/db/ora-00900/
-
-Tue Apr 30 2024 12:19:52 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-01722: número inválido
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01722/
-
-Tue Apr 30 2024 13:11:58 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Tue Apr 30 2024 13:12:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00909: número de argumentos inválido
-Help: https://docs.oracle.com/error-help/db/ora-00909/
-
-Tue Apr 30 2024 13:16:35 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Tue Apr 30 2024 13:16:42 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00936/
-
-Tue Apr 30 2024 13:17:02 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00936/
-
-Tue Apr 30 2024 13:17:39 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00936/
-
-Tue Apr 30 2024 13:23:11 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01858: foi localizado um caractere não numérico onde se esperava um numérico
-Help: https://docs.oracle.com/error-help/db/ora-01858/
-
-Tue Apr 30 2024 13:23:27 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00909: número de argumentos inválido
-Help: https://docs.oracle.com/error-help/db/ora-00909/
-
-Tue Apr 30 2024 13:23:34 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01858: foi localizado um caractere não numérico onde se esperava um numérico
-Help: https://docs.oracle.com/error-help/db/ora-01858/
-
-Tue Apr 30 2024 13:24:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00936/
-
-Tue Apr 30 2024 13:24:20 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00936: expressão não encontrada
-Help: https://docs.oracle.com/error-help/db/ora-00936/
-
-Tue Apr 30 2024 13:25:11 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01830: a imagem do formato da data termina antes de converter a string de entrada inteira
-Help: https://docs.oracle.com/error-help/db/ora-01830/
-
-Tue Apr 30 2024 13:26:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00921: fim inesperado do comando SQL
-Help: https://docs.oracle.com/error-help/db/ora-00921/
-
-Tue Apr 30 2024 13:27:05 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00921: fim inesperado do comando SQL
-Help: https://docs.oracle.com/error-help/db/ora-00921/
-
-Tue Apr 30 2024 13:27:29 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava CHAR obteve TIMESTAMP
-Help: https://docs.oracle.com/error-help/db/ora-00932/
-
-Tue Apr 30 2024 13:27:48 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00932: tipos de dados inconsistentes: esperava CHAR obteve TIMESTAMP
-Help: https://docs.oracle.com/error-help/db/ora-00932/
-
-Wed May 01 2024 21:42:31 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-01400: não é possível inserir NULL em ("SYSTEM"."USU_USUARIO"."ID_PARC")
-ORA-06512: em "SYSTEM.INSERI_USUARIO", line 26
+Fri Jun 07 2024 09:23:31 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 27:
+PLS-00363: a expressão '<null>' não pode ser usada como um destino de designação
+ORA-06550: linha 2, coluna 1:
+PL/SQL: Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Fri Jun 07 2024 09:23:38 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 27:
+PLS-00363: a expressão 'X' não pode ser usada como um destino de designação
+ORA-06550: linha 2, coluna 1:
+PL/SQL: Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Fri Jun 07 2024 09:24:52 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 1:
+PLS-00905: o objeto SYSTEM.INSERI_MOVI é inválido
+ORA-06550: linha 2, coluna 1:
+PL/SQL: Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Fri Jun 07 2024 09:25:21 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
 ORA-06512: em line 2
-Help: https://docs.oracle.com/error-help/db/ora-01400/
-
-Wed May 01 2024 23:57:50 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Token inválido!r
-
-Fri May 03 2024 12:45:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06502: PL/SQL: erro: buffer de string de caracteres pequeno demais numérico ou de valor
-ORA-06512: em "SYSTEM.FORMATA_TELEFONE", line 10
 Help: https://docs.oracle.com/error-help/db/ora-06502/
 
-Fri May 03 2024 12:45:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06502: PL/SQL: erro: buffer de string de caracteres pequeno demais numérico ou de valor
-ORA-06512: em "SYSTEM.FORMATA_TELEFONE", line 10
-Help: https://docs.oracle.com/error-help/db/ora-06502/
+Fri Jun 07 2024 09:25:39 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
 
-Fri May 03 2024 12:56:53 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20253: Numero de telefone contém mais carcteres o que o formato (XX) 9XXXX-XXXX,verifique os valores e tente novamente!
-ORA-06512: em "SYSTEM.FORMATA_TELEFONE", line 14
-Help: https://docs.oracle.com/error-help/db/ora-20253/
-
-Fri May 03 2024 13:07:30 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20253: Numero de telefone contém mais carcteres do que o formato (XX) 9XXXX-XXXX,verifique os valores e tente novamente!
-ORA-06512: em "SYSTEM.FORMATA_TELEFONE", line 14
-Help: https://docs.oracle.com/error-help/db/ora-20253/
-
-Fri May 03 2024 13:07:35 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20253: Numero de telefone contém mais carcteres do que o formato (XX) 9XXXX-XXXX,verifique os valores e tente novamente!
-ORA-06512: em "SYSTEM.FORMATA_TELEFONE", line 14
-Help: https://docs.oracle.com/error-help/db/ora-20253/
-
-Fri May 03 2024 13:10:13 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20254: O primeiro digito antes do telefone dever ser 9,verifique e tente novamente!
-ORA-06512: em "SYSTEM.FORMATA_TELEFONE", line 19
-Help: https://docs.oracle.com/error-help/db/ora-20254/
-
-Fri May 03 2024 13:11:24 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20254: O primeiro digito antes do telefone dever ser 9,verifique e tente novamente!
-ORA-06512: em "SYSTEM.FORMATA_TELEFONE", line 19
-Help: https://docs.oracle.com/error-help/db/ora-20254/
-
-Fri May 03 2024 22:57:55 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
-Help: https://docs.oracle.com/error-help/db/ora-00900/
-
-Fri May 03 2024 22:58:02 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06503: PL/SQL: Função retornada sem valor
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 7
-Help: https://docs.oracle.com/error-help/db/ora-06503/
-
-Fri May 03 2024 23:04:28 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20203: A IE informada não é válida,não é permitido letras e nem caracteres especais!
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 10
-Help: https://docs.oracle.com/error-help/db/ora-20203/
-
-Fri May 03 2024 23:12:25 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00902: tipo de dados inválido
-Help: https://docs.oracle.com/error-help/db/ora-00902/
-
-Fri May 03 2024 23:13:02 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20203: A IE informada não é válida,não é permitido letras e nem caracteres especais!
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 13
-Help: https://docs.oracle.com/error-help/db/ora-20203/
-
-Fri May 03 2024 23:13:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20205: IE deve ter 9 digitos!
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 24
-Help: https://docs.oracle.com/error-help/db/ora-20205/
-
-Fri May 03 2024 23:13:24 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20205: IE deve ter 9 digitos!
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 24
-Help: https://docs.oracle.com/error-help/db/ora-20205/
-
-Fri May 03 2024 23:13:57 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20204: IE não é válida,os dois primeiros digitos devem ser um dos numeros a seguir => 10,11,20,29
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 21
-Help: https://docs.oracle.com/error-help/db/ora-20204/
-
-Fri May 03 2024 23:16:25 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20204: IE não é válida,os dois primeiros digitos devem ser um dos numeros a seguir => 10,11,20,29
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 23
-Help: https://docs.oracle.com/error-help/db/ora-20204/
-
-Fri May 03 2024 23:16:46 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20204: IE não é válida,os dois primeiros digitos devem ser um dos numeros a seguir => 10,11,20,29
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 23
-Help: https://docs.oracle.com/error-help/db/ora-20204/
-
-Fri May 03 2024 23:44:08 GMT-0300 (Horário Padrão de Brasília) -- /importar/dados  -- AxiosError: Request failed with status code 429
-
-Fri May 03 2024 23:44:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20205: IE deve ter 9 digitos!
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 47
-Help: https://docs.oracle.com/error-help/db/ora-20205/
-
-Fri May 03 2024 23:44:57 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-20205: IE deve ter 9 digitos!
-ORA-06512: em "SYSTEM.VAL_IE_GO", line 47
-Help: https://docs.oracle.com/error-help/db/ora-20205/
-
-Sat May 04 2024 09:33:11 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: : identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 09:33:26 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: : identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 09:33:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: : identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 09:34:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: : identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 09:34:23 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: : identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 09:36:15 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
-Help: https://docs.oracle.com/error-help/db/ora-00907/
-
-Sat May 04 2024 09:36:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "TOKENDESC": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:16:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "CURRENT_TIME": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:16:15 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "CURRENT_TIME": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:17:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "CURRENT_TIME": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:20:15 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "EXTARCT_DAY": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:20:21 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "EXTRACT_DAY": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:20:29 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "EXTRACTDAY": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:20:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "EXTRACTDAY": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:22:17 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "EXTRACTDAY": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:22:35 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "EXTRACTHOUR": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:23:31 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "EXTRACTHOUR": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:30:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "RAND": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:30:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "RAND": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:30:51 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "RAND": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:31:28 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "RAND": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:31:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "RAND": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:31:42 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "RAND": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Sat May 04 2024 10:36:40 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Mon May 06 2024 12:56:49 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
-Help: https://docs.oracle.com/error-help/db/ora-00900/
-
-Mon May 06 2024 12:57:11 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Mon May 06 2024 12:57:21 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Mon May 06 2024 12:57:26 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Mon May 06 2024 13:26:05 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "TELA": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Mon May 06 2024 13:27:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
-Help: https://docs.oracle.com/error-help/db/ora-00907/
-
-Mon May 06 2024 13:32:05 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Mon May 06 2024 13:32:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Mon May 06 2024 13:32:32 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
-
-Mon May 06 2024 13:34:19 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "COUNT": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Mon May 06 2024 13:34:25 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "PERCENTASC": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Mon May 06 2024 13:39:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00907: parêntese direito não encontrado
-Help: https://docs.oracle.com/error-help/db/ora-00907/
-
-Mon May 06 2024 13:40:11 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00918: coluna definida de maneira ambígua
-Help: https://docs.oracle.com/error-help/db/ora-00918/
-
-Mon May 06 2024 13:40:52 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00979: não é uma expressão GROUP BY
-Help: https://docs.oracle.com/error-help/db/ora-00979/
-
-Wed May 08 2024 19:59:45 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 2 positional bind values are required but 0 were provided
-
-Wed May 08 2024 19:59:49 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 2 positional bind values are required but 0 were provided
-
-Wed May 08 2024 20:00:02 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 2 positional bind values are required but 0 were provided
-
-Wed May 08 2024 20:00:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 2 positional bind values are required but 0 were provided
-
-Wed May 08 2024 20:05:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Wed May 08 2024 23:22:06 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: : identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Wed May 08 2024 23:25:13 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00979: não é uma expressão GROUP BY
-Help: https://docs.oracle.com/error-help/db/ora-00979/
-
-Thu May 09 2024 19:26:01 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Token inválido!r
-
-Sat May 11 2024 10:10:52 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
-Help: https://docs.oracle.com/error-help/db/ora-01722/
-
-Sat May 11 2024 17:33:43 GMT-0300 (Horário Padrão de Brasília) -- /monitordesessao  -- Token inválido!r
-
-Sun May 12 2024 14:54:07 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-01400: não é possível inserir NULL em ("SYSTEM"."MARCA"."NOME")
+Thu Jun 13 2024 13:47:19 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_GRUPO) violada - registro filho localizado
 ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-01400/
-
-Sun May 12 2024 15:50:15 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
-ORA-06512: em line 2
 Help: https://docs.oracle.com/error-help/db/ora-02292/
 
-Sun May 12 2024 19:00:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
-Help: https://docs.oracle.com/error-help/db/ora-00933/
+Thu Jun 13 2024 13:48:33 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_GRUPO) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/
 
-Mon May 13 2024 11:34:13 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+Thu Jun 13 2024 13:52:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_GRUPO) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/
 
-Mon May 13 2024 12:33:08 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Token inválido!r
-
-Mon May 13 2024 12:57:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
-Help: https://docs.oracle.com/error-help/db/ora-00900/
-
-Mon May 13 2024 12:58:08 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-097: no bind placeholder named ":GRP_DESC" was found in the statement text
-
-Mon May 13 2024 13:13:03 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "L"."ID_USU": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Mon May 13 2024 13:13:13 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "L"."ID_USU": identificador inválido
-Help: https://docs.oracle.com/error-help/db/ora-00904/
-
-Mon May 13 2024 13:16:11 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Mon May 13 2024 13:16:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
-Help: https://docs.oracle.com/error-help/db/ora-00923/
-
-Mon May 13 2024 13:20:58 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01481: modelo inválido para formato de número
-Help: https://docs.oracle.com/error-help/db/ora-01481/
-
-Mon May 13 2024 13:24:31 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00979: não é uma expressão GROUP BY
-Help: https://docs.oracle.com/error-help/db/ora-00979/
+Thu Jun 13 2024 13:53:14 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_GRUPO) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/

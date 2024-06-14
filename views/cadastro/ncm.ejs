@@ -47,17 +47,22 @@
    </form>
   </div>
   <!-- Tabela -->
-  <table class="table table-hover" id="Ncm" style="height: auto;">
-    <thead>
-        <tr>
-            <td>Código</td>
-            <td>Descrição</td>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Dados sendo inseridos automaticamente -->
-    </tbody>
-  </table>
+  <div style="width: 100%;display: block;">
+    <%- include('../components/exporta.ejs');%>
+
+    <table class="table table-hover" id="Ncm" style="height: auto;">
+      <thead>
+          <tr>
+              <th>Código</td>
+              <th>Descrição</td>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Dados sendo inseridos automaticamente -->
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
 <script type="module" src="/js/cadastro/ncm.js"></script>

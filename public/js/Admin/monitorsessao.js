@@ -17,7 +17,6 @@ function Atualizar(){
 
 document.getElementById('monitor').addEventListener('dblclick',(e)=>{
     let cell = ( e.target.parentNode.cells[0].textContent)
-    console.log(cell);
     swal({
         title:'Finalizar sessão deste usuário?',
         text:'Realmente deseja finalizar a sessão deste usuário?',

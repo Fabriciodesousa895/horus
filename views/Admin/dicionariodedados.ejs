@@ -39,12 +39,13 @@
               <div class="form-group row">
                 <div class="col-sm-10">
                   <button type="button"  class="btn btn-primary mt-3" id="BuscarFiltro">Buscar</button>
-                  <a data-js="export-table" role="button" id="exportatabelas" class="btn btn-info mt-3" >Exportar CSV</a>
                 </div>
               </div>
             </form>
       </div> 
-      <div style="width: 100%;" >
+      <div style="width: 100%;display: block;" >
+        <%- include('../components/exporta.ejs');%>
+        
         <table class="table" style="width: 70%;" id="tabeladados" >
           <thead>
             <tr>
@@ -84,7 +85,9 @@
             </div>
           </form>
     </div> 
-    <div style="width: 100%;" >
+    <div style="width: 100%;display: block;" >
+      <%- include('../components/exporta.ejs');%>
+
       <table class="table" style="width: 70%;" id="tabelatriggerdados" >
         <thead>
           <tr>
@@ -117,7 +120,6 @@
             <div class="form-group row">
               <div class="col-sm-10">
                 <button  class="btn btn-primary mt-3" type="button" id="Buscarprocedure">Buscar</button>
-                <a data-js="export-table" role="button" id="exportarprocedures" class="btn btn-info mt-3" >Exportar CSV</a>
 
                 
               </div>
@@ -126,7 +128,9 @@
           </form>
     </div> 
     <!-- Procedures -->
-    <div style="width: 100%;" >
+    <div style="width: 100%;display: block;" >
+      <%- include('../components/exporta.ejs');%>
+
       <table class="table" style="width: 70%;" id="proceduredados" >
         <thead>
           <tr>
@@ -158,7 +162,6 @@
             <div class="form-group row">
               <div class="col-sm-10">
                 <button  class="btn btn-primary mt-3" type="button" id="Buscarprocedure">Buscar</button>
-                <a data-js="export-table" role="button" id="exportarprocedures" class="btn btn-info mt-3" >Exportar CSV</a>
 
                 
               </div>
@@ -167,7 +170,9 @@
           </form>
     </div> 
     <!-- Procedures -->
-    <div style="width: 100%;" >
+    <div style="width: 100%;display: block;" >
+      <%- include('../components/exporta.ejs');%>
+
       <table class="table" style="width: 70%;" id="proceduredados" >
         <thead>
           <tr>
@@ -200,7 +205,6 @@
              <div class="form-group row">
                <div class="col-sm-10">
                  <button  class="btn btn-primary mt-3" type="button" id="Buscarview">Buscar</button>
-                 <a data-js="export-table" role="button" id="exportarview" class="btn btn-info mt-3" >Exportar CSV</a>
  
                  
                </div>

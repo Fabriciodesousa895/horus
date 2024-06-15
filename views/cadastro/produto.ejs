@@ -96,31 +96,31 @@
 
                               <span >Nome</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="text" class="form-control" placeholder="Nome do produto"    id="PRDT_NOME" required>
+                                  <input type="text" class="form-control TddCam" placeholder="Nome do produto" name="PRDT_NOME"   required>
                               </div>
 
                               <label >Descrição</label>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="text" class="form-control" placeholder="Descrição"  id="PRDT_DESC" required>
+                                  <input type="text" class="form-control TddCam" placeholder="Descrição"  name="PRDT_DESCRICAO" required>
                               </div>
                               <label >Nr. peças</label>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="Nr. de peças"   id="PRDT_NR_PECA" required>
+                                  <input type="number" class="form-control TddCam" placeholder="Nr. de peças"   name="PRDT_NR_PECA" required>
                               </div>
 
                               <label f>Categoria</label>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="text" required  id="PRDT_ID_CTG" style="width: 80px;margin-right: 8px;" class="form-control">
-                                  <input type="text" required   id="PRDT_NOME_CTG" class="form-control  " placeholder="Categoria" >
+                                  <input type="number" required id="PRDT_ID_CTG" name="PRDT_ID_CTG" style="width: 80px;margin-right: 8px;" class="form-control  TddCam">
+                                  <input type="text" required  id="PRDT_NOME_CTG"  name="PRDT_NOME_CTG" class="form-control  " placeholder="Categoria" >
                                  </div>
                               <label >Marca</label>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="text" required  id="PRDT_MARCA" style="width: 80px;margin-right: 8px;" class="form-control ">
-                                  <input type="text" required   id="PRDT_MARCA_NOME" class="form-control  " placeholder="Marca" >
+                                  <input type="number" required id="PRDT_MARCA"  name="PRDT_MARCA" style="width: 80px;margin-right: 8px;" class="form-control TddCam">
+                                  <input type="text" required id="PRDT_MARCA_NOME"   name="PRDT_MARCA_NOME" class="form-control  " placeholder="Marca" >
                                  </div>
                               <label >Usado como</label>
                               <div style="display: flex; flex-direction: row;">
-                                <select  id="PRDT_USADO_COMO" class="form-control" required>
+                                <select  name="PRDT_USADO_COMO" class="form-control TddCam" required>
                                     <option value="">Selecione uma opção</option>
                                     <option value="R"  >Revenda</option>
                                     <option value="B"  >Brinde</option>
@@ -133,17 +133,17 @@
 
                               <label >Ncm</label>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="text" required  id="PRDT_NCM" style="width: 90px;margin-right: 8px;" class="form-control ">
-                                  <input type="text" required   id="PRDT_NCM_DESC" class="form-control  " placeholder="Descrição Ncm" >
+                                  <input type="text" required id="PRDT_NCM"  name="PRDT_NCM" style="width: 90px;margin-right: 8px;" class="form-control TddCam">
+                                  <input type="text" required  id="PRDT_NCM_DESC"  name="PRDT_NCM_DESC" class="form-control  " placeholder="Descrição Ncm" >
                                  </div>
 
                               <span >Estoque minimo</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="00,000"    id="PRDT_EST_MIN">
+                                  <input type="number" class="form-control TddCam" placeholder="00,000"    name="PRDT_EST_MIN">
                               </div>
                               <span >Estoque máximo</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="00,000"    id="PRDT_EST_MAX">
+                                  <input type="number" class="form-control TddCam" placeholder="00,000"    name="PRDT_EST_MAX">
                               </div>
 
                           </div>
@@ -151,36 +151,36 @@
                             
                               <span >Peso bruto</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="00,000"    id="PRDT_P_BRUTO">
+                                  <input type="number" class="form-control TddCam" placeholder="00,000"    name="PRDT_P_BRUTO">
                               </div>
                               <span >Peso liquido</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="00,000"    id="PRDT_P_LIQUIDO">
+                                  <input type="number" class="form-control TddCam" placeholder="00,000"    name="PRDT_P_LIQUIDO">
                               </div>
                               <span >Altura em centimetro</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="Altura"    id="PRDT_ALTURA">
+                                  <input type="number" class="form-control TddCam" placeholder="Altura"    name="PRDT_ALTURA">
                               </div>
            
                               <span >Largura em centimetro</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="Largura"    id="PRDT_LARGURA">
+                                  <input type="number" class="form-control TddCam" placeholder="Largura"    name="PRDT_LARGURA">
                               </div>
                               <span >Margem de lucro (%)</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="% 000,00"    id="PRDT_MARGEM_LUCRO">
+                                  <input type="number" class="form-control TddCam" placeholder="% 000,00"    name="PRDT_MARGEM_LUCRO">
                               </div>
                               <span >Comissão vendedor (%)</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="% 000,00"    id="PRDT_COMISSAO_VND">
+                                  <input type="number" class="form-control TddCam" placeholder="% 000,00"    name="PRDT_COMISSAO_VND">
                               </div>
                               <span >Comissão gerente (%)</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="number" class="form-control" placeholder="% 000,00"    id="PRDT_COMISSAO_GER">
+                                  <input type="number" class="form-control TddCam" placeholder="% 000,00"    name="PRDT_COMISSAO_GER">
                               </div>
                               <div class="custom-control custom-checkbox"> 
-                                <input type="checkbox" class="custom-control-input"  id="PRDT_CAL_COMISSAO" >
-                                <label class="custom-control-label"  for="PRDT_CAL_COMISSAO">Calcula comissão?</label>
+                                <input type="checkbox" class="custom-control-input TddCam"  name="PRDT_CAL_COMISSAO"  id="PRDT_CAL_">
+                                <label class="custom-control-label"  for="PRDT_CAL_">Calcula comissão?</label>
                               </div> 
  
                        
@@ -189,16 +189,16 @@
 
                               <span >Desconto máximo (%)</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="text" class="form-control" placeholder=" % 000,00"    id="PRDT_DESC_MAX">
+                                  <input type="number" class="form-control TddCam" placeholder=" % 000,00"    name="PRDT_DESC_MAX">
                               </div>
    
                               <span >Código de barra</span>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="text" class="form-control" placeholder="Código de barra"    id="PRDT_COD_BARRA">
+                                  <input type="number" class="form-control TddCam" placeholder="Código de barra"    name="PRDT_COD_BARRA">
                               </div>
                               <span >Caracteristicas</span>
                               <div style="display: flex; flex-direction: row;">
-                                <textarea  name="CARACT_PRDT" id="CARACT_PRDT" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea  name="PRDT_CARACT" cols="30" rows="10" class="form-control TddCam" required></textarea>
                               </div>
                        
                           </div>     

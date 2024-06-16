@@ -25,5 +25,7 @@ document.getElementById('FormFiltro').addEventListener('submit', (e) => {
     new Tabela('TabelaProduto').InseriRegistros(array_dados);
    })
 })
-//Inserindo produto
-new ActionForm('formproduto').Insert('PRDT_PRODUTO') 
+
+let ActionInstancia = new ActionForm('formproduto','PRDT_PRODUTO')
+ActionInstancia.Insert();
+ActionInstancia.delete('PRDT_ID'); 

@@ -41,6 +41,8 @@ document.getElementById('EDITAR').addEventListener('click',(e)=>{
     USU_LOGADO:true                        
   }
 //fazendo a requisição ajax e alterando o registro
+console.log(data.binds)
+console.log(data.sql)
   new Ajax('/rota/universal',data).RequisicaoAjax(true)
 
 })

@@ -1,9 +1,10 @@
 import { Ajax } from "../Class/Ajax.js";
 class ActionForm{
-  constructor(IdForm){
+  constructor(IdForm,TableName){
        this.IdForm = IdForm
+       this.TableName = TableName
 }
-    Insert(TableName){
+    Insert(){
         let IdForm = document.getElementById(this.IdForm);
         IdForm.addEventListener('submit',(e)=>{
             e.preventDefault();
@@ -47,7 +48,7 @@ class ActionForm{
     
             })
             //Criando Sql
-            let SqlInsert = 'BEGIN \n INSERT INTO ' + TableName + '  (';
+            let SqlInsert = 'BEGIN \n INSERT INTO ' + this.TableName + '  (';
             for (let key in ObjetsForms) {
                 if (ObjetsForms.hasOwnProperty(key)) {
                     SqlInsert += key + ',\n';
@@ -73,14 +74,42 @@ class ActionForm{
                 binds:ObjetsForms,
                 USU_LOGADO: true
             }
+            console.log(RequiredTrueOrFalse)
             if(RequiredTrueOrFalse == true){
                 new Ajax('/rota/universal',data).RequisicaoAjax(true)
             }
-            
         })
-
-
     }
+
+    delete(PkRegistro){
+        document.getElementById('EXCLUIR').addEventListener('click', (e) => {
+            let TrSelecionado = document.getElementsByClassName('Selectedtr');
+            if(TrSelecionado.length == 1){
+              Array.from(TrSelecionado).forEach(element => {
+                let td = element.querySelectorAll('td')
+                td.forEach((tdcorrent, index) => {
+                  if (index == 0) {
+                    let data = {
+                      sql:`BEGIN DELETE FROM ${this.TableName} WHERE ${PkRegistro} = :PkRegistro; COMMIT; END;`,
+                      binds:{PkRegistro:tdcorrent.textContent},
+                      mensagem_sucess: 'Registro deletado com sucesso!',
+                      mensagem_error: 'Erro ao deletar registro!',
+                    }
+                    new Ajax('/rota/universal',data).RequisicaoAjax(true)
+                    // element.remove(); // Remove o elemento selecionado da tabela
+                  }
+                })
+              });
+            } else {
+              swal({
+                text:'Selecione apenas um registro',
+                icon:'error'
+              })
+            }
+          });
+          
+    }
+
 
 }
 export {ActionForm as ActionForm}

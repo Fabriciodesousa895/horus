@@ -1,6 +1,7 @@
 'use scrict';
 import { SalvaFiltro } from "../Class/Filtro.js";
 import {Ajax} from "../Class/Ajax.js"
+import {ActionForm} from "../FormClass/ActionForm.js"
 import { Tabela } from "../Class/Tabela.js";
 let ID_MARCA = document.getElementById('ID_MARCA');
 let NOME_DESC = document.getElementById('NOME_DESC');
@@ -36,21 +37,7 @@ e.preventDefault();
 
 })
 //Inserindo um novo registro
-form.addEventListener('submit',(e)=>{
-  e.preventDefault();
-  let data ={
-    sql:`BEGIN INSERT INTO MARCA(NOME) VALUES(UPPER(:NOME_DESC)); COMMIT;END;`,
-    binds:{NOME_DESC:NOME_DESC.value},
-    mensagem_sucess:'Registro inserido com sucesso!', 
-    mensagem_error:'Erro ao inserir registro!',
-    USU_LOGADO: false
-  };
-  if(NOME_DESC.value != ''){
-    new Ajax('/rota/universal',data).RequisicaoAjax(true)
-    NOME_DESC.value = ''
-  }
-
-})
+new ActionForm('form').Insert('MARCA')
 
 document.getElementById('EXCLUIR').addEventListener('click',()=>{
     let trselecionada = document.querySelectorAll('.Selectedtr');

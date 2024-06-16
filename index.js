@@ -1124,7 +1124,7 @@ app.get('/categoria/produtos', auth, async (req, res) => {
     let token = req.cookies.jwt;
     let Acesso = await valida_acesso(362, token);
     let P_USU = await permi_usu(362, token);
-    res.render('./cadastro/categoriaproduto', { P_USU })
+    res.render('./cadastro/categoriaprodutos', { P_USU })
   } catch (error) {
     res.status(500).send(error)
   }
@@ -1145,10 +1145,10 @@ app.get('/visualizaproduto/:ID', auth, async (req, res) => {
     P.PRDT_USADO_COMO,
     P.PRDT_CAL_COMISSAO,
     P.PRDT_NCM,
-    P.PRDT_EST_MIN,
+    REPLACE(P.PRDT_EST_MIN,'.',',') PRDT_EST_MIN,
     P.PRDT_EST_MAX,
     P.PRDT_NR_PECA,
-    P.PRDT_MARGEM_LUCRO,
+    REPLACE(P.PRDT_MARGEM_LUCRO,'.',',') PRDT_MARGEM_LUCRO ,
     P.PRDT_COMISSAO_VND,
     P.PRDT_COMISSAO_GER,
     P.PRDT_P_LIQUIDO,

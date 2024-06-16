@@ -1,0 +1,105 @@
+<%- include('../partials/head'); %>
+<!--Incluir registro-->
+<% let P = P_USU.P_USU %>
+<% let D = P[0] %>
+
+<div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-xl" style="width: 500px;">
+      <div class="modal-content">
+        <form class="needs-validation" id="FormCategoria" novalidate>
+          <div class="container" style="padding: 40px;" >
+              <div class="row">
+                <div class="col-sm"  >
+                    <label for="NOME">Nome da categoria</label>
+                   <input type="text" class="form-control TddCam"  name="CTG_NOME"  placeholder="Nome da categoria" required>
+                    <label>Descrição da categoria</label>
+                   <input type="text" class="form-control TddCam"  name="CTG_DESCRICAO" required placeholder="Descrição da categoria">
+                    <label>Comissão vendedor  ( % )</label>
+                   <input type="text" class="form-control TddCam"  name="COMI_VEND"  placeholder="Comissão vendedor">
+                    <label>Comissão Gerente  ( % )</label>
+                   <input type="text" class="form-control TddCam"  name="COMI_GER"  placeholder="Comissão gerente">
+                    <label>Desconto máximo ( % ) </label>
+                   <input type="text" class="form-control TddCam"  name="CTG_DESC_MAX"  placeholder="Comissão gerente">
+                    <label>Estoque minimo ( UN ) </label>
+                   <input type="text" class="form-control TddCam"  name="CTG_EST_MINIMO"  placeholder="Estoque minimo">
+                   <div class="custom-control custom-checkbox"> 
+                    <input type="checkbox" class="custom-control-input TddCam"  name="CTG_T_EST_NEGATIVO"  id="CTG_T_EST_NEG" >
+                    <label class="custom-control-label"  for="CTG_T_EST_NEG">Trabalha com estoque negativo?</label>
+                  </div> 
+                </div>
+              </div>
+          
+              </div>
+              <button style="margin-left: 40px;" type="submit"  class="btn btn-warning ">Salvar</button>
+            </div>
+          
+          </form>
+      </div>
+    </div>
+  </div>
+<!--editar registro-->
+<div class="modal fade EDITAR" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-xl" style="width: 500px;">
+      <div class="modal-content">
+        <form class="needs-validation"  novalidate>
+          <div class="container" style="padding: 40px;" >
+              <div class="row">
+                <div class="col-sm"  >
+                    <label for="NOME_UP">Nome da cidade</label>
+                   <input type="text" class="form-control"  id="NOME_UP" required>
+                    <label for="COD_UP">Código de domicilio fiscal</label>
+                    <input type="hidden" id="ID_SELECIONADO">
+                   <input type="number" class="form-control"  id="COD_UP" required>
+                </div>
+              </div>
+              </div>
+              <% if (D.ALTERA == 'N') { %> 
+                <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" disabled  >Salvar</button>
+            <% }else{ %>
+                <button style="margin-left: 40px;" id="SALVA_EDICAO"  class="btn btn-warning ">Salvar</button>
+
+            <%}%> 
+            </div>
+          
+          </form>
+      </div>
+    </div>
+  </div>
+<!--Filtro e tabela-->
+<div class="grad" style="display: flex; height: auto;padding: 30px;">
+    <% let filtro = P_USU.T_FILTRO %>
+      <div style="width: 300px;height: 400px;">
+          <form  id="filtro" >
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <input type="text" placeholder="Nome" id="FILTRO_NOME" value="<%=filtro[0][0]%>" class="form-control"  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <input type="text" placeholder="Cod. domicilio" id="FILTRO_COD" value="<%=filtro[0][1]%>" class="form-control"  >
+                </div>
+              </div>
+    <button id="Buscar" type="button" class="btn btn-warning">Buscar</button>
+    <br>
+      </div> 
+      <div style="width: 100%;display: block;" >
+      <%- include('../components/exporta.ejs');%>
+        <table class="table" style="width: 70%;" id="tabeladados">
+          <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Cod. domicilio  fiscal</th>
+                <th><input type="checkbox" id="DELETE_TOTAL"></th>
+            </tr>
+          </thead>
+          <tbody id="tabela"   >
+                 <!-- inserido pela requição ajax apos usar o filtro -->
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+<script type="module" src="/js/cadastro/categoriaprodutos.js"></script>
+<%- include('../partials/footer'); %>

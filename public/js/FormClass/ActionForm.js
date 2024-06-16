@@ -14,6 +14,8 @@ class ActionForm{
             //Validando se os campos obrigatórios estão preenchidos
             RequiredTrueOrFalse = false;
             Inputs.forEach((elementrequired)=>{
+                console.log(elementrequired.value)
+                console.log(RequiredTrueOrFalse)
                if( elementrequired.required && elementrequired.value == ''){
                 RequiredTrueOrFalse = false;
                 }else{

@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server)
 const axios = require('axios');
 let packge = require('./package.json');
 require('dotenv').config()
+const PdfKit = require('pdfkit');
 'use strict';
 //view engine
 app.set("view engine", "ejs");
@@ -14,7 +14,7 @@ app.use(express.static("public"));
 //body-parser
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(bodyparser.json({ limit: '100mb' }));
+app.use(bodyparser.json({ limit: '500mb' }));
 //sessao de cookies
 const cookieparser = require('cookie-parser');
 app.use(cookieparser());
@@ -85,6 +85,7 @@ app.use(cors());
 //a verificação da licença será feita a cada 60 minutos pelo servidor
 const fs = require('fs');
 const { split, stubString, toInteger } = require("lodash");
+const send = require("send");
 
 
 app.get('/certificado/validacao', (req, res) => {
@@ -1451,6 +1452,25 @@ app.post('/api/via/cep', async (req, res) => {
 
 })
 
+//gerando pdf das tabelas
+app.post('/gerapdf', auth, (req, res) => {
+  let objeto = req.body;
+  let options = {
+    layout:'landscape',
+    size: 'A4'
+  }
+  let dados = objeto.dados;
+  let doc = new PdfKit(options);
+  doc.fontSize(15).text('Tela : ' + objeto.tela ,10,10);
+  doc.fontSize(15).text('Usuário : ' + objeto.usuario,10,30);
+  dados.forEach((elementcorrent,index)=>{
+    doc.text('dsdd',index + 10 , index + 10)
+  })
+  doc.pipe(res);
+  doc.end();
+  console.log(dados);
+});
+
 
 server.listen(80, (err) => {
   if (err) {
@@ -1459,4 +1479,3 @@ server.listen(80, (err) => {
     console.log("Servidor rodando,no link https://ft42zqfb-80.brs.devtunnels.ms/login");
   }
 });
-

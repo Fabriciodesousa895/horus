@@ -1,3 +1,4 @@
+
 document.querySelectorAll('.ExportaPdf').forEach((e) => {
     e.addEventListener('click', (k) => {
         let Elementopai = e.parentNode.parentNode;
@@ -14,7 +15,7 @@ document.querySelectorAll('.ExportaPdf').forEach((e) => {
                 let propriedade = e.textContent.trim();
                 keys.push(propriedade);
             });
-
+          console.log(keys);
             // Capturar as linhas da tabela
             let tr = table.querySelectorAll('tbody tr');
             tr.forEach((row) => {
@@ -30,18 +31,39 @@ document.querySelectorAll('.ExportaPdf').forEach((e) => {
 
             let nametelaatual = document.querySelector('.nametelaatual').value;
             let nameusuarioaatual = document.querySelector('.nameusuarioaatual___').value;
-            let Data = new Date();
-            let Day = Data.getDate().toString().padStart(2, '0');
-            let Month = (Data.getMonth() + 1).toString().padStart(2, '0');
-            let Year = Data.getFullYear();
-            let DataAtual = Day + '-' + Month + '-' + Year;
+            let data = {
+                tela:nametelaatual,
+                usuario:nameusuarioaatual,
+                dados:table_array
+            }
+            let barra_progresso = document.getElementById('PROGRESSO');
+            barra_progresso.style.opacity = 1
+            let ajax = new XMLHttpRequest();
+            ajax.open('POST', '/gerapdf', true);
+            ajax.setRequestHeader('Content-type', 'application/json');
+            ajax.responseType = 'blob';  // Necessário para tratar a resposta como um blob (binário)
+            
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState === 4 && ajax.status === 200) {
+                    barra_progresso.style.opacity = 0;
+                    console.log('testeando 123');
+            
+                    // Criar um URL para o blob e simular um clique no link de download
+                    let blob = ajax.response;
+                    let link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = 'Dadosexportados.pdf';
+                    link.click();
+            
+                    // Limpar o URL do objeto
+                    window.URL.revokeObjectURL(link.href);
+                }
+            };
+            
+            let jsonData = JSON.stringify(data);
+            ajax.send(jsonData);
+            
 
-            const doc = new jsPDF('landscape');
-            doc.text('Tela: ' + nametelaatual, 10, 10);
-            doc.text('Emitida em: ' + DataAtual, 10, 20);
-            doc.text('Usuário: ' + nameusuarioaatual, 10, 30);
-            doc.table(150,30,table_array)
-            doc.save("DadosExportadosPdf_" + DataAtual + ".pdf");
         }
 
         if (Number(Count) > 500) {

@@ -184,6 +184,110 @@ app.use(async (req, res, next) => {
 
 
 
+---------------------------------------------------------------------------------
+                           => Modelo HTML <=
+
+
+
+
+<%-include('../partials/head')%>
+<% let P = P_USU.P_USU %>
+<% let D = P[0] %>
+<!--  -->
+<div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-xl" style="width: 500px;">
+      <div class="modal-content">
+        <form class="needs-validation" id="form" novalidate>
+          <div class="container" style="padding: 40px;" >
+              <div class="row">
+                <div class="col-sm"  >
+                    <label >Descrição</label>
+                   <input type="text" class="form-control TddCam"  name="NOME" required>
+                </div>
+              </div>
+          
+              </div>
+              <button style="margin-left: 40px;" id="Salvar" type="submit" class="btn btn-warning ">Salvar</button>
+            </div>
+          
+          </form>
+      </div>
+    </div>
+  </div>
+  <!--editar registro-->
+<div class="modal fade EDITAR" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-xl" style="width: 500px;">
+    <div class="modal-content">
+      <form class="needs-validation"  novalidate>
+        <div class="container" style="padding: 40px;" >
+            <div class="row">
+              <div class="col-sm"  >
+                  <label for="ID_MARCA_">Código da marca</label>
+                 <input type="text" class="form-control"  id="ID_MARCA_" disabled required>
+                  <label for="NOME_MARCA">Descrição</label>
+                 <input type="text" class="form-control"  id="NOME_MARCA" required>
+              </div>
+            </div>
+            </div>
+            <% if (D.ALTERA == 'N') { %> 
+              <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" disabled  >Salvar</button>
+          <% }else{ %>
+              <button style="margin-left: 40px;" id="SALVA_EDICAO"  class="btn btn-warning ">Salvar</button>
+
+          <%}%> 
+          </div>
+        
+        </form>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="grad" style="display: flex;height: auto;padding: 30px;">
+  <div style="width: 300px;height: 400px;">
+   <form>
+<%let filtro = P_USU.T_FILTRO%> 
+
+    <div class="form-group row">
+
+        <div class="col-sm-10">
+            <span >Código marca</span>
+            <input type="number"  class="form-control" placeholder="ID" name="" id="ID_MARCA" value="<%=filtro[0][0]%>">
+        </div>
+ 
+        <div class="col-sm-10">
+            <span >Descrição</span>
+            <input type="text"  class="form-control" placeholder="Descrição" name="" id="NOME" value="<%=filtro[0][1]%>">
+        </div>
+
+    </div>
+
+    <button id="filtro" class="btn btn-primary">Buscar</button>
+
+   </form>
+  </div>
+  <!-- Tabela -->
+  <div style="width: 100%;display: block;"">
+    <div class="caption" ><caption ></caption></div> 
+
+    <table class="table table-hover" id="Marca" style="height: auto;width: 700px;">
+
+      <thead>
+          <tr>
+              <th>Código</th>
+              <th>Descrição</th>
+          </tr>
+      </thead>
+      <tbody id="tbodytable">
+          <!-- Dados sendo inseridos automaticamente -->
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script type="module" src="/js/cadastro/marca.js"></script>
+<%-include('../partials/footer')%>
+
 
 
 

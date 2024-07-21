@@ -14,7 +14,7 @@ app.use(express.static("public"));
 //body-parser
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(bodyparser.json({ limit: '500mb' }));
+app.use(bodyparser.json({ limit: '2000mb' }));
 //sessao de cookies
 const cookieparser = require('cookie-parser');
 app.use(cookieparser());
@@ -141,7 +141,6 @@ async function auth(req, res, next) {
     let KILL
     result.forEach((e) => { KILL = e.KILL });
     if (KILL == 'S') {
-      console.log('---------------')
    res.status(500).send('Token inválido!!');
 
 
@@ -1120,6 +1119,16 @@ app.get('/marca/produtos', auth, async (req, res) => {
     res.status(500).send(error)
   }
 })
+app.get('/natureza/lancamento',auth,async(req,res)=>{
+try{
+  let token = req.cookies.jwt;
+  let Acesso = await valida_acesso(381,token);
+  let P_USU = await permi_usu(381, token);
+  res.render('./cadastro/naturezas', { P_USU })
+}catch (error){
+  res.status(500).send(error)
+}
+})
 app.get('/categoria/produtos', auth, async (req, res) => {
   try {
     let token = req.cookies.jwt;
@@ -1454,21 +1463,45 @@ app.post('/api/via/cep', async (req, res) => {
 
 //gerando pdf das tabelas
 app.post('/gerapdf', auth, (req, res) => {
-  let objeto = req.body;
-  let options = {
-    layout:'landscape',
-    size: 'A4'
-  }
-  let dados = objeto.dados;
-  let doc = new PdfKit(options);
-  doc.fontSize(15).text('Tela : ' + objeto.tela ,10,10);
-  doc.fontSize(15).text('Usuário : ' + objeto.usuario,10,30);
-  dados.forEach((elementcorrent,index)=>{
-    doc.text('dsdd',index + 10 , index + 10)
-  })
-  doc.pipe(res);
-  doc.end();
-  console.log(dados);
+  let objetos = req.body;
+let keys = objetos.keys
+  
+  // Create a new PDF document
+  const doc = new PdfKit({ layout: 'landscape', size: 'A4' });
+// Add title and user info
+doc.fontSize(15).text('Tela: ' + objetos.tela, 10, 10);
+doc.fontSize(15).text('Usuário: ' + objetos.usuario, 10, 30);
+
+// Function to draw the table
+function drawTable(doc, data, startX, startY, rowHeight, columnWidths) {
+  let y = startY;
+  
+  // Draw header
+  // doc.fontSize(12).text('Código', startX, y);
+  doc.text(keys[0], startX , y);
+  doc.text(keys[1], startX + 100, y);
+  doc.text(keys[2], startX + 250, y);
+  doc.text(keys[3], startX + 400, y);
+  y += rowHeight;
+console.log(data)
+  // Draw rows
+  data.forEach((row,index) => {
+    doc.fontSize(10).text(row.Código, startX, y);
+    doc.text(row.Nome, startX + columnWidths[0], y);
+    doc.text(row.Usado_como, startX + columnWidths[0] + columnWidths[1], y);
+    // doc.text(row.keys[index], startX + columnWidths[0] + columnWidths[1] + columnWidths[2], y);
+    y += rowHeight;
+  });
+}
+
+// Column widths
+let columnWidths = [100, 200, 200, 100];
+
+// Draw the table
+drawTable(doc, objetos.dados, 10, 50, 20, columnWidths);
+
+doc.pipe(res);
+doc.end();
 });
 
 

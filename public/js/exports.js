@@ -12,7 +12,7 @@ document.querySelectorAll('.ExportaPdf').forEach((e) => {
 
             // Capturar os cabeçalhos da tabela
             th.forEach((e) => {
-                let propriedade = e.textContent.trim();
+                let propriedade = e.textContent.trim().replace(' ','_');
                 keys.push(propriedade);
             });
           console.log(keys);
@@ -34,7 +34,8 @@ document.querySelectorAll('.ExportaPdf').forEach((e) => {
             let data = {
                 tela:nametelaatual,
                 usuario:nameusuarioaatual,
-                dados:table_array
+                dados:table_array,
+                keys:keys
             }
             let barra_progresso = document.getElementById('PROGRESSO');
             barra_progresso.style.opacity = 1

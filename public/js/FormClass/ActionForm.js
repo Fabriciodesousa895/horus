@@ -164,35 +164,25 @@ class ActionForm{
           let SqlUpdate = 'BEGIN \n UPDATE ' + this.TableName + ' SET '
            SqlUpdate += 'USU_ALTER = :USU_LOGADO,DT_ALTER = SYSDATE, '
           for (let key in ObjetsForms) {
-          console.log(key)
               if (ObjetsForms.hasOwnProperty(key)) {
-                  SqlUpdate += key + ' = ' + key;
+                  SqlUpdate += key + " = '" +  ObjetsForms[key] +"' , \n" ;
               }
           }
-          console.log(ObjetsForms)
-
-          // Campos a serem editados
-          for (let key in ObjetsForms) {
-              if (ObjetsForms.hasOwnProperty(key)) {
-               console.log( '=' + key +  ObjetsForms[key] + ', \n');
-              }
-          }
+          SqlUpdate =   SqlUpdate.replace(/,(\s*)$/,' ');
           // Fechar a instrução SQL
-           SqlUpdate += ' \n WHERE ' + IdPk_registro.name;
+          SqlUpdate += ' \n WHERE ' + IdPk_registro.name;
           SqlUpdate += " = '"+   + IdPk_registro.value + "'"
           SqlUpdate += '; \n COMMIT; \n END;';
           let data ={
               sql: SqlUpdate,
-              mensagem_sucess:'  Registro inserido com sucesso',
-              mensagem_error:'Error ao inseri registro',
-              binds:ObjetsForms,
+              mensagem_sucess:'  Registro alterado com sucesso',
+              mensagem_error:'Error ao editar registro',
+              binds:{},
               USU_LOGADO: true
           }
-          console.log(SqlUpdate)
           if(RequiredTrueOrFalse == true){
-               new Ajax('/rota/universal',data).RequisicaoAjax(true)
-          }
-      })
+               new Ajax('/rota/universal',data).RequisicaoAjax(true)}
+                 })
   }
 
 

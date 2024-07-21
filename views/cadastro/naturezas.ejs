@@ -17,8 +17,8 @@
                    <label for="">Descrição</label>
                    <input type="text" class="form-control TddCam"  name="DESCRICAO">
                     <br>
-                    <h5>OBS: Código da natureza deve ter apenas numeros e pontos <br>
-                        Exemplo: 201.000.000</h5>
+                    <h5>OBS: Código da natureza deve ter apenas numeros <br>
+                        Exemplo: 201000000</h5>
                 </div>
               </div>
           
@@ -39,11 +39,11 @@
             <div class="row">
               <div class="col-sm"  >
                   <label for="CODNAT_UPD">Código da natureza</label>
-                 <input type="text" class="form-control" name="CODNAT" id="IdPknat" value="201.102" disabled required>
-                  <label for="NOME_NATUREZA">Nome</label>
+                 <input type="number" class="form-control" name="CODNAT" id="IdPknat" value="124587" disabled required>
+                  <label for="">Nome</label>
                  <input type="text" class="form-control TddCam" name="NOME"  required>
                   <label for="">Descrição</label>
-                 <input type="text" class="form-control TddCam" name="DESCRICAO" id="NOME_NATUREZA" required>
+                 <input type="text" class="form-control TddCam" name="DESCRICAO"  required>
               </div>
             </div>
             </div>
@@ -68,12 +68,12 @@
 
         <div class="col-sm-10">
             <span >Código da natureza</span>
-            <input type="number"  class="form-control" placeholder="ID" name="" id="ID_MARCA" value="<%=filtro[0][0]%>">
+            <input type="number"  class="form-control" placeholder="ID" name="" id="ID_NAT" value="<%=filtro[0][0]%>">
         </div>
  
         <div class="col-sm-10">
             <span >Nome</span>
-            <input type="text"  class="form-control" placeholder="Descrição" name="" id="NOME" value="<%=filtro[0][1]%>">
+            <input type="text"  class="form-control" placeholder="Descrição" name="" id="NOME_NAT" value="<%=filtro[0][1]%>">
         </div>
 
     </div>

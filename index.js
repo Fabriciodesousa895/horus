@@ -1392,6 +1392,7 @@ app.post('/importar/dados', async (req, res) => {
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
 app.post('/rota/universal', async (req, res) => {
   let Objeto = req.body;
+  console.log(Objeto)
   let token = req.cookies.jwt;
   let novobinds;
   jwt.verify(token, process.env.SECRET, async (error, data) => {
@@ -1400,16 +1401,18 @@ app.post('/rota/universal', async (req, res) => {
       let USU_LOGADO = data.ID_USUARIO;
       novobinds = { ...Objeto.binds, USU_LOGADO }
       try {
-        let result = await conectar(Objeto.sql, novobinds);
+        await conectar(Objeto.sql, novobinds);
         res.status(200).send(Objeto.mensagem_sucess);
       } catch (error) {
         res.status(500).send('Error :' + error)
       }
     } else {
+     
       try {
-        let result = await conectar(Objeto.sql, Objeto.binds);
+        await conectar(Objeto.sql, Objeto.binds);
         res.status(200).send(Objeto.mensagem_sucess);
       } catch (error) {
+        console.log(error)
         let log = error;
         criarlogtxt(log, req.url);
         res.status(500).send(Objeto.mensagem_error + error);

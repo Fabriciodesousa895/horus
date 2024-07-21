@@ -1,6 +1,7 @@
 
   function SalvaFiltro (ID_TELA,P_CAMP_1,P_CAMP_2,P_CAMP_3,P_CAMP_4,P_CAMP_5,P_CAMP_6,P_CAMP_7,P_CAMP_8,P_CAMP_9,P_CAMP_10) {
       'use strict';
+    //   window.addEventListener('submit',(e)=>{e.preventDefault()})
     let ajax = new XMLHttpRequest();
     ajax.open('POST', '/rota/universal');
     ajax.setRequestHeader('Content-type', 'application/json');

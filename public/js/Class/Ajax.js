@@ -42,7 +42,7 @@ class Ajax {
                     reject(
                         swal({
                             title: ajax.responseText + ajax.status + '  Error :',
-                            icon: 'error'
+                            icon: 'warning'
                         }
                         ));
                     barra_progresso.style.opacity = 0

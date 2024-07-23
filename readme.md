@@ -222,10 +222,10 @@ app.use(async (req, res, next) => {
         <div class="container" style="padding: 40px;" >
             <div class="row">
               <div class="col-sm"  >
-                  <label for="ID_MARCA_">Código da marca</label>
-                 <input type="text" class="form-control"  id="ID_MARCA_" disabled required>
-                  <label for="NOME_MARCA">Descrição</label>
-                 <input type="text" class="form-control"  id="NOME_MARCA" required>
+                  <label for="">DESCRIÇÃO CAMPO</label>
+                 <input type="text" class="form-control"   required>
+                  <label for="">Descrição</label>
+                 <input type="text" class="form-control"  required>
               </div>
             </div>
             </div>
@@ -250,13 +250,13 @@ app.use(async (req, res, next) => {
     <div class="form-group row">
 
         <div class="col-sm-10">
-            <span >Código marca</span>
-            <input type="number"  class="form-control" placeholder="ID" name="" id="ID_MARCA" value="<%=filtro[0][0]%>">
+            <span >CAMPO DO FILTRO</span>
+            <input type="number"  class="form-control" placeholder="ID"  value="<%=filtro[0][0]%>">
         </div>
  
         <div class="col-sm-10">
-            <span >Descrição</span>
-            <input type="text"  class="form-control" placeholder="Descrição" name="" id="NOME" value="<%=filtro[0][1]%>">
+            <span >CAMPO DO FILTRO</span>
+            <input type="text"  class="form-control" placeholder="Descrição" ME" value="<%=filtro[0][1]%>">
         </div>
 
     </div>
@@ -264,20 +264,18 @@ app.use(async (req, res, next) => {
     <button id="filtro" class="btn btn-primary">Buscar</button>
 
    </form>
-  </div>
   <!-- Tabela -->
-  <div style="width: 100%;display: block;"">
-    <div class="caption" ><caption ></caption></div> 
+  <div style="width: 100%;display: block;">
 
     <table class="table table-hover" id="Marca" style="height: auto;width: 700px;">
 
       <thead>
           <tr>
-              <th>Código</th>
+              <th>Nome coluna</th>
               <th>Descrição</th>
           </tr>
       </thead>
-      <tbody id="tbodytable">
+      <tbod>
           <!-- Dados sendo inseridos automaticamente -->
       </tbody>
     </table>

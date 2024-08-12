@@ -156,7 +156,7 @@ async function auth(req, res, next) {
 
 
   if (!token) {
-    console.log('error');
+   res.status(401)
 
   } else {
     try {
@@ -589,6 +589,19 @@ app.get('/monitordesessao', auth, async (req, res) => {
     let Acesso = await valida_acesso(301, token);
     let P_USU = await permi_usu(301, token);
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/monitordesessao', { P_USU })
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.send('Error:' + error);
+  }
+})
+//tabela de preço
+app.get('/tabela/preco', auth, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(401, token);
+    let P_USU = await permi_usu(401, token);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./cadastro/tabeladepreco', { P_USU })
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
@@ -1311,7 +1324,7 @@ app.post('/copia_usuario', async (req, res) => {
 
 })
 //CONSULTA PERMISSOES DE TODAS AS TELAS
-app.post('/consulta_acessos', async (req, res) => {
+app.post('/consulta_acessos', auth,async (req, res) => {
   let ID = req.body.ID;
   let TABELA = req.body.TABELA
   //valida se o usuario selecionou o select
@@ -1353,6 +1366,7 @@ app.post('/consulta_acessos', async (req, res) => {
 })
 app.post('/importar/dados', async (req, res) => {
   let CGC = req.body.CGC
+  console.log(CGC)
   try {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
@@ -1392,7 +1406,6 @@ app.post('/importar/dados', async (req, res) => {
 //Rota universal para requisições mais simples,apneas para insert,delete ou update dentro de blocos begin
 app.post('/rota/universal', async (req, res) => {
   let Objeto = req.body;
-  console.log(Objeto)
   let token = req.cookies.jwt;
   let novobinds;
   jwt.verify(token, process.env.SECRET, async (error, data) => {
@@ -1404,7 +1417,7 @@ app.post('/rota/universal', async (req, res) => {
         await conectar(Objeto.sql, novobinds);
         res.status(200).send(Objeto.mensagem_sucess);
       } catch (error) {
-        res.status(500).send('Error :' + error)
+        res.status(500).send('*' + error)
       }
     } else {
      
@@ -1423,11 +1436,11 @@ app.post('/rota/universal', async (req, res) => {
 
 })
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
-app.post('/select/universal', async (req, res) => {
+app.post('/select/universal',auth, async (req, res) => {
   let Binds = req.body.binds;
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
-    let USU_LOGADO = data.ID_USUARIO;
     if (req.body.USU_LOGADO) {
+    let USU_LOGADO = data.ID_USUARIO;
       Binds.USU_LOGADO = USU_LOGADO;
     }
     try {

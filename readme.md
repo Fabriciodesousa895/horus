@@ -144,42 +144,15 @@ import { SalvaFiltro } from "../Class/Tabela.js";
 
 
 ----------------------------------------------------------------------------------------------------------------------------------
+                         =>Regra para tabela de preços<=
 
-app.use(async (req, res, next) => {
-  if(req.method == 'GET' && req.url !== '/certificado/validacao')
-  console.log('Entre cliente e servidorr!');
-  if (V_truefalse) {
-    try {
-      fs.readFile('licenca.json', 'utf-8', async (err, data) => {
-        if (err) {
-          res.json('Houve um erro ao ler o certificado da aplicação, por favor contactar setor de TI');
-          console.log('err');
-          return;
-        } else {
-          // faz uma requisição get para o gerenciador de licença passando o json com os dados
-          try {
-            const response = await axios.get(`http://localhost:8030/licenca/${data}`);
-            let response_data = response.data;
-            // validando o resultado da requisição
-            next()
-            console.log(response_data)
-          } catch (error) {
-              res.status(500).redirect('/certificado/validacao' );
-                  
-          }
+   O preço o produto é definida por categoria ou por produto
 
-        }
-      });
-    } catch (error) {
-      let log = error;
-      criarlogtxt(log, req.url);
-      console.log('Erro ao se comunicar com o gerenciador de licenças: ', error);
-      res.status(500).send('Internal Server Error');
-    }
-  } else {
-    next();
-  }
-});
+TABELA PRC_PRECO => DEFINE PREÇO DO PRODUTO
+TABELA PRC_PRECO_CAT => DEFINE PREÇO DO PRODUTO POR CATEGORIA
+
+PARA PODER FAZER VENDA É PRECISO TER UMA TABELA DE PREÇO ATIVA VINCULDO AO PRODUTO,AO INCLUIR UMA NOVA TABELA DE PREÇO PRA UM PRODUTO 
+É VERIFICADO SE HÁ UMA TABELA POR CATEGORIA ATIVA SE CASO TENHA NÃO SERÁ PERMITIDO
 
 
 
@@ -264,6 +237,7 @@ app.use(async (req, res, next) => {
     <button id="filtro" class="btn btn-primary">Buscar</button>
 
    </form>
+   </div>
   <!-- Tabela -->
   <div style="width: 100%;display: block;">
 

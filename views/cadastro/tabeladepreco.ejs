@@ -35,18 +35,18 @@
 <div class="modal fade EDITAR" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-xl" style="width: 500px;">
     <div class="modal-content">
-      <form class="needs-validation"  novalidate>
+      <form class="needs-validation" id="form_produto"  novalidate>
         <div class="container" style="padding: 40px;" >
        <p>Alteração por produto</p> 
             <div class="row">
               <div class="col-sm"  >
                 <label for="">Produto</label>
                  <div style="display: flex; flex-direction: row;">
-                    <input type="text"  id=""  style="width: 90px;margin-right: 8px;" class="form-control" >
-                    <input type="text"   id="" class="form-control  " placeholder="Produto" >
+                    <input type="text"  id="CODPROD_2"  style="width: 90px;margin-right: 8px;" class="form-control" >
+                    <input type="text"   id="NOMEPROD_2" class="form-control  " placeholder="Produto" >
                 </div>
                   <label for="">Preço</label>
-                 <input type="text" class="form-control"  required>
+                 <input type="text" class="form-control" id="PRECO_PROD" required>
               </div>
             </div>
             </div>
@@ -66,14 +66,14 @@
                 <p>Alteração por categoria</p>
               <div class="col-sm"  >
                   <label for="">Tipo alteração</label>
-                <select name="TIPO"  class="form-control TddCam">
+                <select name="TIPO" id="TIPO" class="form-control TddCam">
                     <option value="A" selected>Para mais</option>
                     <option value="D">Para menos</option>
                 </select>
               </div>
               <div class="col-sm">
                 <label for="">Percentual</label>
-                <input type="text"  class="form-control TddCam" name="PERC" placeholder="00,00">
+                <input type="text" id="PERCENTUAL" class="form-control TddCam" name="PERC" placeholder="00,00">
               </div>
               <label for="">Categoria de produto</label>
               <div style="display: flex; flex-direction: row;">
@@ -94,6 +94,68 @@
         
     </div>
   </div>
+</div>
+<!--  -->
+<!-- Log de alterações -->
+<div class="modal fade " id="DJTVBKUBGK" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content"  style="padding: 5px;">
+      <form class="needs-validation" id="Auditoria_sql"  novalidate>
+        <div class="container" style="padding: 20px;" >
+         <p>Auditoria de tabela de  preços</p> 
+            <div class="row">
+              <div class="col-sm"  >
+                <label for="">Periodo</label>
+                 <div style="display: flex; flex-direction: row;">
+                    <input type="date"  id="P_INI"  style="margin-right: 8px;" class="form-control" required>
+                    <input type="date"   id="P_FIN" class="form-control  " placeholder="Produto" required >
+                </div>
+                  <label for="">Tipo</label>
+                <select id="TDDOPC" class="form-control" required>
+                  <option value="">Selecione uma opção</option>
+                  <option value="A">Aumento de preços por categoria</option>
+                  <option value="D">Diminuição de preços por categoria</option>
+                  <option value="P">Alteração de preços por produto</option>
+                  <option value="I">Somente inclusão de tabela de preço</option>
+                </select>
+              </div>
+              <div class="col-sm"  >
+                <label for="">Produto</label>
+                 <div style="display: flex; flex-direction: row;">
+                    <input type="text"  id="P_PRDT"  style="width: 90px;margin-right: 8px;" class="form-control" >
+                    <input type="text"   id="P_PRDT_N" class="form-control  " placeholder="Produto" >
+                </div>
+                <label for="">Categoria</label>
+                 <div style="display: flex; flex-direction: row;">
+                    <input type="text"  id="P_CAT"  style="width: 90px;margin-right: 8px;" class="form-control" >
+                    <input type="text"   id="P_CAT_N" class="form-control  " placeholder="Categoria produto" >
+                </div>
+
+              </div>
+              <div class="col-sm">
+                <label for="">Usuário</label>
+                <input type="text" class="form-control" id="ID_USU" placeholder="Nome do usuario">
+                  <button  id="Filtra_auditoria"  class="btn btn-warning mt-4">Consultar</button>
+              </div>
+
+            </div>
+            </div>
+
+        </form>
+        <table class="table " id="Tabela_auditoria">
+          <thead>
+            <th>Id</th>
+            <th>Descrição</th>
+            <th id="DT_ALT_INCLU">Dt. alteração</th>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+  
 </div>
 <!--  -->
 <div class="grad" style="display: flex;height: auto;padding: 30px;">
@@ -128,16 +190,17 @@
   <!-- Tabela -->
   <div style="width: 100%;display: block;margin-left: 10px;">
 
-    <table class="table table-hover" style="height: auto;width: 700px;">
+    <table class="table table-hover" style="height: auto;width: 700px;" id="TabelaPrecos">
 
       <thead>
           <tr>
               <th>Cod. tabela</th>
               <th>Produto</th>
+              <th>Status</th>
               <th>Preço</th>
           </tr>
       </thead>
-      <tbod>
+      <tbody>
           <!-- Dados sendo inseridos automaticamente -->
       </tbody>
     </table>

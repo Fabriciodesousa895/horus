@@ -5,9 +5,12 @@ class filtra_campo{
     this.TABELA= TABELA;
     }
     Filtra(){
+  
         let CAMP_1 = document.getElementById(this.CAMPO_1);
         let CAMP_2 = document.getElementById(this.CAMPO_2);
         CAMP_1.addEventListener('change',()=>{
+        let BarraProgresso = document.getElementById('PROGRESSO');
+        BarraProgresso.style.opacity = '1';
             let ajax = new XMLHttpRequest();
             ajax.open('POST', '/select/universal');
             ajax.setRequestHeader('Content-type', 'application/json');
@@ -38,9 +41,11 @@ class filtra_campo{
                         icon: 'info'
                     });
                 }
+                BarraProgresso.style.opacity = '0';
+              
             };
             ajax.send(JsonData);
-
+        
         })
 
 

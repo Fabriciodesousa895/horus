@@ -124,7 +124,8 @@ async function resetInactivityTimer(token) {
       let log = error;
       console.log(error);
     }
-  }, TempoSessao);
+    console.log(TempoSessao)
+  }, TempoSessao * 1000);
 }
 
 //middleware de autenticação;
@@ -929,8 +930,8 @@ app.get('/visualiza_usuario/:ID_USU', auth, async (req, res) => {
 FROM
 USU_USUARIO U
 LEFT JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
-LEFT JOIN USU_USUARIO US ON US.ID_USU = U.ID_USU_INCLUSAO
-LEFT JOIN USU_USUARIO USU ON USU.ID_USU = U.COD_USU_ALTER
+LEFT JOIN USU_USUARIO US ON US.ID_USU = U.USU_INCLU
+LEFT JOIN USU_USUARIO USU ON USU.ID_USU = U.USU_ALTER
 LEFT JOIN CONFIG_USU CG ON CG.COD_USU = U.ID_USU
 LEFT JOIN PRC_PARCEIRO P ON P.ID_PARC = U.ID_PARC
 LEFT JOIN VND_VENDEDOR V ON V.ID_VENDEDOR = U.USU_ID_VEND 
@@ -945,7 +946,7 @@ WHERE U.ID_USU = :ID_USU AND ROWNUM = 1`;
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./usuario/visualiza_usuario', { P_USU, result })
 
   } catch (error) {
-    res.redirect(`/erroservidor/${error}`);
+    res.send(error);
   }
 })
 //Lançador de tarefa

@@ -37,7 +37,7 @@ e.preventDefault();
 
 })
 //Inserindo um novo registro
-new ActionForm('form').Insert('MARCA')
+new ActionForm('form','MARCA').Insert()
 
 document.getElementById('EXCLUIR').addEventListener('click',()=>{
     let trselecionada = document.querySelectorAll('.Selectedtr');

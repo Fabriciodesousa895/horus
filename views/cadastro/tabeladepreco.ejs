@@ -37,16 +37,29 @@
     <div class="modal-content">
       <form class="needs-validation" id="form_produto"  novalidate>
         <div class="container" style="padding: 40px;" >
-       <p>Alteração por produto</p> 
+         <p>Alteração por produto</p> 
             <div class="row">
               <div class="col-sm"  >
                 <label for="">Produto</label>
                  <div style="display: flex; flex-direction: row;">
-                    <input type="text"  id="CODPROD_2"  style="width: 90px;margin-right: 8px;" class="form-control" >
-                    <input type="text"   id="NOMEPROD_2" class="form-control  " placeholder="Produto" >
+                    <input type="text"  id="CODPROD_2"  style="width: 90px;margin-right: 8px;" class="form-control" required>
+                    <input type="text"   id="NOMEPROD_2" class="form-control  " placeholder="Produto"  required>
                 </div>
-                  <label for="">Preço</label>
+                  <label for="">Preço novo</label>
                  <input type="text" class="form-control" id="PRECO_PROD" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+
+                <label for="">Preço anterior</label>
+                <input type="text" class="form-control" id="PRECO_PROD_ANTERIOR" required disabled>
+              </div>
+              <div class="col-sm">
+                <div class="custom-control custom-checkbox mt-4"> 
+                  <input type="checkbox" class="custom-control-input "  name="STATUS_TABELA"  id="STATUS_TABELA">
+                  <label class="custom-control-label"  for="STATUS_TABELA">Ativo?</label>
+                </div> 
               </div>
             </div>
             </div>
@@ -66,19 +79,19 @@
                 <p>Alteração por categoria</p>
               <div class="col-sm"  >
                   <label for="">Tipo alteração</label>
-                <select name="TIPO" id="TIPO" class="form-control TddCam">
+                <select name="TIPO" id="TIPO" class="form-control TddCam" required>
                     <option value="A" selected>Para mais</option>
                     <option value="D">Para menos</option>
                 </select>
               </div>
               <div class="col-sm">
                 <label for="">Percentual</label>
-                <input type="text" id="PERCENTUAL" class="form-control TddCam" name="PERC" placeholder="00,00">
+                <input type="text" id="PERCENTUAL" class="form-control TddCam" name="PERC" placeholder="00,00" required>
               </div>
               <label for="">Categoria de produto</label>
               <div style="display: flex; flex-direction: row;">
-                  <input type="text"  id="COD_CAT_1"  style="width: 90px;margin-right: 8px;" name="COD_CAT" class="form-control TddCam" >
-                  <input type="text"   id="NOME_CAT_1" class="form-control  " placeholder="Produto" >
+                  <input type="text"  id="COD_CAT_1"  style="width: 90px;margin-right: 8px;" name="COD_CAT" class="form-control TddCam" required>
+                  <input type="text"   id="NOME_CAT_1" class="form-control  " placeholder="Produto" required>
               </div>
             </div>
             </div>
@@ -115,7 +128,7 @@
                   <option value="">Selecione uma opção</option>
                   <option value="A">Aumento de preços por categoria</option>
                   <option value="D">Diminuição de preços por categoria</option>
-                  <option value="P">Alteração de preços por produto</option>
+                  <option value="P">Alteração por produto</option>
                   <option value="I">Somente inclusão de tabela de preço</option>
                 </select>
               </div>
@@ -136,12 +149,15 @@
                 <label for="">Usuário</label>
                 <input type="text" class="form-control" id="ID_USU" placeholder="Nome do usuario">
                   <button  id="Filtra_auditoria"  class="btn btn-warning mt-4">Consultar</button>
+                  <button type="reset"   class="btn btn-primary mt-4">Limpar filtro</button>
               </div>
 
             </div>
             </div>
 
         </form>
+
+    <%- include('../components/exporta.ejs');%>
         <table class="table " id="Tabela_auditoria">
           <thead>
             <th>Id</th>
@@ -183,12 +199,14 @@
 
     </div>
 
-    <button class="btn btn-primary">Buscar</button>
-
+    <button class="btn btn-warning">Buscar</button>
+    <button type="reset"   class="btn btn-primary">Limpar filtro</button>
+    
    </form>
   </div>
   <!-- Tabela -->
-  <div style="width: 100%;display: block;margin-left: 10px;">
+  <div style="width: 700px;display: block;margin-left: 10px;">
+    <%- include('../components/exporta.ejs');%>
 
     <table class="table table-hover" style="height: auto;width: 700px;" id="TabelaPrecos">
 

@@ -18,7 +18,7 @@ let DESC_PROD_F = document.getElementById('DESC_PROD_F');
 
 
 new ActionForm('form', 'PRC_PRECO').Insert()
-
+// Usando filtro
 document.getElementById('form_filtro').addEventListener('submit', (e) => {
   e.preventDefault();
   SalvaFiltro(401, COD_PROD_F.value, DESC_PROD_F.value, COD_CAT.value, '', '', '', '', '', '', '');
@@ -34,7 +34,7 @@ document.getElementById('form_filtro').addEventListener('submit', (e) => {
   })
 
 })
-
+// Alterando por categoria
 document.getElementById('form_categoria').addEventListener('submit', (e) => {
   e.preventDefault();
   let objetos = new Tabela().InputsValues(['COD_CAT_1', 'PERCENTUAL', 'TIPO']);
@@ -44,15 +44,16 @@ document.getElementById('form_categoria').addEventListener('submit', (e) => {
            END;`,
     binds: { TIPO: objetos.TIPO, PERCENTUAL: objetos.PERCENTUAL, CATEGORIA: objetos.COD_CAT_1 },
     USU_LOGADO: true,
-    mensagem_sucess: 'Alteração de preços feita com sucesso!',
+    mensagem_sucess: 'Alteração de preços por categoria feita com sucesso!',
     mensagem_error: 'Erro ao alterar preços!'
   }
-  new Ajax('/rota/universal', data).RequisicaoAjax(true);
+  if(objetos.PERCENTUAL != '' && objetos.COD_CAT_1 != '' ){
+    new Ajax('/rota/universal', data).RequisicaoAjax(true);
+  }
 })
-
+// Alterando preço por produto
 document.getElementById('form_produto').addEventListener('submit', (e) => {
   e.preventDefault();
-
   let objetos = new Tabela().InputsValues(['CODPROD_2', 'PRECO_PROD']);
   let data = {
     sql: `BEGIN
@@ -63,8 +64,15 @@ document.getElementById('form_produto').addEventListener('submit', (e) => {
     mensagem_sucess: 'Alteração de preço no produto feita com sucesso!',
     mensagem_error: 'Erro ao alterar preços!'
   }
-  new Ajax('/rota/universal', data).RequisicaoAjax(true);
+  if( objetos.CODPROD_2 != '' && objetos.PRECO_PROD){
+    new Ajax('/rota/universal', data).RequisicaoAjax(true);
+  }
 })
+
+// let AllTds = document.querySelectorAll('td');
+// AllTds.addEventListener('dbclick',(e)=>{
+//   console.log('Elemento clicado');
+// })
 
 document.getElementById('TDDOPC').addEventListener('change', (e) => {
   let TDDOPC = document.getElementById('TDDOPC').value
@@ -110,7 +118,7 @@ document.getElementById('TDDOPC').addEventListener('change', (e) => {
 
 
 })
-
+// Filtrando auditoria de preços
 document.getElementById('Auditoria_sql').addEventListener('submit',(e)=>{
   e.preventDefault();
   let objeto = new Tabela().InputsValues(['P_CAT','P_PRDT','TDDOPC','P_INI','P_FIN','ID_USU']);
@@ -123,11 +131,12 @@ document.getElementById('Auditoria_sql').addEventListener('submit',(e)=>{
 
   }
   new Ajax('/select/universal', data).RequisicaoAjax().then((arraydedados) => {
-    console.log(arraydedados)
-    new Tabela('Tabela_auditoria').InseriRegistros(arraydedados)
+    if(objeto.P_INI != '' && objeto.P_FIN != '' && objeto.TDDOPC != ''){
+      new Tabela('Tabela_auditoria').InseriRegistros(arraydedados);
+    }
   })
 })
-
+// Desativando tabela de preço
 document.getElementById('EXCLUIR').addEventListener('click',(e)=>{
   let TabelaSelecionada = document.querySelector('.Selectedtr');
   let IdTabelaSelecionada = TabelaSelecionada.querySelector('td').innerText
@@ -138,7 +147,23 @@ document.getElementById('EXCLUIR').addEventListener('click',(e)=>{
   dangerMode:true
  }).then((WillDelete)=>{
   if(WillDelete){
-    alert('Registro: ' + IdTabelaSelecionada );
+    let data ={
+      sql:`DECLARE
+        V_COD_PROD INT;
+          BEGIN 
+          SELECT COD_PROD INTO V_COD_PROD FROM PRC_PRECO WHERE ID = :ID_TAB; 
+                  UPDATE PRC_PRECO SET ATIVO = 'N' WHERE ID = :ID_TAB;
+                  INSERT INTO LOG_PRECO(DESCRICAO,DT_INCLU,TIPO,USU_INCLU,ID_PROD) VALUES ('Usuario ' || :USU_LOGADO || ' desativou a tabela de preço ' || :ID_TAB || ' no produto ' || V_COD_PROD ,
+                                                                              SYSDATE,'P',:USU_LOGADO,V_COD_PROD  );
+                                                                              COMMIT;
+          END;`,
+          USU_LOGADO:true,
+          binds:{ID_TAB:IdTabelaSelecionada},
+          mensagem_sucess:'Tabela de preço destivada com sucesso!',
+          mensagem_error:'Erro ao destivar tabela de preço!'
+
+    }
+    new Ajax('/rota/universal',data).RequisicaoAjax(true)
   }
    
  })

@@ -24,16 +24,12 @@
   <!-- Modal para inserir  uma tela no sistema-->
 
 
-<div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="TituloModalCentralizado">Crie uma tela T_TELA</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+<div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true"  >
+    <div class="modal-dialog modal-dialog-centered" role="document" >
+        <div class="modal-content"   style="width: 900px;min-height: 800px;">
           <div class="modal-body">
+            <h5 class="modal-title" id="TituloModalCentralizado">Crie numa tela </h5>
+
         <input type="text" id="T_NOME" class="form-control mt-3" placeholder="Nome da tela">
         <input type="text" id="T_DESCRICAO" class="form-control mt-3" placeholder="Descrição">
         <input type="text" id="ROTA" class="form-control mt-3" placeholder="Nome da rota get">
@@ -42,10 +38,33 @@
             <option value="R">Tela principal (sem parametro)</option>
             <option value="V">Tela secundaria (requer parametro)</option>
         </select>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="button" id="SALVAR" class="btn btn-primary">Salvar mudanças</button>
+        </div>
+          </div>
+          <div class="modal">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" id="SALVAR" class="btn btn-primary">Salvar mudanças</button>
+          </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="TituloModalCentralizado">Crie uma ação numa tela </h5>
+
+          </div>
+          <div class="modal-body">
+            <label for="">Nome da ação</label>
+           <input type="text" id="NOME_ACAO" class="form-control mt-3" placeholder="Nome da ação na tela">
+           <label for="">Observações</label>
+           <input type="text" id="OBS" class="form-control mt-3" placeholder="Observações sobre a ação">
+           <label >Tela</label>
+           <div style="display: flex; flex-direction: row;">
+               <input type="number" required id="ID_TELA" name="PRDT_ID_CTG" style="width: 80px;margin-right: 8px;" class="form-control  TddCam">
+               <input type="text" required  id="NOME_TELA"  name="PRDT_NOME_CTG" class="form-control  " placeholder="Nome tela" >
+           </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            <button type="button" id="SALVAR" class="btn btn-primary">Salvar mudanças</button>
+            <button type="button" id="CriarAcao" class="btn btn-primary">Salvar mudanças</button>
           </div>
         </div>
       </div>

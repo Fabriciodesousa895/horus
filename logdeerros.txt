@@ -425,3 +425,25 @@ Help: https://docs.oracle.com/error-help/db/ora-00942/
 Sun Aug 25 2024 09:23:57 GMT-0300 (Horário Padrão de Brasília) -- /tabela/preco?  -- Token inválido!r
 
 Sun Aug 25 2024 20:42:00 GMT-0300 (Horário Padrão de Brasília) -- /tabela/preco  -- Token inválido!r
+
+Tue Aug 27 2024 20:04:13 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:05:23 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:09:24 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:11:43 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:11:56 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:12:26 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:12:26 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:13:51 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:13:54 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:23:13 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Tue Aug 27 2024 20:24:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"

@@ -1,12 +1,36 @@
 
 'use strict';
 import { Ajax } from "../Class/Ajax.js";
+import { filtra_campo } from "../Class/Filtra_campo.js";
+import { Tabela } from "../Class/Tabela.js";
 let ID_USU = document.getElementById('ID_USU');
 let btn = document.getElementById('btn');
 let PROGRESSO = document.getElementById('PROGRESSO');
 let TABELA = document.getElementById('TABELA');
 let PERMI = document.getElementById('PERMI');
 
+new filtra_campo('ID_TELA', 'NOME_TELA', 'T_TELA').Filtra();
+
+document.getElementById('CriarAcao').addEventListener('click', (e) => {
+  e.preventDefault()
+  let objeto = new Tabela().InputsValues(['ID_TELA', 'NOME_ACAO', 'OBS'])
+  let data = {
+    sql: `BEGIN 
+  DECLARE
+    V_NUM_ALEATORIO  VARCHAR(10);
+   BEGIN
+     SELECT  DBMS_RANDOM.STRING('U',10) INTO V_NUM_ALEATORIO FROM DUAL;
+     INSERT INTO ACAO (DESCRICAO,OBSERVACAO,ID_TELA,ID_JS) VALUES (:NOME_ACAO,:OBS,:ID_TELA,V_NUM_ALEATORIO  );
+     COMMIT;
+  END;
+END;`,
+    binds:  objeto ,
+    mensagem_sucess: 'Ação criada  com sucesso!',
+    mensagem_error: 'Erro ao criar ação!'
+  };
+  new Ajax('/rota/universal', data).RequisicaoAjax(true)
+  console.table(objeto)
+})
 function sendForm() {
 
   let ajax = new XMLHttpRequest();
@@ -111,7 +135,7 @@ function FiltAcao(ID_TELA) {
   let ModalAcao = document.getElementById('ModalAcao');
   let data = {
     sql: `SELECT FILT_ACAO(:ID_TELA,:ID_USU) FROM DUAL`,
-    binds: { ID_TELA: ID_TELA,ID_USU:ID_USU.value }
+    binds: { ID_TELA: ID_TELA, ID_USU: ID_USU.value }
   }
   new Ajax('/select/universal', data).RequisicaoAjax(false).then((array_dados) => {
     if (array_dados.length != 0) {

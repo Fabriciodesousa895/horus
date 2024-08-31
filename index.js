@@ -1338,8 +1338,7 @@ app.post('/consulta_acessos', auth,async (req, res) => {
    FROM
    CONFIG_USU_TELA U
    INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
-    WHERE ID_USU = :ID
-    AND T.TIPO <> 'F'`
+    WHERE ID_USU = :ID`
     }
     if (TABELA == 'GRP_GRUPO') {
       sql = `SELECT T.ID_TELA,T.T_NOME,GRUP_ALTERA,GRUP_INCLUI,GRUP_DELETA,GRUP_CONSULTA
@@ -1347,8 +1346,7 @@ app.post('/consulta_acessos', auth,async (req, res) => {
    CONFIG_GRUPO_TELA U
    INNER JOIN T_TELA T ON T.ID_TELA = U.ID_TELA
    INNER JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
-    WHERE U.ID_GRUPO = :ID
-    AND T.TIPO <> 'F'`
+    WHERE U.ID_GRUPO = :ID`
     }
 
     let binds = {

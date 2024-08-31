@@ -29,7 +29,6 @@ END;`,
     mensagem_error: 'Erro ao criar ação!'
   };
   new Ajax('/rota/universal', data).RequisicaoAjax(true)
-  console.table(objeto)
 })
 function sendForm() {
 

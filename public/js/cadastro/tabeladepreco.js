@@ -32,7 +32,14 @@ document.getElementById('form_filtro').addEventListener('submit', (e) => {
   new Ajax('/select/universal', data).RequisicaoAjax().then((arraydedados) => {
     new Tabela('TabelaPrecos').InseriRegistros(arraydedados)
   })
-
+  //Duplo clique para abrir tabela de preço
+  // let AllTrs = document.querySelectorAll('#TabelaPrecos tr');
+  // AllTrs.forEach((ElemnetoCorrentePai)=>{
+  //   // alert(ElemnetoCorrentePai.textContent)//.target.parentNode.cells[0].textContent
+  //    ElemnetoCorrentePai.addEventListener('dblclick',(ElemnetoCorrenteFilho)=>{
+  //   alert(ElemnetoCorrenteFilho.textContent)
+  //   })
+  // })
 })
 // Alterando por categoria
 document.getElementById('form_categoria').addEventListener('submit', (e) => {
@@ -69,10 +76,10 @@ document.getElementById('form_produto').addEventListener('submit', (e) => {
   }
 })
 
-// let AllTds = document.querySelectorAll('td');
-// AllTds.addEventListener('dbclick',(e)=>{
-//   console.log('Elemento clicado');
-// })
+
+  
+
+
 
 document.getElementById('TDDOPC').addEventListener('change', (e) => {
   let TDDOPC = document.getElementById('TDDOPC').value
@@ -132,6 +139,7 @@ document.getElementById('Auditoria_sql').addEventListener('submit',(e)=>{
   }
   new Ajax('/select/universal', data).RequisicaoAjax().then((arraydedados) => {
     if(objeto.P_INI != '' && objeto.P_FIN != '' && objeto.TDDOPC != ''){
+    console.table(objeto)
       new Tabela('Tabela_auditoria').InseriRegistros(arraydedados);
     }
   })

@@ -447,3 +447,29 @@ Tue Aug 27 2024 20:13:54 GMT-0300 (Horário Padrão de Brasília) -- /rota/unive
 Tue Aug 27 2024 20:23:13 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
 
 Tue Aug 27 2024 20:24:47 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: NJS-044: bind object must contain one of the following attributes: "dir", "type", "maxSize", or "val"
+
+Fri Aug 30 2024 21:27:44 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
+Help: https://docs.oracle.com/error-help/db/ora-00923/
+
+Fri Aug 30 2024 21:27:50 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
+Help: https://docs.oracle.com/error-help/db/ora-00923/
+
+Fri Aug 30 2024 21:29:34 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Fri Aug 30 2024 21:30:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Fri Aug 30 2024 21:30:59 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Fri Aug 30 2024 21:35:52 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Fri Aug 30 2024 21:36:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Sat Aug 31 2024 09:41:30 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Token inválido!r
+
+Sat Aug 31 2024 14:44:08 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00947: não há valores suficientes
+Help: https://docs.oracle.com/error-help/db/ora-00947/
+
+Sat Aug 31 2024 14:44:17 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Sat Aug 31 2024 14:44:56 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')

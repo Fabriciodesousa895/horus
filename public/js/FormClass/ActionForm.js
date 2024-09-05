@@ -92,6 +92,7 @@ class ActionForm{
                 let td = element.querySelectorAll('td')
                 td.forEach((tdcorrent, index) => {
                   if (index == 0) {
+                    alert(tdcorrent)
                     let data = {
                       sql:`BEGIN DELETE FROM ${this.TableName} WHERE ${PkRegistro} = :PkRegistro; COMMIT; END;`,
                       binds:{PkRegistro:tdcorrent.textContent},

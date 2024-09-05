@@ -473,3 +473,68 @@ Help: https://docs.oracle.com/error-help/db/ora-00947/
 Sat Aug 31 2024 14:44:17 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
 
 Sat Aug 31 2024 14:44:56 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Sat Aug 31 2024 15:02:56 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Sat Aug 31 2024 15:03:03 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "USU_ID": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Sat Aug 31 2024 15:03:10 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01008: nem todas as variáveis são limitadas
+Help: https://docs.oracle.com/error-help/db/ora-01008/
+
+Sat Aug 31 2024 22:16:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Sat Aug 31 2024 22:23:35 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00923: palavra-chave FROM não localizada onde esperada
+Help: https://docs.oracle.com/error-help/db/ora-00923/
+
+Wed Sep 04 2024 12:19:36 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00904: : identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Wed Sep 04 2024 12:20:38 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "U"."ID_USU": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Wed Sep 04 2024 22:18:11 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 34:
+PL/SQL: ORA-00904: "UNDEFINED": identificador inválido
+ORA-06550: linha 1, coluna 7:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Wed Sep 04 2024 22:20:44 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_CODPROD) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Wed Sep 04 2024 22:20:54 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.PRDT_FK) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Wed Sep 04 2024 22:23:23 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_CODPROD) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Wed Sep 04 2024 22:23:32 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_CODPROD) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Wed Sep 04 2024 22:23:40 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_CODPROD) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Wed Sep 04 2024 22:24:03 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 34:
+PL/SQL: ORA-00904: "IDPKNAT": identificador inválido
+ORA-06550: linha 1, coluna 7:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Wed Sep 04 2024 22:26:56 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 34:
+PL/SQL: ORA-00904: "IDPKNAT": identificador inválido
+ORA-06550: linha 1, coluna 7:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Wed Sep 04 2024 22:28:00 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 34:
+PL/SQL: ORA-00904: "IDPKNAT": identificador inválido
+ORA-06550: linha 1, coluna 7:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/

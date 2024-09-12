@@ -538,3 +538,105 @@ PL/SQL: ORA-00904: "IDPKNAT": identificador inválido
 ORA-06550: linha 1, coluna 7:
 PL/SQL: SQL Statement ignored
 Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Fri Sep 06 2024 20:18:21 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "XT"."XMLD_DATA": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Fri Sep 06 2024 20:18:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "XT"."XMLD_DATA": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Fri Sep 06 2024 20:18:45 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Fri Sep 06 2024 20:19:19 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "E": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Fri Sep 06 2024 20:23:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "X"."DTHSAIENT": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Fri Sep 06 2024 20:26:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Fri Sep 06 2024 20:27:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00904: "PARC_CGC": identificador inválido
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+Fri Sep 06 2024 20:29:15 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Sat Sep 07 2024 12:35:10 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Token inválido!r
+
+Sat Sep 07 2024 14:04:37 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Sat Sep 07 2024 14:04:44 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Sat Sep 07 2024 14:04:52 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Sat Sep 07 2024 18:48:18 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Sat Sep 07 2024 21:10:48 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Token inválido!r
+
+Mon Sep 09 2024 12:43:00 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Mon Sep 09 2024 13:24:08 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Mon Sep 09 2024 14:21:57 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-32795: não é possível inserir em uma coluna de identidade sempre gerada
+ORA-06512: em line 3
+Help: https://docs.oracle.com/error-help/db/ora-32795/
+
+Mon Sep 09 2024 14:22:27 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01704: literal de string extenso demais
+ORA-06512: em line 3
+Help: https://docs.oracle.com/error-help/db/ora-01704/
+
+Mon Sep 09 2024 14:30:41 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 7 positional bind values are required but 0 were provided
+
+Mon Sep 09 2024 14:31:44 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 3, coluna 25:
+PL/SQL: ORA-00947: não há valores suficientes
+ORA-06550: linha 3, coluna 1:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Mon Sep 09 2024 14:31:52 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 3, coluna 25:
+PL/SQL: ORA-00947: não há valores suficientes
+ORA-06550: linha 3, coluna 1:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Mon Sep 09 2024 14:32:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01704: literal de string extenso demais
+ORA-06512: em line 3
+Help: https://docs.oracle.com/error-help/db/ora-01704/
+
+Mon Sep 09 2024 17:49:39 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Mon Sep 09 2024 20:34:22 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Mon Sep 09 2024 20:45:10 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Mon Sep 09 2024 20:45:17 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Mon Sep 09 2024 21:03:33 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01722: número inválido
+Help: https://docs.oracle.com/error-help/db/ora-01722/
+
+Tue Sep 10 2024 22:15:43 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Wed Sep 11 2024 13:09:07 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 22:
+PL/SQL: ORA-00904: "CNPJ": identificador inválido
+ORA-06550: linha 2, coluna 1:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Wed Sep 11 2024 13:09:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-06550: linha 2, coluna 22:
+PL/SQL: ORA-00904: "CNPJ": identificador inválido
+ORA-06550: linha 2, coluna 1:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Wed Sep 11 2024 18:39:54 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00903: nome de tabela inválido
+Help: https://docs.oracle.com/error-help/db/ora-00903/
+
+Thu Sep 12 2024 12:43:56 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')

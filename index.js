@@ -775,6 +775,20 @@ app.get('/log/acesso', urlencodedParser, auth, async (req, res) => {
     res.status(500).send('Error:' + error)
   }
 })
+//Tela de portal de importação de XML
+app.get('/portal/importacao', urlencodedParser, auth, async (req, res) => {
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(461, token);
+    let P_USU = await permi_usu(461, token);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/portaldeimportacaoxml', { P_USU })
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.send('Error:' + error)
+    res.status(500).send('Error:' + error)
+  }
+})
 app.get('/lancador/log', urlencodedParser, auth, async (req, res) => {
   let token = req.cookies.jwt;
   try {

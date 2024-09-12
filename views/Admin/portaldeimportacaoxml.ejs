@@ -1,0 +1,185 @@
+
+<%-include('../partials/head')%>
+<% let P = P_USU.P_USU %>
+<% let D = P[0] %>
+<!-- Relacionamento produto -->
+ <!-- Modal grande -->
+ <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">Relacionamento de produtos  </div>
+      <div class="modal-body">
+       <table class="table table-hover" id="RelacionamentoTabela">
+         <thead>
+           <th>Cod. na nota</th>
+           <th>Nome produto na nota</th>
+           <th>Cod. no sistema</th>
+           <th>Nome produto no sistema</th>
+         </thead>
+         <tbody>
+
+         </tbody>
+
+       </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  -->
+<div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-xl" style="width: 500px;">
+      <div class="modal-content">
+        <form class="needs-validation" id="form" novalidate>
+          <div class="container" style="padding: 40px;" >
+              <div class="row">
+                <div class="col-sm"  >
+                    <label >Arquivo XML</label>
+                   <input type="file"  class="form-control TddCam" accept=".xml" id="ArquivoXml" name="arquivo xml" required>
+                </div>
+              </div>
+          
+              </div>
+              <button style="margin-left: 40px;" id="SalvarXml" type="submit" class="btn btn-warning ">Salvar</button>
+            </div>
+          
+          </form>
+      </div>
+    </div>
+  </div>
+  <!--editar registro-->
+<div class="modal fade EDITAR" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-xl" style="width: 500px;">
+    <div class="modal-content">
+      <form class="needs-validation"  novalidate>
+        <div class="container" style="padding: 40px;" >
+            <div class="row">
+              <div class="col-sm"  >
+                  <label for="">DESCRIÇÃO CAMPO</label>
+                 <input type="text" class="form-control"   required>
+                  <label for="">Descrição</label>
+                 <input type="text" class="form-control"  required>
+              </div>
+            </div>
+            </div>
+            <% if (D.ALTERA == 'N') { %> 
+              <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" disabled  >Salvar</button>
+          <% }else{ %>
+              <button style="margin-left: 40px;" id="SALVA_EDICAO"  class="btn btn-warning ">Salvar</button>
+
+          <%}%> 
+          </div>
+        
+        </form>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="grad" style="display: flex;height: auto;padding: 30px;">
+  <div style="width: 310px;height: 400px;">
+   <form>
+<%let filtro = P_USU.T_FILTRO%> 
+
+    <div class="form-group row">
+
+        <div class="col-sm-12">
+            <span >Chave de acesso</span>
+            <input type="number"  class="form-control" placeholder="Chave de acesso" id="ChaveAcesso"  value="<%=filtro[0][0]%>">
+        </div>
+ 
+        <div class="col-sm-12">
+            <span >Numero de nota</span>
+            <input type="text"  class="form-control" placeholder="Numero de nota" id="NrNota" value="<%=filtro[0][1]%>">
+        </div>
+        <div class="col-sm-12">
+            <span >Cnpj emitente</span>
+            <input type="text"  class="form-control" placeholder="Cnpj emitente" id="CNPJ_EMIT" value="<%=filtro[0][2]%>">
+        </div>
+        <div class="col-sm-12">
+            <span>Status</span>
+            <%let Status = filtro[0][3]%>
+            <select name="" id="StatusXml" class="form-control" >
+                <option value="" selected >Todos</option>
+                <option value="IC" <%if(Status == 'IC'){%>selected <%}%> >Importado com sucesso</option>
+                <option value="P" <%if(Status == 'IE'){%>selected <%}%>>Importado com erro</option>
+                <option value="E"   <%if(Status == 'E'){%>selected <%}%>>Entrada concluida</option>
+            </select>
+        </div>
+        <div class="col-sm-12">
+           <span>Modelo</span>
+           <%let Modelo = filtro[0][4]%>
+           <select name="" id="ModeloNota" class="form-control">
+            <option value="">Todos</option>
+            <option value="55"  <%if(Modelo == '55'){%>selected <%}%>>55-NFe</option>
+            <option value="57"  <%if(Modelo == '57'){%>selected <%}%>>57-CTe</option>
+           </select>
+        </div>
+
+    </div>
+
+    <button id="filtro" class="btn btn-primary">Buscar</button>
+
+   </form>
+   <textarea name="" id="TextArea" style="width: 100%;min-height: 300px;height: auto;" disabled>
+
+   </textarea>
+   </div>
+  <!-- Tabela -->
+  <div style="width: 100%;display: block;">
+    <input type="button" value="Reprocessar" id="Reprocessar" style="margin-left: 10px;" class="btn btn-primary" disabled>
+    <input type="button" value="Relacionamento produtos" id="Relacionamento" data-toggle="modal" data-target=".bd-example-modal-xl"class="btn btn-warning" disabled>
+    <table class="table table-hover mt-2" id="XmlImportados" style="height: auto;width: 1000px;">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Chave de acesso</th>
+              <th>Nota</th>
+              <th>Modelo</th>
+              <th>Status</th>
+          </tr>
+      </thead>
+      <tbody  >
+          <!-- Dados sendo inseridos automaticamente -->
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<script type="module" src="/js/Admin/portaldeimportacaoxml.js"></script>
+<%-include('../partials/footer')%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

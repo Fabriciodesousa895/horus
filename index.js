@@ -233,11 +233,16 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
+  console.log('------')
+
   let USU_SENHA = req.body.USU_SENHA;
   let USU_NOME = req.body.USU_NOME;
   let sql = `SELECT USU_SENHA, ID_USU FROM USU_USUARIO WHERE USU_NOME = :USU_NOME AND USU_STATUS = 'S'`;
   let binds = { USU_NOME: USU_NOME }
+  console.log('--242----')
   let result = await conectarbd(sql, binds, options);
+  
+
   //Verifica se há um token,caso haja é finalizado a sessão
   let TOKEN = req.cookies.jwt;
   // t
@@ -310,9 +315,11 @@ app.post('/login', async (req, res) => {
                         SO_COMPUTADOR: req.headers['sec-ch-ua-platform'],
                         ID_USU: ID_USUARIO
                       }
+                      console.log('------')
                       conectar(sql, binds);
                     } catch (error) {
                       res.status(500).send('Error ', error);
+                      console.log('----Error--')
                       console.log(error);
                     }
                   });
@@ -815,10 +822,13 @@ app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
       array_colunas: array_colunas,
       array_registros: array_registros
     };
-    res.send(objeto)
+    console.log(result);
+
+    res.send(objeto);
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
+    console.log(error);
     res.status(500).send('Erro ao execultar sql! ' + error.message);
   }
 })
@@ -1147,6 +1157,17 @@ app.get('/marca/produtos', auth, async (req, res) => {
     res.status(500).send(error)
   }
 })
+//TOP
+app.get('/top/tipomovimento', auth, async (req, res) => {
+  try {
+    let token = req.cookies.jwt;
+    let Acesso = await valida_acesso(481, token);
+    let P_USU = await permi_usu(481, token);
+    res.render('./Admin/top.ejs', { P_USU })
+  } catch (error) {
+    res.status(500).send(error)
+  }
+})
 app.get('/natureza/lancamento',auth,async(req,res)=>{
 try{
   let token = req.cookies.jwt;
@@ -1421,6 +1442,7 @@ app.post('/rota/universal', async (req, res) => {
   let Objeto = req.body;
   let token = req.cookies.jwt;
   let novobinds;
+  console.log(Objeto)
   jwt.verify(token, process.env.SECRET, async (error, data) => {
     if (error) { return res.status(500).send('Token inválido!') }
     if (Objeto.USU_LOGADO) {
@@ -1451,6 +1473,7 @@ app.post('/rota/universal', async (req, res) => {
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
 app.post('/select/universal',auth, async (req, res) => {
   let Binds = req.body.binds;
+  console.log(Binds)
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
     if (req.body.USU_LOGADO) {
     let USU_LOGADO = data.ID_USUARIO;
@@ -1461,6 +1484,59 @@ app.post('/select/universal',auth, async (req, res) => {
       res.status(200).send(result.rows[0][0]);
     } catch (error) {
       res.status(500).send('Ocorreu um erro! ' + error);
+    }
+
+  });
+});
+app.post('/select/universal/objeto',auth, async (req, res) => {
+  let Binds = req.body.binds;
+  jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
+    if (req.body.USU_LOGADO) {
+    let USU_LOGADO = data.ID_USUARIO;
+      Binds.USU_LOGADO = USU_LOGADO;
+    }
+    try {
+      let result = await conectarbd(req.body.sql, Binds,options_objeto);
+      console.log(result);
+      res.status(200).send(result);
+    } catch (error) {
+      res.status(500).send('Ocorreu um erro! ' + error);
+    }
+
+  });
+});
+app.post('/select/universal/array',auth, async (req, res) => {
+  let Binds = req.body.binds;
+  jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
+    if (req.body.USU_LOGADO) {
+    let USU_LOGADO = data.ID_USUARIO;
+      Binds.USU_LOGADO = USU_LOGADO;
+    }
+    try {
+      let result = await conectarbd(req.body.sql, Binds,options);
+      console.log(result);
+      res.status(200).send(result);
+    } catch (error) {
+      res.status(500).send('Ocorreu um erro! ' + error);
+    }
+
+  });
+});
+app.post('/procedure_com_saida',auth, async (req, res) => {
+  console.log(req.body)
+  let Binds = req.body.binds;
+  jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
+    if (req.body.USU_LOGADO) {
+    let USU_LOGADO = data.ID_USUARIO;
+      Binds.USU_LOGADO = USU_LOGADO;
+    }
+    try {
+      Binds.P_RESULTADO =  { dir: oracledb.BIND_OUT, type: oracledb.STRING }
+      let result = await conectar(req.body.sql, Binds);
+      res.status(200).send(result.outBinds.P_RESULTADO);
+    } catch (error) {
+      res.status(500).send('Ocorreu um erro! ' + error);
+      console.log('error '+ error)
     }
 
   });
@@ -1490,48 +1566,6 @@ app.post('/api/via/cep', async (req, res) => {
 
 })
 
-//gerando pdf das tabelas
-app.post('/gerapdf', auth, (req, res) => {
-  let objetos = req.body;
-let keys = objetos.keys
-  
-  // Create a new PDF document
-  const doc = new PdfKit({ layout: 'landscape', size: 'A4' });
-// Add title and user info
-doc.fontSize(15).text('Tela: ' + objetos.tela, 10, 10);
-doc.fontSize(15).text('Usuário: ' + objetos.usuario, 10, 30);
-
-// Function to draw the table
-function drawTable(doc, data, startX, startY, rowHeight, columnWidths) {
-  let y = startY;
-  
-  // Draw header
-  // doc.fontSize(12).text('Código', startX, y);
-  doc.text(keys[0], startX , y);
-  doc.text(keys[1], startX + 100, y);
-  doc.text(keys[2], startX + 250, y);
-  doc.text(keys[3], startX + 400, y);
-  y += rowHeight;
-console.log(data)
-  // Draw rows
-  data.forEach((row,index) => {
-    doc.fontSize(10).text(row.Código, startX, y);
-    doc.text(row.Nome, startX + columnWidths[0], y);
-    doc.text(row.Usado_como, startX + columnWidths[0] + columnWidths[1], y);
-    // doc.text(row.keys[index], startX + columnWidths[0] + columnWidths[1] + columnWidths[2], y);
-    y += rowHeight;
-  });
-}
-
-// Column widths
-let columnWidths = [100, 200, 200, 100];
-
-// Draw the table
-drawTable(doc, objetos.dados, 10, 50, 20, columnWidths);
-
-doc.pipe(res);
-doc.end();
-});
 
 
 server.listen(80, (err) => {

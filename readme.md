@@ -38,8 +38,8 @@ exemplo:
 Da mesma forma esxiste uma rota para select dentro do banco
 -- sql => Sql a ser execultado
 --binds => Valores a serem lidos(parametros)
---mensagem_error  => mensagem de erro 
---rows => valor booleano,define se o valor retornado é somente somente a primeira psoição do array ou um array completo
+
+
       let data = {
         sql: `  SELECT   U.ID_USU, U.USU_NOME
         FROM USU_USUARIO U
@@ -53,12 +53,39 @@ Da mesma forma esxiste uma rota para select dentro do banco
           AND (CU.CFU_CONSULTA = 'S' OR CG.GRUP_CONSULTA = 'S' OR U.USU_ADM = 'S' )
        GROUP BY  U.USU_NOME,U.ID_USU`,
         binds: { ID_TELA: ID_TELA.value },
-        mensage_error: 'Houve um erro ao conultar o registro!',
-        rows: true
-        USU_LOGADO,true
+        USU_LOGADO:true
       };
       OBS: rows =  true irá retornar um array com os registros
-<!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------ -->
+                             =>Rota para pocedure com saida<=
+Rota para a chamada de procedures quw possuem um parametro de saida(P_RESULTADO)
+-- sql => Sql a ser execultado para chamar a procedure(na chamada da procedure devr ter um parametro :P_RESULTADO)
+-- binds => Valores a serem lidos(parametros)
+-- USU_LOGADO =>  valor booleano,define se deve pegar o uisuario logado ou não
+
+
+Procedure de exemplo
+CREATE OR REPLACE procedure TESTE_SAIDA2 (
+    P_ID IN VARCHAR2,
+    P_RESULTADO OUT VARCHAR2
+) 
+AS
+BEGIN
+    P_RESULTADO := P_ID; 
+END;
+
+Exemplo:
+
+let datad ={
+  sql:` BEGIN 
+        TESTE_SAIDA2('1-ghgfdhgfhfghgdfhdfhg1',:P_RESULTADO);
+        END;`,
+  binds:{},
+  USU_LOGADO: false
+};
+new Ajax('/procedure_com_saida',datad).RequisicaoAjax(true);
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------- -->
                                  => Componentes para header,body e footer <= 
 
 Toda pagina html dever ser informado os componentes abaixo,caso não informe deverá escrever o html próprio(cabeçalho,corpo e footer);
@@ -97,23 +124,6 @@ app.get('/usuario', auth, async (req, res) => {
   }
 });
 
------------------------------------------------------------------------------------------------------------------------------
-                                        => Certificado <=
-
-Na pasta raiz da aplicacão há um arquivo chamadado certificado.json,no qual é passado algumas informações sobre a licença atual.
-
-cnpj: 'cnpj da empresa'
-razao_social:'rasao  social da empresa'
-token:'token da licenca'
-
-Ainda na raiz da aplicação no arquivo principal index.js e feito a leitura da licenca e  faz a comunicação com o gerenciador de licença
- e faz uma validação a cada 1h(3600000 milissegundos).
-
-Será retornado um objeto com dos valores.
-
-status  => caso seja 200 a aplicação segue adiante,sendo outros status será informado ao usuário uma mensagem sobre a situação da licença
-mensage => mesagem sobre a situação da licença
-
 ----------------------------------------------------------------------------------------------------------------------------------
 
                                           => Historico de filtros <=
@@ -129,19 +139,6 @@ Para evitar a repeticão de chamadas da função SalvaFiltro é orientado a cria
         SalvaFiltro(181, FILTRO_NOME.value, FILTRO_COD.value,'','','','','','','','');
     }
 OBS:O primeiro parametro é o ID da tela e os demias são os valores a serem salvos
-
-----------------------------------------------------------------------------------------------------------------------------------
-                                             => Trabalhas com tabelas <=  
-
-Foi desenvolvida uma class para tarabalhar com tabelas.Basta importar e chamar os metodos.
-Requer dois parametros,o primeiro é o id da tboby e o segundoo array de registros.
-
-'use strict';
-import { SalvaFiltro } from "../Class/Tabela.js";
-
- new   Tabela('tabelausuario',array_de_dados).InseriRegistros()
-
-
 
 ----------------------------------------------------------------------------------------------------------------------------------
                          =>Regra para tabela de preços<=
@@ -254,14 +251,21 @@ PARA PODER FAZER VENDA É PRECISO TER UMA TABELA DE PREÇO ATIVA VINCULDO AO PRO
       </tbody>
     </table>
   </div>
-
 </div>
-
-<script type="module" src="/js/cadastro/marca.js"></script>
 <%-include('../partials/footer')%>
 
 
 
+-------------------------------------------------------------------------------------------
+
+REGRAS DE NEGOCIO DE TOP
+
+ORÇAMENTO   => SE A FLAG ORÇAMENTO ESTIVER MARCADA NÃO SE GERA FINANCEIRO E NEM ATUALIZA ESTOQUE
+BONIFICAÇÃO => SE A FLAG BONIFICAÇÃO ESTIVER MARCADA IRA GERAR UM TITULO DE DESPESA E IRÁ ATUALIZAR O ESTOQUE DO PRODUTO
+
+ FLAG (Permite a exclusão de registros confirmados?) => MARCADA IRÁ PERMITIR EXCLUIR OPERAÇOES QUE JÁ FORAM CONFIRMADAS
+ FLAG (Permite alterar registros confirmados?) => MARCADA IRÁ PERMITIR ALTERAR OPERAÇOES QUE JÁ FORAM CONFIRMADAS
+ FLAG (Reserva estoque ao salvar?) => QUANDO SALVAR O MOVIMENTO IRA RESERVAR O ESTOQUE DOS PRODUTOS
 
 
 

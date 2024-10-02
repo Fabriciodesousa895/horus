@@ -138,7 +138,21 @@ document.getElementById('form').addEventListener('submit', (e) => {
         let DT_NASC = (document.getElementById('PARC_NASC').value).split('-');
         console.log(document.getElementById('PARC_NASC').value)
         let DT_NASC_SPLIT = `${DT_NASC[0]}-${DT_NASC[1]}-${DT_NASC[2]}`
-        dados['DT_NASC_SPLIT'] = DT_NASC_SPLIT
+        dados['DT_NASC_SPLIT'] = DT_NASC_SPLIT;
+                    //Validando se os campos obrigatórios estão preenchidos
+            let Inputs = IdForm.querySelectorAll('input.TddCam, textarea.TddCam, select.TddCam');
+                    RequiredTrueOrFalse = false;
+                    Inputs.forEach((elementrequired)=>{
+                       if( elementrequired.required && elementrequired.value == ''){
+                        RequiredTrueOrFalse = false;
+                        }else{
+                            if(!RequiredTrueOrFalse &&  elementrequired.value == ''){
+                                RequiredTrueOrFalse = false;
+                            }else{
+                                RequiredTrueOrFalse = true
+                            }
+                        }
+                    })
     let data = {
         sql: `BEGIN
                 INSERI_PARCEIRO      (:PARC_NOME,:PARC_N_RAZAO_SOCIAL,:PARC_CGC_,:PARC_IR_RG,:PARC_EMAIL,TO_DATE(:DT_NASC_SPLIT),:PARC_TEL,:PARC_TEL_2,
@@ -152,7 +166,9 @@ document.getElementById('form').addEventListener('submit', (e) => {
     };
 
     console.log(data)
-
-    new Ajax('/rota/universal', data).RequisicaoAjax(true, 'form')
+    if(RequiredTrueOrFalse == true){
+        new Ajax('/rota/universal', data).RequisicaoAjax(true, 'form')
+    }
+   
 });
 

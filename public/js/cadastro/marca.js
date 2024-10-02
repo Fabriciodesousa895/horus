@@ -24,9 +24,6 @@ e.preventDefault();
  let tr = document.querySelectorAll('tr');
  tr.forEach(element => {
    let td = document.createElement('td');
-   let check = document.createElement('input');
-   check.type = 'checkbox'
-   td.appendChild(check)
    element.appendChild(td); // Use element instead of tr
  });
  
@@ -83,3 +80,11 @@ document.getElementById('SALVA_EDICAO').addEventListener('click',(e)=>{
   new Ajax('/rota/universal',data).RequisicaoAjax(true)
 
 })
+let datad ={
+  sql:` BEGIN 
+        TESTE_SAIDA2('1-ghgfdhgfhfghgdfhdfhg1',:P_RESULTADO);
+        END;`,
+  binds:{},
+  USU_LOGADO: false
+};
+new Ajax('/procedure_com_saida',datad).RequisicaoAjax(true);

@@ -1,0 +1,294 @@
+<%-include('../partials/head')%>
+<% let P = P_USU.P_USU %>
+<% let D = P[0] %>
+<!--  -->
+    <div class="modal fade bd-example-modal-xl PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content" style="padding: 20px;">
+            <form action="" id="SalvarTop">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="">Nome</label>
+                    <input type="text" class="form-control TddCam" name="NOME" required placeholder="Nome da top " maxlength="40">
+                    <label for="">Descrição</label>
+                    <input type="text" class="form-control TddCam"  name="DESCRICAO" required placeholder="Descrição da top " maxlength="40">
+                     <div class="custom-control custom-checkbox"> 
+                      <input type="checkbox" class="custom-control-input TddCam"  name="ORCAMENTO"  id="ORCAMENTO" >
+                      <label class="custom-control-label"  for="ORCAMENTO">Orçamento?</label>
+                    </div>  
+                    <div class="custom-control custom-checkbox"> 
+                      <input type="checkbox" class="custom-control-input TddCam"  name="BONIFICACAO" id="BONIFICACAO">
+                      <label class="custom-control-label"  for="BONIFICACAO">Bonificação?</label>
+                    </div> 
+
+                </div>
+     
+                <div class="col-sm-4">
+                  <div class="custom-control custom-checkbox"> 
+                    <input type="checkbox" class="custom-control-input TddCam"  name="EXCLUI_CONFIRMADOS" id="EXCLUI_CONFIRMADOS" >
+                    <label class="custom-control-label"  for="EXCLUI_CONFIRMADOS">Permite a exclusão de registros confirmados?</label>
+                  </div> 
+                  <div class="custom-control custom-checkbox"> 
+                    <input type="checkbox" class="custom-control-input TddCam"  name="ALTERA_CONFIRMADOS" id="ALTERA_CONFIRMADOS" >
+                    <label class="custom-control-label"  for="ALTERA_CONFIRMADOS">Permite alterar registros confirmados?</label>
+                  </div> 
+                  <div class="custom-control custom-checkbox"> 
+                    <input type="checkbox" class="custom-control-input TddCam"  name="RESERVA_SALVAR"  id="RESERVA_SALVAR">
+                    <label class="custom-control-label"  for="RESERVA_SALVAR">Reserva estoque ao salvar?</label>
+                  </div> 
+                <label for="">Estoque</label>
+                <select name="ESTOQUE" id="ESTOQUE" class="form-control TddCam">
+                         <option value="N" >Não atualiza estoque</option>
+                         <option value="A">Alimenta estoque</option>
+                         <option value="B">Baixa estoque</option>
+                 </select>
+                <label for="">Financeiro</label>
+                <select name="FINANCEIRO"  id="FINANCEIRO" class="form-control TddCam">
+                         <option value="N" >Não atualiza financeiro</option>
+                         <option value="GFP">Gera financeiro a pagar</option>
+                         <option value="GFR">Gera financeiro a receber</option>
+                 </select>
+                 </div>
+          </div>
+          <input type="submit" class="btn btn-warning" value="Salvar">
+        </form>
+
+        </div>
+      </div>
+  <!--editar registro-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"  aria-hidden="true" >
+  <div class="modal-dialog modal-xl" style="width: 500px;">
+    <div class="modal-content">
+      <form class="needs-validation"  novalidate>
+        <div class="container" style="padding: 40px;" >
+            <div class="row">
+              <div class="col-sm"  >
+                  <label for="">DESCRIÇÃO CAMPO</label>
+                 <input type="text" class="form-control"   required>
+                  <label for="">Descrição</label>
+                 <input type="text" class="form-control"  required>
+              </div>
+            </div>
+            </div>
+            <% if (D.ALTERA == 'N') { %> 
+              <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" disabled  >Salvar</button>
+          <% }else{ %>
+              <button style="margin-left: 40px;" id="SALVA_EDICAO"  class="btn btn-warning ">Salvar</button>
+
+          <%}%> 
+          </div>
+        
+        </form>
+    </div>
+  </div>
+</div>
+<!--  -->
+<!-- Restrições  e excessoes -->
+
+<div class="modal fade " id="EXCESSAO_RESTRICAO" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content"  style="padding: 5px;">
+      <div class="modal-header">Restrição / excessão de tops</div>
+      <form class="needs-validation" id="Auditoria_sql"  novalidate>
+       
+        <div class="row">
+          <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Empresa</a>
+              <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Usuários</a>
+              <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Grupos</a>
+              <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Parceiros</a>
+              <a class="nav-link" id="v-pills-naturezas-tab" data-toggle="pill" href="#v-pills-naturezas" role="tab" aria-controls="v-pills-naturezas" aria-selected="false">Naturezas</a>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                Empresas liberadas
+
+                <div class="custom-control custom-checkbox"> 
+                  <input type="radio" class="custom-control-input TddCam" checked  name="EMPRESA" id="TD_EMPRESAS" >
+                  <label class="custom-control-label"  for="TD_EMPRESAS">Acesso para todas as empresas?</label>
+                </div> 
+                <div class="custom-control custom-checkbox"> 
+                  <input type="radio" class="custom-control-input TddCam"  name="EMPRESA" id="TD_EMPRESAS_ESP" >
+                  <label class="custom-control-label"  for="TD_EMPRESAS_ESP">Somente empresas especificas?</label>
+                </div> 
+                <label >Empresas</label>
+                <div style="display: flex; flex-direction: row;width: 70%;">
+                    <input type="number" required id="ID_EMPRESA" style="width: 80px;margin-right: 8px;" class="form-control ">
+                    <input type="text" required id="NOME_EMPRESA"  name="" class="form-control  " placeholder="Nome empresa" >
+
+                </div>
+                <div id="CARD_EMP">
+                <img src="/img/botao-adicionar (2).png" style="cursor: pointer;" alt="Adicionar" id="AD_EMPRESA">
+                <img src="/img/excluir.png"  style="cursor: pointer;" alt="Adicionar" id="EX_EMPRESA">
+                <table class="table table-hover"  style="width: 70%;">
+                  <thead>
+                    <th>Id</th>
+                    <th>Nome empresa</th>
+                  </thead>
+                  <tbody id="EMPRESAS_TABLE">
+
+                  </tbody>
+                </table>
+               </div>
+              </div>
+              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                Usuários liberados
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input TddCam" checked  name="EMPRESA" id="USUARIOS" >
+                  <label class="custom-control-label"  for="USUARIOS">Acesso para todas os usuários?</label>
+                </div>
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input TddCam"  name="EMPRESA" id="USUARIOS_ESP" >
+                  <label class="custom-control-label"  for="USUARIOS_ESP">Acesso somente para usuários especificos?</label>
+                </div>
+                <div style="display: flex; flex-direction: row;width: 70%;" >
+                  <input type="number" required id="ID_USUARIO" style="width: 80px;margin-right: 8px;" class="form-control ">
+                  <input type="text" required id="NOME_USUARIO"  name="" class="form-control  " placeholder="Nome do usuário" >
+                  <img src="/img/adicionar.png" width="30px" style="cursor: pointer;" alt="Adicionar">
+
+              </div>
+              <table class="table table-hover"  style="width: 70%;">
+                <thead>
+                  <th>Id</th>
+                  <th>Nome de usuário</th>
+                </thead>
+                <tbody id="USUARIOS_TABLE">
+
+                </tbody>
+              </table>
+              </div>
+              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                Grupos de usuários liberados
+                
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input TddCam" checked name="EMPRESA" id="GRUPOS" >
+                  <label class="custom-control-label"  for="GRUPOS">Acesso para todos os grupos?</label>
+                </div> 
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input TddCam"  name="EMPRESA" id="GRUPOS_ESP" >
+                  <label class="custom-control-label"  for="GRUPOS_ESP">Somente grupos especificos?</label>
+                </div> 
+                <div style="display: flex; flex-direction: row;width: 70%;" >
+                  <input type="number" required id="ID_GRUPO" style="width: 80px;margin-right: 8px;" class="form-control ">
+                  <input type="text" required id="NOME_GRUPO"  name="" class="form-control  " placeholder="Nome do grupo" >
+                  <img src="/img/adicionar.png" width="30px" style="cursor: pointer;" alt="Adicionar">
+
+              </div>
+              <table class="table table-hover"  style="width: 70%;">
+                <thead>
+                  <th>Id</th>
+                  <th>Nome do grupo</th>
+                </thead>
+                <tbody id="GRUPO_TABLE">
+
+                </tbody>
+              </table>
+              </div>
+              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                Parceiros liberados
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input TddCam" checked  name="EMPRESA" id="PARCEIROS" >
+                  <label class="custom-control-label"  for="PARCEIROS">Acesso para todos os parceiros?</label>
+                </div> 
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input TddCam"  name="EMPRESA" id="PARCEIROS_ESP" >
+                  <label class="custom-control-label"  for="PARCEIROS_ESP">Somente parceiros especificos?</label>
+                </div> 
+                <div style="display: flex; flex-direction: row;width: 70%;" >
+                  <input type="number" required id="ID_PARCEIRO" style="width: 100px;margin-right: 8px;" class="form-control ">
+                  <input type="text" required id="NOME_PARCEIRO"  name="" class="form-control  " placeholder="Nome do grupo" >
+                  <img src="/img/adicionar.png" width="30px" style="cursor: pointer;" alt="Adicionar">
+
+              </div>
+              <table class="table table-hover"  style="width: 70%;">
+                <thead>
+                  <th>Id</th>
+                  <th>Nome do parceiro</th>
+                </thead>
+                <tbody id="PARCEIRO_TABLE">
+
+                </tbody>
+              </table>
+              </div>
+              <div class="tab-pane fade" id="v-pills-naturezas" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                Naturezas liberadas
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input TddCam"  checked name="EMPRESA" id="NATUEZAS" >
+                  <label class="custom-control-label"  for="NATUEZAS" >Acesso para todos as naturezas?</label>
+                </div> 
+                <div class="custom-control custom-checkbox"> 
+                  <input type="checkbox" class="custom-control-input TddCam"  name="EMPRESA" id="NATUEZAS_ESP" >
+                  <label class="custom-control-label"  for="NATUEZAS_ESP">Somente naturezas especificas?</label>
+                </div> 
+                <div style="display: flex; flex-direction: row;width: 70%;" >
+                  <input type="number" required id="ID_NATUREZA" style="width: 100px;margin-right: 8px;" class="form-control ">
+                  <input type="text" required id="NOME_NATUREZA"  name="" class="form-control  " placeholder="Nome do grupo" >
+                  <img src="/img/adicionar.png" width="30px" style="cursor: pointer;" alt="Adicionar">
+
+              </div>
+              <table class="table table-hover"  style="width: 70%;">
+                <thead>
+                  <th>Id</th>
+                  <th>Nome das naturezas</th>
+                </thead>
+                <tbody id="NATUREZA_TABLE">
+
+                </tbody>
+              </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        </form>
+
+    </div>
+  </div>
+</div>
+
+<!--  -->
+<div class="grad" style="display: flex;height: auto;padding: 30px;">
+  <div style="width: 300px;height: 400px;">
+<%let filtro = P_USU.T_FILTRO%> 
+
+    <div class="form-group row">
+
+        <div class="col-sm-10">
+            <span >Id top</span>
+            <input type="number"  class="form-control" placeholder="ID" id="ID_FILTRO"  value="<%=filtro[0][0]%>">
+        </div>
+ 
+        <div class="col-sm-10">
+            <span >Nome da top</span>
+            <input type="text"  class="form-control" placeholder="Descrição" id="DESC_FILTRO" value="<%=filtro[0][1]%>">
+        </div>
+
+    </div>
+
+    <button id="filtro" class="btn btn-primary">Buscar</button>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#EXCESSAO_RESTRICAO" id="ModalExcesaoRestricao">Excessão / restrição</button>
+
+   </div>
+  <!-- Tabela -->
+  <div style="width: 100%;display: block;">
+
+    <table class="table table-hover" id="Tops" style="height: auto;width: 700px;">
+
+      <thead>
+          <tr>
+              <th>Nome coluna</th>
+              <th>Descrição</th>
+          </tr>
+      </thead>
+      <tbody id="TABLE_TOP">
+          <!-- Dados sendo inseridos automaticamente -->
+      </tbody>
+    </table>
+  </div>
+</div>
+<script type="module" src="/js/Admin/top.js"></script>
+<%-include('../partials/footer')%>

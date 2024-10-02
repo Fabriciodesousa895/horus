@@ -63,7 +63,14 @@
   
       <button id="filtro" class="btn btn-warning">Buscar</button>
       <button type="reset"   class="btn btn-primary ">Limpar filtro</button>
-      
+      <button class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Gráficos</button>
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <canvas  id="Grafico"></canvas >
+    </div>
+  </div>
+</div>
      </form>
     </div>
     <!-- Tabela -->
@@ -109,7 +116,7 @@
                                   <input type="number" class="form-control TddCam" placeholder="Nr. de peças"   name="PRDT_NR_PECA" required>
                               </div>
 
-                              <label f>Categoria</label>
+                              <label >Categoria</label>
                               <div style="display: flex; flex-direction: row;">
                                   <input type="number" required id="PRDT_ID_CTG" name="PRDT_ID_CTG" style="width: 80px;margin-right: 8px;" class="form-control  TddCam">
                                   <input type="text" required  id="PRDT_NOME_CTG"  name="PRDT_NOME_CTG" class="form-control  " placeholder="Categoria" >
@@ -136,7 +143,12 @@
                               <div style="display: flex; flex-direction: row;">
                                   <input type="text" required id="PRDT_NCM"  name="PRDT_NCM" style="width: 90px;margin-right: 8px;" class="form-control TddCam">
                                   <input type="text" required  id="PRDT_NCM_DESC"  name="PRDT_NCM_DESC" class="form-control  " placeholder="Descrição Ncm" >
-                                 </div>
+                              </div>
+                              <label >Unidade de medida</label>
+                              <div style="display: flex; flex-direction: row;">
+                                  <input type="text" required id="PRDT_UNIDADE"  name="PRDT_UNI" style="width: 90px;margin-right: 8px;" class="form-control TddCam">
+                                  <input type="text" required  id="PRDT_UNIDADE_DESC"  name="PRDT_UNI_DESC" class="form-control  " placeholder="Descrição unidade de medida" >
+                              </div>
 
                               <span >Estoque minimo</span>
                               <div style="display: flex; flex-direction: row;">
@@ -217,5 +229,14 @@
           </div>
 
    </div>
+
+
+
 <script type="module" src="/js/cadastro/produto.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+</script
 <%-include('../partials/footer')%>

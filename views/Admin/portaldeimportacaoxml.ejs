@@ -11,16 +11,22 @@
       <div class="modal-body">
        <table class="table table-hover" id="RelacionamentoTabela">
          <thead>
-           <th>Cod. na nota</th>
+           <th style="width: 120px;">Id</th>
+           <th style="width: 140px;">Cod. nota</th>
            <th>Nome produto na nota</th>
-           <th>Cod. no sistema</th>
+           <th style="width: 140px;">Cod. sistema</th>
            <th>Nome produto no sistema</th>
          </thead>
-         <tbody>
+         <tbody id="RelacionamentoTbody">
 
          </tbody>
 
        </table>
+      </div>
+      <div class="modal-footer">
+        <input type="button" class="btn btn-warning" value="Salvar"  id="SalvaRel" >
+        <input type="button" value="Cadastro simplificado" id="CadastroSimplificado" style="margin-left: 10px;" class="btn btn-primary" disabled>
+
       </div>
     </div>
   </div>
@@ -138,7 +144,7 @@
               <th>Status</th>
           </tr>
       </thead>
-      <tbody  >
+      <tbody>
           <!-- Dados sendo inseridos automaticamente -->
       </tbody>
     </table>

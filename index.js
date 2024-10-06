@@ -4,7 +4,6 @@ const server = require('http').createServer(app);
 const axios = require('axios');
 let packge = require('./package.json');
 require('dotenv').config()
-const PdfKit = require('pdfkit');
 'use strict';
 //view engine
 app.set("view engine", "ejs");
@@ -86,6 +85,8 @@ app.use(cors());
 const fs = require('fs');
 const { split, stubString, toInteger } = require("lodash");
 const send = require("send");
+const { tryEach } = require("async");
+const { MAX_LENGTH } = require("picomatch/lib/constants");
 
 
 app.get('/certificado/validacao', (req, res) => {
@@ -1221,7 +1222,7 @@ app.get('/visualizaproduto/:ID', auth, async (req, res) => {
     TO_CHAR(P.DT_INCLU,'DD-MM-YYYY  HH24:MI:SS') AS DT_INCLU,
     TO_CHAR(P.DT_ALTER,'DD-MM-YYYY  HH24:MI:SS') AS DT_ALTER,
     P.USU_ALTER || ' - ' || U.USU_NOME AS ID_USU_ALT ,
-    P.USU_INCLU || ' - ' || US.USU_NOME AS ID_USU_INCLUSAO ,
+    P.USU_INCLU || ' - ' || US.USU_NOME AS ID_USU_INCLU ,
     M.NOME AS MARCA_NOME,
     G.CTG_DESCRICAO,
     P.PRDT_STATUS,
@@ -1272,9 +1273,9 @@ app.get('/VisualizaNcm/:cod_ncm', auth, async (req, res) => {
              TO_CHAR(N.DT_ALTER,'DD/MM/YYYY HH24:MM:SS') AS DT_ALTER,
              TO_CHAR(N.DT_INCLU,'DD/MM/YYYY HH24:MM:SS') AS DT_INCLU ,
              US.USU_NOME AS USU_ALTER,
-             U.USU_NOME AS USU_INCLUSAO
+             U.USU_NOME AS USU_INCLU
              FROM NCM N
-             LEFT JOIN USU_USUARIO U ON U.ID_USU = N.ID_USU_INCLUSAO	
+             LEFT JOIN USU_USUARIO U ON U.ID_USU = N.ID_USU_INCLU
              LEFT JOIN USU_USUARIO US ON US.ID_USU = N.COD_USU_ALTER	
               WHERE N.COD_NCM_ = :COD_NCM`;
   let binds = { COD_NCM: ncm };
@@ -1311,7 +1312,7 @@ app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
   PARC_CGC_ AS PARC_CGC
               FROM PRC_PARCEIRO PR 
               LEFT JOIN USU_USUARIO U ON U.ID_USU = PR.USU_ALTER 
-              LEFT JOIN USU_USUARIO T ON T.ID_USU = PR.USU_INCLUSAO 
+              LEFT JOIN USU_USUARIO T ON T.ID_USU = PR.USU_INCLU
               WHERE PR.ID_PARC = :ID   `;
   let binds = { ID: ID };
   try {
@@ -1552,7 +1553,6 @@ app.post('/api/via/cep', async (req, res) => {
   try {
     let response = await axios(`https://viacep.com.br/ws/${req.body.CEP}/json/`);
     let data = response.data;
-
     if (!data.erro) {
       conectarbd(`BEGIN API_CEP(:CEP,:CIDADE,:IBGE,:UF,:BAIRRO,:COMPLEMENTO); END;`, { CEP: data.cep, CIDADE: data.localidade, IBGE: data.ibge, UF: data.uf, BAIRRO: data.bairro, COMPLEMENTO: data.complemento }, options_objeto);
       res.json({ 'status': 'ok' })
@@ -1562,11 +1562,81 @@ app.post('/api/via/cep', async (req, res) => {
   } catch (error) {
     res.status(500).send('CEP não é valido ou não existe! Error');
   }
-
-
 })
 
+app.post('/Api/atualiza/ncm', async (req, res) => {
+  console.log('------ Inicio da rota para atualizar Ncm ------');
+  // URL do arquivo JSON
+  const url = 'https://val.portalunico.siscomex.gov.br/classif/api/publico/nomenclatura/download/json';
+  try {
+    const response = await axios.get(url);
+    const jsonData = JSON.stringify(response.data);
+    const result = await conectar(
+      `DECLARE
+        l_json CLOB := :dados;
+      BEGIN
+        processar_json_complexo(l_json);
+      END;`,
+      {
+        dados: { val: jsonData, type: oracledb.CLOB } 
+      }
+    );
+    console.log('------ Fim da rota para atualizar Ncm ------');
+    res.send('Ncms atualizados com sucesso.');
 
+  } catch (error) {
+    console.error('Erro no JSON:', error.message);
+    res.status(500).send('Erro ao atualizar NCM');
+  }
+});
+
+
+const https = require('https');
+
+const certificado = fs.readFileSync('certificado.pfx');
+
+const agenteHttps = new https.Agent({
+    pfx: certificado,
+    passphrase: 'Casa03' // Senha do certificado digital
+});
+const xml2js = require('xml2js');
+
+const xmlConsultaMDFe = `
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mdfe="http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeConsultaMFDest">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mdfe:consultaMDFe>
+         <mdfe:chMDFe>35241076487032004384550010006146111314086050</mdfe:chMDFe>
+      </mdfe:consultaMDFe>
+   </soapenv:Body>
+</soapenv:Envelope>`;
+
+axios({
+    method: 'post',
+    url: '	https://mdfe.svrs.rs.gov.br/ws/MDFeConsulta/MDFeConsulta.asmx',  // Substitua pela URL do webservice da SEFAZ.
+    httpsAgent: agenteHttps,
+    headers: {
+        'Content-Type': 'text/xml',
+        'SOAPAction': '' // SOAPAction pode ser vazio, dependendo do serviço
+    },
+    data: xmlConsultaMDFe
+})
+.then(response => {
+    // Parse o XML de resposta
+    xml2js.parseString(response.data, (err, result) => {
+        if (err) {
+            console.error('Erro ao converter XML:', err);
+        } else {
+            console.log('Resposta da SEFAZ:', result);
+        }
+    });
+})
+.catch(error => {
+    console.error('Erro ao consultar MDFe:', error);
+});
+
+
+// Executar a função
 
 server.listen(80, (err) => {
   if (err) {

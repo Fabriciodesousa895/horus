@@ -4,7 +4,7 @@
         aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <form class="needs-validation" id="form" novalidate>
+                <form class="needs-validation" id="FormParceiro" novalidate>
                     <div class="container">
                         <div class="row">
 
@@ -13,42 +13,42 @@
                                 <span class="mt-2">Nome</span>
                                 <div style="display: flex; flex-direction: row;">
                                     <input type="text" class="form-control TddCam" placeholder="Nome do parceiro"
-                                        id="PARC_N_RAZAO_SOCIAL" required>
+                                     name="PARC_N_RAZAO_SOCIAL"   id="PARC_N_RAZAO_SOCIAL" required>
                                 </div>
 
                                 <label for="">Razão social</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control TddCam" placeholder="Razão social" id="PARC_NOME"
+                                    <input type="text" class="form-control TddCam" placeholder="Razão social" name="PARC_NOME" id="PARC_NOME"
                                         required>
                                 </div>
                                 <label for="">CPF/CNPJ</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="number" class="form-control TddCam" placeholder="CPF/CNPJ" id="PARC_CGC_"
+                                    <input type="number" class="form-control TddCam" name="PARC_CGC_" placeholder="CPF/CNPJ" id="PARC_CGC_"
                                         required>
                                 </div>
                                 <label for="">IE/RG</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="number" class="form-control TddCam" placeholder="IE/RG" id="PARC_IR_RG"
-                                        required>
+                                    <input type="text" class="form-control TddCam" name="IE_RG" placeholder="IE/RG" id="PARC_IR_RG"
+                                        >
                                 </div>
                                 <label for="">Email</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control TddCam" placeholder="exemplo@gmail.com"
+                                    <input type="text" class="form-control TddCam" name="PARC_EMAIL" placeholder="exemplo@gmail.com"
                                         id="PARC_EMAIL" required>
                                 </div>
                                 <label for="">Nascimento/fundação</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="date" class="form-control" id="PARC_NASC" required>
+                                    <input type="date" class="form-control TddCam" name="PARC_NASC" id="PARC_NASC" required>
                                 </div>
 
                                 <span class="mt-2">Telefone</span>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Telefone 1" id="PARC_TEL"
+                                    <input type="text" class="form-control TddCam" name="PARC_TEL" placeholder="Telefone 1" id="PARC_TEL"
                                         required>
                                 </div>
                                 <span class="mt-2">Telefone</span>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Telefone 2" id="PARC_TEL_2">
+                                    <input type="text" class="form-control TddCam" name="PARC_TEL_2" placeholder="Telefone 2" id="PARC_TEL_2">
                                 </div>
 
                             </div>
@@ -56,54 +56,53 @@
 
                                 <span class="mt-2">Empresa de trabalho</span></p>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Empresa de trabalho"
+                                    <input type="text" class="form-control TddCam" name="PARC_TRABALHO_N" placeholder="Empresa de trabalho"
                                         id="PARC_TRABALHO_N">
                                 </div>
                                 <span class="mt-2">CEP do trabalho</span></p>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="CEP do trabalho"
-                                        id="PARC_CEP_T">
+                                    <input type="text" class="form-control TddCam" placeholder="CEP do trabalho"
+                                      name="PARC_CEP_T"  id="PARC_CEP_T">
                                 </div>
                                 <span class="mt-2">Bairro do trabalho</span></p>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Bairro do trabalho"
-                                        id="PARC_BAIRRO_T">
+                                    <input type="text" class="form-control TddCam" placeholder="Bairro do trabalho"
+                                     name="PARC_BAIRRO_T"   id="PARC_BAIRRO_T">
                                 </div>
                                 <label for="">Cidade</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" required id="ID_CID_F" style="width: 80px;margin-right: 8px;"
-                                        class="form-control cidade">
-                                    <input type="text" required id="NOME_CID_F" class="form-control "
+                                    <input type="text"  id="ID_CID_F" name="PARC_CID_F" style="width: 80px;margin-right: 8px;"
+                                        class="form-control cidade TddCam">
+                                    <input type="text"  id="NOME_CID_F" class="form-control  "
                                         placeholder="Cidade">
                                 </div>
                                 <span class="mt-2">Logradouro do trabalho</span>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Logradouro do trabalho"
-                                        id="PARC_LOGRA_T">
+                                    <input type="text" class="form-control TddCam" placeholder="Logradouro do trabalho"
+                                        id="PARC_LOGRA_T" name="PARC_LOGRA_T">
                                 </div>
                                 <span class="mt-2">Numero do trabalho</span>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Numero do trabalho"
-                                        id="PARC_NUM_T">
+                                    <input type="text" class="form-control TddCam" placeholder="Numero do trabalho" name="PARC_NUM_T"   id="PARC_NUM_T">
                                 </div>
                                 <span class="mt-2">Complemento do trabalho</span>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Complemento do trabalho"
+                                    <input type="text" class="form-control TddCam" placeholder="Complemento do trabalho" name="PARC_COMP_T"
                                         id="PARC_COMP_T">
                                 </div>
                                 <span class="mt-2">Telefone do trabalho</span>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Complemento do trabalho"
-                                        id="PARC_TEL_T">
+                                    <input type="text" class="form-control TddCam" placeholder="Complemento do trabalho"
+                                       name="PARC_COMP_T" id="PARC_TEL_T">
                                 </div>
                                 <span class="mt-2">Salário base</span>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="number" class="form-control" placeholder="Salário base"
-                                        id="PARC_SALARIO" required>
+                                    <input type="number" class="form-control TddCam" placeholder="Salário base"
+                                      name="PARC_SALARIO"  id="PARC_SALARIO" >
                                 </div>
                                 <span class="mt-2">Data admissão</span>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="date" class="form-control" id="PARC_ADMISSAO">
+                                    <input type="date" class="form-control TddCam" name="PARC_ADMISSAO" id="PARC_ADMISSAO" required>
                                 </div>
 
                             </div>
@@ -111,10 +110,10 @@
 
                                 <label for="">CEP</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control TddCam" placeholder="Cep" id="PARC_CEP" required>
+                                    <input type="text" class="form-control TddCam" placeholder="Cep" name="PARC_CEP" id="PARC_CEP" required>
                                 </div>
                                 <label for="ESTADO">Estado</label>
-                                <select id="ESTADO" name="ESTADO" class="form-control TddCam" required>
+                                <select id="ESTADO" name="UF" class="form-control TddCam" required>
                                     <option value="">Selecione</option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
@@ -146,31 +145,31 @@
                                 </select>
                                 <label for="">Cidade</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="number" id="ID_CID" style="width: 80px;margin-right: 8px;"
+                                    <input type="number" id="ID_CID" name="ID_CIDADE" style="width: 80px;margin-right: 8px;"
                                         class="form-control TddCam ">
-                                    <input type="text" id="NOMECID" class="form-control TddCam " placeholder="Cidade">
+                                    <input type="text" name="" id="NOMECID" class="form-control  " placeholder="Cidade">
                                 </div>
                                 <label for="">Bairro</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Bairro" id="PARC_BAIRRO"
+                                    <input type="text" class="form-control TddCam" placeholder="Bairro" name="PARC_BAIRRO" id="PARC_BAIRRO"
                                         required>
                                 </div>
                                 <label for="">Logradouro</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Logradouro" id="PARC_LOGRA"
+                                    <input type="text" class="form-control TddCam" placeholder="Logradouro" name="PARC_LOGRA" id="PARC_LOGRA"
                                         required>
                                 </div>
                                 <label for="">Numero</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control TddCam" placeholder="Numero" id="PARC_NUM" required>
+                                    <input type="text" class="form-control TddCam" placeholder="Numero" name="PARC_NUM" id="PARC_NUM" required>
                                 </div>
                                 <label for="">Complemento</label>
                                 <div style="display: flex; flex-direction: row;">
-                                    <input type="text" class="form-control" placeholder="Complemento" id="PARC_COMP">
+                                    <input type="text" class="form-control TddCam" placeholder="Complemento" name="PARC_COMP" id="PARC_COMP">
                                 </div>
 
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="PARC_FORNEC">
+                                    <input type="checkbox" class="custom-control-input TddCam" name="PARC_FORNEC" id="PARC_FORNEC">
                                     <label class="custom-control-label" for="PARC_FORNEC">Fornecedor?</label>
                                 </div>
                             </div>

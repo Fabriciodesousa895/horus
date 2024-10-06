@@ -80,11 +80,3 @@ document.getElementById('SALVA_EDICAO').addEventListener('click',(e)=>{
   new Ajax('/rota/universal',data).RequisicaoAjax(true)
 
 })
-let datad ={
-  sql:` BEGIN 
-        TESTE_SAIDA2('1-ghgfdhgfhfghgdfhdfhg1',:P_RESULTADO);
-        END;`,
-  binds:{},
-  USU_LOGADO: false
-};
-new Ajax('/procedure_com_saida',datad).RequisicaoAjax(true);

@@ -3,6 +3,8 @@
 <div class="row" id="form">
     <%result.forEach(result=>{%>
     <div class="col-sm-3" style="padding: 50px;width: 356px;">
+<button id="IMPORTAR" class="btn btn-warning mt-3">Importar dados </button>
+
         <p><span class="mt-2">ID</span></p>
         <div style="display: flex; flex-direction: row;">
             <input type="text" class="form-control" disabled value="<%=result.ID_PARC%>"  id="ID" required>

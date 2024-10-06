@@ -77,7 +77,6 @@ class ActionForm{
                 binds:ObjetsForms,
                 USU_LOGADO: true
             }
-            console.log(RequiredTrueOrFalse)
             if(RequiredTrueOrFalse == true){
                 new Ajax('/rota/universal',data).RequisicaoAjax(true)
             }

@@ -1160,3 +1160,27 @@ PLS-00103: Encontrado o símbolo "&" quando um dos seguintes símbolos era esper
 Help: https://docs.oracle.com/error-help/db/ora-06550/
 
 Tue Oct 01 2024 20:18:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 1 positional bind values are required but 0 were provided
+
+Fri Oct 04 2024 16:16:37 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Fri Oct 04 2024 16:28:58 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Fri Oct 04 2024 17:08:44 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01400: não é possível inserir NULL em ("SYSTEM"."PRC_PARCEIRO"."IE_RG")
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-01400/
+
+Fri Oct 04 2024 17:10:14 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01400: não é possível inserir NULL em ("SYSTEM"."PRC_PARCEIRO"."IE_RG")
+ORA-06512: em line 1373
+Help: https://docs.oracle.com/error-help/db/ora-01400/
+
+Fri Oct 04 2024 17:12:28 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Fri Oct 04 2024 17:18:08 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- TypeError: Cannot read properties of undefined (reading 'forEach')
+
+Sat Oct 05 2024 16:27:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Sat Oct 05 2024 21:52:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/

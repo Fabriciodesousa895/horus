@@ -144,7 +144,7 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <%A_ACAO.forEach(RESULT=>{%>
-                      <a class="dropdown-item " data-toggle="modal" data-target="#<%=RESULT.ID_JS%>" >
+                      <a class="dropdown-item <%=RESULT.ID_JS%>" data-toggle="modal" data-target="#<%=RESULT.ID_JS%>" >
                         <%=RESULT.DESCRICAO%>
                       </a>
                       <%})%>

@@ -8,6 +8,10 @@ let COD_NCM_ = document.getElementById('COD_NCM_');
 let NCM_DESC = document.getElementById('NCM_DESC');
 let filtro = document.getElementById('filtro');
 let form = document.getElementById('form');
+let AtualizaNcm = document.querySelector('.NNDINXKMJX');
+AtualizaNcm.addEventListener('click',(e)=>{
+  new Ajax('/Api/atualiza/ncm',{}).RequisicaoAjax(true)
+})
 
 
 //Usando o filtro
@@ -40,7 +44,6 @@ form.addEventListener('submit',(e)=>{
   new Ajax('/rota/universal',data).RequisicaoAjax(true)
   NCM_DESC.value = ''
   COD_NCM_.value = ''
-  console.log(data)
 })
 
 new Tabela('Ncm').VisualizaRegistro('/VisualizaNcm/',1);

@@ -55,7 +55,6 @@ Da mesma forma esxiste uma rota para select dentro do banco
         binds: { ID_TELA: ID_TELA.value },
         USU_LOGADO:true
       };
-      OBS: rows =  true irá retornar um array com os registros
 <!-- ------------------------------------------------------------------------------------ -->
                              =>Rota para pocedure com saida<=
 Rota para a chamada de procedures quw possuem um parametro de saida(P_RESULTADO)

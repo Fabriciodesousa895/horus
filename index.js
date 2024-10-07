@@ -1563,7 +1563,7 @@ app.post('/api/via/cep', async (req, res) => {
     res.status(500).send('CEP não é valido ou não existe! Error');
   }
 })
-
+//Atualiza ncm
 app.post('/Api/atualiza/ncm', async (req, res) => {
   console.log('------ Inicio da rota para atualizar Ncm ------');
   // URL do arquivo JSON
@@ -1589,6 +1589,32 @@ app.post('/Api/atualiza/ncm', async (req, res) => {
     res.status(500).send('Erro ao atualizar NCM');
   }
 });
+//Atualizar cidades
+app.get('/Atualiza/cidades',async(req,res)=>{
+  console.log('------ Inicio da rota para atualizar Cidades ------');
+
+const url = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios';
+try {
+    let response = await axios.get(url);
+    let JsonData = JSON.stringify(response.data);
+    const result = await conectar(
+      `DECLARE
+        l_json CLOB := :dados;
+      BEGIN
+        processar_json_cidades(l_json);
+      END;`,
+      {
+        dados: { val: JsonData, type: oracledb.CLOB } 
+      }
+    );
+    console.log('------ Fim da rota para atualizar cidades ------');
+
+    res.send('Cidades inseridas com sucesso');
+} catch (error) {
+  console.log('Erro ao atualizar cidades.' + error);
+  res.send('Erro ao atualizar cidades.');
+}
+})
 
 
 const https = require('https');
@@ -1611,29 +1637,29 @@ const xmlConsultaMDFe = `
    </soapenv:Body>
 </soapenv:Envelope>`;
 
-axios({
-    method: 'post',
-    url: '	https://mdfe.svrs.rs.gov.br/ws/MDFeConsulta/MDFeConsulta.asmx',  // Substitua pela URL do webservice da SEFAZ.
-    httpsAgent: agenteHttps,
-    headers: {
-        'Content-Type': 'text/xml',
-        'SOAPAction': '' // SOAPAction pode ser vazio, dependendo do serviço
-    },
-    data: xmlConsultaMDFe
-})
-.then(response => {
-    // Parse o XML de resposta
-    xml2js.parseString(response.data, (err, result) => {
-        if (err) {
-            console.error('Erro ao converter XML:', err);
-        } else {
-            console.log('Resposta da SEFAZ:', result);
-        }
-    });
-})
-.catch(error => {
-    console.error('Erro ao consultar MDFe:', error);
-});
+// axios({
+//     method: 'post',
+//     url: '	https://mdfe.svrs.rs.gov.br/ws/MDFeConsulta/MDFeConsulta.asmx',  // Substitua pela URL do webservice da SEFAZ.
+//     httpsAgent: agenteHttps,
+//     headers: {
+//         'Content-Type': 'text/xml',
+//         'SOAPAction': '' // SOAPAction pode ser vazio, dependendo do serviço
+//     },
+//     data: xmlConsultaMDFe
+// })
+// .then(response => {
+//     // Parse o XML de resposta
+//     xml2js.parseString(response.data, (err, result) => {
+//         if (err) {
+//             console.error('Erro ao converter XML:', err);
+//         } else {
+//             console.log('Resposta da SEFAZ:', result);
+//         }
+//     });
+// })
+// .catch(error => {
+//     console.error('Erro ao consultar MDFe:', error);
+// });
 
 
 // Executar a função

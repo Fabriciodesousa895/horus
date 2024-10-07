@@ -1184,3 +1184,15 @@ Help: https://docs.oracle.com/error-help/db/ora-00942/
 
 Sat Oct 05 2024 21:52:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
 Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Sun Oct 06 2024 15:09:15 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sun Oct 06 2024 15:09:25 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Sun Oct 06 2024 15:09:30 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-02292/

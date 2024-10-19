@@ -1,0 +1,183 @@
+<meta charset="UTF-8">
+<title>Horus</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" defer></script>
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<!-- <link rel="shortcut icon" href="/img/logo-triangular (3).png" type="image/x-icon"> -->
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<body>
+  <div class="progress" id="PROGRESSO" style="opacity: 0;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+      aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+  </div>
+  <meta charset="UTF-8">
+  <title>EJS Is Fun</title>
+
+  <!-- CSS (load bootstrap from a CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* align-self: self-end; */
+    }
+
+    .caption {
+      font-weight: bold;
+      height: 70px;
+      width: auto;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    #img {
+      width: 60px;
+      height: 60px;
+      border: none;
+    }
+
+    .barratarefa {
+      margin-right: 50px;
+      border-radius: 10px 0 10px 10px;
+      padding: 10px;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+
+    .Selectedtr {
+      background-color: #85e783;
+    }
+
+    .Count {
+      align-self: self-end;
+      border-radius: 10px 10px 0 10px;
+
+    }
+  </style>
+  </style>
+  <!-- Botão para acionar modal -->
+  <!-- Inicio Anexo -->
+  <button type="button" class="btn btn-primary" style="display: none;" data-toggle="modal" id="AnexoModal"
+    data-target="#ModalAnexo">
+    Abrir modal de demonstração
+  </button>
+  <div id="baixar"></div>
+  <!-- Modal -->
+  <div class="modal fade" id="ModalAnexo" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 600px;">
+      <div class="modal-content">
+        <div class="modal-body">
+          <table class="table" id="TabelaAnexo">
+            <thead>
+              <td>Id</td>
+              <td>Nome</td>
+              <td>Data inclusão</td>
+              <td>Deletar</td>
+              <td>Baixar</td>
+            </thead>
+            <tbody id="Tbody">
+              <!-- Dados sendo inseridos pelo js -->
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <form action="/Upload/Anexo" enctype="multipart/form-data" method="post">
+            <input type="file" class="form-control" name="FileAnexo" id="FileAnexo">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="submit" id="BtnAnexo" class="btn btn-warning">Salvar Anexo</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- valida o acessos -->
+    <% let T_USU=P_USU.T_NOME %>
+      <input type="hidden" value="<%=T_USU[2]%>" id="Id_Tela">
+
+      <nav>
+
+           
+
+
+                  <form action="/logout" method="post" style="margin-left: 15px;"> <button type="submit"
+                      class="btn btn-secondary mt-3">Sair</button>
+                  </form>
+
+
+      </nav>
+      <!---->
+      <nav>
+        <div>
+          <input type="hidden"class="nametelaatual" value="<%=T_USU[0]%>">
+          <input type="hidden"class="nameusuarioaatual___" value="<%=D.USU_NOME%>">
+          <%=T_USU[0]%>
+        </div>
+        <input type="hidden" value="<%=T_USU[2]%>" id="ID_TELA_ATUAL">
+
+      </nav>
+      <!---->
+
+
+
+      <nav>
+
+        <div class="input-group mb-3" style="width: 300px;">
+          <div class="input-group-prepend">
+            <label class="input-group-text" id="irParaLink" for="irParaLink">Pesquisar</label>
+          </div>
+          <input list="meuSelect" type="text" class="form-control" id="inputText">
+          <datalist id="meuSelect">
+            <option value="">Consulte suas telas</option>
+
+          </datalist>
+        </div>
+        </div>
+
+      </nav>
+  </nav>
+
+  <script>
+    let selectElement = document.getElementById('inputText');
+    let buttonElement = document.getElementById('irParaLink');
+    buttonElement.addEventListener('click', function () {
+      if (selectElement.value) {
+        window.location.href = selectElement.value;
+      }
+    });
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    let PROGRESSO = document.getElementById('PROGRESSO');
+    document.getElementById('irParaLink').addEventListener('click', () => {
+      //mostra ao usuário a barra de progresso
+      if (document.getElementById('inputText').value != '') {
+        PROGRESSO.style.opacity = '1'
+
+      }
+    })
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+</script>

@@ -670,9 +670,9 @@ app.get('/construtor/componente/BI/:ID',async(req,res)=>{
   try {
     let Acesso = await valida_acesso(ID, token);
     let P_USU = await permi_usu(ID, token);
-    let Xml = await conectar('SELECT XML FROM T_TELA WHERE ID_TELA = :ID_TELA',{ID_TELA:ID});
+    // let Xml = await conectar('SELECT XML FROM T_TELA WHERE ID_TELA = :ID_TELA',{ID_TELA:ID});
     Acesso === 'N' ? res.send('Usuário não tem permissão') :  res.render('./Admin/dashpersonalizado.ejs',{ P_USU });
-    console.log(Xml)
+    // console.log(Xml)
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
@@ -1527,6 +1527,7 @@ app.post('/select/universal/objeto',auth, async (req, res) => {
 });
 app.post('/select/universal/array',auth, async (req, res) => {
   let Binds = req.body.binds;
+  console.log(Binds)
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
     if (req.body.USU_LOGADO) {
     let USU_LOGADO = data.ID_USUARIO;

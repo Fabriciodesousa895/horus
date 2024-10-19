@@ -1196,3 +1196,11 @@ Help: https://docs.oracle.com/error-help/db/ora-02292/
 Sun Oct 06 2024 15:09:30 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.ID_CIDADE) violada - registro filho localizado
 ORA-06512: em line 2
 Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Fri Oct 18 2024 19:16:05 GMT-0300 (Horário Padrão de Brasília) -- /portal/importacao  -- Token inválido!r
+
+Fri Oct 18 2024 19:54:02 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-00001: restrição exclusiva (SYSTEM.ROTA) violada
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-00001/
+
+Fri Oct 18 2024 20:05:33 GMT-0300 (Horário Padrão de Brasília) -- /construtor/componente/BI/505  -- ReferenceError: result is not defined

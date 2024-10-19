@@ -28,10 +28,10 @@ SalvarXml.addEventListener('click', (e) => {
               L_CLOB := :XmlString;
               -- Converter o CLOB para XMLTYPE
               L_XML := XMLTYPE(L_CLOB);
-              -- InsirIR o XMLTYPE na tabela
+              -- Inserir o XMLTYPE na tabela
               INSERT INTO XML (XML,USU_INCLU,DT_INCLU) VALUES (L_XML,:USU_LOGADO,SYSDATE)
               RETURNING ID INTO V_ID;
-               ENTRADA_XML(V_ID,:USU_LOGADO);
+               NOVA_ENTRADA_XML(V_ID,:USU_LOGADO,:P_RESULTADO);
               COMMIT;
               END;
 `,
@@ -40,7 +40,22 @@ SalvarXml.addEventListener('click', (e) => {
                 mensagem_sucess:'Xml importado para o sistema!'
             }
 
-            new Ajax('/rota/universal', data).RequisicaoAjax(true);
+            new Ajax('/procedure_com_saida', data).RequisicaoAjax('T').then((result)=>{
+              alert(result)
+                if(result == 'N'){
+                    swal({
+                            title: 'Produtos sem relacionamento',
+                            text: 'Deseja realizar um pré cadastro deste produto?',
+                            buttons: true,
+                            dangerMode: true,
+                            icon: 'warning'
+                    }).then((WillDelte)=>{
+                        if(WillDelte){
+
+                        }
+                    })
+                }
+            })
         }
         LerXml.readAsText(ArquivoXmlFile)
 

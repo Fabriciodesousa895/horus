@@ -81,12 +81,12 @@ const upload = multer({ storage: storage })
 const cors = require('cors');
 let urlencodedParser = bodyparser.urlencoded({ extended: false });
 app.use(cors());
-//a verificação da licença será feita a cada 60 minutos pelo servidor
+
 const fs = require('fs');
 const { split, stubString, toInteger } = require("lodash");
-const send = require("send");
-const { tryEach } = require("async");
-const { MAX_LENGTH } = require("picomatch/lib/constants");
+// const send = require("send");
+// const { tryEach } = require("async");
+// const { MAX_LENGTH } = require("picomatch/lib/constants");
 
 
 app.get('/certificado/validacao', (req, res) => {
@@ -664,6 +664,25 @@ app.get('/visualiza/dicionario/dados/procedure/:procedure_name', auth, async (re
     res.status(500).send(error)
   }
 });
+app.get('/construtor/componente/BI/:ID',async(req,res)=>{
+  let ID = req.params.ID;
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(ID, token);
+    let P_USU = await permi_usu(ID, token);
+    let Xml = await conectar('SELECT XML FROM T_TELA WHERE ID_TELA = :ID_TELA',{ID_TELA:ID});
+    Acesso === 'N' ? res.send('Usuário não tem permissão') :  res.render('./Admin/dashpersonalizado.ejs',{ P_USU });
+    console.log(Xml)
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.send(error);
+  }
+})
+app.get('/construtor/componente/BI',(req,res)=>{
+
+  res.render('./Admin/construtorBi');
+})
 //Rota pára gráfico de usuario
 app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
@@ -1617,52 +1636,6 @@ try {
 })
 
 
-const https = require('https');
-
-const certificado = fs.readFileSync('certificado.pfx');
-
-const agenteHttps = new https.Agent({
-    pfx: certificado,
-    passphrase: 'Casa03' // Senha do certificado digital
-});
-const xml2js = require('xml2js');
-
-const xmlConsultaMDFe = `
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mdfe="http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeConsultaMFDest">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <mdfe:consultaMDFe>
-         <mdfe:chMDFe>35241076487032004384550010006146111314086050</mdfe:chMDFe>
-      </mdfe:consultaMDFe>
-   </soapenv:Body>
-</soapenv:Envelope>`;
-
-// axios({
-//     method: 'post',
-//     url: '	https://mdfe.svrs.rs.gov.br/ws/MDFeConsulta/MDFeConsulta.asmx',  // Substitua pela URL do webservice da SEFAZ.
-//     httpsAgent: agenteHttps,
-//     headers: {
-//         'Content-Type': 'text/xml',
-//         'SOAPAction': '' // SOAPAction pode ser vazio, dependendo do serviço
-//     },
-//     data: xmlConsultaMDFe
-// })
-// .then(response => {
-//     // Parse o XML de resposta
-//     xml2js.parseString(response.data, (err, result) => {
-//         if (err) {
-//             console.error('Erro ao converter XML:', err);
-//         } else {
-//             console.log('Resposta da SEFAZ:', result);
-//         }
-//     });
-// })
-// .catch(error => {
-//     console.error('Erro ao consultar MDFe:', error);
-// });
-
-
-// Executar a função
 
 server.listen(80, (err) => {
   if (err) {

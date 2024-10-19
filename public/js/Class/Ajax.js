@@ -17,7 +17,7 @@ class Ajax {
             ajax.setRequestHeader('Content-type', 'application/json');
             ajax.onreadystatechange = function () {
                 if (ajax.status === 200) {
-                    if (Info) {
+                    if (Info == true) {
                         resolve(
                             swal({
                                 title: ajax.responseText,
@@ -33,8 +33,13 @@ class Ajax {
 
                     } else {
                         barra_progresso.style.opacity = 0
-                        resolve(JSON.parse(ajax.responseText));
-
+                        if(Info == 'T'){
+                            resolve(ajax.response);
+                            console.log('Marco aurélio: ' + ajax.response);
+                        }else{
+                            resolve(JSON.parse(ajax.responseText));
+                        }
+                      
                     }
 
                 } else {

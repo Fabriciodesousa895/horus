@@ -7,7 +7,13 @@ require('dotenv').config()
 'use strict';
 //view engine
 app.set("view engine", "ejs");
-
+const ratelimit = require('express-rate-limit');
+  const limiter = ratelimit({
+    window: 15 * 60 * 1000,
+    max:100,
+    message:'Muitas requisiçoes de um único IP.'
+  })
+  app.use(limiter)
 //static public
 app.use(express.static("public"));
 //body-parser
@@ -679,9 +685,18 @@ app.get('/construtor/componente/BI/:ID',async(req,res)=>{
     res.send(error);
   }
 })
-app.get('/construtor/componente/BI',(req,res)=>{
-
-  res.render('./Admin/construtorBi');
+app.get('/construtor/componente/BI',async(req,res)=>{
+  let token = req.cookies.jwt;
+  try {
+    let Acesso = await valida_acesso(501, token);
+    let P_USU = await permi_usu(501, token);
+    Acesso === 'N' ? res.send('Usuário não tem permissão') :  res.render('./Admin/construtorBi.ejs',{ P_USU });
+    // console.log(Xml)
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.send(error);
+  }
 })
 //Rota pára gráfico de usuario
 app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, res) => {
@@ -832,7 +847,30 @@ app.get('/lancador/log', urlencodedParser, auth, async (req, res) => {
 //faz a conSulta sql que o usuario digitou 
 app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
   try {
+    console.log(req.body)
     let result = await conectar(req.body.sql, []);
+    let arrayobjetos = result.metaData
+    let array_colunas = [];
+    let array_registros = []
+    array_registros = result.rows;
+
+    arrayobjetos.forEach((e) => { array_colunas.push(e.name) });
+    let objeto = {
+      array_colunas: array_colunas,
+      array_registros: array_registros
+    };
+console.log(objeto)
+    res.send(objeto);
+  } catch (error) {
+    let log = error;
+    criarlogtxt(log, req.url);
+    res.status(500).send('Erro ao execultar sql! ' + error.message);
+  }
+})
+app.post('/DashTabela', auth, async (req, res) => {
+  try {
+    let Binds = req.body.binds
+    let result = await conectar(req.body.sql, Binds);
     let arrayobjetos = result.metaData
     let array_colunas = [];
     let array_registros = []
@@ -842,13 +880,10 @@ app.post('/sql/DBE_explorer', auth, urlencodedParser, async (req, res) => {
       array_colunas: array_colunas,
       array_registros: array_registros
     };
-    console.log(result);
-
     res.send(objeto);
   } catch (error) {
     let log = error;
     criarlogtxt(log, req.url);
-    console.log(error);
     res.status(500).send('Erro ao execultar sql! ' + error.message);
   }
 })
@@ -1038,8 +1073,6 @@ app.post('/filtro_usuario', async (req, res) => {
         let result = await conectarbd(sql, binds, options);
         let result2 = await conectarbd(sql2, binds2, options);
         res.send(result[0][0]);
-        console.log(binds);
-        console.log(result[0][0]);
       } catch (error) {
         let log = error;
         criarlogtxt(log, req.url);
@@ -1258,7 +1291,6 @@ app.get('/visualizaproduto/:ID', auth, async (req, res) => {
     res.render('./cadastro/visualizaproduto', { P_USU, result });
   } catch (error) {
     res.status(500).send(error)
-    console.log(error)
   }
 })
 //Cadastro de grupos
@@ -1341,7 +1373,6 @@ app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
     if (Acesso == 'N') return res.status(505).send('Usuário não tem permissão')
     res.render('./parceiro/visualizaparceiro', { P_USU, result });
   } catch (error) {
-    console.log(error);
     res.status(500).send(error)
   }
 
@@ -1350,7 +1381,6 @@ app.get('/visualizaparceiro/:id', urlencodedParser, auth, async (req, res) => {
 
 //Copia permissões
 app.post('/copia_usuario', async (req, res) => {
-  console.log(req.body)
   let token = req.cookies.jwt;
   jwt.verify(token, process.env.SECRET, async (error, data) => {
     if (error) { return res.status(500).send('Token inválido!') }
@@ -1368,7 +1398,6 @@ app.post('/copia_usuario', async (req, res) => {
       try {
         let result = await conectar(sql, binds)
         res.status(200).send(result.outBinds.P_RESULTADO);
-        console.log(result.outBinds.P_RESULTADO, ' -----')
       } catch (error) {
         let log = error;
         criarlogtxt(log, req.url);
@@ -1420,7 +1449,6 @@ app.post('/consulta_acessos', auth,async (req, res) => {
 })
 app.post('/importar/dados', async (req, res) => {
   let CGC = req.body.CGC
-  console.log(CGC)
   try {
     const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${CGC}`);
     const data = response.data;
@@ -1462,7 +1490,6 @@ app.post('/rota/universal', async (req, res) => {
   let Objeto = req.body;
   let token = req.cookies.jwt;
   let novobinds;
-  console.log(Objeto)
   jwt.verify(token, process.env.SECRET, async (error, data) => {
     if (error) { return res.status(500).send('Token inválido!') }
     if (Objeto.USU_LOGADO) {
@@ -1480,7 +1507,6 @@ app.post('/rota/universal', async (req, res) => {
         await conectar(Objeto.sql, Objeto.binds);
         res.status(200).send(Objeto.mensagem_sucess);
       } catch (error) {
-        console.log(error)
         let log = error;
         criarlogtxt(log, req.url);
         res.status(500).send(Objeto.mensagem_error + error);
@@ -1493,7 +1519,6 @@ app.post('/rota/universal', async (req, res) => {
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
 app.post('/select/universal',auth, async (req, res) => {
   let Binds = req.body.binds;
-  console.log(Binds)
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
     if (req.body.USU_LOGADO) {
     let USU_LOGADO = data.ID_USUARIO;
@@ -1510,6 +1535,7 @@ app.post('/select/universal',auth, async (req, res) => {
 });
 app.post('/select/universal/objeto',auth, async (req, res) => {
   let Binds = req.body.binds;
+  console.log(req.body)
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
     if (req.body.USU_LOGADO) {
     let USU_LOGADO = data.ID_USUARIO;
@@ -1517,7 +1543,6 @@ app.post('/select/universal/objeto',auth, async (req, res) => {
     }
     try {
       let result = await conectarbd(req.body.sql, Binds,options_objeto);
-      console.log(result);
       res.status(200).send(result);
     } catch (error) {
       res.status(500).send('Ocorreu um erro! ' + error);
@@ -1527,7 +1552,6 @@ app.post('/select/universal/objeto',auth, async (req, res) => {
 });
 app.post('/select/universal/array',auth, async (req, res) => {
   let Binds = req.body.binds;
-  console.log(Binds)
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
     if (req.body.USU_LOGADO) {
     let USU_LOGADO = data.ID_USUARIO;
@@ -1535,7 +1559,6 @@ app.post('/select/universal/array',auth, async (req, res) => {
     }
     try {
       let result = await conectarbd(req.body.sql, Binds,options);
-      console.log(result);
       res.status(200).send(result);
     } catch (error) {
       res.status(500).send('Ocorreu um erro! ' + error);
@@ -1544,7 +1567,6 @@ app.post('/select/universal/array',auth, async (req, res) => {
   });
 });
 app.post('/procedure_com_saida',auth, async (req, res) => {
-  console.log(req.body)
   let Binds = req.body.binds;
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
     if (req.body.USU_LOGADO) {
@@ -1638,7 +1660,7 @@ try {
 
 
 
-server.listen(80, (err) => {
+server.listen(70, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);
   } else {

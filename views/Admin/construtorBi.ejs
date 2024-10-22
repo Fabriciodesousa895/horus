@@ -2,6 +2,164 @@
 <%-include('../partials/head')%>
 <% let P = P_USU.P_USU %>
 <% let D = P[0] %>
+<style>
+    .body{
+        width: 100%;
+    }
+    .containerpai{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        min-height: 800px;
+        border: 1px solid black;
+        padding: 2%;
+    }
+    .dashs{
+        border: 1px solid red;
+        width: 20%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        max-height: 500px;
+
+    }
+    .principal{
+        border: 1px solid rgb(31, 29, 138);
+        width: 60%;
+        padding: 2%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .filtros{
+        border: 1px solid rgb(72, 192, 66);
+        width: 20%;
+    }
+    .DivDash{
+        width: 350px;
+        height: 80px;
+        border-radius: 8px;
+        border: 1px solid black;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="containerpai">
+    <div class="dashs">
+<button class="componentes btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-xl">Adicionar componente</button>
 
 
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" style="padding: 50px;max-width: 100%;overflow-x: auto;white-space: nowrap;">
+   
+        <label for="">Titulo</label>
+        <input type="text" id="Titulo" placeholder="Titulo" class="form-control">
+        <p>
+            <label for="">Altura</label>
+            <input type="text" id="Altura" placeholder="Altura" class="form-control">
+            <label for="">Largura</label>
+            <input type="text" id="Largura" placeholder="Largura" class="form-control">
+        </p>
+
+        <label for="">Tipo de componente</label>
+        <select name="" id="TipoDash" class="form-control">
+            <option value="Coluna">Gráfico de colunas</option>
+            <option value="polarArea">Gráfico de área polar</option>
+            <option value="Line">Gráfico de linhas</option>
+            <option value="Pizza">Gráfico de pizza</option>
+            <option value="Tabela">Tabela</option>
+        </select>
+      <textarea name="" id="Sql" placeholder="Sql" rows="10" class="form-control mt-2"></textarea>
+      <p>
+        <button class="btn btn-primary mt-2" id="Consultar" style="width: 150px;">Consultar</button>
+        <button class="btn btn-info mt-2" id="AdicionarComponente" style="width: 150px;">Adicionar</button>
+      </p>
+
+      <table class="table table-hover mt-2 table-bordered table-sm" id="RegistrosSql">
+        <thead >
+            <tr id="Colunas" >
+
+            </tr>
+        </thead>
+      <tbody id="Registros">
+
+      </tbody>
+    </table>
+
+    </div>
+  </div>
+</div>
+    </div>
+    <div class="principal" id="PainelPrincipal">
+          
+    </div>
+    <div class="filtros">
+           <p>Parametros</p>
+           <!-- Botão para acionar modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ExemploModalCentralizado">
+    Adicionar 
+  </button>
+  <table class="table table-hover">
+    <thead>
+        <th>Tipo</th>
+        <th>Descrição</th>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+  <!-- Modal -->
+  <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="TituloModalCentralizado">Fitro para o dash</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="">Descrição</label>
+          <input type="text" id="NomeCampo"  class="form-control">
+          <label for="">Parametro</label>
+          <input type="text" id="IdCampo"  class="form-control">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input TddCam" name="Required" id="Required">
+            <label class="custom-control-label" for="Required">Obrigatório?</label>
+          </div>
+          <label for="">Tipo de filtro</label>
+          <select name="" id="TipoCampo" class="form-control">
+            <option value="text">Texto</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="lista">Lista(texto)</option>
+            <option value="select">Select(Sql)</option>
+          </select>
+          <textarea name="" id="TextArea" style="display: none;" rows="10" class="form-control mt-2"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Salvar mudanças</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+    window.addEventListener('change',(e)=>{
+        let TipoCampo = document.getElementById('TipoCampo');
+        let TextArea = document.getElementById('TextArea');
+        if(TipoCampo.value == 'lista'){
+            TextArea.style.display = '';
+            TextArea.setAttribute("placeholder",'T=Todos/S=Somente ativo/N=Somente inativo')
+        }
+        if(TipoCampo.value == 'select'){
+            TextArea.style.display = '';
+            TextArea.setAttribute("placeholder",`É preciso ter um valor (a ser usado no sql) e label para a visualização do usuário exemplo: SELECT COUNT(*) AS VALOR,G.GRP_NOME AS LABEL FROM GRP_GRUPO G GROUP BY G.GRP_NOME    `)
+        }
+    })
+</script>
+<script type="module" src="/js/Admin/construtorBi.js"></script>
 <%-include('../partials/footer')%>

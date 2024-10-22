@@ -6,7 +6,7 @@ class Tabela {
 
   //inseri os registros na tabela
   //array_de_dados => um array de array com os registros a serem inseridos
-  InseriRegistros(array_de_registros) {
+  InseriRegistros(array_de_registros,limit) {
     let table_ = document.getElementById(this.ID_TABELA)
     let Count = (table_.parentNode).querySelector('.Count')
     if(Count){
@@ -14,16 +14,34 @@ class Tabela {
     }
     let Tbody = table_.querySelector('tbody')
     Tbody.innerText = '';
-    array_de_registros.forEach(RowData => {
-      const row = document.createElement('tr');
-      RowData.forEach(cellData => {
-        let cell = document.createElement('td');
-        // row.draggable = true
-        cell.innerText = cellData;
-        row.appendChild(cell);
+    if(limit){
+      array_de_registros.forEach((RowData,index) => {
+        const row = document.createElement('tr');
+        RowData.forEach((cellData) => {
+          if(index < limit){
+            let cell = document.createElement('td');
+            row.draggable = true
+           cell.innerText = cellData;
+           row.appendChild(cell);
+          }
+
+        })
+        Tbody.appendChild(row);
       })
-      Tbody.appendChild(row);
-    })
+    }else{
+      array_de_registros.forEach(RowData => {
+        const row = document.createElement('tr');
+        RowData.forEach(cellData => {
+          let cell = document.createElement('td');
+          // row.draggable = true
+          cell.innerText = cellData;
+          row.appendChild(cell);
+        })
+        Tbody.appendChild(row);
+      })
+    }
+  
+    
   }
 
   //quando o usuário clicar em uma linha da tabela irá redirecionar para outra pagina passando a uma  celula como parametro;
@@ -108,7 +126,9 @@ class Tabela {
           let date = inputs.value;
           let datesplit = date.split('-');
           let datafinal = `${datesplit[2]}-${datesplit[1]}-${datesplit[0]}`
-          value = datafinal
+          value = datafinal 
+        console.log(datafinal)
+
         }else{
           value = '';
         }

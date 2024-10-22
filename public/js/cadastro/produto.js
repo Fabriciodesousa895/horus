@@ -32,33 +32,29 @@ ActionInstancia.Insert();
 ActionInstancia.delete('PRDT_ID'); 
 
 let Data = {
-    sql: `SELECT COUNT(*) AS TOTAL
-    FROM PRDT_PRODUTO P
-    GROUP BY P.PRDT_ID_CTG`,
+    sql: `SELECT COUNT(*) AS TOTAL,
+    C.CTG_NOME 
+FROM PRDT_PRODUTO P
+LEFT JOIN CTG_PRODUTO C ON C.ID_CATEGORIA = P.PRDT_ID_CTG
+GROUP BY C.CTG_NOME`,
     binds: {},
     mensage_error: 'Error ao consultar',
 };
 
-new Ajax('/select/universal/array', Data).RequisicaoAjax().then((dados)=>{
+new Ajax('/select/universal/objeto', Data).RequisicaoAjax().then((data)=>{
     const ctx = document.getElementById('Grafico');
-    const arrayUnidimensional = dados.flat();
-    console.log(arrayUnidimensional);
+    let totais = data.map(item => item.TOTAL);
+    let categorias = data.map(item => item.CTG_NOME);
     new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','JJ','---'],
+        labels: categorias,
         datasets: [{
           label: 'Categoria de produtos',
-          data: arrayUnidimensional,
+          data: totais,
           borderWidth: 1
         }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
       }
+
     });
 })

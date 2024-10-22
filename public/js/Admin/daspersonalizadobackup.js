@@ -81,40 +81,12 @@ window.addEventListener('load', () => {
                         let Id = InputCorrente.getAttribute("id");
                         let Sql = InputCorrente.getAttribute("sql");
                         let requerid = InputCorrente.getAttribute("requerid");
-                        let lista = InputCorrente.getAttribute("lista");
                         //Criando elementos
                         let h5 = document.createElement('h6');
                         //Adicionando atributos
                         h5.textContent = nome;
-                        //Input do tipo lista
-                         
-                        if (tipo == 'lista') {
-                            let InputElementSelect = document.createElement('select');
-                             let List = lista.split('/');
-                             for (let i = 0;i< List.length;i++){
-                                let TddOpc = List[i].split('=');
-                                   for(let i = 0;i< TddOpc.length;i++){
-                                    if(TddOpc[i] != undefined && TddOpc[i - 1] != undefined ){
-                                        console.log(TddOpc[i - 1] + '-------' +TddOpc[i] );
-                                    let InputElementOption = document.createElement('option');
-                                    InputElementOption.value = TddOpc[i - 1];
-                                    InputElementOption.textContent = TddOpc[i];
-                                    InputElementSelect.classList.add('mt-1');
-                                    InputElementSelect.classList.add('form-control');
-                                    InputElementSelect.id = Id;
-                                    InputElementSelect.setAttribute("required", true);
-                                    InputElementSelect.appendChild(InputElementOption);
-                                    }
-                                   }
-                             }      
-            
-                            ComponenteElementoFiltro.appendChild(h5);
-                            ComponenteElementoFiltro.appendChild(InputElementSelect);
-                        }
                         //Input do tipo select
                         if (tipo == 'select') {
-                            console.log('---Tipo Select----')
-
                             let InputElementSelect = document.createElement('select');
                             let data = {
                                 sql: `${Sql}`,
@@ -137,7 +109,6 @@ window.addEventListener('load', () => {
                         }
                         //Input do tipo texto
                         if (tipo == 'text') {
-
                             let InputElement = document.createElement('input');
                             InputElement.setAttribute("type", tipo);
                             InputElement.setAttribute("placeholder", nome);
@@ -148,7 +119,6 @@ window.addEventListener('load', () => {
                             ComponenteElementoFiltro.appendChild(h5);
                             ComponenteElementoFiltro.appendChild(InputElement);
                         }
-
                         //Input do tipo data
                         if (tipo == 'date') {
                             let InputElement = document.createElement('input');
@@ -299,8 +269,7 @@ window.addEventListener('load', () => {
                             // Criação do cabeçalho da tabela
                             for (let i = 0; i < array_colunas.length; i++) {
                                 let th = document.createElement('th');
-                                let NovoValor = array_colunas[i].replace(/_/g ,' ');
-                                th.textContent = NovoValor
+                                th.textContent = array_colunas[i];
                                 tr.appendChild(th);
                             }
 
@@ -466,7 +435,6 @@ window.addEventListener('load', () => {
 
 
                     });
-
                 }
                 let MyChartAreaPolar;
                 if (InpuTipoDash.value == 'polarArea') {
@@ -540,9 +508,8 @@ window.addEventListener('load', () => {
 
             })
         }
-         GerarDash(XmlDoc);
-         setTimeout(( )=>{CarregaDash()},5000)
-       
+        GerarDash(XmlDoc);
+        CarregaDash();
     });
 
 
@@ -621,7 +588,7 @@ function EscutadorFiltroDash() {
                             responsive: true, // Garantir que o gráfico seja responsivo
                             scales: {
                                 y: {
-                                    beginAtZero: true 
+                                    beginAtZero: true // Iniciar o eixo Y no zero
                                 }
                             }
                         }

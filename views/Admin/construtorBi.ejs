@@ -54,17 +54,24 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content" style="padding: 50px;max-width: 100%;overflow-x: auto;white-space: nowrap;">
    
-        <label for="">Titulo</label>
-        <input type="text" id="Titulo" placeholder="Titulo" class="form-control">
-        <p>
+   
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="">Titulo</label>
+            <input type="text" id="Titulo" placeholder="Titulo" class="form-control">
+          </div>
+          <div class="form-group col-md-2">
             <label for="">Altura</label>
             <input type="text" id="Altura" placeholder="Altura" class="form-control">
+          </div>
+          <div class="form-group col-md-2">
             <label for="">Largura</label>
             <input type="text" id="Largura" placeholder="Largura" class="form-control">
-        </p>
+          </div>
+        </div>
 
         <label for="">Tipo de componente</label>
-        <select name="" id="TipoDash" class="form-control">
+        <select name="" id="TipoDash" class="form-control form-group col-md-2">
             <option value="Coluna">Gráfico de colunas</option>
             <option value="polarArea">Gráfico de área polar</option>
             <option value="Line">Gráfico de linhas</option>
@@ -98,7 +105,7 @@
     <div class="filtros">
            <p>Parametros</p>
            <!-- Botão para acionar modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ExemploModalCentralizado">
+<button type="button" class="btn btn-primary" id="AdcionarFiltro" data-toggle="modal" data-target="#ExemploModalCentralizado">
     Adicionar 
   </button>
   <table class="table table-hover">
@@ -129,6 +136,9 @@
             <input type="checkbox" class="custom-control-input TddCam" name="Required" id="Required">
             <label class="custom-control-label" for="Required">Obrigatório?</label>
           </div>
+          <select name="" id="DashFiltro" class="form-control ">
+            <option value="">Selecione um dash</option>
+          </select>
           <label for="">Tipo de filtro</label>
           <select name="" id="TipoCampo" class="form-control">
             <option value="text">Texto</option>
@@ -136,11 +146,12 @@
             <option value="lista">Lista(texto)</option>
             <option value="select">Select(Sql)</option>
           </select>
+
           <textarea name="" id="TextArea" style="display: none;" rows="10" class="form-control mt-2"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary">Salvar mudanças</button>
+          <button type="button" id="SalvaFiltro" class="btn btn-primary">Salvar mudanças</button>
         </div>
       </div>
     </div>

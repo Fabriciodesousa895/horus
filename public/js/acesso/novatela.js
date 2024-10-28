@@ -3,6 +3,7 @@
     let PROGRESSO = document.getElementById('PROGRESSO');
     let T_NOME = document.getElementById('T_NOME');
     let TIPO = document.getElementById('TIPO');
+    let PERSONALIZADA = document.getElementById('PERSONALIZADA');
     let T_DESCRICAO = document.getElementById('T_DESCRICAO');
     let ROTA = document.getElementById('ROTA');
 
@@ -22,14 +23,15 @@
             //pega os dados dos inputs e adiciona num objeto
             let data = {
                 sql: `BEGIN
-                INSERT INTO T_TELA (ROTA,T_NOME,T_DESCRICAO,TIPO) VALUES(:T_ROTA,:T_NOME,:T_DESCRICAO,:TIPO);
+                INSERT INTO T_TELA (ROTA,T_NOME,T_DESCRICAO,TIPO,PERSONALIZADA) VALUES(:T_ROTA,:T_NOME,:T_DESCRICAO,:TIPO,:PERSONALIZADA);
                 COMMIT;
                 END;`,
                 binds:{
                     T_ROTA: ROTA.value,
                     T_NOME: T_NOME.value,
                     T_DESCRICAO:  T_DESCRICAO.value,
-                    TIPO: TIPO.value
+                    TIPO: TIPO.value,
+                    PERSONALIZADA: PERSONALIZADA.checked ? 'S' : 'N'
                   },
                   mensagem_sucess:'Registro inserido com sucesso!',
                   mensagem_error:'Erro ao inserir registro!',

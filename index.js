@@ -1660,10 +1660,10 @@ try {
 
 
 
-server.listen(70, (err) => {
+server.listen(80, (err) => {
   if (err) {
     console.log("Erro ao iniciar servidor" + err);
   } else {
-    console.log("Servidor rodando,no link https://ft42zqfb-80.brs.devtunnels.ms/login");
+    console.log("Servidor rodando na porta 80");
   }
 });

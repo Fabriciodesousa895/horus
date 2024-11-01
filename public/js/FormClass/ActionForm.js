@@ -65,7 +65,6 @@ class ActionForm{
 
                 }
             }
-               console.log( SqlInsert);
 
             SqlInsert += ':USU_LOGADO,:USU_LOGADO,SYSDATE,SYSDATE)'
             // Fechar a instrução SQL

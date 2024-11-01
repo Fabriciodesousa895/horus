@@ -1326,7 +1326,7 @@ app.get('/VisualizaNcm/:cod_ncm', auth, async (req, res) => {
              US.USU_NOME AS USU_ALTER,
              U.USU_NOME AS USU_INCLU
              FROM NCM N
-             LEFT JOIN USU_USUARIO U ON U.ID_USU = N.ID_USU_INCLU
+             LEFT JOIN USU_USUARIO U ON U.ID_USU = N.ID_USU_INCLUSAO
              LEFT JOIN USU_USUARIO US ON US.ID_USU = N.COD_USU_ALTER	
               WHERE N.COD_NCM_ = :COD_NCM`;
   let binds = { COD_NCM: ncm };
@@ -1337,7 +1337,8 @@ app.get('/VisualizaNcm/:cod_ncm', auth, async (req, res) => {
     let result = await conectarbd(sql, binds, options_objeto);
     res.render('./cadastro/VisualizaNcm', { P_USU, result });
   } catch (error) {
-    res.status(500).send(error)
+    res.status(500).send(error);
+    console.log(error);
   }
 
 })

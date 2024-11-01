@@ -40,6 +40,7 @@ window.addEventListener('load', () => {
 
                 let ComponenteElemento = document.createElement('div');
                 let ComponenteElementoFiltro = document.createElement('div');
+                let Form = document.createElement('form');
                 let ComponenteElementoDash = document.createElement('canvas');
                 let TipoComponenteTituloH6 = document.createElement('h5');
                 ComponenteElementoDash.classList.add('CanvaDash');
@@ -63,11 +64,16 @@ window.addEventListener('load', () => {
                 ComponenteElemento.style.width = Largura;
                 ComponenteElemento.style.height = Altura;
                 ComponenteElementoFiltro.style.height = Altura;
-                ComponenteElementoFiltro.appendChild(Inputsql);
+                Form.setAttribute("novalidate","");
+                Form.className = 'needs-validation';
+                // Form.appendChild(Inputsql);
+                // Form.appendChild(InpuTipoDash);
+                ComponenteElementoFiltro.appendChild(Form);
                 ComponenteElementoFiltro.appendChild(InpuTipoDash);
                 ComponenteElemento.appendChild(ComponenteElementoFiltro);
                 ComponenteElemento.appendChild(TipoComponenteTituloH6);
                 ComponenteElemento.appendChild(ComponenteElementoDash);
+             
 
                 //Adiciona os filtros
                 let filtro = ComponenteCorrente.getElementsByTagName("filtro")[0];
@@ -102,14 +108,16 @@ window.addEventListener('load', () => {
                                     InputElementSelect.classList.add('mt-1');
                                     InputElementSelect.classList.add('form-control');
                                     InputElementSelect.id = Id;
-                                    InputElementSelect.setAttribute("required", true);
+                                    InputElementSelect.setAttribute("required", requerid);
                                     InputElementSelect.appendChild(InputElementOption);
                                     }
                                    }
                              }      
             
                             ComponenteElementoFiltro.appendChild(h5);
+                            Form.appendChild(InputElementSelect);
                             ComponenteElementoFiltro.appendChild(InputElementSelect);
+
                         }
                         //Input do tipo select
                         if (tipo == 'select') {
@@ -133,6 +141,7 @@ window.addEventListener('load', () => {
                                 });
                             });
                             ComponenteElementoFiltro.appendChild(h5);
+                            Form.appendChild(InputElementSelect);
                             ComponenteElementoFiltro.appendChild(InputElementSelect);
                         }
                         //Input do tipo texto
@@ -146,6 +155,8 @@ window.addEventListener('load', () => {
                             InputElement.id = Id;
                             InputElement.setAttribute("required", requerid);
                             ComponenteElementoFiltro.appendChild(h5);
+                            Form.appendChild(InputElement);
+                            
                             ComponenteElementoFiltro.appendChild(InputElement);
                         }
 
@@ -195,6 +206,7 @@ window.addEventListener('load', () => {
                 ComponenteElementoFiltro.appendChild(Button);
                 // Adiciona o componente ao dashboard
                 dashboard.appendChild(ComponenteElemento);
+
             }
 
         }
@@ -273,60 +285,84 @@ window.addEventListener('load', () => {
 
                 if (InpuTipoDash.value == 'Tabela') {
                     // Escutador no button do filtro
+
                     ButtonFiltro.addEventListener('click', (e) => {
-                        
+                        let RequiredTrueOrFalse = false;
+                        //Validando se os campos obrigatórios estão preenchidos
+                        Inputs.forEach((elementRequerid)=>{
+                            if(elementRequerid.required && elementRequerid.value == ''){
+                                RequiredTrueOrFalse = false;
+                            }else{
+                              if(!RequiredTrueOrFalse && elementRequerid == ''){
+                                RequiredTrueOrFalse = false;
+                              }else{
+                                RequiredTrueOrFalse = true;
+                              }
+                            };
+                        })
+                        if(RequiredTrueOrFalse){
+
                         let SqlDashs = DashCorrente.querySelector('.SqlDashs');
                         let Binds = new Tabela().InputsValues(ArrayIds);
                         let Data = {
                             sql: `${SqlDashs.value}`,
                             binds: Binds
                         };
-                        new Ajax('/DashTabela', Data).RequisicaoAjax().then((datas) => {
-                            let tableExists = DashCorrente.querySelector('table');
-
-                            // Se uma tabela já existe
-                            if (tableExists) {
-                                DashCorrente.removeChild(tableExists);
-                            }
-
-                            let table = document.createElement('table');
-                            let thead = document.createElement('thead');
-                            let tbody = document.createElement('tbody');
-                            let tr = document.createElement('tr');
-                            let array_colunas = datas.array_colunas;
-                            let array_registros = datas.array_registros;
-
-                            // Criação do cabeçalho da tabela
-                            for (let i = 0; i < array_colunas.length; i++) {
-                                let th = document.createElement('th');
-                                let NovoValor = array_colunas[i].replace(/_/g ,' ');
-                                th.textContent = NovoValor
-                                tr.appendChild(th);
-                            }
-
-                            table.style.width = '100%';
-                            table.style.borderCollapse = 'collapse';
-                            table.className = 'Tabela table table-hover';
-
-                            thead.appendChild(tr);
-                            table.appendChild(thead);
-
-                            // Preenche as linhas da tabela com os dados
-                            array_registros.forEach(rowData => {
-                                const row = document.createElement('tr');
-                                rowData.forEach(cellData => {
-                                    const cell = document.createElement('td');
-                                    cell.innerText = cellData;
-                                    row.appendChild(cell);
+                            new Ajax('/DashTabela', Data).RequisicaoAjax().then((datas) => {
+                                let tableExists = DashCorrente.querySelector('table');
+    
+                                // Se uma tabela já existe
+                                if (tableExists) {
+                                    DashCorrente.removeChild(tableExists);
+                                }
+    
+                                let table = document.createElement('table');
+                                let thead = document.createElement('thead');
+                                let tbody = document.createElement('tbody');
+                                let tr = document.createElement('tr');
+                                let array_colunas = datas.array_colunas;
+                                let array_registros = datas.array_registros;
+    
+                                // Criação do cabeçalho da tabela
+                                for (let i = 0; i < array_colunas.length; i++) {
+                                    let th = document.createElement('th');
+                                    let NovoValor = array_colunas[i].replace(/_/g ,' ');
+                                    th.textContent = NovoValor
+                                    tr.appendChild(th);
+                                }
+    
+                                table.style.width = '100%';
+                                table.style.borderCollapse = 'collapse';
+                                table.className = 'Tabela table table-hover';
+    
+                                thead.appendChild(tr);
+                                table.appendChild(thead);
+    
+                                // Preenche as linhas da tabela com os dados
+                                array_registros.forEach(rowData => {
+                                    const row = document.createElement('tr');
+                                    rowData.forEach(cellData => {
+                                        const cell = document.createElement('td');
+                                        cell.innerText = cellData;
+                                        row.appendChild(cell);
+                                    });
+                                    tbody.appendChild(row);
                                 });
-                                tbody.appendChild(row);
+    
+                                table.appendChild(tbody);
+                                DashCorrente.appendChild(table);
+                                console.log(datas.array_colunas);
                             });
-
-                            table.appendChild(tbody);
-                            DashCorrente.appendChild(table);
-                            console.log(datas.array_colunas);
-                        });
+                        }else{
+                             swal({
+                                text:'Preencha todos os campos obrigatórios',
+                                icon:'warning'
+                             })
+                        }
+          
                     });
+
+                    // ---------------------
                 }
 
 
@@ -541,7 +577,7 @@ window.addEventListener('load', () => {
             })
         }
          GerarDash(XmlDoc);
-         setTimeout(( )=>{CarregaDash()},5000)
+         setTimeout(( )=>{CarregaDash()},2000)
        
     });
 

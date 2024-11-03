@@ -174,15 +174,15 @@
 
       <nav>
 
-        <div class="input-group mb-3" style="width: 300px;">
+        <div class="input-group mb-3" style="width: 500px;">
           <div class="input-group-prepend">
             <label class="input-group-text" id="irParaLink" for="irParaLink">Pesquisar</label>
           </div>
           <input list="meuSelect" type="text" class="form-control" id="inputText">
-          <datalist id="meuSelect">
+          <select name="" id="meuSelect" class="form-control">
             <option value="">Consulte suas telas</option>
+          </select>
 
-          </datalist>
         </div>
         </div>
 
@@ -190,7 +190,7 @@
   </nav>
 
   <script>
-    let selectElement = document.getElementById('inputText');
+    let selectElement = document.getElementById('meuSelect');
     let buttonElement = document.getElementById('irParaLink');
     buttonElement.addEventListener('click', function () {
       if (selectElement.value) {

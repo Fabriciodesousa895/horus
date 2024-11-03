@@ -15,7 +15,7 @@
   integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-  // Exemplo de JavaScript inicial para desativar envios de formulário, se houver campos inválidos.
+  // JavaScript inicial para desativar envios de formulário, se houver campos inválidos.
   (function () {
     'use strict';
     window.addEventListener('load', function () {
@@ -39,15 +39,15 @@
   })
 </script>
 <script>
-// Retira todos os registros selecionados clicando na tecla ESC
-window.addEventListener('keydown',(e)=>{
-  if(e.key == 'Escape'){
- let AllSelects =   document.querySelectorAll('.Selectedtr');
- AllSelects.forEach((element)=>{
-  element.classList.remove('Selectedtr');
- })
-  }
-})
+  // Retira todos os registros selecionados clicando na tecla ESC
+  window.addEventListener('keydown', (e) => {
+    if (e.key == 'Escape') {
+      let AllSelects = document.querySelectorAll('.Selectedtr');
+      AllSelects.forEach((element) => {
+        element.classList.remove('Selectedtr');
+      })
+    }
+  })
 
 
   let table_ = document.querySelectorAll('table');

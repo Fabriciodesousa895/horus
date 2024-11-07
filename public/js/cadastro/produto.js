@@ -4,7 +4,6 @@ import { filtra_campo } from "../Class/Filtra_campo.js";
 import { Tabela } from "../Class/Tabela.js";
 import { SalvaFiltro } from "../Class/Filtro.js";
 import { ActionForm } from "../FormClass/ActionForm.js";
-
 new filtra_campo('PRDT_ID_CTG','PRDT_NOME_CTG','CTG_PRODUTO').Filtra();
 new filtra_campo('PRDT_MARCA','PRDT_MARCA_NOME','MARCA').Filtra();
 new filtra_campo('PRDT_UNIDADE','PRDT_UNIDADE_DESC','UNIDADE_MEDIDA').Filtra();
@@ -17,13 +16,15 @@ document.getElementById('FormFiltro').addEventListener('submit', (e) => {
     let data = {
         sql: `SELECT FILTRA_PRODUTO(:COD,:NOME,:DESCRICAO,:CARACT,:USADO,:STATUS,:NCM) FROM DUAL`,
         binds: dados,
-        mensage_error: 'Error ao consultar',
+        mensage_error: 'Error ao consultarr',
     };
 // Salvando filtro
    new SalvaFiltro(281,dados.COD,dados.NOME,dados.DESCRICAO,dados.CARACT,dados.USADO,dados.STATUS,dados.NCM,'','','')
 //fazendo a requisição ajax e inserindo na tabela
     new Ajax('/select/universal', data).RequisicaoAjax().then((array_dados)=>{
     new Tabela('TabelaProduto').InseriRegistros(array_dados);
+
+
    })
 })
 
@@ -58,3 +59,5 @@ new Ajax('/select/universal/objeto', Data).RequisicaoAjax().then((data)=>{
 
     });
 })
+
+

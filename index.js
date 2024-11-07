@@ -1658,7 +1658,25 @@ try {
   res.send('Erro ao atualizar cidades.');
 }
 })
+const xlsx = require('xlsx');
 
+app.post('/download/excel', async(req,res)=>{
+let Data = req.body.Data;
+  try {
+  const workbook = xlsx.utils.book_new();
+  const worksheet = xlsx.utils.aoa_to_sheet(Data);
+  xlsx.utils.book_append_sheet(workbook,worksheet,"Principal");
+  const excelbuffer = xlsx.write(workbook,{type:'buffer',bookType:'xlsx'});
+  res.setHeader('Content-Disposition','attachment; filename=relatorio.xlsx');
+  res.setHeader('Content-Type','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  res.send(excelbuffer);
+  console.log('---')
+
+  } catch (error) {
+    console.error('Erro ao gerar excel:', error);
+    res.status(500).json({ error: 'Erro ao gerar planilha' });
+  }
+})
 
 
 server.listen(80, (err) => {

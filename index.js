@@ -942,6 +942,7 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
       let ID_GRUPO = req.body.ID_GRUPO
       let USU_LOGADO = data.ID_USUARIO;
       let CAIXA = data.CAIXA;
+      let EXPORTA = data.EXPORTA;
       // Gerando o hash da senha usando bcrypt 
       const hash = await bycrypt.hash(USU_SENHA, saltRounds);
       let sql = `BEGIN
@@ -950,7 +951,7 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
                   :ID_PARC,:USU_ADM,:USU_LOGADO, 
                   :ID_GRUPO, :CFG_USU_ALT_PARC, 
                   :CFG_USU_CONF_CONFERE_CAIXA, :CFG_USU_LIB_BLOQ_PARC, 
-                  :CFG_USU_EXC_FIN, :CFG_USU_FECHA_CAIXA,:CAIXA,:P_RESULTADO);
+                  :CFG_USU_EXC_FIN, :CFG_USU_FECHA_CAIXA,:CAIXA,:EXPORTA,:P_RESULTADO);
   END;
   `
       let binds = {
@@ -967,6 +968,7 @@ app.post('/usuario', urlencodedParser, async (req, res) => {
         CFG_USU_EXC_FIN: CFG_USU_EXC_FIN,
         CFG_USU_FECHA_CAIXA: CFG_USU_FECHA_CAIXA,
         CAIXA: CAIXA,
+        EXPORTA:EXPORTA,
         P_RESULTADO: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
       }
       try {
@@ -1006,7 +1008,8 @@ app.get('/visualiza_usuario/:ID_USU', auth, async (req, res) => {
   CG.CFG_USU_FECHA_CAIXA AS F_CAIXA,
   P.PARC_NOME,
   V.VND_NOME ,
-  U.CAIXA AS CAIXA
+  U.CAIXA AS CAIXA,
+  U.EXPORTA
 FROM
 USU_USUARIO U
 LEFT JOIN GRP_GRUPO G ON G.ID_GRUPO = U.ID_GRUPO
@@ -1106,6 +1109,7 @@ app.post('/update_usuario', async (req, res) => {
       :CFG_USU_CONF_CONFERE_CAIXA,
       :CFG_USU_ALT_PARC,
       :CAIXA,
+      :EXPORTA,
      :USU_LOGADO,
      :P_MENSAGEM);
       END;`;
@@ -1124,6 +1128,7 @@ app.post('/update_usuario', async (req, res) => {
       CFG_USU_CONF_CONFERE_CAIXA: objeto.CFG_USU_CONF_CONFERE_CAIXA,
       CFG_USU_ALT_PARC: objeto.CFG_USU_ALT_PARC,
       CAIXA: objeto.CAIXA,
+      EXPORTA: objeto.EXPORTA,
       USU_LOGADO: data.ID_USUARIO,
       P_MENSAGEM: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
 

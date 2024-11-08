@@ -1,26 +1,8 @@
 
-Tue Oct 29 2024 22:52:52 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
+Thu Nov 07 2024 23:08:36 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
 ORA-06512: em line 1
 Help: https://docs.oracle.com/error-help/db/ora-06502/
 
-Tue Oct 29 2024 22:52:52 GMT-0300 (Horário Padrão de Brasília) -- /construtor/componente/BI/warnning  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
+Thu Nov 07 2024 23:08:57 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
 ORA-06512: em line 1
 Help: https://docs.oracle.com/error-help/db/ora-06502/
-
-Thu Oct 31 2024 21:56:49 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-06502/
-
-Thu Oct 31 2024 21:56:49 GMT-0300 (Horário Padrão de Brasília) -- /construtor/componente/BI/ace  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-06502/
-
-Thu Oct 31 2024 22:03:12 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 1 positional bind values are required but 0 were provided
-
-Thu Oct 31 2024 22:05:01 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01745: nome de variável de host/ligação inválido
-Help: https://docs.oracle.com/error-help/db/ora-01745/
-
-Thu Oct 31 2024 22:05:35 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: NJS-098: 1 positional bind values are required but 0 were provided
-
-Fri Nov 01 2024 17:38:34 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00900: instrução SQL inválida
-Help: https://docs.oracle.com/error-help/db/ora-00900/

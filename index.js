@@ -443,8 +443,8 @@ function permi_usu(ID_TELA, token) {
           END AS INCLUI,
           U.USU_ADM,
           U.PATH_IMG AS PATH_IMG,
-          U.USU_NOME AS USU_NOME
-          
+          U.USU_NOME AS USU_NOME,
+          U.EXPORTA
       FROM (
           SELECT CFU_ALTERA
           FROM CONFIG_USU_TELA
@@ -488,7 +488,6 @@ function permi_usu(ID_TELA, token) {
       WHERE U.ID_USU = :P_ID_USU`;
 
         let binds = { P_ID_USU: data.ID_USUARIO, P_ID_TELA: ID_TELA };
-
 
         let sql3 = `SELECT T_NOME,T_DESCRICAO,ID_TELA,TABELA FROM T_TELA WHERE ID_TELA = :ID_TELA`;
         let binds3 = {
@@ -535,6 +534,8 @@ function permi_usu(ID_TELA, token) {
             T_FILTRO: result5.rows,
             T_ACAO: result6
           }
+console.log(result)
+
           resolve(Objeto);
         } catch (error) {
           let log = error;
@@ -1661,6 +1662,8 @@ try {
 const xlsx = require('xlsx');
 
 app.post('/download/excel', async(req,res)=>{
+  console.log('--Inicio da geração de planilha-');
+
 let Data = req.body.Data;
   try {
   const workbook = xlsx.utils.book_new();
@@ -1670,7 +1673,7 @@ let Data = req.body.Data;
   res.setHeader('Content-Disposition','attachment; filename=relatorio.xlsx');
   res.setHeader('Content-Type','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   res.send(excelbuffer);
-  console.log('---')
+  console.log('--Fim da geração de planilha--');
 
   } catch (error) {
     console.error('Erro ao gerar excel:', error);

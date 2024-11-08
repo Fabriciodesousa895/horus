@@ -1,5 +1,8 @@
 
-document.querySelectorAll('.ExportaXlsx').forEach((e) => {
+let PermiteExportar = document.querySelector('.PermiteExportar');
+
+if(PermiteExportar.value == 'S'){
+  document.querySelectorAll('.ExportaXlsx').forEach((e) => {
     e.addEventListener('click', (k) => {
   // Função para baixar o arquivo em xlsx
 async function downloadExcel() {
@@ -68,10 +71,12 @@ async function downloadExcel() {
         console.error('Erro:', error);
       }
     }
-
-
         downloadExcel();
-
     });
 
 });
+}else{
+  document.querySelectorAll('.ExportaXlsx').forEach(element => {
+    element.style.cursor = 'no-drop';
+  });
+}

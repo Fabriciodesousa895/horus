@@ -66,12 +66,65 @@
     }
   </style>
   </style>
+  <style>
+    e {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px 0;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        cursor: pointer;
+    }
+    th:hover {
+        background-color: #ddd;
+    }
+    th::after {
+        content: "↕️";
+        margin-left: 5px;
+        opacity: 0.5;
+    }
+    th.asc::after {
+        content: "↑";
+        opacity: 1;
+    }
+    th.desc::after {
+        content: "↓";
+        opacity: 1;
+    }
+</style>
+<!-- Modal para os filtros -->
+<button type="button"  data-toggle="modal" data-target=".modalfiltro" id="modalfiltro000" style="display: none;" >Modal filtro</button>
+
+<div class="modal fade modalfiltro" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="padding: 20px;">
+      <p>Filtre</p>
+      <input type="text" class="form-control" id="CampoFitroFK001">
+      <table class="table table-hover mt-2" id="TabelaFiltro002">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="BodyFiltro003">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
   <!-- Botão para acionar modal -->
-  <!-- Inicio Anexo -->
-  <button type="button" class="btn btn-primary" style="display: none;" data-toggle="modal" id="AnexoModal"
-    data-target="#ModalAnexo">
-    Abrir modal de demonstração
-  </button>
+
   <div id="baixar"></div>
   <!-- Modal -->
   <div class="modal fade" id="ModalAnexo" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado"

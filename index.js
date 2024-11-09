@@ -1526,6 +1526,8 @@ app.post('/rota/universal', async (req, res) => {
 //Rota universal para consultas de campos que retornal apenas um valor ou array de array
 app.post('/select/universal',auth, async (req, res) => {
   let Binds = req.body.binds;
+  console.log(Binds)
+
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
     if (req.body.USU_LOGADO) {
     let USU_LOGADO = data.ID_USUARIO;
@@ -1687,10 +1689,4 @@ let Data = req.body.Data;
 })
 
 
-server.listen(80, (err) => {
-  if (err) {
-    console.log("Erro ao iniciar servidor" + err);
-  } else {
-    console.log("Servidor rodando na porta 80");
-  }
-});
+server.listen(80,'0.0.0.0');

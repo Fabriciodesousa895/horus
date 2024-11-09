@@ -1,8 +1,0 @@
-
-Thu Nov 07 2024 23:08:36 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-06502/
-
-Thu Nov 07 2024 23:08:57 GMT-0300 (Horário Padrão de Brasília) -- /update_usuario  -- Error: ORA-06502: PL/SQL: erro: erro de conversão de caractere em número numérico ou de valor
-ORA-06512: em line 1
-Help: https://docs.oracle.com/error-help/db/ora-06502/

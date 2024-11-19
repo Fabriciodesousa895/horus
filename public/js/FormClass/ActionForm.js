@@ -76,7 +76,10 @@ class ActionForm{
                 binds:ObjetsForms,
                 USU_LOGADO: true
             }
-            if(RequiredTrueOrFalse == true){
+            console.log("------FORA------- ",RequiredTrueOrFalse);
+            if(RequiredTrueOrFalse){
+            console.log("------DENTRO-------")
+
                 new Ajax('/rota/universal',data).RequisicaoAjax(true)
             }
         })

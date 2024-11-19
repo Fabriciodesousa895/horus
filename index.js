@@ -1670,7 +1670,8 @@ const xlsx = require('xlsx');
 
 app.post('/download/excel', async(req,res)=>{
   console.log('--Inicio da geração de planilha-');
-
+  console.log(req.baseUrl)
+let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU,DT_EXPORTACAO,ID_TELA,QTD) VALUES (:ID_USU,:DT_EXPORTACAO,ID_TELA,QTD); COMMIT; END;`
 let Data = req.body.Data;
   try {
   const workbook = xlsx.utils.book_new();
@@ -1689,4 +1690,4 @@ let Data = req.body.Data;
 })
 
 
-server.listen(80,'0.0.0.0');
+server.listen(3000,'0.0.0.0');

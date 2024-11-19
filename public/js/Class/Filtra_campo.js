@@ -5,7 +5,7 @@ class filtra_campo{
     this.CAMPO_2= CAMPO_2;
     this.TABELA= TABELA;
     }
-    FiltraVersaoAnterior(){
+    Filtra(){
   
         let CAMP_1 = document.getElementById(this.CAMPO_1);
         let CAMP_2 = document.getElementById(this.CAMPO_2);
@@ -16,7 +16,7 @@ class filtra_campo{
             ajax.open('POST', '/select/universal');
             ajax.setRequestHeader('Content-type', 'application/json');
             let data = {
-                sql: `SELECT FILTRA_CAMPO(:CAMP_1, :CAMP_2,:TABELA) FROM DUAL`,
+                sql: `SELECT FILTRA_CAMP(:CAMP_1, :CAMP_2,:TABELA) FROM DUAL`,
                 binds: {
                     CAMP_1:CAMP_1.value ,
                     CAMP_2: '',
@@ -55,7 +55,7 @@ class filtra_campo{
                 ajax.open('POST', '/select/universal');
                 ajax.setRequestHeader('Content-type', 'application/json');
                 let data = {
-                    sql: `SELECT FILTRA_CAMPO(:CAMP_1, :CAMP_2,:TABELA) FROM DUAL`,
+                    sql: `SELECT FILTRA_CAMP(:CAMP_1, :CAMP_2,:TABELA) FROM DUAL`,
                     binds: {
                         CAMP_1:'' ,
                         CAMP_2: CAMP_2.value,
@@ -93,7 +93,7 @@ class filtra_campo{
 
 
 }
-    Filtra(){
+    Filtra2(){
   
         let CAMP_1 = document.getElementById(this.CAMPO_1);
         let CAMP_2 = document.getElementById(this.CAMPO_2);

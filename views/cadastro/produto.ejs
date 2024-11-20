@@ -1,4 +1,11 @@
 <%-include('../partials/head')%>
+<style>
+ 
+.modal#modalfiltro000 {
+  z-index: 1190;
+}
+
+</style>
 <div class="grad" style="display: flex;height: auto;padding: 30px;">
     <!-- Filtro -->
     <div style="width: 300px;height: 400px;">
@@ -63,19 +70,13 @@
   
       <button id="filtro" class="btn btn-warning">Buscar</button>
       <button type="reset"   class="btn btn-primary ">Limpar filtro</button>
-      <button class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">Gráficos</button>
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <canvas  id="Grafico"></canvas >
-    </div>
-  </div>
-</div>
+
      </form>
     </div>
     <!-- Tabela -->
     <div style="width: 80%;display: block;">
         <%- include('../components/exporta.ejs');%>
+        
         <table class="table table-hover" id="TabelaProduto" style="width: 100%;">
             <thead>
                 <tr>
@@ -96,6 +97,12 @@
       aria-hidden="true">
       <div class="modal-dialog modal-xl">
           <div class="modal-content">
+            <div class="modal-header">
+                <h5>Cadastre um produto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+             </button>
+            </div>
               <form class="needs-validation" id="formproduto" novalidate>
                   <div class="container" >
                       <div class="row">
@@ -116,7 +123,7 @@
                                   <input type="number" class="form-control TddCam" placeholder="Nr. de peças"   name="PRDT_NR_PECA" required>
                               </div>
 
-                              <label >Categoria</label>
+                              <label >Categoria <img src="/img/lupa.png" alt="" style="cursor: pointer;" id="Pesquisa017"></label>
                               <div style="display: flex; flex-direction: row;">
                                   <input type="number" required id="PRDT_ID_CTG" name="PRDT_ID_CTG" style="width: 80px;margin-right: 8px;" class="form-control  TddCam">
                                   <input type="text" required  id="PRDT_NOME_CTG"  name="PRDT_NOME_CTG" class="form-control  " placeholder="Categoria" >
@@ -125,7 +132,7 @@
                               <div style="display: flex; flex-direction: row;">
                                   <input type="number" required id="PRDT_MARCA"  name="PRDT_MARCA" style="width: 80px;margin-right: 8px;" class="form-control TddCam">
                                   <input type="text" required id="PRDT_MARCA_NOME"   name="PRDT_MARCA_NOME" class="form-control  " placeholder="Marca" >
-                                 </div>
+                            </div>
                               <label >Usado como</label>
                               <div style="display: flex; flex-direction: row;">
                                 <select  name="PRDT_USADO_COMO" class="form-control TddCam" required>
@@ -146,7 +153,7 @@
                               </div>
                               <label >Unidade de medida</label>
                               <div style="display: flex; flex-direction: row;">
-                                  <input type="text" required id="PRDT_UNIDADE"  name="PRDT_UNI" style="width: 90px;margin-right: 8px;" class="form-control TddCam">
+                                  <input type="text" required id="PRDT_UNIDADE"  name="PRDT_UNIDADE" style="width: 90px;margin-right: 8px;" class="form-control TddCam">
                                   <input type="text" required  id="PRDT_UNIDADE_DESC"  name="PRDT_UNI_DESC" class="form-control  " placeholder="Descrição unidade de medida" >
                               </div>
 
@@ -219,7 +226,11 @@
                       </div>
 
                       </div>
-                      <button  type="submit" style="margin-left: 50px;" class="btn btn-success mt-3">Salvar</button>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button  type="submit" class="btn btn-success ">Salvar</button>
+                      </div>
+
           
           
                     </form>

@@ -20,10 +20,12 @@ class Ajax {
                     if (Info == true) {
                         resolve(
                             swal({
-                                title: ajax.responseText,
-                                icon: 'info'
-                            }
-
+                                text: "OK",
+                                value: true,
+                                visible: true,
+                                className: "",
+                                closeModal: true,
+                              }
                             ));
 
                             if(idform){

@@ -3,9 +3,16 @@
     <div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl">
-            <div class="modal-content">
+            <div class="modal-content" style="padding: 10px;">
+                <div class="modal-header">
+                    <h5>Cadastre um Parceiro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+     
                 <form class="needs-validation" id="FormParceiro" novalidate>
-                    <div class="container">
+           
                         <div class="row">
 
                             <div class="col-sm-4">
@@ -175,11 +182,14 @@
                             </div>
 
                         </div>
-                        <button id="SALVAR" style="margin-left: 50px;" class="btn btn-success mt-3">Salvar</button>
-                        <button id="IMPORTAR" class="btn btn-warning mt-3">Importar dados</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button id="SALVAR"  class="btn btn-success">Salvar</button>
+                            <button id="IMPORTAR" class="btn btn-warning">Importar dados</button>
+                        </div>
+     
                 </form>
 
-            </div>
 
         </div>
 

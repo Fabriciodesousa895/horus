@@ -6,8 +6,14 @@
 <div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-xl" style="width: 500px;">
       <div class="modal-content">
+        <div class="modal-header">
+          <h5>Cadastre uma cidade</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
         <form class="needs-validation" id="form" novalidate>
-          <div class="container" style="padding: 40px;" >
+          <div class="container" style="padding: 10px;" >
               <div class="row">
                 <div class="col-sm"  >
                     <label for="NOME">Nome da cidade</label>
@@ -18,8 +24,11 @@
               </div>
           
               </div>
-              <button style="margin-left: 40px;" id="SALVA"  class="btn btn-warning ">Salvar</button>
-              <button  id="IMPORTAR"  class="btn btn-danger ">Importar dados</button>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button  type="submit" id="SALVA" class="btn btn-success ">Salvar</button>
+              </div>
+       
             </div>
           
           </form>
@@ -30,8 +39,14 @@
 <div class="modal fade EDITAR" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-xl" style="width: 500px;">
       <div class="modal-content">
+        <div class="modal-header">
+          <h5>Editando uma cidade</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
         <form class="needs-validation"  novalidate>
-          <div class="container" style="padding: 40px;" >
+          <div class="container" style="padding: 10px;" >
               <div class="row">
                 <div class="col-sm"  >
                     <label for="NOME_UP">Nome da cidade</label>
@@ -42,12 +57,18 @@
                 </div>
               </div>
               </div>
-              <% if (D.ALTERA == 'N') { %> 
-                <button class="btn btn-primary" style="margin-right: 15px;" data-toggle="modal" disabled  >Salvar</button>
-            <% }else{ %>
-                <button style="margin-left: 40px;" id="SALVA_EDICAO"  class="btn btn-warning ">Salvar</button>
+              <div class="modal-footer">
+                <% if (D.ALTERA == 'N') { %> 
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  <button class="btn btn-success"  data-toggle="modal" disabled  >Salvar</button>
+              <% }else{ %>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button  type="submit"  id="SALVA_EDICAO" class="btn btn-success ">Salvar</button>
+  
+              <%}%> 
 
-            <%}%> 
+              </div>
+
             </div>
           
           </form>

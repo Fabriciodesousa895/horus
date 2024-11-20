@@ -267,7 +267,11 @@ BONIFICAÇÃO => SE A FLAG BONIFICAÇÃO ESTIVER MARCADA IRA GERAR UM TITULO DE 
  FLAG (Reserva estoque ao salvar?) => QUANDO SALVAR O MOVIMENTO IRA RESERVAR O ESTOQUE DOS PRODUTOS
 
 
-
+<!-- <label for=""><%= NameLabel %> <img src="/img/lupa.png" alt="" style="cursor: pointer;"></label>
+<div style="display: flex; flex-direction: row;">
+    <input type="number" required name="<%= nameNumber %>" style="width: 30%;margin-right: 8px;" class="form-control TddCam">
+    <input type="text" required name="<%= nameText %>" class="form-control">
+</div> -->
 
 
 

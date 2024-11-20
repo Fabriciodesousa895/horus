@@ -8,7 +8,8 @@ if(PermiteExportar.value == 'S'){
 async function downloadExcel() {
     let Elementopai = e.parentNode.parentNode;
     let tabela = Elementopai.querySelector('table');
-    let tbody =  tabela.querySelector('tbody');
+    let Id_Tela = document.getElementById('Id_Tela');
+    let tbody =  Elementopai.querySelector('tbody');
     let Trs =  tbody.querySelectorAll('tr');
     let Ths = tabela.querySelectorAll('th')
     let ArrayCabecalho = [];
@@ -31,6 +32,7 @@ async function downloadExcel() {
     });
     ArrayCabecalho2.push(ArrayCabecalho)
     let Data = [...ArrayCabecalho2,...ArrayCorpo] 
+        let ObjetoPost = {Matrix:Data,Id_Tela:Id_Tela.value}
       try {
         //Validando se há registros para exportar
         if(Data.length > 1){
@@ -40,7 +42,7 @@ async function downloadExcel() {
                   'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                Data: Data
+                ObjetoPost: ObjetoPost
               })
               });
               

@@ -5,6 +5,7 @@ import { Tabela } from "../Class/Tabela.js";
 import { SalvaFiltro } from "../Class/Filtro.js";
 import { ActionForm } from "../FormClass/ActionForm.js";
 new filtra_campo('PRDT_ID_CTG','PRDT_NOME_CTG','CTG_PRODUTO').Filtra();
+new filtra_campo('PRDT_ID_CTG','PRDT_NOME_CTG','CTG_PRODUTO').Filtra2('Pesquisa017');
 new filtra_campo('PRDT_MARCA','PRDT_MARCA_NOME','MARCA').Filtra();
 new filtra_campo('PRDT_UNIDADE','PRDT_UNIDADE_DESC','UNIDADE_MEDIDA').Filtra();
 new filtra_campo('PRDT_NCM','PRDT_NCM_DESC','NCM').Filtra();
@@ -32,32 +33,8 @@ let ActionInstancia = new ActionForm('formproduto','PRDT_PRODUTO')
 ActionInstancia.Insert();
 ActionInstancia.delete('PRDT_ID'); 
 
-let Data = {
-    sql: `SELECT COUNT(*) AS TOTAL,
-    C.CTG_NOME 
-FROM PRDT_PRODUTO P
-LEFT JOIN CTG_PRODUTO C ON C.ID_CATEGORIA = P.PRDT_ID_CTG
-GROUP BY C.CTG_NOME`,
-    binds: {},
-    mensage_error: 'Error ao consultar',
-};
 
-new Ajax('/select/universal/objeto', Data).RequisicaoAjax().then((data)=>{
-    const ctx = document.getElementById('Grafico');
-    let totais = data.map(item => item.TOTAL);
-    let categorias = data.map(item => item.CTG_NOME);
-    new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: categorias,
-        datasets: [{
-          label: 'Categoria de produtos',
-          data: totais,
-          borderWidth: 1
-        }]
-      }
 
-    });
-})
+
 
 

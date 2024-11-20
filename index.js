@@ -7,13 +7,13 @@ require('dotenv').config()
 'use strict';
 //view engine
 app.set("view engine", "ejs");
-const ratelimit = require('express-rate-limit');
-  const limiter = ratelimit({
-    window: 15 * 60 * 1000,
-    max:100,
-    message:'Muitas requisiçoes de um único IP.'
-  })
-  app.use(limiter)
+// const ratelimit = require('express-rate-limit');
+//   const limiter = ratelimit({
+//     window: 15 * 60 * 1000,
+//     max:100,
+//     message:'Muitas requisiçoes de um único IP.'
+//   })
+//   app.use(limiter)
 //static public
 app.use(express.static("public"));
 //body-parser
@@ -1669,19 +1669,30 @@ try {
 const xlsx = require('xlsx');
 
 app.post('/download/excel', async(req,res)=>{
-  console.log('--Inicio da geração de planilha-');
-  console.log(req.baseUrl)
-let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU,DT_EXPORTACAO,ID_TELA,QTD) VALUES (:ID_USU,:DT_EXPORTACAO,ID_TELA,QTD); COMMIT; END;`
-let Data = req.body.Data;
+      console.log('--Inicio da geração de planilha-');
+      let ObjetoPost = req.body.ObjetoPost;
+      console.log(ObjetoPost.Matrix)
   try {
-  const workbook = xlsx.utils.book_new();
-  const worksheet = xlsx.utils.aoa_to_sheet(Data);
-  xlsx.utils.book_append_sheet(workbook,worksheet,"Principal");
-  const excelbuffer = xlsx.write(workbook,{type:'buffer',bookType:'xlsx'});
-  res.setHeader('Content-Disposition','attachment; filename=relatorio.xlsx');
-  res.setHeader('Content-Type','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-  res.send(excelbuffer);
-  console.log('--Fim da geração de planilha--');
+     jwt.verify(req.cookies.jwt,process.env.SECRET,async(error,data)=>{
+
+      if(error){
+        res.status(500).send("Token inválido");
+        return;
+      }
+      let ID_USU = data.ID_USUARIO
+      let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU,DT_EXPORTACAO,ID_TELA,QTD) VALUES (:ID_USU,SYSDATE,:ID_TELA,:QTD); COMMIT; END;`
+      let Binds = {ID_USU:ID_USU,ID_TELA:ObjetoPost.Id_Tela,QTD:ObjetoPost.Matrix.length - 1}
+      conectar(Sql,Binds);
+      const workbook = xlsx.utils.book_new();
+      const worksheet = xlsx.utils.aoa_to_sheet(ObjetoPost.Matrix);
+      xlsx.utils.book_append_sheet(workbook,worksheet,"Principal");
+      const excelbuffer = xlsx.write(workbook,{type:'buffer',bookType:'xlsx'});
+      res.setHeader('Content-Disposition','attachment; filename=relatorio.xlsx');
+      res.setHeader('Content-Type','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      res.send(excelbuffer);
+      console.log('--Fim da geração de planilha--');
+    })
+
 
   } catch (error) {
     console.error('Erro ao gerar excel:', error);

@@ -1,0 +1,8 @@
+
+Thu Nov 21 2024 21:42:33 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.PRDT_FK) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Thu Nov 21 2024 21:43:16 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_PRODUTO) violada - registro filho localizado
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-02292/

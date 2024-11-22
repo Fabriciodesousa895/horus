@@ -5,15 +5,13 @@ const axios = require('axios');
 let packge = require('./package.json');
 require('dotenv').config()
 'use strict';
+// Xlsx
+const xlsx = require('xlsx');
+// Pdf
+const PdfDocument = require('pdfkit');
+
 //view engine
 app.set("view engine", "ejs");
-// const ratelimit = require('express-rate-limit');
-//   const limiter = ratelimit({
-//     window: 15 * 60 * 1000,
-//     max:100,
-//     message:'Muitas requisiçoes de um único IP.'
-//   })
-//   app.use(limiter)
 //static public
 app.use(express.static("public"));
 //body-parser
@@ -90,10 +88,6 @@ app.use(cors());
 
 const fs = require('fs');
 const { split, stubString, toInteger } = require("lodash");
-// const send = require("send");
-// const { tryEach } = require("async");
-// const { MAX_LENGTH } = require("picomatch/lib/constants");
-
 
 app.get('/certificado/validacao', (req, res) => {
   let url = req.params.url;
@@ -1666,8 +1660,6 @@ try {
   res.send('Erro ao atualizar cidades.');
 }
 })
-const xlsx = require('xlsx');
-
 app.post('/download/excel', async(req,res)=>{
       console.log('--Inicio da geração de planilha-');
       let ObjetoPost = req.body.ObjetoPost;
@@ -1680,7 +1672,7 @@ app.post('/download/excel', async(req,res)=>{
         return;
       }
       let ID_USU = data.ID_USUARIO
-      let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU,DT_EXPORTACAO,ID_TELA,QTD) VALUES (:ID_USU,SYSDATE,:ID_TELA,:QTD); COMMIT; END;`
+      let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU,DT_EXPORTACAO,ID_TELA,QTD,TIPO) VALUES (:ID_USU,SYSDATE,:ID_TELA,:QTD,"Xlsx"); COMMIT; END;`
       let Binds = {ID_USU:ID_USU,ID_TELA:ObjetoPost.Id_Tela,QTD:ObjetoPost.Matrix.length - 1}
       conectar(Sql,Binds);
       const workbook = xlsx.utils.book_new();
@@ -1699,6 +1691,50 @@ app.post('/download/excel', async(req,res)=>{
     res.status(500).json({ error: 'Erro ao gerar planilha' });
   }
 })
+
+// Exportação de PDF
+app.post('/exportaPdf', async (req, res) => {
+  console.log('--Início da geração do Pdf---');
+  let ObjetoPost = req.body.ObjetoPost;
+  
+  try {
+    // Verificação do token JWT
+    await new Promise((resolve, reject) => {
+      jwt.verify(req.cookies.jwt, process.env.SECRET, (error, data) => {
+        if (error) {
+          reject("Token inválido");
+        } else {
+          resolve(data);
+        }
+      });
+    }).then((data) => {
+      let ID_USU = data.ID_USUARIO;
+      
+      // Query SQL
+      let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU, DT_EXPORTACAO, ID_TELA, QTD, TIPO) VALUES (:ID_USU, SYSDATE, :ID_TELA, :QTD, 'Pdf'); COMMIT; END;`;
+      let Binds = { ID_USU: ID_USU, ID_TELA: ObjetoPost.Id_Tela, QTD: ObjetoPost.Matrix.length - 1 };
+       conectar(Sql, Binds); // Certifique-se de que a função conectar retorna uma promise
+
+      // Criando o documento PDF
+      let Doc = new PdfDocument();
+      res.setHeader('Content-type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'inline; filename="PdfExportado.pdf"');
+
+      // Adicionando conteúdo ao PDF
+      Doc.fontSize(10)
+         .text("Relatório exportado")
+         .end()
+         .pipe(res)
+    }).catch((err) => {
+      res.status(500).send(err);
+    });
+
+    console.log("---------Fim da geração do Pdf-------------");
+  } catch (error) {
+    res.status(500).send("Erro ao gerar PDF: " + error);
+    console.log("---------Fim do processo com erro-------------", error);
+  }
+});
 
 
 server.listen(3000,'0.0.0.0');

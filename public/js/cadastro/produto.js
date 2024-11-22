@@ -5,7 +5,7 @@ import { Tabela } from "../Class/Tabela.js";
 import { SalvaFiltro } from "../Class/Filtro.js";
 import { ActionForm } from "../FormClass/ActionForm.js";
 new filtra_campo('PRDT_ID_CTG','PRDT_NOME_CTG','CTG_PRODUTO').Filtra();
-new filtra_campo('PRDT_ID_CTG','PRDT_NOME_CTG','CTG_PRODUTO').Filtra2('Pesquisa017');
+// new filtra_campo('PRDT_ID_CTG','PRDT_NOME_CTG','CTG_PRODUTO').Filtra2('Pesquisa017'); em desenvolvimento
 new filtra_campo('PRDT_MARCA','PRDT_MARCA_NOME','MARCA').Filtra();
 new filtra_campo('PRDT_UNIDADE','PRDT_UNIDADE_DESC','UNIDADE_MEDIDA').Filtra();
 new filtra_campo('PRDT_NCM','PRDT_NCM_DESC','NCM').Filtra();

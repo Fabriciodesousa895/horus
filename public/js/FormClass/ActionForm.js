@@ -1,4 +1,5 @@
 import { Ajax } from "../Class/Ajax.js";
+import { Tabela } from "../Class/Tabela.js";
 class ActionForm{
   constructor(IdForm,TableName){
        this.IdForm = IdForm
@@ -8,20 +9,13 @@ class ActionForm{
         let IdForm = document.getElementById(this.IdForm);
         IdForm.addEventListener('submit',(e)=>{
             e.preventDefault();
-            let RequiredTrueOrFalse = false
+            let RequiredTrueOrFalse = true;
             let Inputs = IdForm.querySelectorAll('input.TddCam, textarea.TddCam, select.TddCam');
             let ObjetsForms = {};
             //Validando se os campos obrigatórios estão preenchidos
-            RequiredTrueOrFalse = false;
             Inputs.forEach((elementrequired)=>{
-               if( elementrequired.required && elementrequired.value == ''){
+               if( elementrequired.required && elementrequired.value == '' || RequiredTrueOrFalse == false){
                 RequiredTrueOrFalse = false;
-                }else{
-                    if(!RequiredTrueOrFalse &&  elementrequired.value == ''){
-                        RequiredTrueOrFalse = false;
-                    }else{
-                        RequiredTrueOrFalse = true
-                    }
                 }
             })
             //Percorrendo pelos campos e pegando os valores
@@ -45,7 +39,6 @@ class ActionForm{
             }
             //Inserindo os valores no objeto
             ObjetsForms[NamesInputs] = ValueInputs
-    
             })
             //Criando Sql
             let SqlInsert = 'BEGIN \n INSERT INTO ' + this.TableName + '  (';
@@ -54,15 +47,12 @@ class ActionForm{
                     SqlInsert += key + ',\n';
                 }
             }
-            
             SqlInsert += 'USU_ALTER,USU_INCLU,DT_INCLU,DT_ALTER)'
-            
             // Adicionar a parte VALUES
             SqlInsert += ' VALUES (';
             for (let key in ObjetsForms) {
                 if (ObjetsForms.hasOwnProperty(key)) {
                     SqlInsert += ':' + key + ', \n';
-
                 }
             }
 
@@ -76,11 +66,26 @@ class ActionForm{
                 binds:ObjetsForms,
                 USU_LOGADO: true
             }
-            console.log("------FORA------- ",RequiredTrueOrFalse);
             if(RequiredTrueOrFalse){
-            console.log("------DENTRO-------")
-
-                new Ajax('/rota/universal',data).RequisicaoAjax(true)
+            let barra_progresso = document.getElementById('PROGRESSO');
+            barra_progresso.style.opacity = 1;
+            let ajax = new XMLHttpRequest();
+            ajax.open('POST', '/rota/universal');
+            ajax.setRequestHeader('Content-type', 'application/json');
+            ajax.onreadystatechange = function () {
+                if (ajax.status === 200) {
+                    new Tabela().LimpaInputs(IdForm.id);
+                    barra_progresso.style.opacity = 0;
+                    swal( ajax.response,"","success");
+                } else {
+                        swal({
+                            title: ajax.responseText + ajax.status + '  Error :',
+                            icon: 'warning'
+                        } )
+                        barra_progresso.style.opacity = 0;
+                }
+            };
+            ajax.send(JSON.stringify(data));
             }
         })
     }

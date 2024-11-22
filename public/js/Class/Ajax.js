@@ -17,16 +17,9 @@ class Ajax {
             ajax.setRequestHeader('Content-type', 'application/json');
             ajax.onreadystatechange = function () {
                 if (ajax.status === 200) {
-                    if (Info == true) {
+                    if (Info) {
                         resolve(
-                            swal({
-                                text: "OK",
-                                value: true,
-                                visible: true,
-                                className: "",
-                                closeModal: true,
-                              }
-                            ));
+                            swal( ajax.response,"","success"));
 
                             if(idform){
                                 new Tabela().LimpaInputs(idform)

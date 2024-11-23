@@ -1672,7 +1672,7 @@ app.post('/download/excel', async(req,res)=>{
         return;
       }
       let ID_USU = data.ID_USUARIO
-      let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU,DT_EXPORTACAO,ID_TELA,QTD,TIPO) VALUES (:ID_USU,SYSDATE,:ID_TELA,:QTD,"Xlsx"); COMMIT; END;`
+      let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU,DT_EXPORTACAO,ID_TELA,QTD,TIPO) VALUES (:ID_USU,SYSDATE,:ID_TELA,:QTD,'Xlsx'); COMMIT; END;`
       let Binds = {ID_USU:ID_USU,ID_TELA:ObjetoPost.Id_Tela,QTD:ObjetoPost.Matrix.length - 1}
       conectar(Sql,Binds);
       const workbook = xlsx.utils.book_new();
@@ -1709,22 +1709,19 @@ app.post('/exportaPdf', async (req, res) => {
       });
     }).then((data) => {
       let ID_USU = data.ID_USUARIO;
-      
       // Query SQL
       let Sql = `BEGIN INSERT INTO LOG_EXPORTACAO(ID_USU, DT_EXPORTACAO, ID_TELA, QTD, TIPO) VALUES (:ID_USU, SYSDATE, :ID_TELA, :QTD, 'Pdf'); COMMIT; END;`;
       let Binds = { ID_USU: ID_USU, ID_TELA: ObjetoPost.Id_Tela, QTD: ObjetoPost.Matrix.length - 1 };
-       conectar(Sql, Binds); // Certifique-se de que a função conectar retorna uma promise
-
+       conectar(Sql, Binds); 
       // Criando o documento PDF
       let Doc = new PdfDocument();
       res.setHeader('Content-type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'inline; filename="PdfExportado.pdf"');
-
+      res.setHeader('Content-Disposition', 'attachment; filename="PdfExportado.pdf"');
       // Adicionando conteúdo ao PDF
       Doc.fontSize(10)
          .text("Relatório exportado")
-         .end()
-         .pipe(res)
+         .pipe(res);
+         Doc.end();
     }).catch((err) => {
       res.status(500).send(err);
     });
@@ -1735,6 +1732,77 @@ app.post('/exportaPdf', async (req, res) => {
     console.log("---------Fim do processo com erro-------------", error);
   }
 });
+
+
+app.post('/gerar-pdf', (req, res) => {
+  // Dados de exemplo, mas você pode substituir por dados enviados na requisição
+let Data  = req.body.ObjetoPost ;
+
+  const data  = Data.Matrix
+  console.log(data.Matrix)
+  // Criação do PDF
+  const doc = new PdfDocument();
+  
+  // Definir cabeçalhos do PDF
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=relatorio.pdf');
+  
+  // Pipe para a resposta HTTP (envia o PDF diretamente ao cliente)
+  doc.pipe(res);
+
+  // Definir largura das colunas
+ 
+  function drawRow(rowData, columnWidths, currentY) {
+    let currentX = marginLeft;
+    
+    rowData.forEach((cell, index) => {
+      // Adiciona o texto da célula
+      doc.text(cell, currentX, currentY, { width: columnWidths[index], align: 'left' });
+      currentX += columnWidths[index]; // Atualiza a posição horizontal para a próxima coluna
+    });
+    
+    currentY += 20; // Altura entre as linhas
+  }
+  // Função para desenhar uma linha de dados
+  function calculateColumnWidths(data) {
+    // Define a largura mínima de cada coluna
+    const minColumnWidths = [50, 100, 50]; // Exemplo de largura mínima das colunas (ajuste conforme necessário)
+    const columnWidths = minColumnWidths.slice(); // Cria uma cópia do array de larguras mínimas
+  
+    // Itera sobre os dados e calcula a largura de cada coluna
+    for (let row of data) {
+      row.forEach((cell, index) => {
+        const cellWidth = doc.widthOf(cell); // Calcula a largura do texto da célula
+        if (cellWidth > columnWidths[index]) {
+          columnWidths[index] = cellWidth; // Atualiza a largura da coluna se a largura da célula for maior
+        }
+      });
+    }
+  
+    // Adiciona uma margem extra para cada coluna
+    return columnWidths.map(width => width + 10); // Aumenta a largura de cada coluna em 10 unidades para dar margem
+  }
+
+  const columnWidths = calculateColumnWidths(data);
+
+  const marginLeft = 50;
+  const marginTop = 50;
+  let currentY = marginTop;
+
+  // Desenhar o cabeçalho (primeira linha do array)
+  currentY = drawRow(data[0], columnWidths, currentY);
+
+  // Desenhar as linhas de dados
+  for (let i = 1; i < data.length; i++) {
+    currentY = drawRow(data[i], columnWidths, currentY);
+  }
+
+  // Finalizar o PDF
+  doc.end();
+  console.log("---------Fim da geração do Pdf-------------");
+
+});
+
 
 
 server.listen(3000,'0.0.0.0');

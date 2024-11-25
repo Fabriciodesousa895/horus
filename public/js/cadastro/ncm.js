@@ -41,9 +41,12 @@ form.addEventListener('submit',(e)=>{
     mensagem_error:'Erro ao inserir registro!',
     USU_LOGADO: true
   };
-  new Ajax('/rota/universal',data).RequisicaoAjax(true)
-  NCM_DESC.value = ''
-  COD_NCM_.value = ''
+  if(COD_NCM_.value != '' && NCM_DESC.value != ''){
+    new Ajax('/rota/universal',data).RequisicaoAjax(true)
+    NCM_DESC.value = ''
+    COD_NCM_.value = ''
+  }
+
 })
 
 new Tabela('Ncm').VisualizaRegistro('/VisualizaNcm/',1);

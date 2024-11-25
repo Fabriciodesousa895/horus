@@ -212,6 +212,7 @@
     "path-is-absolute": "^1.0.1",
     "path-to-regexp": "^0.1.7",
     "pdfkit": "^0.15.0",
+    "pdfmake": "^0.2.15",
     "peek-readable": "^5.0.0",
     "pend": "^1.2.0",
     "performance-now": "^2.1.0",

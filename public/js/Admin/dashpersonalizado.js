@@ -66,8 +66,7 @@ window.addEventListener('load', () => {
                 ComponenteElementoFiltro.style.height = Altura;
                 Form.setAttribute("novalidate","");
                 Form.className = 'needs-validation';
-                // Form.appendChild(Inputsql);
-                // Form.appendChild(InpuTipoDash);
+                Form.appendChild(Inputsql);
                 ComponenteElementoFiltro.appendChild(Form);
                 ComponenteElementoFiltro.appendChild(InpuTipoDash);
                 ComponenteElemento.appendChild(ComponenteElementoFiltro);
@@ -115,9 +114,7 @@ window.addEventListener('load', () => {
                              }      
             
                             ComponenteElementoFiltro.appendChild(h5);
-                            Form.appendChild(InputElementSelect);
                             ComponenteElementoFiltro.appendChild(InputElementSelect);
-
                         }
                         //Input do tipo select
                         if (tipo == 'select') {
@@ -141,7 +138,6 @@ window.addEventListener('load', () => {
                                 });
                             });
                             ComponenteElementoFiltro.appendChild(h5);
-                            Form.appendChild(InputElementSelect);
                             ComponenteElementoFiltro.appendChild(InputElementSelect);
                         }
                         //Input do tipo texto
@@ -155,8 +151,6 @@ window.addEventListener('load', () => {
                             InputElement.id = Id;
                             InputElement.setAttribute("required", requerid);
                             ComponenteElementoFiltro.appendChild(h5);
-                            Form.appendChild(InputElement);
-                            
                             ComponenteElementoFiltro.appendChild(InputElement);
                         }
 
@@ -206,7 +200,6 @@ window.addEventListener('load', () => {
                 ComponenteElementoFiltro.appendChild(Button);
                 // Adiciona o componente ao dashboard
                 dashboard.appendChild(ComponenteElemento);
-
             }
 
         }

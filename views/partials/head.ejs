@@ -119,7 +119,8 @@
     </div>
   </div>
 </div>
-
+<!-- Modal para menu -->
+<%- include('./Menu'); %>
 
 
   <!-- Botão para acionar modal -->
@@ -191,7 +192,10 @@
                   </div>
                 </div>
                 <%}%>
-
+                <!-- Botão para acionar modal de menu-->
+<button type="button" class="btn btn-primary"  style="margin-left: 15px;" id="ModalMenu171" data-toggle="modal" data-target="#ModalLongoExempl">
+  Menu
+</button>
                   <form action="/logout" method="post" style="margin-left: 15px;"> <button type="submit"
                       class="btn btn-secondary mt-3">Sair</button>
                   </form>
@@ -229,6 +233,10 @@
 
       </nav>
   </nav>
+
+
+<!-- Modal para menu, precisa replicar para os outros heads -->
+
 
   <script>
     let selectElement = document.getElementById('meuSelect');

@@ -1535,9 +1535,42 @@ app.post('/select/universal/objeto',auth, async (req, res) => {
     if (req.body.USU_LOGADO) {
     let USU_LOGADO = data.ID_USUARIO;
       Binds.USU_LOGADO = USU_LOGADO;
+      console.log(Binds);
     }
     try {
       let result = await conectarbd(req.body.sql, Binds,options_objeto);
+      res.status(200).send(result);
+    } catch (error) {
+      res.status(500).send('Ocorreu um erro! ' + error);
+    }
+
+  });
+});
+app.post('/Menu/Acessos',auth, async (req, res) => {
+  const sql = `SELECT
+  T.ID_TELA,
+  T.ROTA,
+  T.T_NOME,
+  T.GRUPO
+FROM T_TELA T
+INNER JOIN CONFIG_GRUPO_TELA G ON G.ID_TELA = T.ID_TELA
+INNER JOIN CONFIG_USU_TELA C ON C.ID_TELA = T.ID_TELA
+INNER JOIN USU_USUARIO U ON U.ID_USU = C.ID_USU
+LEFT JOIN ACAO A ON  A.ID_TELA = T.ID_TELA
+WHERE C.ID_USU = :USU_LOGADO2
+AND (U.USU_ADM = 'S' OR C.CFU_CONSULTA = 'S' OR G.GRUP_CONSULTA = 'S')
+AND G.ID_GRUPO = (SELECT ID_GRUPO FROM USU_USUARIO US WHERE US.ID_USU = :USU_LOGADO)
+AND T.TIPO = 'R'
+AND T.ID_TELA <> 323
+ORDER BY T.T_NOME ASC
+`
+  jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
+     let Binds = {};
+     let USU_LOGADO = data.ID_USUARIO;
+      Binds.USU_LOGADO = USU_LOGADO;
+      Binds.USU_LOGADO2 = USU_LOGADO;
+    try {
+      let result = await conectarbd(sql, Binds,options_objeto);
       res.status(200).send(result);
     } catch (error) {
       res.status(500).send('Ocorreu um erro! ' + error);

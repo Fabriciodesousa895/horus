@@ -64,41 +64,48 @@
       border-radius: 10px 10px 0 10px;
 
     }
-    .ComponenteElemento{
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        margin-bottom: 10px;
-        position: relative;
-    }
-    .ComponenteElementoFiltro{
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        padding: 10px;
-        margin-left: 10px;
-    }
-    .CanvaDash{
-        position: absolute;
-        padding: 35px;
-        margin-left: 320px;
-       
-    }
-    .Titulo {
-    position: absolute;
-    top: 0; /* Coloca o elemento no topo da página */
-    left: 320px; /* Mantém a margem à esquerda */
-    margin-bottom: 20px;
-}
-    .Tabela {
-    position: absolute;
-    top: 0; /* Coloca o elemento no topo da página */
-    left: 320px; /* Mantém a margem à esquerda */
-    margin-bottom: 20px;
-    margin-top: 70px;
-}
 
-  
+    .ComponenteElemento {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .ComponenteElementoFiltro {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      padding: 10px;
+      margin-left: 10px;
+    }
+
+    .CanvaDash {
+      position: absolute;
+      padding: 35px;
+      margin-left: 320px;
+
+    }
+
+    .Titulo {
+      position: absolute;
+      top: 0;
+      /* Coloca o elemento no topo da página */
+      left: 320px;
+      /* Mantém a margem à esquerda */
+      margin-bottom: 20px;
+    }
+
+    .Tabela {
+      position: absolute;
+      top: 0;
+      /* Coloca o elemento no topo da página */
+      left: 320px;
+      /* Mantém a margem à esquerda */
+      margin-bottom: 20px;
+      margin-top: 70px;
+    }
   </style>
   </style>
   <!-- Botão para acionar modal -->
@@ -143,22 +150,24 @@
     <!-- valida o acessos -->
     <% let T_USU=P_USU.T_NOME %>
       <nav style="margin-left: 0;">
-   <form action="/logout" method="post" style="align-self: flex-end;"> <button type="submit"  class="btn btn-secondary mt-3">Sair</button>
-   </form>
+        <form action="/logout" method="post" style="align-self: flex-end;"> <button type="submit"
+            class="btn btn-secondary mt-3">Sair</button>
+        </form>
+              <!-- Botão para acionar modal de menu-->
+      <button type="button" class="btn btn-primary" style="margin-left: 15px;" id="ModalMenu171" data-toggle="modal"
+      data-target="#ModalLongoExempl">
+      Menu
+    </button>
       </nav>
-      <!---->
-      <nav>
-        <div>
 
+      <nav>
+
+        <div>
           <%=T_USU[0]%>
         </div>
         <input type="hidden" value="<%=T_USU[2]%>" id="ID_TELA_ATUAL">
 
       </nav>
-      <!---->
-
-
-
       <nav>
 
         <div class="input-group mb-3" style="width: 500px;">
@@ -175,7 +184,9 @@
 
       </nav>
   </nav>
-
+  <!-- Modal para menu -->
+<%- include('./Menu'); %>
+  
   <script>
     let selectElement = document.getElementById('meuSelect');
     let buttonElement = document.getElementById('irParaLink');

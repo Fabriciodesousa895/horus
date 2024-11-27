@@ -6,3 +6,49 @@ Help: https://docs.oracle.com/error-help/db/ora-02292/
 Thu Nov 21 2024 21:43:16 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-02292: restrição de integridade (SYSTEM.FK_PRODUTO) violada - registro filho localizado
 ORA-06512: em line 1
 Help: https://docs.oracle.com/error-help/db/ora-02292/
+
+Mon Nov 25 2024 23:18:58 GMT-0300 (Horário Padrão de Brasília) -- /rota/universal  -- Error: ORA-06550: linha 1, coluna 34:
+PL/SQL: ORA-00904: "IDPKNAT": identificador inválido
+ORA-06550: linha 1, coluna 7:
+PL/SQL: SQL Statement ignored
+Help: https://docs.oracle.com/error-help/db/ora-06550/
+
+Tue Nov 26 2024 22:50:47 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01422: a extração exata retorna mais do que o número solicitado de linhas
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01422/
+
+Tue Nov 26 2024 22:51:38 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01422: a extração exata retorna mais do que o número solicitado de linhas
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01422/
+
+Tue Nov 26 2024 22:54:43 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01422: a extração exata retorna mais do que o número solicitado de linhas
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01422/
+
+Tue Nov 26 2024 22:54:45 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01422: a extração exata retorna mais do que o número solicitado de linhas
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01422/
+
+Tue Nov 26 2024 22:58:59 GMT-0300 (Horário Padrão de Brasília) -- /usuario  -- Error: ORA-00001: restrição exclusiva (SYSTEM.ID_PARC_) violada
+ORA-06512: em "SYSTEM.INSERI_USUARIO", line 27
+ORA-06512: em line 2
+Help: https://docs.oracle.com/error-help/db/ora-00001/
+
+Tue Nov 26 2024 23:02:18 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01422: a extração exata retorna mais do que o número solicitado de linhas
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01422/
+
+Tue Nov 26 2024 23:03:52 GMT-0300 (Horário Padrão de Brasília) -- undefined  -- Error: ORA-01422: a extração exata retorna mais do que o número solicitado de linhas
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01422/
+
+Tue Nov 26 2024 23:03:52 GMT-0300 (Horário Padrão de Brasília) -- /AdministracaoServidor  -- Error: ORA-01422: a extração exata retorna mais do que o número solicitado de linhas
+ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
+ORA-06512: em line 1
+Help: https://docs.oracle.com/error-help/db/ora-01422/

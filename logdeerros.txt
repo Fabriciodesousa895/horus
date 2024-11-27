@@ -52,3 +52,14 @@ Tue Nov 26 2024 23:03:52 GMT-0300 (Horário Padrão de Brasília) -- /Administra
 ORA-06512: em "SYSTEM.VALIDA_CONSULTAS", line 24
 ORA-06512: em line 1
 Help: https://docs.oracle.com/error-help/db/ora-01422/
+
+Wed Nov 27 2024 17:28:37 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Token inválido!r
+
+Wed Nov 27 2024 17:33:24 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Wed Nov 27 2024 17:35:59 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00933: comando SQL não encerrado adequadamente
+Help: https://docs.oracle.com/error-help/db/ora-00933/
+
+Wed Nov 27 2024 17:39:47 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-01789: o bloco de consulta possui número incorreto de colunas de resultado
+Help: https://docs.oracle.com/error-help/db/ora-01789/

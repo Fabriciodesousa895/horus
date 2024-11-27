@@ -1565,6 +1565,10 @@ AND T.ID_TELA <> 323
 ORDER BY T.T_NOME ASC
 `
   jwt.verify(req.cookies.jwt, process.env.SECRET, async (error, data) => {
+    if(error){
+      res.status(500).send('Token inválido! ' + error);
+    return
+    }
      let Binds = {};
      let USU_LOGADO = data.ID_USUARIO;
       Binds.USU_LOGADO = USU_LOGADO;

@@ -7,6 +7,9 @@ require('dotenv').config()
 'use strict';
 // Xlsx
 const xlsx = require('xlsx');
+//Ler planilhas
+let {LerPlanilha} = require('./Importacao/Functions/ImportaBd');
+LerPlanilha('./Importacao/Modelos/Produtos.xlsx')
 // Pdf
 const PdfMake = require('pdfmake');
 
@@ -35,38 +38,8 @@ const storage = multer.diskStorage({
     callback(null, `${time}__${file.originalname}`);
   }
 })
-const oracledb = require('oracledb');
-
-const dbconfig = {
-  user: process.env.SYSTEM,
-  password: process.env.PASSWORD,
-  connectString: process.env.CONNECT
-}
-
-async function conectarbd(sql, binds, options) {
-  let connection = await oracledb.getConnection(dbconfig);
-  let result = await connection.execute(`${sql}`, binds, options);
-  return result.rows;
-}
-async function conectar(sql, binds) {
-  let connection = await oracledb.getConnection(dbconfig);
-  let result = await connection.execute(`${sql}`, binds);
-  return result;
-}
-
-//resultado vem em array de array
-const options = {
-  autoCommit: true,
-  outFormat: oracledb.OUT_FORMAT_ARRAY
-}
-//resultado vem em array de objeto
-const options_objeto = {
-  autoCommit: true,
-  outFormat: oracledb.OUT_FORMAT_OBJECT
-}
-
-
-
+//Conexão banco
+const {conectar,conectarbd,options,options_objeto,oracledb} = require('./BancoOracle/ConectaBD');
 
 //Esta função recebe o objeto que contém um objeto  com os valores da licença que estão hasheados 
 function Deshashea(stringObject) {
@@ -1720,7 +1693,6 @@ app.post('/download/excel', async(req,res)=>{
     res.status(500).json({ error: 'Erro ao gerar planilha' });
   }
 })
-
 
 
 

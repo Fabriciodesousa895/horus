@@ -658,7 +658,7 @@ app.get('/construtor/componente/BI',async(req,res)=>{
     res.send(error);
   }
 })
-//Rota pára gráfico de usuario
+
 app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, res) => {
   let token = req.cookies.jwt;
   try {
@@ -679,8 +679,8 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
     WHERE TT.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})
     AND TT.COLUMN_NAME = CM.COLUMN_NAME  `;
 
-    let sql3 = `SELECT INDEX_NAME,INDEX_TYPE	,CONSTRAINT_INDEX,NUM_ROWS
-    FROM DBA_INDEXES WHERE TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`;
+    // let sql3 = `SELECT INDEX_NAME,INDEX_TYPE	,CONSTRAINT_INDEX,NUM_ROWS
+    // FROM DBA_INDEXES WHERE TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`;
     let sql4 = `SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID}`
     let sql5 = `SELECT TRIGGER_NAME,
                        TRIGGERING_EVENT,
@@ -701,16 +701,16 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
     WHERE    UC.CONSTRAINT_TYPE= 'R' 
     AND    UC.TABLE_NAME = (SELECT TAB_NOME FROM TABELA_BANCO WHERE ID_TABELA = ${req.params.ID})`
     const result2 = await conectar(sql2, []);
-    const result3 = await conectar(sql3, []);
+    // const result3 = await conectar(sql3, []);
     const result4 = await conectar(sql4, []);
     const result5 = await conectar(sql5, []);
     const result6 = await conectar(sql6, []);
     let CAMPOS = result2.rows
-    let INDEXES = result3.rows
+    // let INDEXES = result3.rows
     let TABELA_NOME = result4.rows
     let TRIGGRES = result5.rows
     let FKS = result6.rows
-    Objeto = { CAMPOS, INDEXES, TABELA_NOME, TRIGGRES, FKS }
+    Objeto = { CAMPOS,/* INDEXES,*/ TABELA_NOME, TRIGGRES, FKS }
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
   } catch (error) {
     let log = error;

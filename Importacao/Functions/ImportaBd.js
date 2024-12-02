@@ -7,14 +7,8 @@ function LerPlanilha(CaminhoArquivo) {
    let SheetName = workhook.SheetNames[0];
    let WorkSheet = workhook.Sheets[SheetName];
    let Data = XLSX.utils.sheet_to_json(WorkSheet);
-   
-   // Data.forEach(element => {
-   //   console.log(element.Produtos + ' --- ' + element.__EMPTY);
-   // let SqlInsert = `INSERT INTO PRDT_PRODUTO () VALUES(:PRDT_ID)`;
-   // let Binds = {PRDT_ID:element.Produtos};
-   // let Result = conectar(SqlInsert,Binds);
-   // });
-    console.log(Data);
+   let Json = Data.slice(2)
+   console.log(Json);
    return Data;
 }
 

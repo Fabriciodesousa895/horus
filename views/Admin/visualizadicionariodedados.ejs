@@ -2,7 +2,6 @@
         <% let CAMPOS=Objeto.CAMPOS %>
             <% let CONSTRAINT=Objeto.CONSTRAINT %>
                 <% let TABELA_NOME=Objeto.TABELA_NOME %>
-                    <% let INDEXES=Objeto.INDEXES %>
                         <% let TRIGGRES=Objeto.TRIGGRES %>
                           <%let FKS=Objeto.FKS %>
 
@@ -12,10 +11,7 @@
                                         aria-controls="home" aria-selected="true">Campos</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab"
-                                        aria-controls="contact" aria-selected="false">Indices</a>
-                                </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Triggres" role="tab"
                                         aria-controls="contact" aria-selected="false">Triggres</a>
@@ -78,41 +74,7 @@
                                             </table>
                                 </div>
 
-                                <!-- Indices -->
-                                <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
-                                    <%if(INDEXES.length==0){%>
-                                        <h5>Não há indices para visualizar.</h5>
-                                        <%}else{%>
-                                            <table class="table mt-3 table-hover" style="width: 1000px;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>INDEX_NAME</th>
-                                                        <th>INDEX_TYPE </th>
-                                                        <th>CONSTRAINT_INDEX</th>
-                                                        <th>NUM_ROWS</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <% for (var i=0; i < INDEXES.length; i++) { %>
-                                                        <tr>
-                                                            <td>
-                                                                <%= INDEXES[i][0] %>
-                                                            </td>
-                                                            <td>
-                                                                <%= INDEXES[i][1] %>
-                                                            </td>
-                                                            <td>
-                                                                <%= INDEXES[i][2] %>
-                                                            </td>
-                                                            <td>
-                                                                <%= INDEXES[i][3] %>
-                                                            </td>
-                                                        </tr>
-                                                        <% } %>
-                                                </tbody>
-                                            </table>
-                                            <%}%>
-                                </div>
+                    
                                 <!-- Triggres -->
                                 <div class="tab-pane fade" id="Triggres" role="tabpanel" aria-labelledby="contact-tab">
                                     <%if(TRIGGRES.length==0){%>

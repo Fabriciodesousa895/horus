@@ -15,9 +15,9 @@
            
                         <div class="row">
 
-                            <div class="col-sm-4">
+                            <div class="col-12 col-md-6 col-lg-4">
 
-                                <span class="mt-2">Nome</span>
+                                <span class="mt-2 form-label" >Nome</span>
                                 <div style="display: flex; flex-direction: row;">
                                     <input type="text" class="form-control TddCam" placeholder="Nome do parceiro"
                                      name="PARC_N_RAZAO_SOCIAL"   id="PARC_N_RAZAO_SOCIAL" required>
@@ -59,7 +59,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-12 col-md-6 col-lg-4">
 
                                 <span >Empresa de trabalho</span></p>
                                 <div style="display: flex; flex-direction: row;">
@@ -113,7 +113,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-12 col-md-6 col-lg-4">
 
                                 <label for="">CEP</label>
                                 <div style="display: flex; flex-direction: row;">
@@ -198,9 +198,9 @@
     </div>
 
     <!--FILTRO E TABELA-->
-    <div style="display: flex;padding: 50px;">
+    <div style="display: flex;padding: 50px;min-width: 300px;" class="MIN_CONTAINER">
         <% filtro=P_USU.T_FILTRO %>
-            <div style="width: 300px;margin-right: 20px;">
+            <div  class="MIN_FILTRO">
                 <label for="ID">ID</label>
                 <input type="number" class="form-control" placeholder="ID do parceiro" id="ID"
                     value="<%=filtro[0][0]%>">
@@ -275,18 +275,21 @@
             </div>
             <div style="width: 100%;display: block;">
                 <%- include('../components/exporta.ejs');%>
-                <table class="table table-hover" id="tabeladados">
-                    <thead>
-                        <th>ID</th>
-                        <th style="max-width:300px ;">Nome</th>
-                        <th>CPF/CNPJ</th>
-                        <th>IE_RG</th>
-                        <th>Email</th>
-                    </thead>
-                    <tbody id="tabelaparceiro">
-
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <th>ID</th>
+                            <th style="max-width:300px;">Nome</th>
+                            <th>CPF/CNPJ</th>
+                            <th>IE_RG</th>
+                            <th>Email</th>
+                        </thead>
+                        <tbody>
+                            <!-- Dados -->
+                        </tbody>
+                    </table>
+                </div>
+                
             </div>
     </div>
     <script type="module" src="/js/parceiro/parceiro.js"></script>

@@ -1,8 +1,8 @@
-(function readyJS(win,doc){
 'use strict';
 let USU_SENHA = document.getElementById('USU_SENHA');
 let USU_NOME = document.getElementById('USU_NOME');
 let btn = document.getElementById('btn');
+let FormLogin = document.getElementById('FormLogin');
 
 function sendForm(evento){
     evento.preventDefault();
@@ -40,5 +40,5 @@ function sendForm(evento){
     }
 }
 
-btn.addEventListener('click',sendForm,false);
-}) (window,document);
+
+FormLogin.addEventListener('submit',sendForm,false);

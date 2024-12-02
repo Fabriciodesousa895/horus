@@ -1,0 +1,18 @@
+
+Fri Nov 29 2024 16:49:16 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/
+
+Sat Nov 30 2024 15:48:50 GMT-0300 (Horário Padrão de Brasília) -- /visualiza/dicionario/dados/1  -- ReferenceError: sql4 is not defined
+
+Sat Nov 30 2024 15:49:06 GMT-0300 (Horário Padrão de Brasília) -- /visualiza/dicionario/dados/1  -- ReferenceError: sql4 is not defined
+
+Sat Nov 30 2024 15:50:26 GMT-0300 (Horário Padrão de Brasília) -- /visualiza/dicionario/dados/1  -- ReferenceError: sql4 is not defined
+
+Sat Nov 30 2024 15:50:36 GMT-0300 (Horário Padrão de Brasília) -- /visualiza/dicionario/dados/22  -- ReferenceError: sql4 is not defined
+
+Sat Nov 30 2024 15:50:58 GMT-0300 (Horário Padrão de Brasília) -- /visualiza/dicionario/dados/22  -- ReferenceError: sql4 is not defined
+
+Sat Nov 30 2024 15:52:00 GMT-0300 (Horário Padrão de Brasília) -- /visualiza/dicionario/dados/22  -- ReferenceError: sql4 is not defined
+
+Sat Nov 30 2024 16:08:02 GMT-0300 (Horário Padrão de Brasília) -- /sql/DBE_explorer  -- Error: ORA-00942: a tabela ou view não existe
+Help: https://docs.oracle.com/error-help/db/ora-00942/

@@ -82,97 +82,61 @@ function Filtro() {
 function Importar(e) {
     e.preventDefault()
     let CGC = document.getElementById('PARC_CGC_')
-    let ajax = new XMLHttpRequest();
-    ajax.open('POST', '/importar/dados');
-    ajax.setRequestHeader('Content-type', 'application/json');
-    let data = { CGC: CGC.value }
-    let JsonData = JSON.stringify(data)
-    ajax.onreadystatechange = () => {
-        let dados = JSON.parse(ajax.responseText)
-
-        if (ajax.status === 200) {
-
-            bairro.value = dados.bairro;
-            numero.value = dados.numero;
-            complemento.value = dados.complemento;
-            logradouro.value = dados.logradouro;
-            cep.value = dados.cep;
-            nome.value = dados.nome;
-            fantasia.value = dados.fantasia;
-            email.value = dados.email;
-            var data = dados.abertura
-            var dataform = data.split('/');
-            var newdata = dataform[2] + '-' + dataform[1] + '-' + dataform[0]
-            PARC_NASC.value = newdata;
-            var tel = dados.telefone
-            var telNew = tel.split('/');
-            telefone.value = telNew[0];
-            if (telNew[1]) {
-                telefone2.value = telNew[1];
+    if( CGC.value.length == 14){
+        let ajax = new XMLHttpRequest();
+        ajax.open('POST', '/importar/dados');
+        ajax.setRequestHeader('Content-type', 'application/json');
+        let data = { CGC: CGC.value }
+        let JsonData = JSON.stringify(data)
+        ajax.onreadystatechange = () => {
+            let dados = JSON.parse(ajax.responseText)
+    
+            if (ajax.status === 200) {
+    
+                bairro.value = dados.bairro;
+                numero.value = dados.numero;
+                complemento.value = dados.complemento;
+                logradouro.value = dados.logradouro;
+                cep.value = dados.cep;
+                nome.value = dados.nome;
+                fantasia.value = dados.fantasia;
+                email.value = dados.email;
+                var data = dados.abertura
+                var dataform = data.split('/');
+                var newdata = dataform[2] + '-' + dataform[1] + '-' + dataform[0]
+                PARC_NASC.value = newdata;
+                var tel = dados.telefone
+                var telNew = tel.split('/');
+                telefone.value = telNew[0];
+                if (telNew[1]) {
+                    telefone2.value = telNew[1];
+                }
+                var selectedIndex = dados.uf
+                UF.value = selectedIndex
+                NOME_CID.value = dados.municipio
+                let evento = new Event('change');
+                // PARC_CEP.dispatchEvent(evento)
+                setTimeout((() => { document.getElementById('NOMECID').dispatchEvent(evento) }),
+                    1000)
+    
             }
-            var selectedIndex = dados.uf
-            UF.value = selectedIndex
-            NOME_CID.value = dados.municipio
-            let evento = new Event('change');
-            // PARC_CEP.dispatchEvent(evento)
-            setTimeout((() => { document.getElementById('NOMECID').dispatchEvent(evento) }),
-                1000)
-
-        }
-        else {
-            swal({
-                text: ajax.responseText,
-                icon: 'error'
-            });
-        }
-    };
-    ajax.send(JsonData);
+            else {
+                swal({
+                    text: ajax.responseText,
+                    icon: 'error'
+                });
+            }
+        };
+        ajax.send(JsonData);
+    }else{
+        swal({
+            text:'CNPJ deve ter  14 digitos!',
+            icon:'warning'
+        })
+    }
+ 
 }
 // Usando o filtro
 document.getElementById('Buscar').addEventListener('click', Filtro, false);
 //importando os dados
 document.getElementById('IMPORTAR').addEventListener('click', Importar, false);
-
-// document.getElementById('form').addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     // let dados = new Tabela().InputsValues(['PARC_NOME', 'PARC_N_RAZAO_SOCIAL', 'PARC_CGC_', 'PARC_IR_RG', 'PARC_EMAIL', 'PARC_TEL', 'PARC_TEL_2', 'PARC_TRABALHO_N',
-//     //     'PARC_CEP_T', 'PARC_BAIRRO_T', 'ID_CID_F', 'PARC_LOGRA_T', 'PARC_NUM_T', 'PARC_COMP_T', 'PARC_TEL_T', 'PARC_SALARIO', 'PARC_ADMISSAO',
-//     //     'PARC_CEP', 'ID_CID', 'PARC_BAIRRO', 'PARC_LOGRA', 'PARC_NUM', 'PARC_COMP', 'PARC_FORNEC', 'ESTADO'])
-//     //     let DT_NASC = (document.getElementById('PARC_NASC').value).split('-');
-//     //     console.log(document.getElementById('PARC_NASC').value)
-//     //     let DT_NASC_SPLIT = `${DT_NASC[0]}-${DT_NASC[1]}-${DT_NASC[2]}`;
-//     //        dados.DT_NASC_SPLIT = DT_NASC_SPLIT
-//     //                 //Validando se os campos obrigatórios estão preenchidos
-//     //         let IdForm = document.getElementById('form')
-//     //         let Inputs = IdForm.querySelectorAll('input.TddCam, textarea.TddCam, select.TddCam');
-//     //               let  RequiredTrueOrFalse = false;
-//     //                 Inputs.forEach((elementrequired)=>{
-//     //                    if( elementrequired.required && elementrequired.value == ''){
-//     //                     RequiredTrueOrFalse = false;
-//     //                     }else{
-//     //                         if(!RequiredTrueOrFalse &&  elementrequired.value == ''){
-//     //                             RequiredTrueOrFalse = false;
-//     //                         }else{
-//     //                             RequiredTrueOrFalse = true
-//     //                         }
-//     //                     }
-//     //                 })
-//     //                 console.log(dados)
-//     // let data = {
-//     //     sql: `BEGIN
-//     //             INSERI_PARCEIRO      (:PARC_NOME,:PARC_N_RAZAO_SOCIAL,:PARC_CGC_,:PARC_IR_RG,:PARC_EMAIL,TO_DATE(:DT_NASC_SPLIT),:PARC_TEL,:PARC_TEL_2,
-//     //                                   :PARC_TRABALHO_N,:PARC_CEP_T,:PARC_BAIRRO_T,:ID_CID_F,:PARC_LOGRA_T,:PARC_NUM_T,:PARC_COMP_T,:PARC_TEL_T,
-//     //                                   :PARC_SALARIO,TO_DATE(:PARC_ADMISSAO,'YYYY-MM-DD'),:PARC_CEP,:ESTADO,:ID_CID,:PARC_BAIRRO,:PARC_LOGRA,:PARC_NUM,:PARC_COMP,
-//     //                                   :PARC_FORNEC,:USU_LOGADO); END;`,
-//     //     binds: dados,
-//     //     mensagem_error: 'Error ',
-//     //     mensagem_sucess: 'Registro inserido com sucesso!',
-//     //     USU_LOGADO: true
-//     // };
-
-//     // if(RequiredTrueOrFalse == true){
-//     //     new Ajax('/rota/universal', data).RequisicaoAjax(true, 'form')
-//     // }
-   
-// });
-

@@ -1,5 +1,31 @@
 <%- include('../partials/head'); %>
+<!-- <style>
 
+@media (max-width:1030px){
+        table th:nth-child(5){
+        display: none;
+    }
+}
+@media (max-width:730px){
+        table th:nth-child(5),
+        table th:nth-child(4){
+        display: none;
+    }
+}
+@media (max-width:550px){
+        table th:nth-child(5),
+        table th:nth-child(4),
+        table th:nth-child(3){
+        display: none;
+    }
+        table tr:nth-child(5),
+        table tr:nth-child(4),
+        table tr:nth-child(3){
+        display: none;
+    }
+}
+
+</style> -->
     <div class="modal fade PRINCIPAL" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -28,7 +54,7 @@
                                     <input type="text" class="form-control TddCam" placeholder="Razão social" name="PARC_NOME" id="PARC_NOME"
                                         required>
                                 </div>
-                                <label for="">CPF/CNPJ</label>
+                                <label for="">CPF/CNPJ <img src="/img/importar.png" alt="" style="cursor: pointer;" id="IMPORTAR"></label>
                                 <div style="display: flex; flex-direction: row;">
                                     <input type="number" class="form-control TddCam" name="PARC_CGC_" placeholder="CPF/CNPJ" id="PARC_CGC_"
                                         required>
@@ -185,7 +211,6 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                             <button id="SALVAR"  class="btn btn-success">Salvar</button>
-                            <button id="IMPORTAR" class="btn btn-warning">Importar dados</button>
                         </div>
      
                 </form>
@@ -276,7 +301,7 @@
             <div style="width: 100%;display: block;">
                 <%- include('../components/exporta.ejs');%>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="tabeladados">
                         <thead>
                             <th>ID</th>
                             <th style="max-width:300px;">Nome</th>

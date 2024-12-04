@@ -41,7 +41,7 @@ class Ajax {
 
                     reject(
                         swal({
-                            title: ajax.responseText + ajax.status + '  Error :',
+                            title: ajax.responseText ,
                             icon: 'warning'
                         }
                         ));

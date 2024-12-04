@@ -3,7 +3,7 @@
 <div class="row" id="form">
     <%result.forEach(result=>{%>
     <div class="col-sm-3" style="padding: 50px;width: 356px;">
-<button id="IMPORTAR" class="btn btn-warning mt-3">Importar dados </button>
+
 
         <p><span class="mt-2">ID</span></p>
         <div style="display: flex; flex-direction: row;">
@@ -23,7 +23,7 @@
         <div style="display: flex; flex-direction: row;">
         </div>
             <input type="text" class="form-control" placeholder="Razão social" value="<%=result.PARC_N_RAZAO_SOCIAL%>"   id="PARC_N_RAZAO_SOCIAL" required>
-        <label for="">CPF/CNPJ</label>
+        <label for="">CPF/CNPJ <img src="/img/importar.png" alt="" style="cursor: pointer;" id="IMPORTAR"></label>
         <div style="display: flex; flex-direction: row;">
             <input type="number" class="form-control" placeholder="CPF/CNPJ" value="<%=result.PARC_CGC%>"   id="PARC_CGC_" required>
         </div>

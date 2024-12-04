@@ -9,7 +9,7 @@ require('dotenv').config()
 const xlsx = require('xlsx');
 //Ler planilhas
 let {LerPlanilha} = require('./Importacao/Functions/ImportaBd');
-LerPlanilha('./Importacao/Modelos/Produtos.xlsx')
+// LerPlanilha('./Importacao/Modelos/Produtos.xlsx')
 // Pdf
 const PdfMake = require('pdfmake');
 
@@ -714,6 +714,7 @@ app.get('/visualiza/dicionario/dados/:ID', auth, urlencodedParser, async (req, r
     Acesso === 'N' ? res.send('Usuário não tem permissão') : res.render('./Admin/visualizadicionariodedados', { P_USU, Objeto })
   } catch (error) {
     let log = error;
+    console.log(error)
     criarlogtxt(log, req.url);
     res.status(500).send(error)
 
@@ -823,8 +824,14 @@ console.log(objeto)
     res.send(objeto);
   } catch (error) {
     let log = error;
+    console.log(error.code)
+
     criarlogtxt(log, req.url);
-    res.status(500).send('Erro ao execultar sql! ' + error.message);
+    if(error.code == 'ORA-00942' ){
+      res.status(500).send('Tabela não existe.');
+      }else{
+      res.status(500).send('Error: '+ error);
+      }
   }
 })
 app.post('/DashTabela', auth, async (req, res) => {
@@ -1465,7 +1472,12 @@ app.post('/rota/universal', async (req, res) => {
         await conectar(Objeto.sql, novobinds);
         res.status(200).send(Objeto.mensagem_sucess);
       } catch (error) {
+        
+        if(error.code == 'ORA-20000'){
+          res.status(500).send(error.message.split('\n')[0].replace('ORA-20000: ', ''))
+        }else{
         res.status(500).send('*' + error)
+        }
       }
     } else {
      
@@ -1474,8 +1486,13 @@ app.post('/rota/universal', async (req, res) => {
         res.status(200).send(Objeto.mensagem_sucess);
       } catch (error) {
         let log = error;
-        criarlogtxt(log, req.url);
-        res.status(500).send(Objeto.mensagem_error + error);
+        console.log(error)
+
+        if(error.code == 'ORA-20000'){
+          res.status(500).send(error.message.split('\n')[0].replace('ORA-20000: ', ''))
+        }else{
+        res.status(500).send('*' + error)
+        }
       }
     }
 

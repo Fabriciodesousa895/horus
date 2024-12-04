@@ -79,7 +79,7 @@ class ActionForm{
                     swal( ajax.response,"","success");
                 } else {
                         swal({
-                            title: ajax.responseText + ajax.status + '  Error :',
+                            title: ajax.responseText ,
                             icon: 'warning'
                         } )
                         barra_progresso.style.opacity = 0;

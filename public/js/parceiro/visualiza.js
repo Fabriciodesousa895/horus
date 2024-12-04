@@ -4,9 +4,21 @@ import { Ajax } from "../Class/Ajax.js";
 let PARC_CEP = document.getElementById('PARC_CEP')
 let complemento = document.getElementById('PARC_COMP')
 let ID_CID = document.getElementById('ID_CID')
-let bairro = document.getElementById('PARC_BAIRRO')
-let UF = document.getElementById('ESTADO')
+let UF = document.getElementById('UF')
 
+let bairro = document.getElementById('PARC_BAIRRO')
+let logradouro = document.getElementById('PARC_LOGRA')
+let numero = document.getElementById('PARC_NUM')
+let cep = document.getElementById('PARC_CEP')
+let nome = document.getElementById('PARC_NOME')
+let fantasia = document.getElementById('PARC_N_RAZAO_SOCIAL')
+let telefone = document.getElementById('PARC_TEL')
+let telefone2 = document.getElementById('PARC_TEL_2')
+let email = document.getElementById('PARC_EMAIL')
+let PARC_NASC = document.getElementById('PARC_NASC')
+let NOME_CID = document.getElementById('NOME_CID');
+let UF_ = document.getElementById('ESTADO')
+let NOME_F = document.getElementById('NOME_F')
 
 new filtra_campo('ID_CID', 'NOME_CID', 'CIDADE').Filtra()
 let evento = new Event('change')
@@ -109,6 +121,64 @@ function Deletar (e){
     
 
 }
+function Importar(e) {
+    e.preventDefault();
+    let CGC = document.getElementById('PARC_CGC_');
+
+    if( CGC.value.length == 14){
+        let ajax = new XMLHttpRequest();
+        ajax.open('POST', '/importar/dados');
+        ajax.setRequestHeader('Content-type', 'application/json');
+        let data = { CGC: CGC.value }
+        let JsonData = JSON.stringify(data)
+        ajax.onreadystatechange = () => {
+            let dados = JSON.parse(ajax.responseText)
+    
+            if (ajax.status === 200) {
+    
+                bairro.value = dados.bairro;
+                numero.value = dados.numero;
+                complemento.value = dados.complemento;
+                logradouro.value = dados.logradouro;
+                cep.value = dados.cep;
+                nome.value = dados.nome;
+                fantasia.value = dados.fantasia;
+                email.value = dados.email;
+                var data = dados.abertura
+                var dataform = data.split('/');
+                var newdata = dataform[2] + '-' + dataform[1] + '-' + dataform[0]
+                PARC_NASC.value = newdata;
+                var tel = dados.telefone
+                var telNew = tel.split('/');
+                telefone.value = telNew[0];
+                if (telNew[1]) {
+                    telefone2.value = telNew[1];
+                }
+                var selectedIndex = dados.uf
+                UF.value = selectedIndex
+                NOME_CID.value = dados.municipio
+                let evento = new Event('change');
+                // PARC_CEP.dispatchEvent(evento)
+                setTimeout((() => { document.getElementById('NOME_CID').dispatchEvent(evento) }),
+                    1000)
+    
+            }
+            else {
+                swal({
+                    text: ajax.responseText,
+                    icon: 'error'
+                });
+            }
+        };
+        ajax.send(JsonData);
+    }else{
+        swal({
+            text:'CNPJ deve ter  14 digitos!',
+            icon:'warning'
+        })
+    }
+ 
+}
 PARC_CEP.addEventListener('change', async() => {
     let CepFormatado = PARC_CEP.value.replace(/\D/g, "");
     let ValApi = {sql:`SELECT FILT_API FROM DUAL`,binds:{}};
@@ -141,5 +211,7 @@ PARC_CEP.addEventListener('change', async() => {
 })
 
 
-document.getElementById('EDITAR').addEventListener('click', Salvar, false)
-document.getElementById('EXCLUIR').addEventListener('click', Deletar, false)
+
+document.getElementById('EDITAR').addEventListener('click', Salvar, false);
+document.getElementById('EXCLUIR').addEventListener('click', Deletar, false);
+document.getElementById('IMPORTAR').addEventListener('click', Importar, false);
